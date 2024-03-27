@@ -18,19 +18,19 @@ public class RecipeEntity extends BaseTime{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int reno;
+    private int reno; // 레시피 식별번호
 
     @Column(nullable = false)
-    private double reamount;
+    private double reamount; // 레시피 분량
 
 
     @ManyToOne
     @JoinColumn(name = "pno")
-    private ProductEntity productEntity;
+    private ProductEntity productEntity; // 제품 테이블 가져옴 ( 제품 이름 )
 
     @ManyToOne
     @JoinColumn(name = "rmno")
-    private RawMaterialEntity rawMaterialEntity;
+    private RawMaterialEntity rawMaterialEntity; // 원자재 테이블 가져옴 ( 원자재 이름 )
 
     public RecipeDto toDto() {
         return RecipeDto.builder()

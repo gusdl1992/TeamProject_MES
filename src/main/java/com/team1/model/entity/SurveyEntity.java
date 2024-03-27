@@ -17,9 +17,9 @@ import lombok.*;
 public class SurveyEntity extends BaseTime{
     @Id
     @GeneratedValue( strategy =  GenerationType.IDENTITY )
-    private int sno; //  식별번호
+    private int sno; // 계량 식별 번호
     @Column( nullable = false)
-    private int samount; // 수량
+    private int samount; // 지시 수량
 
 
     @ManyToOne
@@ -28,7 +28,7 @@ public class SurveyEntity extends BaseTime{
 
     @ManyToOne
     @JoinColumn(name = "wno")
-    private WorkPlanEntity workPlanEntity;
+    private WorkPlanEntity workPlanEntity; // 업무계획 테이블 가져옴 ( 지시 수량 , 그날에 어떤 제품을 만드는 것 )
 
 
 

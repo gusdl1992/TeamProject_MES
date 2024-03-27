@@ -21,7 +21,7 @@ public class WorkPlanEntity extends BaseTime{
 
     @ManyToOne
     @JoinColumn(name = "pno")
-    private ProductEntity productEntity;
+    private ProductEntity productEntity; // 제품 테이블 가져옴 ( 제품 이름 )
 
 
 

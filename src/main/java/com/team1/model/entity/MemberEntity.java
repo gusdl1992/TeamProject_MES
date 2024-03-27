@@ -17,15 +17,15 @@ public class MemberEntity extends BaseTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int mno;
+    private int mno; // 회원 식별키
 
     @Column(nullable = false,unique = true)
-    private String mid;
+    private String mid; // 회원 아이디
 
     @Column(nullable = false)
-    private String mpw;
+    private String mpw; // 회원 비밀번호
 
-    private int pno; // 임시 파트번호
+    private int pno; // 임시 파트번호 ( 어떤 파티에서 일하는지 )
 
     public MemberDto toDto(){
         return MemberDto.builder().mno(this.mno).mid(this.mid).mpw(this.mpw).pno(this.pno).build();

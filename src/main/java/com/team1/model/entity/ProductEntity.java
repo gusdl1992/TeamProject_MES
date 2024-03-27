@@ -17,10 +17,10 @@ public class ProductEntity extends BaseTime{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int pno;
+    private int pno; // 제품 식별번호
 
     @Column(nullable = false)
-    private String pname;
+    private String pname; // 제품 이름
 
     public ProductDto toDto(){
         return ProductDto.builder().pno(this.pno).pname(this.pname).build();
