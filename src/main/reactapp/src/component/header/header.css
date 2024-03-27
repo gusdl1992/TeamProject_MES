@@ -1,0 +1,49 @@
+@media screen and (min-width:1367px){
+    #globalNav{
+        width: 100%;
+        height: 80px;
+        background-color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    #logoBox{
+        width: 100px;
+        height: 80px;
+        border: 1px solid red;
+        margin-left: 20px;
+    }
+    #gnv{
+        width: 1500px;
+        height: 80px;
+        border: 1px solid red;
+    }
+    #gnvMenu{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #loginBox{
+        width: 200px;
+        height: 80px;
+        border: 1px solid red;
+        margin-right: 20px;
+    }
+    #sideNav{
+        position: fixed;
+        left: 0;
+        top: 80px;
+        width: 280px;
+        height: 100%;
+        background-color: #394F66;
+    }
+}
+@media screen and (min-width:768px) and (max-width:1366px){
+
+}
+@media screen and (max-width:767px){
+
+}
