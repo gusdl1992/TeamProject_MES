@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Index from './component/Index';
+import Login from './component/login/Login'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
