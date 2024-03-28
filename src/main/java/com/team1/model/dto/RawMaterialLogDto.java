@@ -1,9 +1,12 @@
 package com.team1.model.dto;
 
+import com.team1.model.entity.BaseTime;
 import com.team1.model.entity.RawMaterialEntity;
 import com.team1.model.entity.RawMaterialLogEntity;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDateTime;
 
 
 @Builder
@@ -12,17 +15,20 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class RawMaterialLogDto {
+public class RawMaterialLogDto extends BaseTimeDto{
 
     private int rmlno; // 원자재로그 식별번호
 
-    private int rmcount; // 원자재 로그가 얼마나 들어갔는지
+    private int rmlcount; // 원자재 로그가 얼마나 들어갔는지
 
     private RawMaterialEntity rawMaterialEntity;
 
 
     public RawMaterialLogEntity toEntity(){
-        return RawMaterialLogEntity.builder().rmlno(this.rmlno).rmcount(this.rmcount).rawMaterialEntity(this.rawMaterialEntity)
+        return RawMaterialLogEntity.builder()
+                .rmlno(this.rmlno)
+                .rmlcount(this.rmlcount)
+                .rawMaterialEntity(this.rawMaterialEntity)
                 .build();
 
     }

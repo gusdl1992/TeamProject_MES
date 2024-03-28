@@ -23,8 +23,13 @@ public class ProductEntity extends BaseTime{
     private String pname; // 제품 이름
 
     public ProductDto toDto(){
-        return ProductDto.builder().pno(this.pno).pname(this.pname).build();
-
+        ProductDto productDto = ProductDto.builder()
+                .pno(this.pno)
+                .pname(this.pname)
+                .build();
+        productDto.setCdate(this.cdate);
+        productDto.setUdate(this.udate);
+        return productDto;
     }
 
 }

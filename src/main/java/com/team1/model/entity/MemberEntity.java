@@ -25,10 +25,21 @@ public class MemberEntity extends BaseTime {
     @Column(nullable = false)
     private String mpw; // 회원 비밀번호
 
+    @Column(nullable = false)
+    private String mname; // 회원 이름
+
     private int pno; // 임시 파트번호 ( 어떤 파티에서 일하는지 )
 
     public MemberDto toDto(){
-        return MemberDto.builder().mno(this.mno).mid(this.mid).mpw(this.mpw).pno(this.pno).build();
+        MemberDto memberDto = MemberDto.builder().
+                mno(this.mno).
+                mid(this.mid).
+                mpw(this.mpw).
+                pno(this.pno).
+                mname(this.mname).build();
+        memberDto.setCdate(this.cdate);
+        memberDto.setUdate(this.udate);
+        return memberDto;
 
     }
 }

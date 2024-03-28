@@ -14,7 +14,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class SurveyDto extends BaseTime {
+public class SurveyDto extends BaseTimeDto {
 
     private int sno; //  식별번호
 
