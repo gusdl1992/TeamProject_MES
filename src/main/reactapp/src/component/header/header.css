@@ -1,11 +1,8 @@
 @media screen and (min-width:1367px){
-    #globalNav{
-        width: 100%;
-        height: 80px;
-        background-color: #fff;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    #menuWrap{
+        width: 280px;
+        height: 100%;
+        background-color: #394F66;
         position: fixed;
         top: 0;
         left: 0;
@@ -16,29 +13,37 @@
         border: 1px solid red;
         margin-left: 20px;
     }
-    #gnv{
-        width: 1500px;
-        height: 80px;
-        border: 1px solid red;
-    }
-    #gnvMenu{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    #loginBox{
-        width: 200px;
-        height: 80px;
-        border: 1px solid red;
-        margin-right: 20px;
-    }
     #sideNav{
-        position: fixed;
-        left: 0;
-        top: 80px;
-        width: 280px;
-        height: 100%;
         background-color: #394F66;
+    }
+    .subMenu {
+        background-color: #6b8db1;;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        min-width: 200px;
+        z-index: 1;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0s ease;
+      }
+      
+      .subMenu ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      .subMenu ul li {
+        padding: 10px;
+        transition: background-color 0.3s ease;
+      }
+      
+      .subMenu ul li:hover {
+        background-color: #f0f0f0;
+      }
+    .subMenu.active{
+        max-height: 200px;
+        transition: max-height 0.8s ease;
     }
 }
 @media screen and (min-width:768px) and (max-width:1366px){

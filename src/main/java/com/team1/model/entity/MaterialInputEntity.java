@@ -22,24 +22,32 @@ public class MaterialInputEntity extends BaseTime{
 
 
     @ManyToOne
-    @JoinColumn(name = "wno")
-    private WorkPlanEntity workPlanEntity; // 지시일자를 따오기위해 작업계획 테이블을 가져옴
+    @JoinColumn(name = "sno")
+    private SurveyEntity surveyEntity; // 계량 테이블 보기
 
     @ManyToOne
     @JoinColumn(name = "pno")
     private ProductEntity productEntity; // 어떤 제품인지를 알기위해 제품테이블을 가져옴
 
     @ManyToOne
-    @JoinColumn(name = "mno")
-    private MemberEntity memberEntity; // 사원번호 따오기 위해 회원테이블 가져옴
+    @JoinColumn(name = "inputmno")
+    private MemberEntity inputmemberEntity; // 사원번호 따오기 위해 회원테이블 가져옴
+
+    @ManyToOne
+    @JoinColumn(name = "checkmno")
+    private MemberEntity checkmemberEntity; // 사원번호 따오기 위해 회원테이블 가져옴
+
 
     public MaterialInputDto toDto(){
-        return MaterialInputDto.builder()
-                .productEntity(this.productEntity)
-                .workPlanEntity(this.workPlanEntity)
+        MaterialInputDto materialInputDto = MaterialInputDto.builder()
+                .productEntity(this.productEntity.toDto())
+                .surveyEntity(this.surveyEntity.toDto())
                 .mipno(this.mipno)
-                .memberEntity(this.memberEntity)
+                .inputmemberEntity(this.inputmemberEntity.toDto())
+                .checkmemberDto(this.checkmemberEntity.toDto())
                 .build();
-
+        materialInputDto.setCdate(this.cdate);
+        materialInputDto.setUdate(this.udate);
+        return materialInputDto;
     }
 }
