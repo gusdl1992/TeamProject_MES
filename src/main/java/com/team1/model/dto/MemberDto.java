@@ -18,7 +18,6 @@ public class MemberDto extends BaseTimeDto {
 
     private int mno;
 
-
     private String mid;
 
     private String mpw;
