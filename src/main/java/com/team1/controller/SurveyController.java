@@ -18,10 +18,21 @@ public class SurveyController {
     @Autowired
     private SurveyService surveyService;
 
-    // workplan 정보 가져오기
+    // workplan 정보전부 가져오기
     @GetMapping("/workplaninfo.do")
     public List<WorkPlanDto> workPlanDtoList (){
-        return surveyService.workPlanDtoList();
+
+        List<WorkPlanDto> result = surveyService.workPlanDtoList();
+        System.out.println("result = " + result);
+
+        return result;
+    }
+
+    // workplan 식별번호로 정보 가져오기
+    @GetMapping("/workplanoneinfo.do")
+    public WorkPlanDto workPlanDto (int wno){
+
+        return surveyService.;
     }
 
 }//class end
