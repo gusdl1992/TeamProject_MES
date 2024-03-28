@@ -20,9 +20,9 @@ public class SurveyDto extends BaseTimeDto {
 
     private int samount; // 수량
 
+    private MemberEntity inputmemberEntity;
 
-
-    private MemberEntity memberEntity; // 담당자
+    private MemberEntity checkmemberEntity; // 담당자
 
 
     private WorkPlanEntity workPlanEntity;
@@ -34,7 +34,8 @@ public class SurveyDto extends BaseTimeDto {
         return SurveyEntity.builder()
                 .sno(this.sno)
                 .samount(this.samount)
-                .memberEntity(this.memberEntity)
+                .inputmemberEntity(this.inputmemberEntity)
+                .checkmemberEntity(this.checkmemberEntity)
                 .workPlanEntity(this.workPlanEntity)
                 .build();
     }
