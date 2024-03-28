@@ -12,22 +12,26 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class MaterialInputDto extends BaseTime {
+public class MaterialInputDto extends BaseTimeDto {
 
     private int mipno;
 
-    private WorkPlanEntity workPlanEntity;
+    private SurveyDto surveyEntity;
 
-    private ProductEntity productEntity;
+    private ProductDto productEntity;
 
-    private MemberEntity memberEntity;
+    private MemberDto inputmemberEntity;
+
+    private MemberDto checkmemberDto;
 
     public MaterialInputEntity toEntity(){
         return MaterialInputEntity.builder()
-                .productEntity(this.productEntity)
-                .workPlanEntity(this.workPlanEntity)
+                .productEntity(this.productEntity.toEntity())
+                .surveyEntity(this.surveyEntity.toEntity())
                 .mipno(this.mipno)
-                .memberEntity(this.memberEntity)
+                .inputmemberEntity(this.inputmemberEntity.toEntity())
+                .checkmemberEntity(this.checkmemberDto.toEntity())
+
                 .build();
 
     }

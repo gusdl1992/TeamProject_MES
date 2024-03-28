@@ -1,4 +1,4 @@
-package com.team1.model.entity;
+package com.team1.model.dto;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
@@ -9,19 +9,17 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-@MappedSuperclass //
-@EntityListeners( AuditingEntityListener.class ) // Auditing 감시
+
 @Getter
 @Setter
 
 @AllArgsConstructor
 @NoArgsConstructor
-public class BaseTime {
+public class BaseTimeDto {
     // 1. 레코드/엔티티 등록날짜
-    @CreatedDate // default now()
     public LocalDateTime cdate;
     // 2. 레코드/엔티티 수정날짜
-    @LastModifiedDate // 마지막 수정 날짜
+
     public LocalDateTime udate;
 }
 /*
