@@ -1,6 +1,7 @@
 package com.team1.model.dto;
 
 
+import com.team1.model.entity.BaseTime;
 import com.team1.model.entity.MemberEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,7 +13,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberDto {
+public class MemberDto extends BaseTimeDto {
 
 
     private int mno;
@@ -22,10 +23,13 @@ public class MemberDto {
 
     private String mpw;
 
+    private String mname;
+
     private int pno; // 임시 파트번호
 
     public MemberEntity toEntity(){
-        return MemberEntity.builder().mno(this.mno).mid(this.mid).mpw(this.mpw).pno(this.pno).build();
+        return MemberEntity.builder().mno(this.mno).mid(this.mid).mpw(this.mpw).pno(this.pno)
+                .mname(this.mname).build();
 
     }
 }

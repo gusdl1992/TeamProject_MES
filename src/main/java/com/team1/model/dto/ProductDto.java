@@ -13,7 +13,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductDto extends BaseTime {
+public class ProductDto extends BaseTimeDto {
 
     private int pno;
 

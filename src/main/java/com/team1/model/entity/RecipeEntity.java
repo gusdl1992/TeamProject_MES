@@ -33,12 +33,16 @@ public class RecipeEntity extends BaseTime{
     private RawMaterialEntity rawMaterialEntity; // 원자재 테이블 가져옴 ( 원자재 이름 )
 
     public RecipeDto toDto() {
-        return RecipeDto.builder()
+        RecipeDto recipeDto = RecipeDto.builder()
                 .productEntity(this.productEntity)
                 .rawMaterialEntity(this.rawMaterialEntity)
                 .reamount(this.reamount)
                 .reno(this.reno)
                 .build();
+        recipeDto.setCdate(this.cdate);
+        recipeDto.setUdate(this.udate);
+        return recipeDto;
+
     }
 
 }

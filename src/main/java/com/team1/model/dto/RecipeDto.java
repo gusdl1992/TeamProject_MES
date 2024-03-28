@@ -15,22 +15,14 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class RecipeDto extends BaseTime {
+public class RecipeDto extends BaseTimeDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int reno;
 
-    @Column(nullable = false)
     private double reamount;
 
-
-    @ManyToOne
-    @JoinColumn(name = "pno")
     private ProductEntity productEntity;
 
-    @ManyToOne
-    @JoinColumn(name = "rmno")
     private RawMaterialEntity rawMaterialEntity;
 
     public RecipeEntity toEntity(){
