@@ -25,13 +25,13 @@ public class SurveyDto extends BaseTimeDto {
 
 
 
-//    // - Dto를 엔티티로 변환하는 메소드
-//    public SurveyEntity toEntity() {
-//        return SurveyEntity.builder()
-//
-//                .samount(this.samount)
-//                .build();
-//    }
+    // - Dto를 엔티티로 변환하는 메소드
+    public SurveyEntity toEntity() {
+        return SurveyEntity.builder()
+
+                .samount(this.samount)
+                .build();
+    }
 
 
 }
