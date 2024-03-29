@@ -21,7 +21,10 @@ public class ProductDto extends BaseTimeDto {
     private String pname;
 
     public ProductEntity toEntity(){
-        return ProductEntity.builder().pno(this.pno).pname(this.pname).build();
+        return ProductEntity.builder()
+                .pno(this.pno)
+                .pname(this.pname)
+                .build();
 
     }
 

@@ -41,10 +41,11 @@ public class SurveyEntity extends BaseTime{
         SurveyDto surveyDto = SurveyDto.builder()
                 .sno(this.sno)
                 .samount(this.samount)
-                .inputmemberEntity(this.inputmemberEntity)
-                .checkmemberEntity(this.checkmemberEntity)
-                .workPlanEntity(this.workPlanEntity)
+                .inputmno(this.inputmemberEntity.getMno())
+                .checkmno(this.checkmemberEntity.getMno())
+                .wno(this.workPlanEntity.getWno())
                 .build();
+
         surveyDto.setCdate(this.cdate);
         surveyDto.setUdate(this.udate);
         return surveyDto;
