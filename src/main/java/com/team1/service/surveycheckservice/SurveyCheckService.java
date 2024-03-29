@@ -33,6 +33,7 @@ public class SurveyCheckService {
         result.put( "원료계량" , result1 );
         result.put( "생산계획" , result2 );
         return result;
+
     }
 
 }
