@@ -44,7 +44,11 @@ insert into survey ( samount , sno , wno , cdate , udate , inputmno , checkmno )
 insert into survey ( samount , sno , wno , cdate , udate , inputmno , checkmno ) values ( 0 , 2 , 2 , '2024-03-20 12:00:12.123456','2024-03-20 12:00:12.123456' , 2 , null );
 insert into survey ( samount , sno , wno , cdate , udate , inputmno , checkmno ) values ( 0 , 3 , 3 , '2024-03-20 14:00:12.123456','2024-03-20 14:00:12.123456' , 2 , null );
 
-
+insert into surveyb ( rmno , sbcount , sbno , sno ) values (5 , 20 , 1 , 2);
+insert into surveyb ( rmno , sbcount , sbno , sno ) values (2 , 10 , 2 , 2);
+insert into surveyb ( rmno , sbcount , sbno , sno ) values (4 , 30 , 3 , 2);
+insert into surveyb ( rmno , sbcount , sbno , sno ) values (3 , 50 , 4 , 1);
+insert into surveyb ( rmno , sbcount , sbno , sno ) values (2 , 60 , 5 , 1);
 
 insert into materialinput ( mipno , sno , pno , inputmno , checkmno , cdate , udate ) values ( 1 , 1 , 1 , 3 , null ,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456');
 insert into materialinput ( mipno , sno , pno , inputmno , checkmno , cdate , udate ) values ( 2 , 2 , 2 , 3 , null ,'2024-03-20 12:30:12.123456','2024-03-20 12:30:12.123456');
