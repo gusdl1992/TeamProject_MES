@@ -28,7 +28,7 @@ public class WorkPlanDto extends BaseTimeDto {
 
     private int wstate; // 보고서 진행상황
 
-    private ProductDto productDto;
+    private int pno;
 
 
     // - 엔티티를 dto로 변환하는 메소드
@@ -39,7 +39,6 @@ public class WorkPlanDto extends BaseTimeDto {
                 .wstarttime(this.wstarttime)
                 .wendtime(this.wendtime)
                 .wstate(this.wstate)
-                .productEntity(this.productDto.toEntity())
                 .build();
     }
 

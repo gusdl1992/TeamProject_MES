@@ -9,6 +9,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
+
 
 @SuperBuilder
 @Setter
@@ -19,21 +21,13 @@ import lombok.experimental.SuperBuilder;
 public class RecipeDto extends BaseTimeDto {
 
     private int reno;
+    private int reamount;
+    private int pno;
+    private int rmno;
 
-    private double reamount;
+    private ProductDto productDto;
+    private List<RawMaterrialDto> rawMaterrialDto;
 
-    private ProductEntity productEntity;
 
-    private RawMaterialEntity rawMaterialEntity;
-
-    public RecipeEntity toEntity(){
-        return RecipeEntity.builder()
-                .productEntity(this.productEntity)
-                .rawMaterialEntity(this.rawMaterialEntity)
-                .reamount(this.reamount)
-                .reno(this.reno)
-                .build();
-
-    }
 
 }
