@@ -5,9 +5,10 @@ import com.team1.model.entity.BaseTime;
 import com.team1.model.entity.MemberEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 
-@Builder
+@SuperBuilder
 @Setter
 @Getter
 @ToString

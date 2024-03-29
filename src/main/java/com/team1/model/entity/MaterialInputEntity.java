@@ -41,7 +41,7 @@ public class MaterialInputEntity extends BaseTime{
     public MaterialInputDto toDto(){
         MaterialInputDto materialInputDto = MaterialInputDto.builder()
                 .productEntity(this.productEntity.toDto())
-                .surveyEntity(this.surveyEntity.toDto())
+                .surveyDto(this.surveyEntity.toDto())
                 .mipno(this.mipno)
                 .inputmemberEntity(this.inputmemberEntity.toDto())
                 .checkmemberDto(this.checkmemberEntity.toDto())

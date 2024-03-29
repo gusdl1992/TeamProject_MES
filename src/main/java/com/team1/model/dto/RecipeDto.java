@@ -7,9 +7,10 @@ import com.team1.model.entity.RawMaterialEntity;
 import com.team1.model.entity.RecipeEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 
-@Builder
+@SuperBuilder
 @Setter
 @Getter
 @ToString

@@ -6,9 +6,10 @@ import com.team1.model.entity.SurveyEntity;
 import com.team1.model.entity.WorkPlanEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 
-@Builder
+@SuperBuilder
 @Setter
 @Getter
 @ToString
