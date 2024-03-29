@@ -3,9 +3,10 @@ package com.team1.model.dto.survetDto;
 import com.team1.model.dto.BaseTimeDto;
 import com.team1.model.entity.SurveyEntity;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 
-@Builder
+@SuperBuilder
 @Setter
 @Getter
 @ToString

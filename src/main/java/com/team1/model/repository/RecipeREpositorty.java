@@ -12,8 +12,8 @@ import java.util.List;
 public interface RecipeREpositorty extends JpaRepository<RecipeEntity,Integer> {
 
 
-    List<RecipeEntity> findByRmno(int rmno); //원자재 이름으로 들어가는 제품들 가져오기
-
-    List<RecipeEntity> findByPno(int pno); //제품이름으로 들어가는 원자재들 가져오기
+//    List<RecipeEntity> findByRmno(int rmno); //원자재 이름으로 들어가는 제품들 가져오기
+//
+//    List<RecipeEntity> findByPno(int pno); //제품이름으로 들어가는 원자재들 가져오기 sql로 변경
 
 }

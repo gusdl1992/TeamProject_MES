@@ -33,8 +33,9 @@ public class MaterialInputEntity extends BaseTime{
     @JoinColumn(name = "inputmno")
     private MemberEntity inputmemberEntity; // 사원번호 따오기 위해 회원테이블 가져옴
 
-    @Column(length = 20)
-    private String checkmembername; // 사원번호 따오기 위해 회원테이블 가져옴
+    @ManyToOne
+    @JoinColumn(name = "checkmno")
+    private MemberEntity checkmembername; // 사원번호 따오기 위해 회원테이블 가져옴
 
     @ColumnDefault("0")
     private int mipstate; // 검사 상태
@@ -46,7 +47,6 @@ public class MaterialInputEntity extends BaseTime{
                 .surveyDto(this.surveyEntity.toDto())
                 .mipno(this.mipno)
                 .inputmemberEntity(this.inputmemberEntity.toDto())
-                .checkmembername(this.checkmembername)
                 .build();
         materialInputDto.setCdate(this.cdate);
         materialInputDto.setUdate(this.udate);

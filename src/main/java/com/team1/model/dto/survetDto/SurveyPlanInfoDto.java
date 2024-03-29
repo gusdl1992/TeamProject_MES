@@ -2,10 +2,11 @@ package com.team1.model.dto.survetDto;
 
 import com.team1.model.dto.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
-@Builder
+@SuperBuilder
 @Setter
 @Getter
 @ToString

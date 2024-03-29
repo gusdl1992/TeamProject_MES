@@ -48,7 +48,7 @@ public class RawMeterialService {
     }
 
     public List<RawMaterialLogDto> doFindRmLog(int pno){
-        List<RawMaterialLogEntity> result = rawMateriallogRepository.findByPno(pno);
+        List<RawMaterialLogEntity> result = rawMateriallogRepository.findByPnoSql(pno);
 
         return result.stream().map(RawMaterialLogEntity::toDto).collect(Collectors.toList());
 

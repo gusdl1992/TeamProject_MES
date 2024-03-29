@@ -31,7 +31,7 @@ public class MaterialInputConfirmService {
 
         MaterialInputEntity materialInputEntity = materialInputRepository.findById(mipno).get();
 
-        materialInputEntity.setCheckmembername(optionalMemberEntity.get().getMname());
+        materialInputEntity.setCheckmembername(optionalMemberEntity.get());
         materialInputEntity.setMipstate(mipstate);
 
         System.out.println("materialInputEntity"+materialInputEntity);
