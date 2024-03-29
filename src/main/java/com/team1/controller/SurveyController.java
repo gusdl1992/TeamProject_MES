@@ -15,8 +15,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/survey")
 public class SurveyController {
-
-
     @Autowired
     private SurveyService surveyService;
 
