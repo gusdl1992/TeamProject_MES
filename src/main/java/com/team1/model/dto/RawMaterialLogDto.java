@@ -22,14 +22,13 @@ public class RawMaterialLogDto extends BaseTimeDto{
 
     private int rmlcount; // 원자재 로그가 얼마나 들어갔는지
 
-    private RawMaterialEntity rawMaterialEntity;
+    private String rmname; //원자재 이름
 
 
     public RawMaterialLogEntity toEntity(){
         return RawMaterialLogEntity.builder()
                 .rmlno(this.rmlno)
                 .rmlcount(this.rmlcount)
-                .rawMaterialEntity(this.rawMaterialEntity)
                 .build();
 
     }
