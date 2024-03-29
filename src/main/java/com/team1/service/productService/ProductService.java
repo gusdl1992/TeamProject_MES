@@ -20,7 +20,7 @@ public class ProductService {
 
     public boolean uploadProduct(ProductDto productDto){
         System.out.println(productDto);
-        if(productRepository.findBypname(productDto.getPname()) != null){
+        if(productRepository.findByPname(productDto.getPname()) != null){
             System.out.println("중복이있습니다");
             return false;
         }
@@ -32,7 +32,8 @@ public class ProductService {
     }
 
     public List<ProductDto> productDtoList(){
-
+        ProductEntity productEntity = productRepository.findById(1).orElse(null);
+        System.out.println(productEntity);
         List<ProductEntity> memberEntityList =productRepository.findAll();
         List<ProductDto> result = memberEntityList.stream().map((e) -> {return e.toDto();}).collect(Collectors.toList());
 
