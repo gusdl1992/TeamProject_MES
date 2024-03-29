@@ -27,12 +27,17 @@ public class RawMaterialLogEntity extends BaseTime{
     @ManyToOne
     private RawMaterialEntity rawMaterialEntity; // 원자재 테이블 가져옴 ( 원자재 이름 )
 
+
+    @JoinColumn( name = "pno")
+    @ManyToOne
+    private ProductEntity productEntity; // 원자재 테이블 가져옴 ( 원자재 이름 )
+
     // - 엔티티를 dto로 변환하는 메소드
     public RawMaterialLogDto toDto() {
         RawMaterialLogDto rawMaterialLogDto = RawMaterialLogDto.builder()
                 .rmlno(this.rmlno)
                 .rmlcount(this.rmlcount)
-                .rawMaterialEntity(this.rawMaterialEntity)
+                .rmname(this.rawMaterialEntity.getRmname())
                 .build();
         rawMaterialLogDto.setCdate(this.cdate);
         rawMaterialLogDto.setUdate(this.udate);

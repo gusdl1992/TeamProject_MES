@@ -17,8 +17,7 @@ public class RawMaterrialDto extends BaseTimeDto {
 
 
     public RawMaterialEntity toEntity() {
-        return RawMaterialEntity.builder()
-                .rmno(this.rmno)
+        return RawMaterialEntity.builder() // 등록용
                 .rmname(this.rmname)
                 .build();
     }

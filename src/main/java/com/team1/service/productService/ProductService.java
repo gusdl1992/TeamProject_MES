@@ -4,6 +4,7 @@ import com.team1.model.dto.ProductDto;
 import com.team1.model.entity.MemberEntity;
 import com.team1.model.entity.ProductEntity;
 import com.team1.model.repository.ProductRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 
 
 @Service
+@Transactional
 public class ProductService {
 
     @Autowired
