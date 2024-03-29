@@ -27,8 +27,13 @@ public class MemberDto extends BaseTimeDto {
     private int pno; // 임시 파트번호
 
     public MemberEntity toEntity(){
-        return MemberEntity.builder().mno(this.mno).mid(this.mid).mpw(this.mpw).pno(this.pno)
-                .mname(this.mname).build();
+        return MemberEntity.builder()
+                .mno(this.mno)
+                .mid(this.mid)
+                .mpw(this.mpw)
+                .pno(this.pno)
+                .mname(this.mname)
+                .build();
 
     }
 }

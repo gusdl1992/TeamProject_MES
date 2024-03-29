@@ -34,11 +34,9 @@ public class SurveyService {
     public WorkPlanDto workPlanDto (int wno){
 
         // JPA에서 데이터 호출하기
-        WorkPlanEntity workPlanEntity = workPlanEntityRepository.findById(wno);
+        WorkPlanEntity workPlanEntity = workPlanEntityRepository.findBywno(wno);
 
-        workPlanEntity.toDto();
-
-        return null;
+        return workPlanEntity.toDto();
     }
 
 }//class end

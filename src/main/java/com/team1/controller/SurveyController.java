@@ -5,6 +5,7 @@ import com.team1.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,10 +30,13 @@ public class SurveyController {
     }
 
     // workplan 식별번호로 정보 가져오기
-    @GetMapping("/workplanoneinfo.do")
+    @PostMapping("/workplanoneinfo.do")
     public WorkPlanDto workPlanDto (int wno){
 
-        return surveyService.;
+        WorkPlanDto result = surveyService.workPlanDto(wno);
+        System.out.println("result = " + result);
+
+        return result;
     }
 
 }//class end
