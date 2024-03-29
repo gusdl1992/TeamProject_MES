@@ -23,7 +23,6 @@ public class RecipeEntity extends BaseTime{
     @Column(nullable = false)
     private int reamount; // 레시피 분량
 
-
     @ManyToOne
     @JoinColumn(name = "pno")
     private ProductEntity productEntity; // 제품 테이블 가져옴 ( 제품 이름 )
