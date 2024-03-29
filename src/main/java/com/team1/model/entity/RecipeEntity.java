@@ -21,7 +21,7 @@ public class RecipeEntity extends BaseTime{
     private int reno; // 레시피 식별번호
 
     @Column(nullable = false)
-    private double reamount; // 레시피 분량
+    private int reamount; // 레시피 분량
 
 
     @ManyToOne
@@ -34,15 +34,14 @@ public class RecipeEntity extends BaseTime{
 
     public RecipeDto toDto() {
         RecipeDto recipeDto = RecipeDto.builder()
-                .productEntity(this.productEntity)
-                .rawMaterialEntity(this.rawMaterialEntity)
+                .pno(this.productEntity.getPno())
+                .rmno(this.rawMaterialEntity.getRmno())
                 .reamount(this.reamount)
                 .reno(this.reno)
                 .build();
         recipeDto.setCdate(this.cdate);
         recipeDto.setUdate(this.udate);
         return recipeDto;
-
     }
 
 }

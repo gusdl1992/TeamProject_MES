@@ -51,6 +51,8 @@ public class SurveyEntity extends BaseTime{
         return surveyDto;
     }
 
+    // 전승호 ===
+
 
 
 }

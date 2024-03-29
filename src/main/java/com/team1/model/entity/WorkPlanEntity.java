@@ -40,6 +40,7 @@ public class WorkPlanEntity extends BaseTime{
                 .wstarttime(this.wstarttime)
                 .wendtime(this.wendtime)
                 .wstate(this.wstate)
+                .pno(this.productEntity.getPno())
                 .build();
         workPlanDto.setCdate(this.cdate);
         workPlanDto.setUdate(this.udate);
