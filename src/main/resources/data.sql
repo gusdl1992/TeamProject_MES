@@ -54,10 +54,5 @@ insert into materialinput ( mipno , sno , pno , inputmno , checkmno , cdate , ud
 insert into materialinput ( mipno , sno , pno , inputmno , checkmno , cdate , udate ) values ( 2 , 2 , 2 , 3 , null ,'2024-03-20 12:30:12.123456','2024-03-20 12:30:12.123456');
 insert into materialinput ( mipno , sno , pno , inputmno , checkmno , cdate , udate ) values ( 3 , 3 , 3 , 3 , null ,'2024-03-20 14:30:12.123456','2024-03-20 14:30:12.123456');
 
-insert into surveyb ( rmno , sbcount , sbno , sno ) values (5 , 20 , 1 , 2);
-insert into surveyb ( rmno , sbcount , sbno , sno ) values (2 , 10 , 2 , 2);
-insert into surveyb ( rmno , sbcount , sbno , sno ) values (4 , 30 , 3 , 2);
-insert into surveyb ( rmno , sbcount , sbno , sno ) values (3 , 50 , 4 , 1);
-insert into surveyb ( rmno , sbcount , sbno , sno ) values (2 , 60 , 5 , 1);
 /* 샘플데이터 END */
 
