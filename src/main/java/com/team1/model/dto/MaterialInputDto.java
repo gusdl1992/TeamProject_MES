@@ -4,9 +4,10 @@ package com.team1.model.dto;
 import com.team1.model.entity.*;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 
-@Builder
+@SuperBuilder
 @Setter
 @Getter
 @ToString
@@ -16,7 +17,7 @@ public class MaterialInputDto extends BaseTimeDto {
 
     private int mipno;
 
-    private SurveyDto surveyEntity;
+    private SurveyDto surveyDto;
 
     private ProductDto productEntity;
 
@@ -24,14 +25,9 @@ public class MaterialInputDto extends BaseTimeDto {
 
     private MemberDto checkmemberDto;
 
-    public MaterialInputEntity toEntity(){
+    public MaterialInputEntity toEntity(){ // C
         return MaterialInputEntity.builder()
-                .productEntity(this.productEntity.toEntity())
-                .surveyEntity(this.surveyEntity.toEntity())
-                .mipno(this.mipno)
-                .inputmemberEntity(this.inputmemberEntity.toEntity())
-                .checkmemberEntity(this.checkmemberDto.toEntity())
-
+                .surveyEntity(surveyDto.toEntity())
                 .build();
 
     }

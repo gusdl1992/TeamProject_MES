@@ -1,5 +1,7 @@
 package com.team1.model.entity;
 
+import com.team1.model.dto.SurveyBDto;
+import com.team1.model.dto.SurveyDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,6 +27,13 @@ public class SurveyBEntity {
     @JoinColumn(name = "sno")
     private SurveyEntity surveyEntity;
 
+    public SurveyBDto toDto(){ // R
+        return SurveyBDto.builder()
+                .rmname(this.rawMaterialEntity.getRmname())
+                .sbcount(this.sbcount)
+                .sno(this.surveyEntity.getSno())
+                .build();
+    }
 
 
 

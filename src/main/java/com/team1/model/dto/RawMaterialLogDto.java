@@ -5,11 +5,12 @@ import com.team1.model.entity.RawMaterialEntity;
 import com.team1.model.entity.RawMaterialLogEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
 
-@Builder
+@SuperBuilder
 @Setter
 @Getter
 @ToString
