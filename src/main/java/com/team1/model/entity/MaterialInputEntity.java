@@ -5,6 +5,7 @@ import com.team1.model.dto.MaterialInputDto;
 import com.team1.model.dto.MemberDto;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(name = "materialinput")
@@ -20,7 +21,6 @@ public class MaterialInputEntity extends BaseTime{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int mipno; // 원료 투입 식별번호
 
-
     @ManyToOne
     @JoinColumn(name = "sno")
     private SurveyEntity surveyEntity; // 계량 테이블 보기
@@ -33,9 +33,11 @@ public class MaterialInputEntity extends BaseTime{
     @JoinColumn(name = "inputmno")
     private MemberEntity inputmemberEntity; // 사원번호 따오기 위해 회원테이블 가져옴
 
-    @ManyToOne
-    @JoinColumn(name = "checkmno")
-    private MemberEntity checkmemberEntity; // 사원번호 따오기 위해 회원테이블 가져옴
+    @Column(length = 20)
+    private String checkmembername; // 사원번호 따오기 위해 회원테이블 가져옴
+
+    @ColumnDefault("0")
+    private int mipstate; // 검사 상태
 
 
     public MaterialInputDto toDto(){
@@ -44,7 +46,7 @@ public class MaterialInputEntity extends BaseTime{
                 .surveyEntity(this.surveyEntity.toDto())
                 .mipno(this.mipno)
                 .inputmemberEntity(this.inputmemberEntity.toDto())
-                .checkmemberDto(this.checkmemberEntity.toDto())
+                .checkmembername(this.checkmembername)
                 .build();
         materialInputDto.setCdate(this.cdate);
         materialInputDto.setUdate(this.udate);

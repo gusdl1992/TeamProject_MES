@@ -55,9 +55,9 @@ insert into survey ( samount , sno , wno , cdate , udate , inputmno , checkmno )
 
 select * from materialinput;
 # materialinput sample # 투입공정
-insert into materialinput ( mipno , sno , pno , inputmno , checkmno , cdate , udate ) values ( 1 , 1 , 1 , 3 , null ,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456');
-insert into materialinput ( mipno , sno , pno , inputmno , checkmno , cdate , udate ) values ( 2 , 2 , 2 , 3 , null ,'2024-03-20 12:30:12.123456','2024-03-20 12:30:12.123456');
-insert into materialinput ( mipno , sno , pno , inputmno , checkmno , cdate , udate ) values ( 3 , 3 , 3 , 3 , null ,'2024-03-20 14:30:12.123456','2024-03-20 14:30:12.123456');
+insert into materialinput ( mipno , sno , pno , inputmno , checkmembername , cdate , udate ) values ( 1 , 1 , 1 , 3 , null ,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456');
+insert into materialinput ( mipno , sno , pno , inputmno , checkmembername , cdate , udate ) values ( 2 , 2 , 2 , 3 , null ,'2024-03-20 12:30:12.123456','2024-03-20 12:30:12.123456');
+insert into materialinput ( mipno , sno , pno , inputmno , checkmembername , cdate , udate ) values ( 3 , 3 , 3 , 3 , null ,'2024-03-20 14:30:12.123456','2024-03-20 14:30:12.123456');
 # 샘플데이터 END ###########################################################################
 select * from member;
 select * from product;

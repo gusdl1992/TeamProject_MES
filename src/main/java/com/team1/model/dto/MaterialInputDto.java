@@ -22,7 +22,7 @@ public class MaterialInputDto extends BaseTimeDto {
 
     private MemberDto inputmemberEntity;
 
-    private MemberDto checkmemberDto;
+    private String checkmembername;
 
     public MaterialInputEntity toEntity(){
         return MaterialInputEntity.builder()
@@ -30,7 +30,7 @@ public class MaterialInputDto extends BaseTimeDto {
                 .surveyEntity(this.surveyEntity.toEntity())
                 .mipno(this.mipno)
                 .inputmemberEntity(this.inputmemberEntity.toEntity())
-                .checkmemberEntity(this.checkmemberDto.toEntity())
+                .checkmembername(this.checkmembername)
 
                 .build();
 
