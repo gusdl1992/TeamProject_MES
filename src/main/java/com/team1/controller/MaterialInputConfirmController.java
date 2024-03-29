@@ -26,6 +26,7 @@ public class MaterialInputConfirmController {
         return materialInputConfirmService.putMaterialInputConfirm(mno , mipno , mipstate);
     }
 
+
     @GetMapping("/confirm/log.do")
     public List<MaterialInputDto> getMaterialInputConfirmLog(){
         System.out.println("material 정보" + materialInputConfirmService.getMaterialInputConfirmLog());
