@@ -1,6 +1,7 @@
 package com.team1.service;
 
 import com.team1.model.dto.ProductDto;
+import com.team1.model.dto.RawMaterrialDto;
 import com.team1.model.dto.RecipeDto;
 import com.team1.model.dto.WorkPlanDto;
 import com.team1.model.dto.survetDto.SurveyPlanInfoDto;
@@ -85,11 +86,14 @@ public class SurveyService {
         recipeDto.setProductDto(optionalProductEntity.get().toDto());
 
         // 원자재 DTO 찾아오기
-//        List<RawMaterialEntity> rawMaterialEntityList = rawMaterialEntityRepository.findByPno(workPlanDto.getPno());
-//        rawMaterialEntityList.forEach((e)->{
-//            recipeDto.setRawMaterrialDto();
-//        });
-//        recipeDto.setRawMaterrialDto(rawMaterialEntityList.get().toDto());
+        List<RawMaterialEntity> rawMaterialEntityList = rawMaterialEntityRepository.findByPnoSql(workPlanDto.getPno());
+        List<RawMaterrialDto> rawMaterrialDtoList = new ArrayList<>();
+        for (int i = 0; i < rawMaterialEntityList.size(); i++) {
+            RawMaterrialDto dto = rawMaterialEntityList.get(i).toDto();
+            rawMaterrialDtoList.add(dto);
+        }
+        recipeDto.setRawMaterrialDto(rawMaterrialDtoList);
+
 
 
         return surveyPlanInfoDto;
