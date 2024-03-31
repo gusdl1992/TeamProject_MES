@@ -42,7 +42,6 @@ public class SurveyEntity extends BaseTime{
                 .sno(this.sno)
                 .samount(this.samount)
                 .inputmno(this.inputmemberEntity.getMno())
-                .checkmno(this.checkmemberEntity.getMno())
                 .wno(this.workPlanEntity.getWno())
                 .build();
 

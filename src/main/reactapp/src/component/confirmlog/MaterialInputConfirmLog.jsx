@@ -3,12 +3,24 @@ import { useState } from "react";
 
 export default function MaterialInputLog(props){
     const [materialconfirmlog , setMaterialconfirmlog] = useState([]);
-    axios.get('http:localhost:80/materialinput/confirm/log.do').then((response)=>{
-        console.log(response);
+    axios.get('/materialinput/confirm/log.do').then((response)=>{
+        console.log(response); 
+        response.data.map((result=>{
+            console.log(result);
+            if(result.checkmembername != null){
+                <tr>
+                    <td>
+                        {result.udate}
+                    </td>
+                    <td>
+                        {result.mipno}
+                    </td>
+                </tr>
+            }
+        }))
     }).catch(error=>{
         console.log(error);
     })
-    
     return(
         <div>
             <table>
@@ -25,7 +37,9 @@ export default function MaterialInputLog(props){
                             
                         </td>
                     </tr>
-                    {}
+                    {
+                        
+                    }
                 </tbody>
             </table>
         </div>
