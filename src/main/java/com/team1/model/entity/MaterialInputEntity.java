@@ -53,3 +53,7 @@ public class MaterialInputEntity extends BaseTime{
         return materialInputDto;
     }
 }
+
+/*
+    워크플랜 참조해야함(제품명,제품수량)
+*/

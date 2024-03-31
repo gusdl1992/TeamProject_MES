@@ -32,7 +32,7 @@ public class SurveyEntity extends BaseTime{
 
     @ManyToOne
     @JoinColumn(name = "wno")
-    private WorkPlanEntity workPlanEntity; // 업무계획 테이블 가져옴 ( 지시 수량 , 그날에 어떤 제품을 만드는 것 )
+    private WorkPlanEntity workPlanEntity; // 업무계획 테이블 가져옴 ( 제품명,지시 수량 , 그날에 어떤 제품을 만드는 것 )
 
 
 
