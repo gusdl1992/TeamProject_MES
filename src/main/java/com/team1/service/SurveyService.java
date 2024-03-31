@@ -1,18 +1,11 @@
 package com.team1.service;
 
-import com.team1.model.dto.ProductDto;
-import com.team1.model.dto.RawMaterrialDto;
-import com.team1.model.dto.RecipeDto;
-import com.team1.model.dto.WorkPlanDto;
+import com.team1.model.dto.*;
+import com.team1.model.dto.survetDto.SurveyInsertDto;
 import com.team1.model.dto.survetDto.SurveyPlanInfoDto;
-import com.team1.model.entity.ProductEntity;
-import com.team1.model.entity.RawMaterialEntity;
-import com.team1.model.entity.RecipeEntity;
-import com.team1.model.entity.WorkPlanEntity;
-import com.team1.model.repository.ProductRepository;
-import com.team1.model.repository.RawMaterialEntityRepository;
-import com.team1.model.repository.RecipeEntityRepository;
-import com.team1.model.repository.WorkPlanEntityRepository;
+import com.team1.model.entity.*;
+import com.team1.model.repository.*;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -33,6 +27,12 @@ public class SurveyService {
     private ProductRepository productRepository;
     @Autowired
     private RawMaterialEntityRepository rawMaterialEntityRepository;
+    @Autowired
+    private HttpServletRequest request;
+    @Autowired
+    private SurveyRepository surveyRepository;
+    @Autowired
+    private SurveyBRepository surveyBRepository;
 
     // workplan 정보 가져오기
     public List<WorkPlanDto> workPlanDtoList (){
@@ -59,7 +59,7 @@ public class SurveyService {
 
     // 1. WorkPlan 식별번호로 만들제품 파악
     // 2. 제품에 들어가는 원재료 를 파악
-    // 3. 반환해야하는것 = 제품명 / 수량 / 원재료종류수량 / 각 원재료별 필요한수량(수량*원재료비율)
+    // 3. 반환해야하는것 = 제품명 / 수량 / 원재료종류수량 / 각 원재료별 필요한수량(수량*원재료비율 이건 뷰에서 계산하는걸로)
     public SurveyPlanInfoDto surveyClilckDo(int wno){
         // 1. 반환할 객체 만들어두기
         SurveyPlanInfoDto surveyPlanInfoDto = new SurveyPlanInfoDto();
@@ -74,29 +74,77 @@ public class SurveyService {
 
             // 2-2. workPlan 에 해당하는 제품 레시피 찾아서 넣기
         // 레시피 찾아오기
-        Optional<RecipeEntity> optionalRecipeEntity = recipeEntityRepository.findById(workPlanDto.getPno());
+        List<RecipeEntity> recipeEntityList = recipeEntityRepository.findByPnoSql(workPlanDto.getPno());
+        List<RecipeDto> recipeDtoList = new ArrayList<>();
         // 찾은 엔티티가 존재하지 않으면 실패
-        if(!optionalRecipeEntity.isPresent())return null;
-        RecipeDto recipeDto = optionalRecipeEntity.get().toDto();
-        surveyPlanInfoDto.setRecipeDto(recipeDto);// 추가
+        if(recipeEntityList == null)return null;
+        for (int i = 0; i < recipeEntityList.size(); i++) {
+            RecipeDto dto = recipeEntityList.get(i).toDto();
+            recipeDtoList.add(dto);
+            for (int j = 0; j < recipeEntityList.size(); j++) {
+                // 제품 DTO 찾아오기
+                Optional<ProductEntity> optionalProductEntity = productRepository.findById(workPlanDto.getPno());
+                if(!optionalProductEntity.isPresent())return null;
+                dto.setProductDto(optionalProductEntity.get().toDto());
 
-        // 제품 DTO 찾아오기
-        Optional<ProductEntity> optionalProductEntity = productRepository.findById(workPlanDto.getPno());
-        if(!optionalProductEntity.isPresent())return null;
-        recipeDto.setProductDto(optionalProductEntity.get().toDto());
-
-        // 원자재 DTO 찾아오기
-        List<RawMaterialEntity> rawMaterialEntityList = rawMaterialEntityRepository.findByPnoSql(workPlanDto.getPno());
-        List<RawMaterrialDto> rawMaterrialDtoList = new ArrayList<>();
-        for (int i = 0; i < rawMaterialEntityList.size(); i++) {
-            RawMaterrialDto dto = rawMaterialEntityList.get(i).toDto();
-            rawMaterrialDtoList.add(dto);
+                // 원자재 DTO 찾아오기
+                List<RawMaterialEntity> rawMaterialEntityList = rawMaterialEntityRepository.findByPnoSql(workPlanDto.getPno());
+                List<RawMaterrialDto> rawMaterrialDtoList = new ArrayList<>();
+                for (int k = 0; k < rawMaterialEntityList.size(); k++) {
+                    RawMaterrialDto rawMaterrialDto = rawMaterialEntityList.get(k).toDto();
+                    rawMaterrialDtoList.add(rawMaterrialDto);
+                }
+                dto.setRawMaterrialDto(rawMaterrialDtoList);
+            }
         }
-        recipeDto.setRawMaterrialDto(rawMaterrialDtoList);
+        surveyPlanInfoDto.setRecipeDto(recipeDtoList);// 추가
 
 
 
         return surveyPlanInfoDto;
+    }
+
+    // 뷰가 해줘야하는거 1. 로그인 2. 워크플랜식별번호(wno) 넣기 3. 투입한거 넣기 *리스트(surveyBDto)
+    // 계량 등록버튼을 눌럿을떄
+    // C survey 와 surveyB 등록하기
+    public int surveyInsertDo(SurveyInsertDto surveyInsertDto){
+        // 로그인한 회원정보를 가져온다
+        Object object =request.getSession().getAttribute("logindto");
+        if(object==null){return 0;} // 값없으면 실패 받환
+        MemberDto memberDto = (MemberDto)object; // 형변환
+        surveyInsertDto.setInputmno(memberDto); // 계량한사람 dto 저장
+
+        int wno = surveyInsertDto.getWno(); // 입력받은 워크플랜 식별번호
+        WorkPlanEntity workPlanEntity = workPlanEntityRepository.findBywno(wno); // 엔티티 호출
+        WorkPlanDto workPlanDto = workPlanEntity.toDto(); // DTO로 변환
+        surveyInsertDto.setWorkPlanDto(workPlanDto); // 워크플랜 DTO 저장
+
+        // Survey 저장
+        SurveyEntity savedSurveyEntity = surveyRepository.save(surveyInsertDto.toSurveyEntity());
+        if(savedSurveyEntity.getSno()>0)return 0; // 저장된 PK 값이없으면 실패 처리
+
+        // SurveyB 저장 ( 원재료 수만큼 등록해야함 )
+        for (int i = 0; i < surveyInsertDto.getSurveyBDto().size(); i++) {
+            // 등록을 위한 가상 객체생성
+            SurveyBDto surveyBDto = new SurveyBDto();
+            // 수량등록 1번째 원재료
+            surveyBDto.setSbcount(surveyInsertDto.getSurveyBDto().get(i).getSbcount());
+
+            // 원재료 식별번호로 값 호출
+            Optional<RawMaterialEntity> rawMaterrialDto = rawMaterialEntityRepository.findById(surveyInsertDto.getSurveyBDto().get(i).getRmno());
+            if(!rawMaterrialDto.isPresent())return 0;
+            // 원재료 DTO 등록
+            surveyBDto.setRawMaterrialDto(rawMaterrialDto.get().toDto());
+            //
+            surveyBDto.setSurveyDto(savedSurveyEntity.toDto());
+
+            // SurveyB 저장
+            SurveyBEntity savedSurveyBEntity = surveyBRepository.save(surveyBDto.toEntity());
+        }
+
+
+
+        return 0;
     }
 
 

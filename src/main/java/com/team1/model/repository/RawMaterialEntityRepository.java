@@ -11,6 +11,10 @@ import java.util.List;
 @Repository
 public interface RawMaterialEntityRepository extends JpaRepository<RawMaterialEntity , Integer> {
 
-    @Query(value = "select * from rawmaterial where pno = :pno",nativeQuery = true)
+    // pno 로 원재료 뭐 들어가는지 가져오기
+    @Query(value = "select rawmaterial.rmno , rmname , rawmaterial.cdate , rawmaterial.udate " +
+            "from rawmaterial inner join recipe on recipe.rmno = rawmaterial.rmno " +
+            "inner join workplan on recipe.pno = workplan.pno " +
+            "where workplan.pno =:pno",nativeQuery = true)
     List<RawMaterialEntity> findByPnoSql(int pno);
 }
