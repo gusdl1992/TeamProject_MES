@@ -26,7 +26,7 @@ public class SurveyCheckController {
 
     // 2. 검사 완료 체크 시 검사 완료자 데이터 저장
     @PutMapping("/check/complete")
-    public boolean surveyCheck(int sno , int mno){
+    public boolean surveyCheck(int sno , int mno){ // 세션 저장 했다고 치고 작업
 
         return surveyCheckService.surveyCheck(sno , mno);
     }
