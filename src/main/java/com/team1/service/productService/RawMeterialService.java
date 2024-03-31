@@ -20,7 +20,7 @@ public class RawMeterialService {
     RawMeterailRepository rawMeterailRepository;
     @Autowired
     RawMateriallogRepository rawMateriallogRepository;
-    public boolean doPostRawMeterial(RawMaterrialDto rawMaterrialDto){
+    public boolean doPostRawMeterial(RawMaterrialDto rawMaterrialDto){ //원자재 입력
         RawMaterialEntity rawMaterialEntity = rawMeterailRepository.save(rawMaterrialDto.toEntity());
 
         if(rawMaterialEntity.getRmno() >= 1){
@@ -29,13 +29,13 @@ public class RawMeterialService {
         return false;
     }
 
-    public List<RawMaterrialDto> doFindRawMeterialList(){
+    public List<RawMaterrialDto> doFindRawMeterialList(){ //원자재 리스트 출력
         List<RawMaterrialDto> result = rawMeterailRepository.findAll().stream().map(RawMaterialEntity::toDto).collect(Collectors.toList());
 
         return result;
     }
 
-    public boolean doPostRmLog(RawMaterialLogDto rawMaterialLogDto){
+    public boolean doPostRmLog(RawMaterialLogDto rawMaterialLogDto){ // //원자재로그 입력(원자재 몇개 등록/감소하게 )
         RawMaterialEntity rawMaterrialEntity = rawMeterailRepository.findByRmname(rawMaterialLogDto.getRmname());
         RawMaterialLogEntity rawMaterialLogEntity =  rawMateriallogRepository.save(rawMaterialLogDto.toEntity());
 

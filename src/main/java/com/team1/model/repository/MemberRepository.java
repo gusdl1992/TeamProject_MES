@@ -12,4 +12,9 @@ import java.util.Optional;
 public interface MemberRepository extends JpaRepository<MemberEntity,Integer> {
     @Query(value = "select * from member where mno = :mno" , nativeQuery = true)
     Optional<MemberEntity> findByMemberInfo(int mno);
+
+    boolean existsByMid(String mid);
+
+    @Query(value = "select * from member where mid = :mid and mpw = :mpw",nativeQuery = true)
+    MemberEntity findByLoginSql(String mid , String mpw);
 }
