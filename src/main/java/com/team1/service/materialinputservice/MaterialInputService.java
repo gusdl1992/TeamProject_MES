@@ -46,15 +46,17 @@ public class MaterialInputService {
         if(saveMaterialInput.getMipno() >= 1){
             saveMaterialInput.setSurveyEntity( surveyEntity );
             saveMaterialInput.setProductEntity( optionalProductEntity );
-
+        // 인풋넘버 넣는곳
             return true;
         }
         return false;
     }
 
-    public List<SurveyBDto> doInputInfoGet(){
+    @Transactional
+    public List<MaterialInputEntity> doInputInfoGet(){
         System.out.println("MaterialInputController.doInputInfoGet");
-//        List<SurveyBDto> result = ;
+        List<MaterialInputEntity> result = materialInputRepository.findAll();
+        System.out.println("result = " + result);
         return null;
     }
 
