@@ -27,10 +27,9 @@ public class RawMaterialLogEntity extends BaseTime{
     @ManyToOne
     private RawMaterialEntity rawMaterialEntity; // 원자재 테이블 가져옴 ( 원자재 이름 )
 
-
     @JoinColumn( name = "pno")
     @ManyToOne
-    private ProductEntity productEntity; // 원자재 테이블 가져옴 ( 원자재 이름 )
+    private ProductEntity productEntity; // 원자재 테이블 가져옴 ( 원자재 이름 ) <<< 이거 필요한가? 원자재가 창고에 얼마나 쌓이는지만 체크하는데
 
     // - 엔티티를 dto로 변환하는 메소드
     public RawMaterialLogDto toDto() {
