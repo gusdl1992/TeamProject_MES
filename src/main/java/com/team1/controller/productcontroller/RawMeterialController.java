@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/RM")
@@ -35,9 +36,13 @@ public class RawMeterialController {
     }
 
     @GetMapping("/log/get.do")
-    public List<RawMaterialLogDto> doFindRmLog(int pno){
+    public List<RawMaterialLogDto> doFindRmLog(int rmno){
+        return rawMeterialService.doFindRmLog(rmno);
+    }
 
-        return rawMeterialService.doFindRmLog(pno);
+    @GetMapping("/log/count/get.do")
+    public List<Map<Object,Object>> doFindRmCount(){
+        return rawMeterialService.doFindRmCount();
     }
 
 }

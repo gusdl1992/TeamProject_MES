@@ -23,7 +23,6 @@ public class RecipeEntity extends BaseTime{
     @Column(nullable = false)
     private int reamount; // 레시피 분량
 
-
     @ManyToOne
     @JoinColumn(name = "pno")
     private ProductEntity productEntity; // 제품 테이블 가져옴 ( 제품 이름 )
@@ -38,6 +37,8 @@ public class RecipeEntity extends BaseTime{
                 .rmno(this.rawMaterialEntity.getRmno())
                 .reamount(this.reamount)
                 .reno(this.reno)
+                .pname(this.productEntity.getPname())
+                .rmname(this.rawMaterialEntity.getRmname())
                 .build();
         recipeDto.setCdate(this.cdate);
         recipeDto.setUdate(this.udate);

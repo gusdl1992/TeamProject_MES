@@ -23,11 +23,15 @@ public class RecipeDto extends BaseTimeDto {
     private int reno;
     private int reamount;
     private int pno;
+    private String pname; //제품이름
     private int rmno;
+    private String rmname; //원자재 이름
 
     private ProductDto productDto;
     private List<RawMaterrialDto> rawMaterrialDto;
 
-
+    public RecipeEntity toEntity(){
+        return RecipeEntity.builder().reamount(this.reamount).build();
+    }
 
 }
