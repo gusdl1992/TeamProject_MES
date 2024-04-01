@@ -68,10 +68,8 @@ public class MemberService {
         if(object != null){
             return (MemberDto) object;
         }
-
         return null;
     }
-
 }
 /*
     Optional 클래스

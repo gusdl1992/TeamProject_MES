@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 @Transactional
 @Service
@@ -34,7 +35,7 @@ public class RawMeterialService {
 
         return result;
     }
-
+    @Transactional
     public boolean doPostRmLog(RawMaterialLogDto rawMaterialLogDto){ // //원자재로그 입력(원자재 몇개 등록/감소하게 )
         RawMaterialEntity rawMaterrialEntity = rawMeterailRepository.findByRmname(rawMaterialLogDto.getRmname());
         RawMaterialLogEntity rawMaterialLogEntity =  rawMateriallogRepository.save(rawMaterialLogDto.toEntity());
@@ -47,10 +48,16 @@ public class RawMeterialService {
         return false;
     }
 
-    public List<RawMaterialLogDto> doFindRmLog(int pno){
-        List<RawMaterialLogEntity> result = rawMateriallogRepository.findByPnoSql(pno);
+    public List<RawMaterialLogDto> doFindRmLog(int rmno){
+        List<RawMaterialLogEntity> result = rawMateriallogRepository.findByPnoSql(rmno);
 
         return result.stream().map(RawMaterialLogEntity::toDto).collect(Collectors.toList());
+
+    }
+
+    public List<Map<Object,Object>> doFindRmCount(){
+        List<Map<Object,Object>> result = rawMateriallogRepository.findsumlogsql();
+        return result;
 
     }
 }

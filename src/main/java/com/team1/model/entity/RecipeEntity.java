@@ -37,6 +37,8 @@ public class RecipeEntity extends BaseTime{
                 .rmno(this.rawMaterialEntity.getRmno())
                 .reamount(this.reamount)
                 .reno(this.reno)
+                .pname(this.productEntity.getPname())
+                .rmname(this.rawMaterialEntity.getRmname())
                 .build();
         recipeDto.setCdate(this.cdate);
         recipeDto.setUdate(this.udate);
