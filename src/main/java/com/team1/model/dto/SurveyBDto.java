@@ -26,11 +26,13 @@ public class SurveyBDto extends BaseTimeDto {
     private RawMaterrialDto rawMaterrialDto;
 
 
+
     public SurveyBEntity toEntity(){ // C
         return SurveyBEntity.builder()
                 .sbcount(this.sbcount)
                 .rawMaterialEntity(this.rawMaterrialDto.toEntity())
                 .surveyEntity(this.surveyDto.toEntity())
+
                 .build();
     }
 

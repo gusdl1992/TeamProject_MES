@@ -28,11 +28,14 @@ public class SurveyBEntity {
     @JoinColumn(name = "sno")
     private SurveyEntity surveyEntity;
 
+
+
     public SurveyBDto toDto(){ // R
         return SurveyBDto.builder()
                 .rmname(this.rawMaterialEntity.getRmname())
                 .sbcount(this.sbcount)
                 .sno(this.surveyEntity.getSno())
+
                 .build();
     }
 
