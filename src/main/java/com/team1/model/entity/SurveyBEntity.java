@@ -15,13 +15,13 @@ import lombok.*;
 public class SurveyBEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int sbno;
+    private int sbno; // 고유번호
 
-    private int sbcount;
+    private int sbcount; // 원료수량
 
     @ManyToOne
     @JoinColumn(name = "rmno")
-    private RawMaterialEntity rawMaterialEntity;
+    private RawMaterialEntity rawMaterialEntity; // 원료이름
 
     @ManyToOne
     @JoinColumn(name = "sno")
