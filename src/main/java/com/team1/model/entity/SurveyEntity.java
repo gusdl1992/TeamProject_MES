@@ -18,7 +18,8 @@ public class SurveyEntity extends BaseTime{
     @Id
     @GeneratedValue( strategy =  GenerationType.IDENTITY )
     private int sno; // 계량 식별 번호
-    @Column( nullable = false)
+
+    @Column( nullable = true)
     private int samount; // 지시 수량
 
 
