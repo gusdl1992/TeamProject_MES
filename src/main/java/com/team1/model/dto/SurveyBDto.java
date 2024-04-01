@@ -12,8 +12,9 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @Setter
 @Getter
+@ToString
 @SuperBuilder
-public class SurveyBDto extends BaseTimeDto{
+public class SurveyBDto extends BaseTimeDto {
 
     private int sbno;
     private int sbcount;

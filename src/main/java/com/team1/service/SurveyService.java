@@ -33,6 +33,8 @@ public class SurveyService {
     private SurveyRepository surveyRepository;
     @Autowired
     private SurveyBRepository surveyBRepository;
+    @Autowired
+    private MemberRepository memberRepository;
 
     // workplan 정보 가져오기
     public List<WorkPlanDto> workPlanDtoList (){
@@ -108,11 +110,20 @@ public class SurveyService {
     // 계량 등록버튼을 눌럿을떄
     // C survey 와 surveyB 등록하기
     public int surveyInsertDo(SurveyInsertDto surveyInsertDto){
+        // 테스트용
+        MemberDto memberDto12 = MemberDto.builder()
+                .mno(1)
+                .build();
+        request.getSession().setAttribute("logindto",memberDto12);
+        // 테스트용 end
+
         // 로그인한 회원정보를 가져온다
         Object object =request.getSession().getAttribute("logindto");
         if(object==null){return 0;} // 값없으면 실패 받환
         MemberDto memberDto = (MemberDto)object; // 형변환
-        surveyInsertDto.setInputmno(memberDto); // 계량한사람 dto 저장
+        Optional<MemberEntity> memberEntity = memberRepository.findById(memberDto.getMno()); // 받아온 mno-> member 엔티티 객체 찾아오기
+        if(!memberEntity.isPresent())return 0; // 찾은값이 없으면 실패 반환
+        surveyInsertDto.setInputmno(memberEntity.get().toDto()); // 계량한사람 dto 저장
 
         int wno = surveyInsertDto.getWno(); // 입력받은 워크플랜 식별번호
         WorkPlanEntity workPlanEntity = workPlanEntityRepository.findBywno(wno); // 엔티티 호출
@@ -120,8 +131,13 @@ public class SurveyService {
         surveyInsertDto.setWorkPlanDto(workPlanDto); // 워크플랜 DTO 저장
 
         // Survey 저장
+        System.out.println("surveyInsertDto = " + surveyInsertDto);
+        System.out.println("surveyInsertDto = " + surveyInsertDto.toSurveyEntity());
         SurveyEntity savedSurveyEntity = surveyRepository.save(surveyInsertDto.toSurveyEntity());
+        System.out.println("OK1");
         if(savedSurveyEntity.getSno()>0)return 0; // 저장된 PK 값이없으면 실패 처리
+        System.out.println("OK2");
+
 
         // SurveyB 저장 ( 원재료 수만큼 등록해야함 )
         for (int i = 0; i < surveyInsertDto.getSurveyBDto().size(); i++) {
@@ -144,7 +160,7 @@ public class SurveyService {
 
 
 
-        return 0;
+        return 1;
     }
 
 
