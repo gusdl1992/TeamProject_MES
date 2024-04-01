@@ -12,6 +12,7 @@ import lombok.*;
 @Setter
 @Getter
 @Builder
+@ToString
 public class SurveyBEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
