@@ -12,23 +12,25 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @Setter
 @Getter
+@ToString
 @SuperBuilder
-public class SurveyBDto extends BaseTimeDto{
+public class SurveyBDto extends BaseTimeDto {
 
     private int sbno;
-
     private int sbcount;
-
     private int rmno;
-
     private int sno;
-
     private String rmname;
+
+    private SurveyDto surveyDto;
+    private RawMaterrialDto rawMaterrialDto;
 
 
     public SurveyBEntity toEntity(){ // C
         return SurveyBEntity.builder()
-
+                .sbcount(this.sbcount)
+                .rawMaterialEntity(this.rawMaterrialDto.toEntity())
+                .surveyEntity(this.surveyDto.toEntity())
                 .build();
     }
 

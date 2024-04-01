@@ -1,14 +1,12 @@
 package com.team1.controller;
 
 import com.team1.model.dto.WorkPlanDto;
+import com.team1.model.dto.survetDto.SurveyInsertDto;
 import com.team1.model.dto.survetDto.SurveyPlanInfoDto;
 import com.team1.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -44,6 +42,15 @@ public class SurveyController {
     @PostMapping("/workplan/clilck.do")
     public SurveyPlanInfoDto surveyClilckDo(int wno){
         return surveyService.surveyClilckDo(wno);
+    }
+
+    // 계량 등록버튼을 눌럿을떄
+    // C survey 와 surveyB 등록하기
+    @PostMapping("/insert.do")
+    public int surveyInsertDo(@RequestBody SurveyInsertDto surveyInsertDto){
+        System.out.println("surveyInsertDto = " + surveyInsertDto);
+        System.out.println("surveyInsertDto.getSurveyBDto().get(0) = " + surveyInsertDto.getSurveyBDto().get(0));
+        return surveyService.surveyInsertDo(surveyInsertDto);
     }
 
 }//class end
