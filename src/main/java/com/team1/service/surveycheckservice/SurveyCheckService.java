@@ -3,13 +3,8 @@ package com.team1.service.surveycheckservice;
 import com.team1.model.entity.*;
 import com.team1.model.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.embedded.netty.NettyWebServer;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 
-import java.sql.Time;
-import java.time.LocalTime;
 import java.util.*;
 
 @Service
