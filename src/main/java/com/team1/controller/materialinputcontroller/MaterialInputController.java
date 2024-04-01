@@ -25,7 +25,7 @@ public class MaterialInputController {
     }
 
     @GetMapping("/input/info/get.do")
-    public List<MaterialInputEntity> doInputInfoGet(){
+    public List<MaterialInputDto> doInputInfoGet(){
         System.out.println("MaterialInputController.doInputInfoGet");
 
         return materialInputService.doInputInfoGet();
