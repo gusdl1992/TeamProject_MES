@@ -8,6 +8,7 @@ import ProductWrite from "./content/product/ProductWrite";
 import ProductList from "./content/product/Productlist";
 import RmWrite from "./content/rawmaterial/RmWrite";
 import RmCount from "./content/rawmaterial/RmCount";
+import RmLogList from "./content/rawmaterial/RMLogList";
 
 export const LoginInfoContext = React.createContext("");
 
@@ -25,6 +26,7 @@ export default function Index(props){
                     <Route path="/product" element={<ProductList/>}/>
                     <Route path="/RM/write" element={<RmWrite/>}/>
                     <Route path="/RM" element={<RmCount/>}/>
+                    <Route path="/RM/log" element={<RmLogList/>}/>
                     </Routes>
                 </div>
         </BrowserRouter>

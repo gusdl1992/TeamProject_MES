@@ -50,7 +50,6 @@ public class RawMeterialService {
 
     public List<RawMaterialLogDto> doFindRmLog(int rmno){
         List<RawMaterialLogEntity> result = rawMateriallogRepository.findByPnoSql(rmno);
-
         return result.stream().map(RawMaterialLogEntity::toDto).collect(Collectors.toList());
 
     }

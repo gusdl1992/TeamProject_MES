@@ -1,13 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import RmLogList from "./RMLogList";
+import { useSearchParams } from 'react-router-dom';
 
-export default function RmCount(props){
+export default function RmLogList(props){
     const [infos, setInfos] = useState([]);
+    //쿼리스트링 받아오기
+    let [query, setQuery] = useSearchParams();
+    console.log(query.get("rmno"))
     useEffect(
         ()=>{
-            axios.get("/RM/log/count/get.do").then( (r) => { 
+            axios.get(`/RM/log/get.do?rmno=${query.get("rmno")}`).then( (r) => { 
                 setInfos(r.data);
             }).catch((error) => {
                 console.error("Error:", error);
@@ -25,10 +27,13 @@ export default function RmCount(props){
                     원자재번호
                     </th>
                     <th>
-                    원자재명
+                    원자재 이름
                     </th>
                     <th>
-                    남은 잔고
+                    기입수량
+                    </th>
+                    <th>
+                    날짜
                     </th>
                 </tr>
             </thead>
@@ -39,12 +44,11 @@ export default function RmCount(props){
                     </tr>
                 ))} */}
                 {infos.map((rm) => (
-                    <tr key={rm.rmno} >
-                        <Link to="/RM/log?rmno=${rm.rmno}">
-                        <td>{rm.rmno}</td>
+                    <tr key={rm.rmlno}>
+                        <td>{query.get("rmno")}</td>
                         <td>{rm.rmname}</td>
-                        <td>{rm.rmsum}</td>
-                        </Link>
+                        <td>{rm.rmlcount}</td>
+                        <td>{rm.cdate}</td>
                     </tr>
                 ))}
             </tbody>
