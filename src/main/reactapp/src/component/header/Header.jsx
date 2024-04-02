@@ -24,6 +24,7 @@ export default function Header(props){
     };
 
 
+    // 로그인 정보 저장
     const { logininfo, setLogin } = useContext(LoginInfoContext);
 
     
@@ -77,7 +78,7 @@ export default function Header(props){
                         <div className='subMenu'>
                             <ul>
                                 <li>
-                                    메뉴1
+                                <Link to="/survey/survey">원료계량</Link>
                                 </li>
                                 <li>
                                     <Link to="/material/input">원료투입</Link>
