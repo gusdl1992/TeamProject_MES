@@ -2,6 +2,7 @@ import { useContext, useEffect } from 'react';
 import styles from './header.css';
 import { LoginInfoContext } from '../Index';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function Header(props){
     const clickMenu = (event) => {
@@ -79,7 +80,7 @@ export default function Header(props){
                                     메뉴1
                                 </li>
                                 <li>
-                                    메뉴2
+                                    <Link to="/material/input">원료투입</Link>
                                 </li>
                                 <li>
                                     메뉴3

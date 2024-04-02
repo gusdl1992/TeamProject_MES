@@ -40,7 +40,7 @@ export default function RmCount(props){
                 ))} */}
                 {infos.map((rm) => (
                     <tr key={rm.rmno} >
-                        <Link to="/RM/log?rmno=${rm.rmno}">
+                        <Link to={`/RM/log?rmno=${rm.rmno}`}>
                         <td>{rm.rmno}</td>
                         <td>{rm.rmname}</td>
                         <td>{rm.rmsum}</td>
