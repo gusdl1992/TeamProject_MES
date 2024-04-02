@@ -50,8 +50,7 @@ public class MaterialInputConfirmService {
             materialInputDtoList.add(matrialInfo.toDto());
         });
 
-        Optional<MaterialInputEntity> test = materialInputRepository.findBySno(1);
-        System.out.println("테스트"+test);
+
 
         return materialInputDtoList;
     }

@@ -5,6 +5,7 @@ export default function MaterialInput(props){
     let snoInfo = {sno:1};
 
     let [test,setTest] = useState([]);
+    let [test1,setTest1] = useState([]);
 
     useEffect(()=>{
         axios.get('/material/input/info/get.do',snoInfo)
@@ -12,9 +13,21 @@ export default function MaterialInput(props){
             console.log(response);
             if(response.data != []){
                 setTest(response.data);
+                   
             }
         })
     },[])
+
+    useEffect(() =>{
+        axios.get('/material/input/info/get.do',snoInfo)
+    .then((response)=>{
+        console.log(response);
+        if(response.data != []){
+            setTest1(response.data);
+        }
+    })
+    } , [])
+    console.log(test)
 
     return(
         <div style={{maxWidth:'66%',minWidth:'1100px',margin:'0 auto',border:'1px solid red'}}>
@@ -66,11 +79,11 @@ export default function MaterialInput(props){
                                 제품수량
                             </th>
                             <th>
-                                원료1
-                            </th>
+                                원료
+                            </th>          
                             <th>
-                                원료2
-                            </th>
+                                원료투입량
+                            </th>                     
                             <th>
                                 날짜
                             </th>
@@ -91,22 +104,22 @@ export default function MaterialInput(props){
                                             {r.mipno}
                                         </td>
                                         <td>
-                                            {r.productDto.pname}
+                                            {r.pname}
                                         </td>
                                         <td>
-                                            {r.workPlanDto.wcount}
+                                            {r.wcount}
                                         </td>
                                         <td>
-                                            
+                                            {r.rmname}
                                         </td>
                                         <td>
-                                            
+                                            {r.sbcount}
                                         </td>
                                         <td>
                                             {r.cdate}
                                         </td>
                                         <td>
-                                            {r.inputmemberDto.mname}
+                                            {r.mname}
                                         </td>
                                         <td>
                                             {r.mipstate}

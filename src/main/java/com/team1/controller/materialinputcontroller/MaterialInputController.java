@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/material")
@@ -24,8 +25,15 @@ public class MaterialInputController {
         return materialInputService.doInputPost(sno);
     }
 
+    @GetMapping("/input/allinfo/get.do")
+    public List<MaterialInputDto> doInputAllInfoGet(){
+        System.out.println("MaterialInputController.doInputInfoGet");
+
+        return materialInputService.doInputAllInfoGet();
+    }
+
     @GetMapping("/input/info/get.do")
-    public List<MaterialInputDto> doInputInfoGet(){
+    public List<Map<Object,Object>> doInputInfoGet(){
         System.out.println("MaterialInputController.doInputInfoGet");
 
         return materialInputService.doInputInfoGet();

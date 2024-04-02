@@ -16,7 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MaterialInputService {
@@ -35,6 +37,7 @@ public class MaterialInputService {
 
         Optional<SurveyEntity> optionalSurveyEntity = surveyRepository.findById( sno );
 
+
         if (!optionalSurveyEntity.isPresent()) return false;
 
         SurveyEntity surveyEntity = optionalSurveyEntity.get();
@@ -44,6 +47,7 @@ public class MaterialInputService {
             // insert
         MaterialInputEntity saveMaterialInput
                 = materialInputRepository.save( MaterialInputEntity.builder().build() );
+
         if(saveMaterialInput.getMipno() >= 1){
             saveMaterialInput.setSurveyEntity( surveyEntity );
             saveMaterialInput.setProductEntity( optionalProductEntity );
@@ -54,23 +58,66 @@ public class MaterialInputService {
     }
 
     @Transactional
-    public List<MaterialInputDto> doInputInfoGet(){
-        System.out.println("MaterialInputController.doInputInfoGet");
-        List<MaterialInputEntity> result = materialInputRepository.findAll();
-        System.out.println("result = " + result);
-        // Entity를 Dto로 변환한다
-        List<MaterialInputDto> materialInputDtoList = new ArrayList<>();
-            // 1. 꺼내온 entity를 순회한다
-        for (int i = 0; i < result.size(); i++) {
-            // 2.하나씩 entity를 꺼낸다
-            MaterialInputEntity materialInputEntity = result.get(i);
-            // 3. 해당 entity를 dto로 변환한다
-            MaterialInputDto materialInputDto = materialInputEntity.toDto();
-            // 4. 변환된 dto를 리스트에 담는다
-            materialInputDtoList.add(materialInputDto);
+    public List<MaterialInputDto> doInputAllInfoGet(){
+//        System.out.println("MaterialInputController.doInputInfoGet");
+//        List<MaterialInputEntity> result = materialInputRepository.findAll();
+//
+//        System.out.println("result = " + result);
+//        // Entity를 Dto로 변환한다
+//        List<MaterialInputDto> materialInputDtoList = new ArrayList<>();
+//            // 1. 꺼내온 entity를 순회한다
+//        for (int i = 0; i < result.size(); i++) {
+//            // 2.하나씩 entity를 꺼낸다
+//            MaterialInputEntity materialInputEntity = result.get(i);
+//                result.get(i).getSurveyBEntity().getSbno();
+//            System.out.println("방금막쓴sno = " + materialInputEntity);
+//
+//            // 3. 해당 entity를 dto로 변환한다
+//            MaterialInputDto materialInputDto = materialInputEntity.toDto();
+//            // 4. 변환된 dto를 리스트에 담는다
+//            materialInputDtoList.add(materialInputDto);
+//
+//        }
+        List<MaterialInputDto> result = materialInputRepository.findBySno(1).stream().map( (materialInputEntity) -> {
+            return materialInputEntity.toDto();
+        }).collect(Collectors.toList());
 
+        for (MaterialInputDto materialInputDto : result) {
+            System.out.println("dddddddd"+materialInputDto);
         }
-        return materialInputDtoList;
+        return result;
+    }
+
+
+
+    @Transactional
+    public List<Map<Object,Object>> doInputInfoGet(){
+//        System.out.println("MaterialInputController.doInputInfoGet");
+//        List<MaterialInputEntity> result = materialInputRepository.findAll();
+//
+//        System.out.println("result = " + result);
+//        // Entity를 Dto로 변환한다
+//        List<MaterialInputDto> materialInputDtoList = new ArrayList<>();
+//            // 1. 꺼내온 entity를 순회한다
+//        for (int i = 0; i < result.size(); i++) {
+//            // 2.하나씩 entity를 꺼낸다
+//            MaterialInputEntity materialInputEntity = result.get(i);
+//                result.get(i).getSurveyBEntity().getSbno();
+//            System.out.println("방금막쓴sno = " + materialInputEntity);
+//
+//            // 3. 해당 entity를 dto로 변환한다
+//            MaterialInputDto materialInputDto = materialInputEntity.toDto();
+//            // 4. 변환된 dto를 리스트에 담는다
+//            materialInputDtoList.add(materialInputDto);
+//
+//        }
+
+        return materialInputRepository.findByHard(1);
     }
 
 }
+
+//        Optional<MaterialInputEntity> test = materialInputRepository.findBySno(1);
+//        Optional<MaterialInputEntity> test2 = materialInputRepository.findByHard(1);
+//        System.out.println("테스트 : "+test);
+//        System.out.println("테스트2"+test2);
