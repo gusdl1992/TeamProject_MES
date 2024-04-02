@@ -1,8 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Await } from "react-router-dom";
+import { Await, useSearchParams } from "react-router-dom";
+import WorkPlanList from "./WorkPlanList";
 
 export default function Survey(props){
+
+    console.log(props);
+    const [query , setQuery] = useSearchParams();
+    console.log(query.get("wno"));
 
     // 워크플랜 객체
     const [ workPlanInfo , setWorkPlanInfo] = useState({});
@@ -29,6 +34,7 @@ export default function Survey(props){
     
     return(<>
         {console.log(workPlanInfo)}
+        <WorkPlanList/>
         <div id="surveyCssBox">
             <form>
                 {/* <div>

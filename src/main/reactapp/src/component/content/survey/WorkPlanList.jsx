@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom";
 export default function WorkPlanList(){
     
     // 워크플랜
@@ -19,10 +20,10 @@ export default function WorkPlanList(){
         <div id="workPlanListBox">
         {workPlan.map((w)=>{
             return(
-                <a onClick={()=>{ window.location.href="/"; }}>
-                    <span>작업계획{w.wno}</span> &nbsp; <span>식별번호 : {w.wno}</span> &nbsp; <span>등록일자 : {w.cdate}</span>
-                </a>
-            )
+                <div>
+                    <Link to={`/survey/survey?wno=${w.wno}`}><span>작업계획{w.wno}</span> &nbsp; <span>식별번호 : {w.wno}</span> &nbsp; <span>등록일자 : {w.cdate}</span></Link>
+                </div>
+                )
         })}
         </div>
     </>)
