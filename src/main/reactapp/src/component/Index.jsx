@@ -11,6 +11,9 @@ import RmCount from "./content/rawmaterial/RmCount";
 import RmLogList from "./content/rawmaterial/RMLogList";
 import MaterialInput from "./materialinput/MaterialInput";
 
+import Survey from "./content/survey/Survey" // 승호
+import WorkPlanList from "./content/survey/WorkPlanList"; // 승호
+
 export const LoginInfoContext = React.createContext("");
 
 export default function Index(props){
@@ -29,6 +32,8 @@ export default function Index(props){
                     <Route path="/RM" element={<RmCount/>}/>
                     <Route path="/RM/log" element={<RmLogList/>}/>
                     <Route path="/material/input" element={ <MaterialInput /> } />
+                    <Route path="/survey/survey" element={<Survey/> } />
+                    <Route path="/survey/plan" element={<WorkPlanList/> } />
                     </Routes>
                 </div>
         </BrowserRouter>
