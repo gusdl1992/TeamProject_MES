@@ -1,6 +1,9 @@
+import { useContext, useEffect } from 'react';
 import styles from './header.css';
+import { LoginInfoContext } from '../Index';
+import axios from 'axios';
 
-export default function header(props){
+export default function Header(props){
     const clickMenu = (event) => {
         const clickedItem = event.currentTarget;
         const subMenu = clickedItem.querySelector(".subMenu");
@@ -19,6 +22,29 @@ export default function header(props){
         }
     };
 
+
+    const { logininfo, setLogin } = useContext(LoginInfoContext);
+
+    
+    useEffect(()=>{
+        axios.get("/member/login/info/get.do")
+            .then( (r)=>{console.log(r)
+                    setLogin(r.data)
+            } )
+            .catch( (e) => {console.log(e)})
+
+
+    } ,[])
+
+    const logoutHandler = ()=>{
+        axios.get("/member/logout/get.do").then( (r)=>{ if(r.data){
+            alert("로그아웃 성공")
+            window.location.href = "/"
+        } } ).catch( e=>{})
+    }
+
+    const checklogin = logininfo ? <li>{logininfo.mname}님 환영합니다! <span onClick={logoutHandler}> 로그아웃</span> </li>:<li> <a href='/member/login'> 로그인</a></li>
+
     return (
         <div id='menuWrap'>
             <div id='logoBox'>
@@ -26,6 +52,7 @@ export default function header(props){
             </div>
             <div id='sideNav'>
                 <ul>
+                    {checklogin}
                     <li onClick={clickMenu}>
                         <a className='topMenu' href='#'>
                             자재관리

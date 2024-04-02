@@ -37,7 +37,11 @@ public class RawMeterialController {
 
     @GetMapping("/log/get.do")
     public List<RawMaterialLogDto> doFindRmLog(int rmno){
-        return rawMeterialService.doFindRmLog(rmno);
+        List<RawMaterialLogDto> result = rawMeterialService.doFindRmLog(rmno);
+//        result.forEach((e)->{
+//            System.out.println(e.cdate);
+//        } );
+        return result;
     }
 
     @GetMapping("/log/count/get.do")

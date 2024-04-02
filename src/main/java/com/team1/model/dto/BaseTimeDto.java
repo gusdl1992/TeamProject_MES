@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class BaseTimeDto {
     // 1. 레코드/엔티티 등록날짜
     public LocalDateTime cdate;
