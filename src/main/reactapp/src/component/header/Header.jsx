@@ -26,12 +26,11 @@ export default function Header(props){
 
     // 로그인 정보 저장
     const { logininfo, setLogin } = useContext(LoginInfoContext);
-
-    
     useEffect(()=>{
         axios.get("/member/login/info/get.do")
             .then( (r)=>{console.log(r)
                     setLogin(r.data)
+                    
             } )
             .catch( (e) => {console.log(e)})
 
@@ -95,8 +94,19 @@ export default function Header(props){
                     <li>
                         경영통계
                     </li>
-                    <li>
+                    <li onClick={clickMenu} >
                         관리자페이지
+                        <div className='subMenu'>
+                            <ul>
+                                <li>
+                                <Link to="/member/test">사원등록</Link>
+                                </li>
+                                <li>
+                                    메뉴99
+                                </li>
+
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </div>
