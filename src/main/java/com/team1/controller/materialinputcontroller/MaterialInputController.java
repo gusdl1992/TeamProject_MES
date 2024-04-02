@@ -16,7 +16,7 @@ public class MaterialInputController {
     @Autowired
     MaterialInputService materialInputService;
 
-    @PostMapping("/input/post.do")
+    @GetMapping("/input/get.do")
     public boolean doInputPost(@RequestParam int sno){
         System.out.println("MaterialInputController.doInputPost");
         System.out.println("sno = " + sno);

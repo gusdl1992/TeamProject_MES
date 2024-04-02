@@ -22,7 +22,7 @@ public class MaterialInputEntity extends BaseTime{
     private int mipno; // 원료 투입 식별번호
 
     @ManyToOne
-    @JoinColumn(name = "sno")
+    @JoinColumn(name = "sno2")
     private SurveyEntity surveyEntity; // 계량 테이블 보기
 
     @ManyToOne
@@ -40,13 +40,23 @@ public class MaterialInputEntity extends BaseTime{
     @ColumnDefault("0")
     private int mipstate; // 검사 상태
 
+    @ManyToOne
+    @JoinColumn(name = "sbno2")
+    private SurveyBEntity surveyBEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "wno2")
+    private WorkPlanEntity workPlanEntity;
 
     public MaterialInputDto toDto(){
         MaterialInputDto materialInputDto = MaterialInputDto.builder()
-                .productEntity(this.productEntity.toDto())
+                .productDto(this.productEntity.toDto())
                 .surveyDto(this.surveyEntity.toDto())
                 .mipno(this.mipno)
-                .inputmemberEntity(this.inputmemberEntity.toDto())
+                .mipstate(this.mipstate)
+                .inputmemberDto(this.inputmemberEntity.toDto())
+                .surveyBDto(this.surveyBEntity.toDto())
+                .workPlanDto(this.workPlanEntity.toDto())
                 .build();
         materialInputDto.setCdate(this.cdate);
         materialInputDto.setUdate(this.udate);

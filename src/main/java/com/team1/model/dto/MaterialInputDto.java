@@ -17,21 +17,29 @@ public class MaterialInputDto extends BaseTimeDto {
 
     private int mipno;
 
+    private int mipstate;
+
     private SurveyDto surveyDto;
 
-    private ProductDto productEntity;
+    private ProductDto productDto;
 
-    private MemberDto inputmemberEntity;
+    private MemberDto inputmemberDto;
 
     private String checkmembername;
 
+    private SurveyBDto surveyBDto;
+
+    private WorkPlanDto workPlanDto;
+
     public MaterialInputEntity toEntity(){
         return MaterialInputEntity.builder()
-                .productEntity(this.productEntity.toEntity())
+                .productEntity(this.productDto.toEntity())
                 .surveyEntity(this.surveyDto.toEntity())
                 .mipno(this.mipno)
-                .inputmemberEntity(this.inputmemberEntity.toEntity())
-
+                .mipstate(this.mipstate)
+                .inputmemberEntity(this.inputmemberDto.toEntity())
+                .surveyBEntity(this.surveyBDto.toEntity())
+                .workPlanEntity(this.workPlanDto.toEntity())
                 .build();
 
     }
