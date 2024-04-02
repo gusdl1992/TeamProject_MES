@@ -50,7 +50,7 @@ public class SurveyController {
     @PostMapping("/insert.do")
     public int surveyInsertDo(@RequestBody SurveyInsertDto surveyInsertDto){
         System.out.println("surveyInsertDto = " + surveyInsertDto);
-        System.out.println("surveyInsertDto.getSurveyBDto().get(0) = " + surveyInsertDto.getSurveyBDto().get(0));
+        //System.out.println("surveyInsertDto.getSurveyBDto().get(0) = " + surveyInsertDto.getSurveyBDto().get(0));
         return surveyService.surveyInsertDo(surveyInsertDto);
     }
 
