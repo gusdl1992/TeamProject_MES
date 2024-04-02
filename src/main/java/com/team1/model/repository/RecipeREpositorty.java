@@ -22,4 +22,8 @@ public interface RecipeREpositorty extends JpaRepository<RecipeEntity,Integer> {
     @Query(value = "select r.* from recipe as r inner join product as p on r.pno = p.pno where pname =:pname",nativeQuery = true)
     List<RecipeEntity> findByPnameSQL(String pname);
 
+
+    @Query(value = "select r.* from recipe as r inner join product as p on r.pno = p.pno where r.pno =:pno",nativeQuery = true)
+    List<RecipeEntity> findByPnoSQL(int pno);
+
 }
