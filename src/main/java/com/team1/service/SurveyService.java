@@ -161,6 +161,7 @@ public class SurveyService {
                 savedSurveyBEntity.setRawMaterialEntity(rawMaterrialDto.get());
                 savedSurveyBEntity.setSurveyEntity(savedSurveyEntity);
             }// SurveyB 저장 for End
+            workPlanEntity.setWstate(1);
 
             return savedSurveyEntity.getSno();
 
@@ -182,9 +183,11 @@ public class SurveyService {
                 surveyBEntity.setSbcount(surveyInsertDto.getSurveyBDto().get(i).getSbcount());
 
             }
-            return surveyEntity.get().getSno();
+            workPlanEntity.setWstate(1);
 
+            return surveyEntity.get().getSno();
         }
+
 
     }
 
