@@ -26,7 +26,7 @@ export default function ProductRecipieList(props){
 
     return(
     <>
-     <Productinput pno={query.get("pno")} reroad={reroad} setReroad={setReroad} />
+    <Productinput pno={query.get("pno")} reroad={reroad} setReroad={setReroad} />
     <table>
         <thead>
             <tr>
