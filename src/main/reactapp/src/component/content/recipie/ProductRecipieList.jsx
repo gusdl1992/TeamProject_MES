@@ -6,27 +6,23 @@ import Productinput from "./ProductInput";
 export default function ProductRecipieList(props){
 
     const [infos, setInfos] = useState([]);
-    const [reroad, setReroad] = useState(true);
-    //쿼리스트링 받아오기
-    let [query, setQuery] = useSearchParams();
+    console.log(props.pno)
 
-    console.log(query.get("pno"))
     useEffect(
         ()=>{
-            axios.get(`/product/recipie/get.do?pno=${query.get("pno")}`).then( (r) => { 
+            axios.get(`/product/recipie/get.do?pno=${props.pno}`).then( (r) => { 
                 setInfos(r.data);
             }).catch((error) => {
                 console.error("Error:", error);
             });
 
-        },[reroad]
+        },[props.reroad]
     )
 
     console.log(infos)
 
     return(
     <>
-    <Productinput pno={query.get("pno")} reroad={reroad} setReroad={setReroad} />
     <table>
         <thead>
             <tr>

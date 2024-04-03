@@ -17,6 +17,7 @@ export default function Productinput(props){
                 if(response.data){
                     alert("글 작성 성공");
                     // 성공 시 처리
+                    window.location.href="/product/recipie/get?pno="+props.pno
                 }
                 else{
                     alert("작성실패")

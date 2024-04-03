@@ -1,5 +1,6 @@
 package com.team1.model.repository;
 
+import com.team1.model.dto.RecipeDto;
 import com.team1.model.entity.MemberEntity;
 import com.team1.model.entity.RawMaterialEntity;
 import com.team1.model.entity.RecipeEntity;
@@ -13,6 +14,9 @@ import java.util.List;
 @Repository
 public interface RecipeREpositorty extends JpaRepository<RecipeEntity,Integer> {
 
+    @Query(value = "select r.* from recipe as r inner join rawmaterial as rm on r.rmno = rm.rmno join product p on p.pno = r.pno where r.rmno = :rmno and p.pno = :pno "
+            ,nativeQuery = true)
+    RecipeEntity findByRmnoandPnoSQl(int rmno , int pno);
 
 //    List<RecipeEntity> findByRmno(int rmno); //원자재 이름으로 들어가는 제품들 가져오기
     @Query(value = "select r.* from recipe as r inner join rawmaterial as rm on r.rmno = rm.rmno where rmname = :rmname;",nativeQuery = true)
