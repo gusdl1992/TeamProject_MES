@@ -62,6 +62,7 @@ public class MemberService {
         request.getSession().setAttribute("logindto",null);
         return true;
     }
+
     //4.현재 로그인 회원정보 호출 (세션 값 반환/호출)
     public MemberDto doLogininfo(){
         Object object = request.getSession().getAttribute("logindto");

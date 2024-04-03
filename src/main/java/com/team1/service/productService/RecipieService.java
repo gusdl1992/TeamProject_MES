@@ -9,11 +9,13 @@ import com.team1.model.repository.RawMeterailRepository;
 import com.team1.model.repository.RecipeREpositorty;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class RecipieService {
 
     @Autowired
@@ -29,8 +31,12 @@ public class RecipieService {
         List< RecipeEntity> result  = recipeREpositorty.findAll();
         return result.stream().map(RecipeEntity::toDto).collect(Collectors.toList());
     }
-    public List<RecipeDto> findRecipieList(String pname){
-        List< RecipeEntity> result  = recipeREpositorty.findByPnameSQL(pname);
+
+    public List<RecipeDto> findRecipieList(int pno){
+        List< RecipeEntity> result  = recipeREpositorty.findByPnoSQL(pno);
+        result.forEach(e->{
+            System.out.println(e);
+        });
 //        List<RecipeDto> result2 = new ArrayList<>();
 //        for (RecipeEntity recipeEntity : result) {
 //            RecipeDto recipeDto = recipeEntity.toDto();
@@ -54,6 +60,17 @@ public class RecipieService {
             }
         }
         
+        return false;
+    }
+    @Transactional
+    public boolean productPost(RecipeDto recipeDto){
+        RecipeEntity recipeEntity =recipeREpositorty.save(recipeDto.toEntity());
+        if(recipeEntity.getReno() >= 1 ){
+            System.out.println("안녕안녕");
+            recipeEntity.setProductEntity(productRepository.findById(recipeDto.getPno()).get());
+            recipeEntity.setRawMaterialEntity(rawMeterailRepository.findById(recipeDto.getRmno()).get());
+            return true;
+        }
         return false;
     }
 }

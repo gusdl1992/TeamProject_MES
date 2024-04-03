@@ -61,13 +61,16 @@ export default function Header(props){
                         <div className='subMenu'>
                             <ul>
                                 <li>
-                                    메뉴1
+                                    <Link to="/RM">원자재리스트</Link>
                                 </li>
                                 <li>
-                                    메뉴2
+                                    <Link to ="/RM/write">원자재등록</Link>
                                 </li>
                                 <li>
-                                    메뉴3
+                                <Link to ="/product">제품리스트</Link>
+                                </li>
+                                <li>
+                                <Link to ="/product/write"> 제품 등록</Link>
                                 </li>
                             </ul>
                         </div>

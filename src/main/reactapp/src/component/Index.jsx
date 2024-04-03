@@ -10,6 +10,7 @@ import RmWrite from "./content/rawmaterial/RmWrite";
 import RmCount from "./content/rawmaterial/RmCount";
 import RmLogList from "./content/rawmaterial/RMLogList";
 import MaterialInput from "./materialinput/MaterialInput";
+import ProductRecipieList from "./content/recipie/ProductRecipieList";
 
 export const LoginInfoContext = React.createContext("");
 
@@ -29,6 +30,7 @@ export default function Index(props){
                     <Route path="/RM" element={<RmCount/>}/>
                     <Route path="/RM/log" element={<RmLogList/>}/>
                     <Route path="/material/input" element={ <MaterialInput /> } />
+                    <Route path="/product/recipie/get" element={<ProductRecipieList/>}/>
                     </Routes>
                 </div>
         </BrowserRouter>
