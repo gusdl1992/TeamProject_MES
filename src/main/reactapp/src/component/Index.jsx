@@ -15,6 +15,8 @@ import ProductRecipieList from "./content/recipie/ProductRecipieList";
 import Survey from "./content/survey/Survey" // 승호
 import WorkPlanList from "./content/survey/WorkPlanList"; // 승호
 import Test from "./member/Test"; // 시현 사원등록 테스트
+import ProductLayOut from "./content/product/ProductLayOut";
+import RmLayOut from "./content/rawmaterial/RmLayOut";
 
 export const LoginInfoContext = React.createContext("");
 
@@ -29,10 +31,9 @@ export default function Index(props){
                     <Routes>
                     <Route path="/" element={<Login/>}/>
                     <Route path="/c" element={<Mensuration/>}/>
-                    <Route path="/product/write" element={<ProductWrite />}/>
-                    <Route path="/product" element={<ProductList/>}/>
-                    <Route path="/RM/write" element={<RmWrite/>}/>
-                    <Route path="/RM" element={<RmCount/>}/>
+                    {/* <Route path="/product/write" element={<ProductWrite />}/> */}
+                    <Route path="/product" element={<ProductLayOut/>}/>
+                    <Route path="/RM" element={<RmLayOut/>}/>
                     <Route path="/RM/log" element={<RmLogList/>}/>
                     <Route path="/material/input" element={ <MaterialInput /> } />
                     <Route path="/survey/survey" element={<Survey/> } />

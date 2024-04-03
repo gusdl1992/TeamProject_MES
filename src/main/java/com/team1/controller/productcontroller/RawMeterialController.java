@@ -31,7 +31,7 @@ public class RawMeterialController {
 
     @PostMapping("/log/post.do")
     public boolean doPostRmLog(RawMaterialLogDto rawMaterialLogDto){
-
+        System.out.println(rawMaterialLogDto);
         return rawMeterialService.doPostRmLog(rawMaterialLogDto);
     }
 

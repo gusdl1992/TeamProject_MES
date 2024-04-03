@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 
-export default function Productinput(props){
+export default function RmLogWrite(props){
     const boardWriteFormRef = useRef();
     const [rmlist,setrmlist] = useState([]);
 
@@ -11,12 +11,12 @@ export default function Productinput(props){
 
     const handleSubmit = (e) => {
         const formdata = new FormData(boardWriteFormRef.current);
-        formdata.append("pno",props.pno)
-        axios.post("/product/recipie/post.do", formdata) // axios contentType : mulitpart
+        axios.post("/RM/log/post.do", formdata) // axios contentType : mulitpart
             .then((response) => {
                 if(response.data){
                     alert("글 작성 성공");
                     // 성공 시 처리
+                    window.location.href="/RM"
                 }
                 else{
                     alert("작성실패")
@@ -32,14 +32,14 @@ export default function Productinput(props){
     return(
         <>
             <form ref={boardWriteFormRef}>
-                <select name="rmno">
+                <select name="rmname">
                 {rmlist.map((e) => (
-                    <option key={e.rmno} value={e.rmno}>
+                    <option key={e.rmlno} value={e.rmname}>
                         {e.rmname}
                     </option>
                     ))}
                 </select>
-                <input type="text" name="reamount"></input>
+                <input type="text" name="rmlcount"></input>
                 <button type="button" onClick={handleSubmit}>전송</button>
             </form>
         </>
