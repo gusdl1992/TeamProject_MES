@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function ProductList(props){
     const [infos, setInfos] = useState([]);
@@ -36,7 +37,7 @@ export default function ProductList(props){
                 {infos.map((product) => (
                     <tr key={product.pno}>
                         <td>{product.pno}</td>
-                        <td>{product.pname}</td>
+                        <td><Link to={"/product/recipie/get?pno="+product.pno}>{product.pname}</Link></td>
                     </tr>
                 ))}
             </tbody>
