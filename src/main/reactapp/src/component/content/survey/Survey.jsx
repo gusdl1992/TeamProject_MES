@@ -79,7 +79,8 @@ console.log(logininfo);
             }
           })
         .then((r)=>{// int 'sno' 반환함 => r.data
-            console.log(r);
+            console.log(r.data);
+            window.location.href = "/material/input?sno="+r.data
         })
         
     

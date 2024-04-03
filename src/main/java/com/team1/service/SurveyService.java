@@ -182,9 +182,10 @@ public class SurveyService {
                 surveyBEntity.setSbcount(surveyInsertDto.getSurveyBDto().get(i).getSbcount());
 
             }
+            return surveyEntity.get().getSno();
 
         }
-        return 0;
+
     }
 
 
