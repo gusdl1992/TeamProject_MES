@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 public class Team1StartApp {
     public static void main(String[] args) {
         SpringApplication.run( Team1StartApp.class );
+
         }
 
 }
