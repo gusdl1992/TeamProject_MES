@@ -47,10 +47,15 @@ public class SurveyController {
 
     // 계량 등록버튼을 눌럿을떄
     // C survey 와 surveyB 등록하기
+    // 반환 정보 :
+        // 0 이상 = sno 의 PK번호
+        // -1 로그인 정보가 없음
+        // -2 Survey 저장실패
+        // -3 해당 원자재 레코드가 없음
     @PostMapping("/insert.do")
     public int surveyInsertDo(@RequestBody SurveyInsertDto surveyInsertDto){
         System.out.println("surveyInsertDto = " + surveyInsertDto);
-        System.out.println("surveyInsertDto.getSurveyBDto().get(0) = " + surveyInsertDto.getSurveyBDto().get(0));
+        //System.out.println("surveyInsertDto.getSurveyBDto().get(0) = " + surveyInsertDto.getSurveyBDto().get(0));
         return surveyService.surveyInsertDo(surveyInsertDto);
     }
 

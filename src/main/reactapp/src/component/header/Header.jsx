@@ -30,7 +30,7 @@ export default function Header(props){
         axios.get("/member/login/info/get.do")
             .then( (r)=>{console.log(r)
                     setLogin(r.data)
-                    
+
             } )
             .catch( (e) => {console.log(e)})
 
@@ -80,7 +80,7 @@ export default function Header(props){
                         <div className='subMenu'>
                             <ul>
                                 <li>
-                                <Link to="/survey/survey">원료계량</Link>
+                                    <Link to="/survey/plan">계량</Link>
                                 </li>
                                 <li>
                                     <Link to="/material/input">원료투입</Link>
