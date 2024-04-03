@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export default function MaterialInput(props){
     let snoInfo = {sno:1};
@@ -7,7 +7,8 @@ export default function MaterialInput(props){
     let [test,setTest] = useState([]);
     let [test1,setTest1] = useState([]);
 
-    useEffect(()=>{
+    //
+    const infoGet =  useCallback ( () => { 
         axios.get('/material/input/info/get.do',snoInfo)
         .then((response)=>{
             console.log(response);
@@ -16,7 +17,33 @@ export default function MaterialInput(props){
                    
             }
         })
-    },[])
+    } , [ test] ) 
+
+
+    useEffect(()=>{ infoGet()  },[  ])
+
+    const [confirmstate , setConfirmState] = useState('0');
+
+    const confirmStateChange = (e)=>{
+        setConfirmState(e.target.value);
+        e.preventDefault();
+    }
+
+    let materialConfirmForm = useRef();
+    let confirmStatePrint = '';
+
+    let onMaterialConfirm = ()=>{
+        axios.put('/materialinput/confirm.do',materialConfirmForm.current)
+        .then(r=>{
+            console.log(r);
+            if(r.data){
+                infoGet()
+            }
+        })
+        .catch(e=>{
+            console.log(e);
+        })
+    }
 
     useEffect(() =>{
         axios.get('/material/input/info/get.do',snoInfo)
@@ -53,6 +80,23 @@ export default function MaterialInput(props){
             </div>
             <div className="AinputBox">
                 <h3>작성</h3>
+                <form ref={materialConfirmForm}>
+                    <input type="text" value="1" style={{display:'none'}} name="mipno"/>
+                    검사자 : <input type="text" name="mname"/>
+                    검사상태
+                    <select name="mipstate" value={confirmstate} onChange={confirmStateChange}>
+                        <option value="0">
+                            검사대기
+                        </option>
+                        <option value="1">
+                            검사불합격
+                        </option>
+                        <option value="2">
+                            검사합격
+                        </option>
+                    </select>
+                    <button type="button" onClick={onMaterialConfirm}>검사 완료</button>
+                </form>
             </div>
             <div className="AcontentBox">
                 <h3>목록</h3>
@@ -122,7 +166,9 @@ export default function MaterialInput(props){
                                             {r.mname}
                                         </td>
                                         <td>
-                                            {r.mipstate}
+                                            {
+                                                r.mipstate == 0 ? '검사대기' : r.mipstate == 1 ? '검사불합격' : r.mipstate == 2 ? '검사합격' : '-'
+                                            }
                                         </td>
                                     </tr>
                                 )

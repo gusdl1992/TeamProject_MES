@@ -3,6 +3,7 @@ package com.team1.controller;
 import com.team1.model.dto.MaterialInputDto;
 import com.team1.model.entity.MaterialInputEntity;
 import com.team1.service.MaterialInputConfirmService;
+import com.team1.service.memberserivce.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,12 +18,15 @@ import java.util.Map;
 public class MaterialInputConfirmController {
     @Autowired
     private MaterialInputConfirmService materialInputConfirmService;
+    @Autowired
+    private MemberService memberService;
 
     @PutMapping("/confirm.do")
-    public boolean putMaterialInputConfirm(){
-        int mno = 1;
-        int mipno = 1;
-        int mipstate = 1;
+    public boolean putMaterialInputConfirm(MaterialInputDto materialInputDto){
+        System.out.println("materialInputDto = " + materialInputDto);
+        int mno = memberService.doLogininfo().getMno();
+        int mipno = materialInputDto.getMipno();
+        int mipstate = materialInputDto.getMipstate();
         return materialInputConfirmService.putMaterialInputConfirm(mno , mipno , mipstate);
     }
 
