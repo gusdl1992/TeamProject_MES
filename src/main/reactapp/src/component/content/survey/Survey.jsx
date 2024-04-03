@@ -5,10 +5,10 @@ import WorkPlanList from "./WorkPlanList";
 import { LoginInfoContext } from "../../Index";
 
 export default function Survey(props){
-
-    // 1. 컨텍스트 가져오기
+    // 1. 컨텍스트 가져오기 (로그인 정보)
     const { logininfo, setLogin } = useContext(LoginInfoContext);
-    console.log(logininfo);
+console.log(logininfo);
+
     
     // 쿼리스트링 값 가져오기 wno
     const [query , setQuery] = useSearchParams();
@@ -46,7 +46,7 @@ export default function Survey(props){
 
         // ul 요소 가져오기
         const ulElement = document.getElementById('surveyUl');
-        // ul 요소 안의 li 요소 개수 파악
+        // ul 요소 안의 li 요소 개수 파악(li개수 = 입력해야하는 레시피 수)
         const listItemCount = ulElement.getElementsByTagName('li').length;
 // console.log(listItemCount);
         
@@ -54,7 +54,7 @@ export default function Survey(props){
         let recipeInputList = [];
         for(let i = 0 ; i<listItemCount; i++){
             let recipeClass = document.querySelector(`.recipe${i}`).value; // 입력값
-            let recipeId = document.querySelector(`.recipe${i}`).id // 이거 rmno로 쓰는중
+            let recipeId = document.querySelector(`.recipe${i}`).id // 이거 rmno로 쓰는중(객체 생성용)
 // console.log(recipeId);
             // 객체생성해서 리스트에 저장
             let test = {"rmno":recipeId,
@@ -69,50 +69,52 @@ export default function Survey(props){
         };
 // console.log(from);
         
-        const formData = new FormData();// 데이터폼 으로 변환
-        formData.append('surveyInsertDto', form);
+// const formData = new FormData();// 데이터폼 으로 변환
+// formData.append('surveyInsertDto', form);
 
         // 등록 요청하기
-        axios.post("/survey/insert.do",formData,{
+        axios.post("/survey/insert.do",form,{
             headers: {
               'Content-Type': 'application/json' // 예: JSON 데이터 전송
             }
           })
-        .then((r)=>{console.log(r);})
+        .then((r)=>{// int 'sno' 반환함 => r.data
+            console.log(r);
+        })
         
-        
-
+    
     }
     
-    
-    return(<>
-        {/* {console.log(workPlanInfo)} */}
-        <WorkPlanList/>
-        <div id="surveyCssBox">
-            <form>
-                <div>
-                    <span>생산제품 : {recipeDtoList[0].pname}</span>
-                    <span>생산수량 : {workPlanInfo.wcount.toLocaleString()} EA</span>
-                    <span>생산기한 : {workPlanInfo.wendtime.split('T')[0]} 까지</span>
-                    {/* {console.log(workPlanInfo.wendtime)} */}
-                </div>
-                <div>
-                    <ul id="surveyUl">
-                    {
-                        recipeDtoList.map((r,index)=>{
-                            return(<>
-                            {/* {console.log(index)} */}
-                                <li>투입재료 : {r.rmname} 투입 해야하는 양 = {(r.reamount*workPlanInfo.wcount).toLocaleString()}g</li>
-                                <div><input type="text" className={"recipe"+index} id={r.rmno} /></div>
-                            </>
-                            );
-                        })
-                    }
-                    </ul>
-                    <button type="button" onClick={onClickEvent}>버튼</button>
-                </div>
-            </form>
+    if(logininfo!=null){ // 로그인 정보가 로딩되지 않았다면 return 안함
+        return(<>
+            {/* {console.log(workPlanInfo)} */}
+            <WorkPlanList/>
+            <div id="surveyCssBox">
+                <form>
+                    <div>
+                        <span>생산제품 : {recipeDtoList[0].pname}</span>
+                        <span>생산수량 : {workPlanInfo.wcount.toLocaleString()} EA</span>
+                        <span>생산기한 : {workPlanInfo.wendtime.split('T')[0]} 까지</span>
+                        {/* {console.log(workPlanInfo.wendtime)} */}
+                    </div>
+                    <div>
+                        <ul id="surveyUl">
+                        {
+                            recipeDtoList.map((r,index)=>{
+                                return(<>
+                                {/* {console.log(index)} */}
+                                    <li>투입재료 : {r.rmname} 투입 해야하는 양 = {(r.reamount*workPlanInfo.wcount).toLocaleString()}g</li>
+                                    <div><input type="text" className={"recipe"+index} id={r.rmno} { ...(logininfo.pno !== 1 && { disabled: true }) } /></div>
+                                </>
+                                );
+                            })
+                        }
+                        </ul>
+                        <button type="button" onClick={onClickEvent}>버튼</button>
+                    </div>
+                </form>
 
-        </div>
-    </>);
+            </div>
+        </>);
+    }
 }
