@@ -1,6 +1,7 @@
 package com.team1.service.materialinputservice;
 
 import com.team1.model.dto.MaterialInputDto;
+import com.team1.model.dto.MemberDto;
 import com.team1.model.dto.SurveyBDto;
 import com.team1.model.dto.SurveyDto;
 import com.team1.model.entity.MaterialInputEntity;
@@ -8,8 +9,10 @@ import com.team1.model.entity.MemberEntity;
 import com.team1.model.entity.ProductEntity;
 import com.team1.model.entity.SurveyEntity;
 import com.team1.model.repository.MaterialInputRepository;
+import com.team1.model.repository.MemberRepository;
 import com.team1.model.repository.ProductRepository;
 import com.team1.model.repository.SurveyRepository;
+import com.team1.service.memberserivce.MemberService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,11 +32,24 @@ public class MaterialInputService {
     MaterialInputRepository materialInputRepository;
     @Autowired
     ProductRepository productRepository;
+    @Autowired
+    MemberService memberService;
+    @Autowired
+    MemberRepository memberRepository;
     @Transactional
     public boolean doInputPost(int sno){
         System.out.println("MaterialInputService.doInputPost");
         System.out.println("sno = " + sno);
 
+        MemberDto loginDto = memberService.doLogininfo();
+        if ( loginDto == null ) return false;
+
+        // 1. 로그인된 회원 엔티티 찾기
+        Optional< MemberEntity > optionalMemberEntity = memberRepository.findById( loginDto.getMno() );
+        // 2. 찾은 엔티티가 존재하지 않으면
+        if( !optionalMemberEntity.isPresent() ) return false;
+        // 3. 엔티티 꺼내기
+        MemberEntity memberEntity = optionalMemberEntity.get();
 
         Optional<SurveyEntity> optionalSurveyEntity = surveyRepository.findById( sno );
 
@@ -51,6 +67,7 @@ public class MaterialInputService {
         if(saveMaterialInput.getMipno() >= 1){
             saveMaterialInput.setSurveyEntity( surveyEntity );
             saveMaterialInput.setProductEntity( optionalProductEntity );
+            saveMaterialInput.setInputmemberEntity( memberEntity );
         // 인풋넘버 넣는곳
             return true;
         }
