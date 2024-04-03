@@ -35,6 +35,7 @@ public class MemberController {
         return memberService.doLogoutGet();
     }
 
+    // 회원 정보 가져오기.
     @GetMapping("/login/info/get.do")
     public MemberDto doLoginInfo(){
         return memberService.doLogininfo();

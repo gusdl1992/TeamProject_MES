@@ -1,8 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Await } from "react-router-dom";
+import { Await, useSearchParams } from "react-router-dom";
+import WorkPlanList from "./WorkPlanList";
 
 export default function Survey(props){
+
+    console.log(props);
+    const [query , setQuery] = useSearchParams();
+    console.log(query.get("wno"));
 
     // 워크플랜 객체
     const [ workPlanInfo , setWorkPlanInfo] = useState({});
@@ -12,7 +17,7 @@ export default function Survey(props){
 
     useEffect( ()=>{
         const formData = new FormData();
-        formData.append("wno",1); // 바꿔야함
+        formData.append("wno",query.get("wno")); // 바꿔야함
         axios.post("/survey/workplan/clilck.do",formData)
         .then((response)=>{
             console.log(response);
@@ -22,13 +27,14 @@ export default function Survey(props){
             
         })
         .catch(re =>{console.log(re)})
-    },[])
+    },[query])
     
     console.log(recipeDtoList);
     
     
     return(<>
         {console.log(workPlanInfo)}
+        <WorkPlanList/>
         <div id="surveyCssBox">
             <form>
                 {/* <div>
