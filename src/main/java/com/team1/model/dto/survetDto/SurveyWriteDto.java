@@ -15,7 +15,7 @@ import lombok.experimental.SuperBuilder;
 public class SurveyWriteDto extends BaseTimeDto {
 
     private int sno; //  식별번호
-    private int samount; // 수량
+    private int sstate; // 수량
     private int inputmno;
     private int checkmno; // 담당자
 
@@ -27,7 +27,7 @@ public class SurveyWriteDto extends BaseTimeDto {
     public SurveyEntity toEntity() {
         return SurveyEntity.builder()
 
-                .samount(this.samount)
+                .sstate(this.sstate)
                 .build();
     }
 
