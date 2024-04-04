@@ -3,12 +3,14 @@ import { useContext, useEffect, useState } from "react";
 import { Await, useSearchParams } from "react-router-dom";
 import WorkPlanList from "./WorkPlanList";
 import { LoginInfoContext } from "../../Index";
+import "./survey.css"
+
 
 
 export default function Survey(props){
     // 1. 컨텍스트 가져오기 (로그인 정보)
     const { logininfo, setLogin } = useContext(LoginInfoContext);
-console.log(logininfo);
+// console.log(logininfo);
 
     
     // 쿼리스트링 값 가져오기 wno
@@ -41,6 +43,7 @@ console.log(logininfo);
     },[query])
     
     // console.log(recipeDtoList);
+// =============================================================
 
     function onClickEvent(){
         console.log("버튼눌림");
@@ -49,29 +52,28 @@ console.log(logininfo);
         const ulElement = document.getElementById('surveyUl');
         // ul 요소 안의 li 요소 개수 파악(li개수 = 입력해야하는 레시피 수)
         const listItemCount = ulElement.getElementsByTagName('li').length;
-// console.log(listItemCount);
         
         // 전송할 객체만들기
         let recipeInputList = [];
         for(let i = 0 ; i<listItemCount; i++){
             let recipeClass = document.querySelector(`.recipe${i}`).value; // 입력값
             let recipeId = document.querySelector(`.recipe${i}`).id // 이거 rmno로 쓰는중(객체 생성용)
-// console.log(recipeId);
+            
+            if(isNaN(recipeClass)){alert("계량) 숫자로 입력해주세요!"); return;}
+            else if(recipeClass==""){alert("계량) 값을 입력해주세요!"); return;}
+            
             // 객체생성해서 리스트에 저장
             let test = {"rmno":recipeId,
                         "sbcount":recipeClass
                         }
             recipeInputList.push(test);
-        }
-// console.log(recipeInputList);
+        }// for END
+        
+        // 전송용 객체
         let form ={
             "wno":query.get("wno"),
             "surveyBDto":recipeInputList
         };
-// console.log(from);
-        
-// const formData = new FormData();// 데이터폼 으로 변환
-// formData.append('surveyInsertDto', form);
 
         // 등록 요청하기
         axios.post("/survey/insert.do",form,{
@@ -81,217 +83,66 @@ console.log(logininfo);
           })
         .then((r)=>{// int 'sno' 반환함 => r.data
             console.log(r.data);
-            window.location.href = "/material/input?sno="+r.data
+            // window.location.href = "/material/input?sno="+r.data
+            alert("안내) 계량내용 등록성공 하였습니다.");
         })
-        
-    
     }
     
     if(logininfo!=null){ // 로그인 정보가 로딩되지 않았다면 return 안함
         return(<>
-            <WorkPlanList/>
-            <div id="surveyCssBox">
-                <form>
-                    <div>
-                        <span>생산제품 : {recipeDtoList[0].pname}</span>
-                        <span>생산수량 : {workPlanInfo.wcount.toLocaleString()} EA</span>
-                        <span>생산기한 : {workPlanInfo.wendtime.split('T')[0]} 까지</span>
-                        {/* {console.log(workPlanInfo.wendtime)} */}
+            <div style={{maxWidth:'66%',minWidth:'1100px',margin:'0 auto',border:'1px solid red'}}>
+                <div className="searchBox">
+                    <h3>검색</h3>
+                </div>
+                <div className="statistics">
+                    <h3>통계</h3>
+                    <div className="statisticsWrap">
+                        <div className="statisticsBox">
+                            
+                        </div>
+                        <div className="statisticsBox">
+                            
+                        </div>
+                        <div className="statisticsBox">
+                            
+                        </div>
+                        <div className="statisticsBox">
+                            
+                        </div>
                     </div>
-                    <div>
-                        <ul id="surveyUl">
-                        {
-                            recipeDtoList.map((r,index)=>{
-                                return(<>
-                                {/* {console.log(index)} */}
-                                    <li>투입재료 : {r.rmname} 투입 해야하는 양 = {(r.reamount*workPlanInfo.wcount).toLocaleString()}g</li>
-                                    <div><input type="text" className={"recipe"+index} id={r.rmno} { ...(logininfo.pno !== 1 && { disabled: true }) } /></div>
-                                </>
-                                );
-                            })
-                        }
-                        </ul>
-                        <button type="button" onClick={onClickEvent}>버튼</button>
-                    </div>
-                </form>
+                </div>
+            
+                <div id="workplanCssBox">
+                <WorkPlanList/>
+                </div>
+                {workPlanInfo.wcount!=""?
+                <div id="surveyCssBox">
+                    <form>
+                        <h3>
+                            <span>생산제품 : {recipeDtoList[0].pname}</span>
+                            <span>생산수량 : {workPlanInfo.wcount.toLocaleString()} EA</span>
+                            <span>생산기한 : {workPlanInfo.wendtime.split('T')[0]} 까지</span>
+                            {/* {console.log(workPlanInfo.wendtime)} */}
+                        </h3>
+                        <div>
+                            <ul id="surveyUl">
+                            {
+                                recipeDtoList.map((r,index)=>{
+                                    return(<>
+                                        <li>투입재료 : {r.rmname} 투입 해야하는 양 = {(r.reamount*workPlanInfo.wcount).toLocaleString()}g</li>
+                                        <div>입력된 양 : <input type="text" className={"recipe"+index} id={r.rmno} { ...(logininfo.pno !== 1 && { disabled: true }) } /></div>
+                                    </>
+                                    );
+                                })
+                            }
+                            </ul>
+                            <button id="surveyBtn" type="button" onClick={onClickEvent}>버튼</button>
+                        </div>
+                    </form>
 
+                </div>
+                :""}
             </div>
         </>);
     }
-
-    // return(<>
-    //     <div style={{maxWidth:'66%',minWidth:'1100px',margin:'0 auto',border:'1px solid red'}}>
-    //         <div className="searchBox">
-    //             <h3>검색</h3>
-    //         </div>
-    //         <div className="statistics">
-    //             <h3>통계</h3>
-    //             <div className="statisticsWrap">
-    //                 <div className="statisticsBox">
-                        
-    //                 </div>
-    //                 <div className="statisticsBox">
-                        
-    //                 </div>
-    //                 <div className="statisticsBox">
-                        
-    //                 </div>
-    //                 <div className="statisticsBox">
-                        
-    //                 </div>
-    //             </div>
-    //         </div>
-    //         <div className="workPlanBox">
-    //             <WorkPlanList/>
-    //         </div>
-    //         <div className="AinputBox">
-                
-    //         <div id="surveyCssBox">
-    //             <form>
-    //                 <div>
-    //                     <span>생산제품 : {recipeDtoList[0].pname}</span>
-    //                     <span>생산수량 : {workPlanInfo.wcount.toLocaleString()} EA</span>
-    //                     <span>생산기한 : {workPlanInfo.wendtime.split('T')[0]} 까지</span>
-    //                     {/* {console.log(workPlanInfo.wendtime)} */}
-    //                 </div>
-    //                 <div>
-    //                     <ul id="surveyUl">
-    //                     {
-    //                         recipeDtoList.map((r,index)=>{
-    //                             return(<>
-    //                             {/* {console.log(index)} */}
-    //                                 <li>투입재료 : {r.rmname} 투입 해야하는 양 = {(r.reamount*workPlanInfo.wcount).toLocaleString()}g</li>
-    //                                 <div><input type="text" className={"recipe"+index} id={r.rmno} { ...(logininfo.pno !== 1 && { disabled: true }) } /></div>
-    //                             </>
-    //                             );
-    //                         })
-    //                     }
-    //                     </ul>
-    //                     <button type="button" onClick={onClickEvent}>버튼</button>
-    //                 </div>
-    //             </form>
-
-    //         </div>
-    //         </div>
-    //         <div className="AcontentBox">
-    //             <h3>목록</h3>
-    //             <table>
-    //             <colgroup>
-    //                 <col width="10%"/>
-    //                 <col width="35%"/>
-    //                 <col width="25%"/>
-    //                 <col width="20%"/>
-    //                 <col width="10%"/>
-    //             </colgroup>
-    //                 <thead>
-    //                     <tr>
-    //                         <th>
-    //                             1
-    //                         </th>
-    //                         <th>
-    //                             2
-    //                         </th>
-    //                         <th>
-    //                             3
-    //                         </th>
-    //                         <th>
-    //                             4
-    //                         </th>
-    //                         <th>
-    //                             5
-    //                         </th>
-    //                     </tr>
-    //                 </thead>
-    //                 <tbody>
-    //                     <tr>
-    //                         <td>
-    //                             내용1
-    //                         </td>
-    //                         <td>
-    //                             내용2
-    //                         </td>
-    //                         <td>
-    //                             내용3
-    //                         </td>
-    //                         <td>
-    //                             내용4
-    //                         </td>
-    //                         <td>
-    //                             내용5
-    //                         </td>
-    //                     </tr>
-    //                     <tr>
-    //                         <td>
-    //                             내용1
-    //                         </td>
-    //                         <td>
-    //                             내용2
-    //                         </td>
-    //                         <td>
-    //                             내용3
-    //                         </td>
-    //                         <td>
-    //                             내용4
-    //                         </td>
-    //                         <td>
-    //                             내용5
-    //                         </td>
-    //                     </tr>
-    //                     <tr>
-    //                         <td>
-    //                             내용1
-    //                         </td>
-    //                         <td>
-    //                             내용2
-    //                         </td>
-    //                         <td>
-    //                             내용3
-    //                         </td>
-    //                         <td>
-    //                             내용4
-    //                         </td>
-    //                         <td>
-    //                             내용5
-    //                         </td>
-    //                     </tr>
-    //                     <tr>
-    //                         <td>
-    //                             내용1
-    //                         </td>
-    //                         <td>
-    //                             내용2
-    //                         </td>
-    //                         <td>
-    //                             내용3
-    //                         </td>
-    //                         <td>
-    //                             내용4
-    //                         </td>
-    //                         <td>
-    //                             내용5
-    //                         </td>
-    //                     </tr>
-    //                     <tr>
-    //                         <td>
-    //                             내용1
-    //                         </td>
-    //                         <td>
-    //                             내용2
-    //                         </td>
-    //                         <td>
-    //                             내용3
-    //                         </td>
-    //                         <td>
-    //                             내용4
-    //                         </td>
-    //                         <td>
-    //                             내용5
-    //                         </td>
-    //                     </tr>
-    //                 </tbody>
-    //             </table>
-    //         </div>
-    //     </div>
-    //     </>
-    // )
 }
