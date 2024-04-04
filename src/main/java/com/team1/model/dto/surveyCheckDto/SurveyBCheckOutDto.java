@@ -11,15 +11,7 @@ import java.util.List;
 @Setter
 @Getter
 @ToString
-@AllArgsConstructor
+
 @NoArgsConstructor
 public class SurveyBCheckOutDto {
-
-
-
-
-
-
-
-
 }

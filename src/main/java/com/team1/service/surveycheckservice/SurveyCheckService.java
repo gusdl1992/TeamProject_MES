@@ -27,7 +27,7 @@ public class SurveyCheckService {
 
     // 1. 계량데이터 가져오기
     public Map< Object , Object >  surveyCheckView(){
-
+        return null; // 임의 수정 - 김건우
     }
 
     // state 로 계량 완료 된것만 가져오기
