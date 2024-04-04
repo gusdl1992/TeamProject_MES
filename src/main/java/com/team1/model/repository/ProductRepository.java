@@ -17,7 +17,7 @@ public interface ProductRepository extends JpaRepository<ProductEntity,Integer> 
     ProductEntity findByPname(String pname);
 
 
-    @Query(value = "select p.* from product p inner join materialinput mip on p.pno = mip.pno where sno = :sno" , nativeQuery = true)
+    @Query(value = "select p.* from product p inner join materialinput mip on p.pno = mip.pno where sno2 = :sno" , nativeQuery = true)
     ProductEntity findBySnoSQL( int sno );
 
 }

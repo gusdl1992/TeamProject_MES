@@ -7,129 +7,63 @@ export default function MaterialInput(props){
     // 1. 컨텍스트 가져오기 (로그인 정보)
 //     const { logininfo, setLogin } = useContext(LoginInfoContext);
 // console.log(logininfo);
+    
 
     // 쿼리스트링 값 가져오기 sno
     let [query, setQuery] = useSearchParams();
 
-    const [ surveyB , setSurveyB ] = useState([]);
-
+    const [ surveyB , setSurveyB ] = useState([
+        {
+            "pname":"",
+            "wcount":0,
+            "wendtime":"2024T"
+        }
+    ]);
+    console.log(query)
     console.log(query.get("sno"))
-
-    useEffect (() => { survey() } , [])
+            
     const survey =
      () =>{
      axios.get('/material/input/info/get.do', { params :{ sno :query.get("sno") }} )
     .then((response)=>{
     console.log(response);
     setSurveyB(response.data);
+    
 
-})
-}
+    }).catch( (e) => {console.log(e)})
+    }
+    console.log(surveyB);
 
-
+    useEffect (() => { 
+        if(query.get("sno")){
+            survey() 
+        }
+    } , [query.get("sno")])
+    
     return(<>
-        <SurveyList />
-        <div id="surveyCssBox">
-            <form>
-            <div>
-
-                        {/* {console.log(workPlanInfo.wendtime)} */}
-                    </div>
-            </form>
+        <div id="workplanCssBox">
+            <SurveyList/>
         </div>
-        </>)
+        <h3>
+            <span>생산제품 : {surveyB[0].pname}</span>
+            <span>생산수량 : {surveyB[0].wcount.toLocaleString()} EA</span>
+            <span>생산기한 : {surveyB[0].wendtime.split('T')[0]} 까지</span>
+            
+        </h3>
+        <ul>
+            {surveyB.map((r,index)=>
+                {
+                    return (<>
+                        <li>투입재료 : {r.rmname} 계량된 값 = {r.sbcount}g</li>
+                        <div>입력된 양 : <input type="text"  /></div>
+                    </>)
+                }
+            )}
+        </ul>
+
+    </>)
 }
 
 
-// let [test,setTest] = useState([{pname:"" , wcount:"" , wendtime:"" }]);
-
-// let [test1,setTest1] = useState([]);
-
-// // 워크플랜 객체
-// const [ workPlanInfo , setWorkPlanInfo] = useState({
-//     wcount:0,
-//     wendtime:"2024-03-30T10:00:12.123456"
-// });
-
-// // 레시피리스트
-// const [ recipeDtoList , setRecipeDtoList] = useState( [
-//     { pname : '' }// 최초 렌더링 할때 오류 발생 : 초기임의의 값을 넣어줌
-// ] );
-
-// const [ survey , setSurvey ] = useState([]);
-
-// useEffect( ( ) => {
-//     axios.get("/material/surveyinfo.do")
-//     .then( (r) => {
-//         console.log(r);
-//         const result = r.data.map((survey) => {return survey;})
-//         setSurvey(result)
-//     })
-// },[])
-
-// //
-// const infoGet =  useCallback ( () => {
-//     axios.get('/material/input/info/get.do', query.get("sno"))
-//     .then((response)=>{
-//         console.log(response);
-//         if(response.data != []){
-//             setTest(response.data);
-
-//         }
-//     })
-// } , [ test] )
 
 
-// useEffect(  ()=>{
-//     const formData = new FormData();
-//     formData.append("wno",query.get("sno")); // 바꿔야함
-//     axios.post("/survey/workplan/clilck.do",formData)
-//     .then((response)=>{
-//         console.log(response);
-//         setWorkPlanInfo(response.data.workPlanDto);
-//         const result = response.data.recipeDto.map( (re) =>{return re;})// 레시피 dto state 추가하기
-//         setRecipeDtoList(result);
-//     })
-//     .catch(re =>{console.log(re)})
-// },[])
-
-
-
-// useEffect(()=>{ infoGet()  },[  ])
-
-// const [confirmstate , setConfirmState] = useState('0');
-
-// const confirmStateChange = (e)=>{
-//     setConfirmState(e.target.value);
-//     e.preventDefault();
-// }
-
-// let materialConfirmForm = useRef();
-// let confirmStatePrint = '';
-
-// let onMaterialConfirm = ()=>{
-//     axios.put('/materialinput/confirm.do',materialConfirmForm.current)
-//     .then(r=>{
-//         console.log(r);
-//         if(r.data){
-//             infoGet()
-//         }
-//     })
-//     .catch(e=>{
-//         console.log(e);
-//     })
-// }
-// const test12 =
-//      () =>{
-//      axios.get('/material/input/info/get.do', query )
-// .then((response)=>{
-//     console.log(response);
-//     if(response.data != []){
-//         setTest1(response.data);
-//     }
-// })
-// }
-// useEffect( () => {test12()} , [])
-// console.log(test)
-// useEffect( () => {test12()} , [])
-// console.log(test)

@@ -19,26 +19,17 @@ export default function SurveyList(props){
         })
     },[])
 
-    useEffect(()=>{
-        axios.get("/survey/workplaninfo.do")
-        .then((response)=>{
-            console.log(response);
-            const result = response.data.map((workPlan)=>{return workPlan;})
-            setWorkPlan(result);
-
-        })
-    },[])
-
+   
 
 
     return(<>
         <div id="workPlanListBox">
-            {workPlan.map((s) => {
+            {survey.map((s) => {
                 
                 return(
                     <div>
-                        <Link to={`/material/input?sno=${s.wno}`}>
-                            <span>작업계획 {s.wno}</span>
+                        <Link to={`/material/input?sno=${s.sno}`}>
+                            <span>작업계획 {s.sno}</span>
                             <span>등록일자 : {s.cdate}</span>
                         </Link>
                     </div>

@@ -52,14 +52,15 @@ public class MaterialInputService {
         MemberEntity memberEntity = optionalMemberEntity.get();
 
         Optional<SurveyEntity> optionalSurveyEntity = surveyRepository.findById( sno );
-
-
         if (!optionalSurveyEntity.isPresent()) return false;
 
         SurveyEntity surveyEntity = optionalSurveyEntity.get();
         System.out.println("surveyEntity = " + surveyEntity);
         System.out.println("optionalSurveyEntity = " + optionalSurveyEntity);
         ProductEntity optionalProductEntity = productRepository.findBySnoSQL( sno );
+
+
+
             // insert
         MaterialInputEntity saveMaterialInput
                 = materialInputRepository.save( MaterialInputEntity.builder().build() );
@@ -68,6 +69,7 @@ public class MaterialInputService {
             saveMaterialInput.setSurveyEntity( surveyEntity );
             saveMaterialInput.setProductEntity( optionalProductEntity );
             saveMaterialInput.setInputmemberEntity( memberEntity );
+
         // 인풋넘버 넣는곳
             return true;
         }
