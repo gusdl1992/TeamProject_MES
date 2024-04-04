@@ -170,7 +170,6 @@ public class SurveyService {
             surveyEntity.get().setInputmemberEntity(memberEntity.get()); // 계량 등록한사람
 
             // SurveyB 업데이트 하기
-
             for (int i = 0; i < surveyInsertDto.getSurveyBDto().size(); i++) {
                 // 원재료 식별번호로 값 호출
                 Optional<RawMaterialEntity> rawMaterrialDto = rawMaterialEntityRepository

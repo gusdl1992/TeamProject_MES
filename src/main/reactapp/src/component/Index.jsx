@@ -23,6 +23,7 @@ import RmWrites from "./content/rawmaterial/RmWirtes";
 import axios from "axios";
 import RmLLayOut from "./content/rawmaterial/RmLLayOut";
 import AllWorkPlanList from "./content/workplan/AllWorkPlanList";
+import ReportAll from "./content/workplan/ReportAll";
 
 export const LoginInfoContext = React.createContext("");
 
@@ -57,6 +58,7 @@ export default function Index(props){
                     <Route path="/member/test" element={<Test/> } />
                     <Route path="/product/recipie/get" element={<ProductLayOut/>}/>
                     <Route path="/wp/list" element={<AllWorkPlanList/>}/>
+                    <Route path="/wp/report" element={<ReportAll/>}/>
                     </Routes>
                 </div>
         </BrowserRouter>
