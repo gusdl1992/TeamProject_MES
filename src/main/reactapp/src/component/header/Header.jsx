@@ -26,16 +26,9 @@ export default function Header(props){
 
     // 로그인 정보 저장
     const { logininfo, setLogin } = useContext(LoginInfoContext);
-    useEffect(()=>{
-        axios.get("/member/login/info/get.do")
-            .then( (r)=>{console.log(r)
-                    setLogin(r.data)
-
-            } )
-            .catch( (e) => {console.log(e)})
 
 
-    } ,[])
+    
 
     const logoutHandler = ()=>{
         axios.get("/member/logout/get.do").then( (r)=>{ if(r.data){
@@ -43,6 +36,9 @@ export default function Header(props){
             window.location.href = "/"
         } } ).catch( e=>{})
     }
+
+
+
 
     const checklogin = logininfo ? <li>{logininfo.mname}님 환영합니다! <span onClick={logoutHandler}> 로그아웃</span> </li>:<li> <a href='/member/login'> 로그인</a></li>
 
@@ -61,16 +57,10 @@ export default function Header(props){
                         <div className='subMenu'>
                             <ul>
                                 <li>
-                                    <Link to="/RM">원자재리스트</Link>
-                                </li>
-                                <li>
-                                    <Link to ="/RM/write">원자재등록</Link>
+                                    <Link to="/RM">원자재</Link>
                                 </li>
                                 <li>
                                 <Link to ="/product">제품리스트</Link>
-                                </li>
-                                <li>
-                                <Link to ="/product/write"> 제품 등록</Link>
                                 </li>
                             </ul>
                         </div>

@@ -3,7 +3,7 @@ import Header from "./header/Header";
 import Login from "./login/Login";
 import Mensuration from "./content/Mensuration";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductWrite from "./content/product/ProductWrite";
 import ProductList from "./content/product/Productlist";
 import RmWrite from "./content/rawmaterial/RmWrite";
@@ -19,16 +19,27 @@ import ProductLayOut from "./content/product/ProductLayOut";
 import RmLayOut from "./content/rawmaterial/RmLayOut";
 import LayoutTest from "./content/layouttest/Layouttest";
 import RmWrites from "./content/rawmaterial/RmWirtes";
+import axios from "axios";
+import RmLLayOut from "./content/rawmaterial/RmLLayOut";
+import AllWorkPlanList from "./content/workplan/AllWorkPlanList";
 
 export const LoginInfoContext = React.createContext("");
 
 export default function Index(props){
-    const[logininfo,setLogin] = useState(null);
+    const[logininfo,setLogin] = useState(null); 
+    useEffect(()=>{
+        axios.get("/member/login/info/get.do")
+            .then( (r)=>{console.log(r)
+                    setLogin(r.data)
+            } )
+            .catch( (e) => {console.log(e)})
+
+    } ,[] )
     return(
         <LoginInfoContext.Provider value={{logininfo,setLogin}}>
         <BrowserRouter>
                 <div id="wrap">
-                {logininfo !== "" && <Header/>}
+                {logininfo && <Header/>}
                 {logininfo && <span onClick={() => window.location.href='/c'}>Profile</span>}
                     <Routes>
                     <Route path="/" element={<Login/>}/>
@@ -36,12 +47,13 @@ export default function Index(props){
                     {/* <Route path="/product/write" element={<ProductWrite />}/> */}
                     <Route path="/product" element={<LayoutTest insert={<ProductWrite/>} list={<ProductList/>} />}/>
                     <Route path="/RM" element={<LayoutTest insert={<RmWrites/>} list={<RmCount/>} />}/>
-                    <Route path="/RM/log" element={<RmLogList/>}/>
+                    <Route path="/RM/log" element={<RmLLayOut/>}/>
                     <Route path="/material/input" element={ <MaterialInput /> } />
                     <Route path="/survey/survey" element={<Survey/> } />
                     <Route path="/survey/plan" element={<WorkPlanList/> } />
                     <Route path="/member/test" element={<Test/> } />
                     <Route path="/product/recipie/get" element={<ProductLayOut/>}/>
+                    <Route path="/wp/list" element={<AllWorkPlanList/>}/>
                     </Routes>
                 </div>
         </BrowserRouter>
