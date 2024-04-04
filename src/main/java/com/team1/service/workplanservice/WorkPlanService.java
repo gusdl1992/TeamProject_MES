@@ -20,5 +20,4 @@ public class WorkPlanService {
         return workPlanEntityRepository.findAll().stream().map(WorkPlanEntity::toDto).collect(Collectors.toList());
     }
 
-
 }
