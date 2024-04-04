@@ -28,7 +28,7 @@ export default function Test(props){
             </div>
             <div className="AinputBox">
                 
-                <WorkPlanList/>
+                <Survey/>
             </div>
             <div className="AcontentBox">
                 <h3>목록</h3>
