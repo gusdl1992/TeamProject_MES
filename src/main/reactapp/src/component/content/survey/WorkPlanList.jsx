@@ -19,10 +19,10 @@ export default function WorkPlanList(){
     },[])
     
     return(<>
-        <div id="workplanCssBoxDiv">
+        <div id="workplanCssBox">
         {workPlan.map((w)=>{
             return(
-                <div>
+                <div className="workplanCss">
                     <Link to={`/survey/survey?wno=${w.wno}`}>
                         <h4>작업계획{w.wno}</h4>
                         <div>PlanNumber : {w.wno}</div>

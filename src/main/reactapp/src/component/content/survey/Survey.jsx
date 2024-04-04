@@ -112,9 +112,9 @@ export default function Survey(props){
                     </div>
                 </div> */}
             
-                <div id="workplanCssBox">
+                
                 <WorkPlanList/>
-                </div>
+                
                 {workPlanInfo.wcount!=""?
                 <div id="surveyCssBox">
                     <form>
