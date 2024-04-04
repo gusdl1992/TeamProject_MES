@@ -15,8 +15,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SurveyEntity extends BaseTime{
-    @Id
-    @GeneratedValue( strategy =  GenerationType.IDENTITY )
+    @Id// 오토인크리먼트 사용 X
     private int sno; // 계량 식별 번호
 
     @Column( nullable = true)
