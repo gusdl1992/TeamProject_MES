@@ -2,6 +2,7 @@ package com.team1.controller.materialinputcontroller;
 
 import com.team1.model.dto.MaterialInputDto;
 import com.team1.model.dto.SurveyBDto;
+import com.team1.model.dto.SurveyDto;
 import com.team1.model.entity.MaterialInputEntity;
 import com.team1.service.materialinputservice.MaterialInputService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class MaterialInputController {
     @Autowired
     MaterialInputService materialInputService;
 
-    @GetMapping("/input/get.do")
+    @PostMapping("/input/post.do")
     public boolean doInputPost(@RequestParam int sno){
         System.out.println("MaterialInputController.doInputPost");
         System.out.println("sno = " + sno);
@@ -33,10 +34,24 @@ public class MaterialInputController {
     }
 
     @GetMapping("/input/info/get.do")
-    public List<Map<Object,Object>> doInputInfoGet(){
+    public List<Map<Object,Object>> doInputInfoGet(@RequestParam int sno ){
         System.out.println("MaterialInputController.doInputInfoGet");
-
-        return materialInputService.doInputInfoGet();
+        System.out.println("sno = " + sno);
+        return materialInputService.doInputInfoGet(sno);
     }
+
+    // sno 정보 뽑아오기
+    @GetMapping("/surveyinfo.do")
+    public List<Object> surveyDtoList(){
+
+        List<Object> result = materialInputService.surveyDtoList();
+        System.out.println("result = " + result);
+
+        return result;
+    }
+
+
+
+
 
 }

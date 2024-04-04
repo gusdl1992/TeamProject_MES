@@ -14,6 +14,7 @@ import java.util.Optional;
 @Repository
 public interface RawMateriallogRepository extends JpaRepository<RawMaterialLogEntity,Integer> {
 
+
     @Query(value = "select * from rawmateriallog where rmno = :rmno",nativeQuery = true)
     List<RawMaterialLogEntity> findByPnoSql(int rmno);
 

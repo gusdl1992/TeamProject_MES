@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 public class Team1StartApp {
     public static void main(String[] args) {
         SpringApplication.run( Team1StartApp.class );
-
         }
 
 }
@@ -19,7 +18,7 @@ public class Team1StartApp {
 // 0329 15:41 총 취합 완료!!!!!
 // 0401 15:36 총 취합 완료 (아주 잘되고있는중)
 // 0402 16:40 총 취합 완료 헷
-
+// 20240404 11:40 총취합 완료
 
 
 
