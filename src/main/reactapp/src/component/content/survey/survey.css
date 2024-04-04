@@ -7,17 +7,17 @@
     margin-top: 20px;
 }
 /* workplan 출력 부분 */
-#workplanCssBox{overflow-x: auto;}
-#workplanCssBox > div{
-    display: flex;
+#workplanCssBox{
+    display: flex; 
+    overflow-x: auto;
     justify-content: space-around;
-    
 }
-#workplanCssBox > div > div{
+.workplanCss{
     box-shadow: 2px 2px 2px gray;
     margin: 0px 5px;
     min-width: 210px;
 }
+
 /* workplan 출력 부분 END ====================================== */
 /* Survey 출력부분 */
 #surveyCssBox>form>h3{margin: 10px 0px;}

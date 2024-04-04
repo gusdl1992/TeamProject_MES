@@ -140,7 +140,9 @@ public class SurveyService {
         if(!surveyEntity.isPresent()){// 워크플랜 번로와 같은 sno가 없다면
 
             // Survey 저장
-            SurveyEntity savedSurveyEntity = surveyRepository.save(SurveyEntity.builder().build());
+            SurveyEntity savedSurveyEntity = surveyRepository.save(SurveyEntity.builder()
+                            .sno(wno)
+                    .build());
             savedSurveyEntity.setInputmemberEntity(memberEntity.get());
             savedSurveyEntity.setWorkPlanEntity(workPlanEntity);
 
@@ -156,6 +158,7 @@ public class SurveyService {
                 // SurveyB 저장
                 SurveyBEntity savedSurveyBEntity = surveyBRepository.save(
                         SurveyBEntity.builder()
+                                .surveyEntity(savedSurveyEntity)
                                 .sbcount(surveyInsertDto.getSurveyBDto().get(i).getSbcount())
                                 .build());
                 savedSurveyBEntity.setRawMaterialEntity(rawMaterrialDto.get());
