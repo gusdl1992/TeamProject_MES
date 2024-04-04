@@ -32,7 +32,7 @@ public class MaterialInputService {
     MemberRepository memberRepository;
     @Autowired
     WorkPlanEntityRepository workPlanEntityRepository;
-    @Autowired
+
     @Transactional
     public boolean doInputPost(int sno){
         System.out.println("MaterialInputService.doInputPost");
