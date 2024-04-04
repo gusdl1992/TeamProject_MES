@@ -35,6 +35,8 @@ export default function Index(props){
             .catch( (e) => {console.log(e)})
 
     } ,[] )
+
+    
     return(
         <LoginInfoContext.Provider value={{logininfo,setLogin}}>
         <BrowserRouter>
