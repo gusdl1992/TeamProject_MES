@@ -108,7 +108,7 @@ public class MaterialInputService {
 
 
     @Transactional
-    public List<Map<Object,Object>> doInputInfoGet(){
+    public List<Map<Object,Object>> doInputInfoGet(int sno){
 //        System.out.println("MaterialInputController.doInputInfoGet");
 //        List<MaterialInputEntity> result = materialInputRepository.findAll();
 //
@@ -129,8 +129,23 @@ public class MaterialInputService {
 //
 //        }
 
-        return materialInputRepository.findByHard(1);
+        return materialInputRepository.findByHard(sno);
     }
+
+    public List<Object> surveyDtoList(){
+
+        List<Object> surveyDtoList = new ArrayList<>();
+
+        List<SurveyEntity> surveyEntityList = surveyRepository.findAll();
+
+        for (int i = 0; i < surveyEntityList.size() ; i++) {
+            surveyDtoList.add( surveyEntityList.get(i).toDto() );
+        }
+        return surveyDtoList;
+    }
+
+
+
 
 }
 
