@@ -27,6 +27,8 @@ import ReportAll from "./content/workplan/ReportAll";
 import MaterialInput from "./content/materialinput/MaterialInput";
 
 
+import SurveyCheckList from "./content/surveyCheck/SurveyCheckList"; // 시현
+
 export const LoginInfoContext = React.createContext("");
 
 export default function Index(props){

@@ -5,6 +5,9 @@ import WorkPlanList from "./WorkPlanList";
 import { LoginInfoContext } from "../../Index";
 import "./survey.css"
 
+// 박시현 추가
+import SurveyCheckList from "../surveyCheck/SurveyCheckList";
+
 
 
 export default function Survey(props){
@@ -90,7 +93,7 @@ export default function Survey(props){
     
     if(logininfo!=null){ // 로그인 정보가 로딩되지 않았다면 return 안함
         return(<>
-            {/* <div style={{maxWidth:'66%',minWidth:'1100px',margin:'0 auto',border:'1px solid red'}}>
+            <div style={{maxWidth:'66%',minWidth:'1100px',margin:'0 auto',border:'1px solid red'}}>
                 <div className="searchBox">
                     <h3>검색</h3>
                 </div>
@@ -110,11 +113,11 @@ export default function Survey(props){
                             
                         </div>
                     </div>
-                </div> */}
+                </div>
             
-                
+                <div id="workplanCssBox">
                 <WorkPlanList/>
-                
+                </div>
                 {workPlanInfo.wcount!=""?
                 <div id="surveyCssBox">
                     <form>
@@ -142,7 +145,9 @@ export default function Survey(props){
 
                 </div>
                 :""}
-            {/* </div> */}
+                <SurveyCheckList/>
+            </div>
+
         </>);
     }
 }
