@@ -1,4 +1,7 @@
 import styles from "./mensuration.css";
+import Survey from "./survey/Survey";
+import WorkPlanList from "./survey/WorkPlanList";
+
 
 export default function Test(props){
     return(
@@ -24,7 +27,8 @@ export default function Test(props){
                 </div>
             </div>
             <div className="AinputBox">
-                <h3>작성</h3>
+                
+                <WorkPlanList/>
             </div>
             <div className="AcontentBox">
                 <h3>목록</h3>

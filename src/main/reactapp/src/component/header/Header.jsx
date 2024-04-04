@@ -80,7 +80,7 @@ export default function Header(props){
                         <div className='subMenu'>
                             <ul>
                                 <li>
-                                    <Link to="/survey/plan">계량</Link>
+                                    <Link to="/survey/survey">계량등록</Link>
                                 </li>
                                 <li>
                                     <Link to="/material/input">원료투입</Link>

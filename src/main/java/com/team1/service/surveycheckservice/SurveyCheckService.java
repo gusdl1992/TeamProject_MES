@@ -91,6 +91,22 @@ public class SurveyCheckService {
 
     }
 
+    // state 로 계량 완료 된것만 가져오기
+    public List<WorkPlanEntity> roadCheckWorkState(){
+        System.out.println("SurveyCheckService.roadCheckWorkState");
+        List<WorkPlanEntity> workPlanEntityList = workPlanEntityRepository.findAll();
+        List<WorkPlanEntity> workPlans = new ArrayList<>();
+        for (int i = 0 ; i < workPlanEntityList.size() ; i++){
+            if (workPlanEntityList.get(i).getWstate() == 1){
+                workPlans.add(workPlanEntityList.get(i));
+            }
+        }
+        System.out.println("workPlans = " + workPlans);
+        return workPlans;
+    }
+
+
+
     // 2. 검사 완료 체크 시 검사 완료자 데이터 저장
     public boolean surveyCheck(int sno , int mno){
         System.out.println("테스트 시작");

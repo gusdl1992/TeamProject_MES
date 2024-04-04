@@ -1,6 +1,8 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom";
+import "./survey.css"
+
 export default function WorkPlanList(){
     
     // 워크플랜
@@ -9,7 +11,7 @@ export default function WorkPlanList(){
     useEffect(()=>{
         axios.get("/survey/workplaninfo.do")
         .then((response)=>{
-            console.log(response);
+            // console.log(response);
             const result = response.data.map((workPlan)=>{return workPlan;})
             setWorkPlan(result);
 
@@ -17,11 +19,15 @@ export default function WorkPlanList(){
     },[])
     
     return(<>
-        <div id="workPlanListBox">
+        <div id="workplanCssBoxDiv">
         {workPlan.map((w)=>{
             return(
                 <div>
-                    <Link to={`/survey/survey?wno=${w.wno}`}><span>작업계획{w.wno}</span> &nbsp; <span>식별번호 : {w.wno}</span> &nbsp; <span>등록일자 : {w.cdate}</span></Link>
+                    <Link to={`/survey/survey?wno=${w.wno}`}>
+                        <h4>작업계획{w.wno}</h4>
+                        <div>PlanNumber : {w.wno}</div>
+                        <div>등록일자 : {w.cdate.split('T')[0].split('-')[0]}년 {w.cdate.split('T')[0].split('-')[1]}월 {w.cdate.split('T')[0].split('-')[2]}일</div>
+                    </Link>
                 </div>
                 )
         })}

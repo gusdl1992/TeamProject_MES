@@ -49,9 +49,9 @@ insert into workplan ( pno , wcount , wno , cdate , udate , wstarttime , wendtim
 
 #select * from survey;
 # survey sample
-insert into survey ( samount , sno , wno , cdate , udate , inputmno , checkmno ) values ( 0 , 1 , 1 , '2024-03-12 12:00:12.123456','2024-03-12 12:00:12.123456' , 2 , null );
-insert into survey ( samount , sno , wno , cdate , udate , inputmno , checkmno ) values ( 0 , 2 , 2 , '2024-03-20 12:00:12.123456','2024-03-20 12:00:12.123456' , 2 , null );
-insert into survey ( samount , sno , wno , cdate , udate , inputmno , checkmno ) values ( 0 , 3 , 3 , '2024-03-20 14:00:12.123456','2024-03-20 14:00:12.123456' , 2 , null );
+insert into survey ( sstate , sno , wno , cdate , udate , inputmno , checkmno ) values ( 0 , 1 , 1 , '2024-03-12 12:00:12.123456','2024-03-12 12:00:12.123456' , 2 , null );
+insert into survey ( sstate , sno , wno , cdate , udate , inputmno , checkmno ) values ( 0 , 2 , 2 , '2024-03-20 12:00:12.123456','2024-03-20 12:00:12.123456' , 2 , null );
+insert into survey ( sstate , sno , wno , cdate , udate , inputmno , checkmno ) values ( 0 , 3 , 3 , '2024-03-20 14:00:12.123456','2024-03-20 14:00:12.123456' , 2 , null );
 
 select * from materialinput;
 # materialinput sample # 투입공정

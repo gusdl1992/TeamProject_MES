@@ -20,7 +20,7 @@ public class SurveyEntity extends BaseTime{
     private int sno; // 계량 식별 번호
 
     @Column( nullable = true)
-    private int samount; // 지시 수량
+    private int sstate; // 지시 수량
 
 
     @ManyToOne
@@ -41,7 +41,7 @@ public class SurveyEntity extends BaseTime{
     public SurveyDto toDto() {
         SurveyDto surveyDto = SurveyDto.builder()
                 .sno(this.sno)
-                .samount(this.samount)
+                .sstate(this.sstate)
                 .inputmno(this.inputmemberEntity.getMno())
                 .wno(this.workPlanEntity.getWno())
                 .build();
