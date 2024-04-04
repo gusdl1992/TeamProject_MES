@@ -39,6 +39,7 @@ public class RawMeterialService {
     public boolean doPostRmLog(RawMaterialLogDto rawMaterialLogDto){ // //원자재로그 입력(원자재 몇개 등록/감소하게 )
         RawMaterialEntity rawMaterrialEntity = rawMeterailRepository.findByRmname(rawMaterialLogDto.getRmname());
         RawMaterialLogEntity rawMaterialLogEntity =  rawMateriallogRepository.save(rawMaterialLogDto.toEntity());
+        System.out.println(rawMaterrialEntity.getRmname());
 
         if(rawMaterialLogEntity.getRmlno() >= 1){
             rawMaterialLogEntity.setRawMaterialEntity(rawMaterrialEntity);
@@ -47,6 +48,7 @@ public class RawMeterialService {
 
         return false;
     }
+
 
     public List<RawMaterialLogDto> doFindRmLog(int rmno){
         List<RawMaterialLogEntity> result = rawMateriallogRepository.findByPnoSql(rmno);

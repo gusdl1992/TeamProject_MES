@@ -48,8 +48,10 @@ public class RecipieService {
     @Transactional
     public boolean insertRecipielist(List<RecipeDto> recipeDtos){
         for (RecipeDto i : recipeDtos) {
+
             RecipeEntity result = i.toEntity();
             ProductEntity productEntity =  productRepository.findById(i.getPno()).get();
+
             RawMaterialEntity rawMaterialEntity =  rawMeterailRepository.findById(i.getRmno()).get();
             RecipeEntity result2 = recipeREpositorty.save(result);
             if (result2 != null){
@@ -64,13 +66,24 @@ public class RecipieService {
     }
     @Transactional
     public boolean productPost(RecipeDto recipeDto){
-        RecipeEntity recipeEntity =recipeREpositorty.save(recipeDto.toEntity());
-        if(recipeEntity.getReno() >= 1 ){
-            System.out.println("안녕안녕");
-            recipeEntity.setProductEntity(productRepository.findById(recipeDto.getPno()).get());
-            recipeEntity.setRawMaterialEntity(rawMeterailRepository.findById(recipeDto.getRmno()).get());
+        System.out.println("ddddddddd"+recipeDto.getPno());
+        System.out.println(recipeDto.getRmno());
+        RecipeEntity recipeEntity2 = recipeREpositorty.findByRmnoandPnoSQl(recipeDto.getRmno(),recipeDto.getPno());
+        System.out.println(recipeEntity2);
+        if(recipeEntity2 != null){
+            recipeEntity2.setReamount(recipeEntity2.getReamount()+recipeDto.getReamount());
             return true;
         }
+        else{
+            RecipeEntity recipeEntity =recipeREpositorty.save(recipeDto.toEntity());
+            if(recipeEntity.getReno() >= 1 ){
+                System.out.println("안녕안녕");
+                recipeEntity.setProductEntity(productRepository.findById(recipeDto.getPno()).get());
+                recipeEntity.setRawMaterialEntity(rawMeterailRepository.findById(recipeDto.getRmno()).get());
+                return true;
+            }
+        }
+
         return false;
     }
 }

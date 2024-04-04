@@ -9,7 +9,11 @@ export default function ProductWrite(props){
     const doPost = ()=>{
         const formData = new FormData();
         formData.append("pname",pname);
-        axios.post("/product/post.do",formData).then( r=> {console.log(r.data)}).catch(e=>{console.log(e)})
+        axios.post("/product/post.do",formData).then( r=> {if(r.data){
+            alert("등록성공")
+            window.location.href="/product"
+        }
+        }).catch(e=>{console.log(e)})
     }
     return(<>
         <input value={pname} onChange={(e)=>{setPname(e.target.value)}}/>
