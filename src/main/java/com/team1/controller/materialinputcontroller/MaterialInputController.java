@@ -31,6 +31,7 @@ public class MaterialInputController {
         System.out.println("MaterialInputController.doInputInfoGet");
 
         return materialInputService.doInputAllInfoGet();
+
     }
 
     @GetMapping("/input/info/get.do")
