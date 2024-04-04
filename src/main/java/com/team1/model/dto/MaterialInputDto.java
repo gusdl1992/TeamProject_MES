@@ -25,7 +25,7 @@ public class MaterialInputDto extends BaseTimeDto {
 
     private MemberDto inputmemberDto;
 
-    private String checkmembername;
+    private MemberDto checkmemberDto;
 
     private SurveyBDto surveyBDto;
 
