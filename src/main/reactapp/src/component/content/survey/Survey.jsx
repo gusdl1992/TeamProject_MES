@@ -113,7 +113,6 @@ export default function Survey(props){
                         <span>생산제품 : {recipeDtoList[0].pname}</span>
                         <span>생산수량 : {workPlanInfo.wcount.toLocaleString()} EA</span>
                         <span>생산기한 : {workPlanInfo.wendtime.split('T')[0]} 까지</span>
-                        {/* {console.log(workPlanInfo.wendtime)} */}
                     </h3>
                     <div>
                         <ul id="surveyUl">
@@ -136,6 +135,7 @@ export default function Survey(props){
             </div>
             :""}
             <SurveyCheckList/>
+            
         </>);
     }
 }
