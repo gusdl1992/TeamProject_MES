@@ -161,7 +161,7 @@ public class SurveyCheckService {
             for (int i = 0 ; i < surveyBEntityList.size() ; i++ ){
                 RawMaterialLogEntity rawMaterialLogEntity = RawMaterialLogEntity.builder()
                         .rawMaterialEntity(surveyBEntityList.get(i).getRawMaterialEntity())
-                        .rmlcount(surveyBEntityList.get(i).getSbcount())
+                        .rmlcount(surveyBEntityList.get(i).getSbcount() * -1)
                         .build();
                 rawMateriallogRepository.save(rawMaterialLogEntity);
             }
