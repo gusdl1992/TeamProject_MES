@@ -30,6 +30,7 @@ public class WorkPlanDto extends BaseTimeDto {
 
     private int pno;
 
+    private String pname;
 
     // - 엔티티를 dto로 변환하는 메소드
     public WorkPlanEntity toEntity() {

@@ -16,16 +16,36 @@ export default function AllWorkPlanList(props){
     // const link = [<Check1 /> , <Check2 />]
 
     
-
+    const state = ["진행전","계량확인전","계량확인완료","투입확인전","투입완료"] //추후 추가
     
     console.log(Planlist);
     return (
-        <div>
+        <table>
+            <thead>
+                <tr><th>작업번호</th><th>생산제품</th><th>생산수량</th><th>상태</th><th>시작일</th></tr>
+            </thead>
+            <tbody>
             {Planlist.map((e) => (
-                <div key={e.id}>
-                    <Link to={"/wp/report?wno="+e.wno+"&wstate="+e.wstate} wno={e.wno} wstate={e.wstate}>이동 </Link>
-                </div>
+                <tr key={e.id}>
+                    <td>
+                        {e.wno}
+                    </td>
+                    <td>
+                        <Link to={"/wp/report?wno="+e.wno+"&wstate="+e.wstate} wno={e.wno} wstate={e.wstate}>{e.pname}</Link>
+                    </td>
+                    <td>
+                        {e.wcount}
+                    </td>
+                    <td>
+                        {state[e.wstate]}
+                    </td>
+                    <td>
+                        {e.wstarttime.split("T")[0]}
+                    </td>
+
+                </tr>
             ))}
-        </div>
+            </tbody>
+        </table>
     );
 }

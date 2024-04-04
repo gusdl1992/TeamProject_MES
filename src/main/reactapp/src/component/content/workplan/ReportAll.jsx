@@ -24,9 +24,11 @@ export default function ReportAll(props){
         }//이런식으로 해야할듯?
         else if (wstate==2|| wstate ==1){
             return(<><ReportForSurvey wno={wno}/></>)
-            
         }
-        // componentsToRender 배열을 반환합니다.
+        else if(wstate == 0){
+            alert("진행 전입니다")
+            window.history.back();
+        }
     };
 
     const result = checkreport(wno,wstate)
