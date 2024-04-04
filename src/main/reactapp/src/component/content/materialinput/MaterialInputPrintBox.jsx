@@ -109,7 +109,7 @@ export default function MaterialInputPrintBox(props){
                                         <p>날짜 : {cdate}</p>
                                         <p>담당자 : {r.inputmemberDto.mname}</p>
                                         <form className={"confirmForm"+index} >
-                                            <input type="text" value={r.mipno} name="mipno"/>
+                                            <input type="text" style={{display:'none'}} value={r.mipno} name="mipno"/>
                                             검사자 : <input onChange={checkMemberNameInput} disabled={r.checkmemberDto != null ? true : false }  value={r.checkmemberDto != null ? r.checkmemberDto.mname : confirmmembername} className="checkMemberInput" type="text"/>
                                             검사상태
                                             <select name="mipstate" value={confirmstate} onChange={confirmStateChange}>
