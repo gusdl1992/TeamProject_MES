@@ -91,63 +91,51 @@ export default function Survey(props){
         })
     }
     
+    function onChangeEvent(index,inputCount){
+        // console.log(index);
+        // console.log(inputCount);
+        let recipeClass = document.querySelector(`.recipe${index}`).value; // 입력값
+        // console.log(recipeClass);
+        // console.log(inputCount-50)
+        if(parseInt(inputCount-50)<parseInt(recipeClass)<parseInt(inputCount+50)){
+            document.querySelector(`.validation${index}`).innerHTML="안녕자바 유효성 통과"
+        }else{document.querySelector(`.validation${index}`).innerHTML="안녕자바 유효성 실패"}
+    }
+
     if(logininfo!=null){ // 로그인 정보가 로딩되지 않았다면 return 안함
         return(<>
-            <div style={{maxWidth:'66%',minWidth:'1100px',margin:'0 auto',border:'1px solid red'}}>
-                <div className="searchBox">
-                    <h3>검색</h3>
-                </div>
-                <div className="statistics">
-                    <h3>통계</h3>
-                    <div className="statisticsWrap">
-                        <div className="statisticsBox">
-                            
-                        </div>
-                        <div className="statisticsBox">
-                            
-                        </div>
-                        <div className="statisticsBox">
-                            
-                        </div>
-                        <div className="statisticsBox">
-                            
-                        </div>
+            <WorkPlanList/>
+
+            {workPlanInfo.wcount!=""?
+            <div id="surveyCssBox">
+                <form>
+                    <h3>
+                        <span>생산제품 : {recipeDtoList[0].pname}</span>
+                        <span>생산수량 : {workPlanInfo.wcount.toLocaleString()} EA</span>
+                        <span>생산기한 : {workPlanInfo.wendtime.split('T')[0]} 까지</span>
+                        {/* {console.log(workPlanInfo.wendtime)} */}
+                    </h3>
+                    <div>
+                        <ul id="surveyUl">
+                        {
+                            recipeDtoList.map((r,index)=>{
+                                return(<>
+                                    <li>투입재료 : {r.rmname} 투입 해야하는 양 = {(r.reamount*workPlanInfo.wcount).toLocaleString()}g</li>
+                                    <div>
+                                        입력된 양 : <input type="text" onChange={()=>{onChangeEvent(index , r.reamount*workPlanInfo.wcount)}} className={"recipe"+index} id={r.rmno} { ...(logininfo.pno === 1 || logininfo.pno === 0? { disabled: false }: { disabled: true })} />
+                                        <span className={"validation"+index}></span>
+                                    </div>
+                                </>
+                                );
+                            })
+                        }
+                        </ul>
+                        <button id="surveyBtn" type="button" onClick={onClickEvent}>버튼</button>
                     </div>
-                </div>
-            
-                <div id="workplanCssBox">
-                <WorkPlanList/>
-                </div>
-                {workPlanInfo.wcount!=""?
-                <div id="surveyCssBox">
-                    <form>
-                        <h3>
-                            <span>생산제품 : {recipeDtoList[0].pname}</span>
-                            <span>생산수량 : {workPlanInfo.wcount.toLocaleString()} EA</span>
-                            <span>생산기한 : {workPlanInfo.wendtime.split('T')[0]} 까지</span>
-                            {/* {console.log(workPlanInfo.wendtime)} */}
-                        </h3>
-                        <div>
-                            <ul id="surveyUl">
-                            {
-                                recipeDtoList.map((r,index)=>{
-                                    return(<>
-                                        <li>투입재료 : {r.rmname} 투입 해야하는 양 = {(r.reamount*workPlanInfo.wcount).toLocaleString()}g</li>
-                                        <div>입력된 양 : <input type="text" className={"recipe"+index} id={r.rmno} { ...(logininfo.pno !== 1 && { disabled: true }) } /></div>
-                                    </>
-                                    );
-                                })
-                            }
-                            </ul>
-                            <button id="surveyBtn" type="button" onClick={onClickEvent}>버튼</button>
-                        </div>
-                    </form>
-
-                </div>
-                :""}
-                <SurveyCheckList/>
+                </form>
             </div>
-
+            :""}
+            <SurveyCheckList/>
         </>);
     }
 }
