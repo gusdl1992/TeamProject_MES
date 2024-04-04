@@ -1,9 +1,11 @@
 package com.team1.service.surveycheckservice;
 
+import com.team1.model.dto.surveyCheckDto.SurveyCheckOutDto;
 import com.team1.model.entity.*;
 import com.team1.model.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.*;
 
@@ -25,69 +27,6 @@ public class SurveyCheckService {
 
     // 1. 계량데이터 가져오기
     public Map< Object , Object >  surveyCheckView(){
-        System.out.println("SurveyCheckService.surveyCheckView");
-        
-        // 계량 과 계량한 원자재 , 레시피 이름 및 필요량 가져오기
-        List<  Map< Object , Object> > result1 = surveyRepository.findBySurveyCheckSQL(1,1);
-        System.out.println("result1 = " + result1);
-
-        // 현재 계량 번호와 비교하여 할일에서 수량 가져오기.
-        Map<Object , Object> result2 = surveyRepository.findBySurveyCheckCountSQL(1);
-        System.out.println("result2 = " + result2);
-
-
-        Map< Object , Object > result  = new HashMap<>();
-        result.put( "원료계량" , result1 );
-        result.put( "생산계획" , result2 );
-
-
-
-        Map<String, Object> retrievedInnerMap = (Map<String, Object>) result.get("생산계획");
-
-        if (retrievedInnerMap != null) {
-            Integer value = (Integer) retrievedInnerMap.get("pno");
-            System.out.println("Value: " + value); //
-            Integer sno = (Integer) retrievedInnerMap.get("sno");
-            System.out.println("sno = " + sno);
-            String cdate = retrievedInnerMap.get("cdate").toString();
-            System.out.println("cdate = " + cdate);
-            String udate = retrievedInnerMap.get("udate").toString();
-            System.out.println("udate = " + udate);
-        } else {
-            System.out.println("Inner map not found");
-        }
-
-
-
-        // 외부 Map에서 List<Map> 가져오기
-        List<Map<String, Object>> innerList = (List<Map<String, Object>>) result.get("원료계량");
-
-        // 내부 List에서 Map 순회
-        if (innerList != null) {
-            for (Map<String, Object> innerMap : innerList) {
-                System.out.println("원료쪽");
-                Integer pno = (Integer) innerMap.get("pno");
-                System.out.println("pno: " + pno); //
-                Integer reno = (Integer) innerMap.get("reno");
-                System.out.println("reno = " + reno);
-                Integer reamount = (Integer) innerMap.get("reamount");
-                System.out.println("reamount = " + reamount);
-                Integer rmno = (Integer) innerMap.get("rmno");
-                System.out.println("rmno = " + rmno);
-                Integer sbcount = (Integer) innerMap.get("sbcount");
-                System.out.println("sbcount = " + sbcount);
-                String rmname = (String) innerMap.get("rmname");
-                System.out.println("rmname = " + rmname);
-                String cdate = innerMap.get("cdate").toString();
-                System.out.println("cdate = " + cdate);
-                String udate = innerMap.get("udate").toString();
-                System.out.println("udate = " + udate);
-            }
-        } else {
-            System.out.println("Inner list not found");
-        }
-
-        return result;
 
     }
 
@@ -105,6 +44,27 @@ public class SurveyCheckService {
         return workPlans;
     }
 
+    // Survey 이용 하여 sno번호 제품명 계량날짜 계량원 상태 가져오기
+    public List<SurveyCheckOutDto> roadCheckSurvey(){
+        System.out.println("SurveyCheckService.roadCheckSurvey");
+        List<SurveyEntity> surveyEntityList =  surveyRepository.findAll();
+        List<SurveyCheckOutDto> surveyCheckOutDtoList = new ArrayList<>();
+        if (!surveyEntityList.isEmpty()){
+            for (int i = 0 ; i < surveyEntityList.size(); i++){
+                SurveyCheckOutDto surveyCheckOutDto = SurveyCheckOutDto.builder()
+                        .wno(surveyEntityList.get(i).getWorkPlanEntity().getWno())
+                        .udate(surveyEntityList.get(i).getUdate())
+                        .sstate(surveyEntityList.get(i).getSstate())
+                        .inputmname(surveyEntityList.get(i).getInputmemberEntity().getMname())
+                        .pname(surveyEntityList.get(i).getWorkPlanEntity().getProductEntity().getPname())
+                        .wcount(surveyEntityList.get(i).getWorkPlanEntity().getWcount())
+                        .build();
+                surveyCheckOutDtoList.add(surveyCheckOutDto);
+            }
+            return surveyCheckOutDtoList;
+        }
+        return null;
+    }
 
 
     // 2. 검사 완료 체크 시 검사 완료자 데이터 저장
