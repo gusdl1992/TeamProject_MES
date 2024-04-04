@@ -27,7 +27,7 @@ public class MaterialInputDto extends BaseTimeDto {
 
     private MemberDto checkmemberDto;
 
-    private SurveyBDto surveyBDto;
+    // private SurveyBDto surveyBDto;
 
     private WorkPlanDto workPlanDto;
 

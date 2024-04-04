@@ -4,14 +4,8 @@ import com.team1.model.dto.MaterialInputDto;
 import com.team1.model.dto.MemberDto;
 import com.team1.model.dto.SurveyBDto;
 import com.team1.model.dto.SurveyDto;
-import com.team1.model.entity.MaterialInputEntity;
-import com.team1.model.entity.MemberEntity;
-import com.team1.model.entity.ProductEntity;
-import com.team1.model.entity.SurveyEntity;
-import com.team1.model.repository.MaterialInputRepository;
-import com.team1.model.repository.MemberRepository;
-import com.team1.model.repository.ProductRepository;
-import com.team1.model.repository.SurveyRepository;
+import com.team1.model.entity.*;
+import com.team1.model.repository.*;
 import com.team1.service.memberserivce.MemberService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +30,8 @@ public class MaterialInputService {
     MemberService memberService;
     @Autowired
     MemberRepository memberRepository;
+    @Autowired
+    WorkPlanEntityRepository workPlanEntityRepository;
     @Transactional
     public boolean doInputPost(int sno){
         System.out.println("MaterialInputService.doInputPost");
@@ -58,8 +54,8 @@ public class MaterialInputService {
         System.out.println("surveyEntity = " + surveyEntity);
         System.out.println("optionalSurveyEntity = " + optionalSurveyEntity);
         ProductEntity optionalProductEntity = productRepository.findBySnoSQL( sno );
-
-
+        System.out.println("방금찍은 : optionalProductEntity = " + optionalProductEntity);
+        Optional<WorkPlanEntity> optionalWorkPlanEntity = workPlanEntityRepository.findById(sno);
 
             // insert
         MaterialInputEntity saveMaterialInput
@@ -69,6 +65,7 @@ public class MaterialInputService {
             saveMaterialInput.setSurveyEntity( surveyEntity );
             saveMaterialInput.setProductEntity( optionalProductEntity );
             saveMaterialInput.setInputmemberEntity( memberEntity );
+            saveMaterialInput.setWorkPlanEntity(optionalWorkPlanEntity.get());
 
         // 인풋넘버 넣는곳
             return true;
