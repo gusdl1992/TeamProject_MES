@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Check1 from "./Check1";
-import Check2 from "./Check2";
+
 import { Link } from "react-router-dom";
 
 
