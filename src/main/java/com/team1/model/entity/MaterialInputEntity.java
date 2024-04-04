@@ -35,7 +35,7 @@ public class MaterialInputEntity extends BaseTime{
 
     @ManyToOne
     @JoinColumn(name = "checkmno")
-    private MemberEntity checkmembername; // 사원번호 따오기 위해 회원테이블 가져옴
+    private MemberEntity checkmemberEntity; // 사원번호 따오기 위해 회원테이블 가져옴
 
     @ColumnDefault("0")
     private int mipstate; // 검사 상태
@@ -55,6 +55,7 @@ public class MaterialInputEntity extends BaseTime{
                 .mipno(this.mipno)
                 .mipstate(this.mipstate)
                 .inputmemberDto(this.inputmemberEntity.toDto())
+                .checkmemberDto(this.checkmemberEntity != null ? this.checkmemberEntity.toDto() : null )
                 .surveyBDto(this.surveyBEntity.toDto())
                 .workPlanDto(this.workPlanEntity.toDto())
                 .build();

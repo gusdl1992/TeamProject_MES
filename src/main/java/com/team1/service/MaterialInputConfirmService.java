@@ -31,12 +31,12 @@ public class MaterialInputConfirmService {
 
         MaterialInputEntity materialInputEntity = materialInputRepository.findById(mipno).get();
 
-        materialInputEntity.setCheckmembername(optionalMemberEntity.get());
+        materialInputEntity.setCheckmemberEntity(optionalMemberEntity.get());
         materialInputEntity.setMipstate(mipstate);
 
         System.out.println("materialInputEntity"+materialInputEntity);
 
-        if (materialInputEntity.getCheckmembername() == null){
+        if (materialInputEntity.getCheckmemberEntity() == null){
             return false;
         }
         return true;
