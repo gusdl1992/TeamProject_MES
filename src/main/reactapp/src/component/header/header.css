@@ -52,3 +52,15 @@
 @media screen and (max-width:767px){
 
 }
+
+/* 로그인 정보 (로그아웃 ) */
+#loginCss{
+  position: relative;
+  top: 800px;
+  left: 40px;
+}
+.logoutSpan{
+  display: inline-block;
+  border: 1px solid red;
+  
+}

@@ -30,6 +30,9 @@ public class SurveyCheckService {
     SurveyBEntityRepository surveyBEntityRepository;
     @Autowired
     MemberService memberService;
+    @Autowired
+    RawMateriallogRepository rawMateriallogRepository;
+
 
     // 1. 계량데이터 가져오기
     public Map< Object , Object >  surveyCheckView(){
@@ -139,6 +142,8 @@ public class SurveyCheckService {
         WorkPlanEntity workPlan = workPlanGetList(survey.getWorkPlanEntity().getWno());
         List<RecipeEntity> recipeEntityList = recipeEntityList(workPlan.getProductEntity().getPno());
         List<SurveyBEntity> surveyBEntityList = surveyBEntityList(sno);
+        System.out.println("로그 테스트 !!surveyBEntityList = " + surveyBEntityList);
+        System.out.println("surveyBEntityList.get(1).getRawMaterialEntity().getRmno() = " + surveyBEntityList.get(1).getRawMaterialEntity().getRmno());
 
 
         boolean result = surveyChack(workPlan ,recipeEntityList ,surveyBEntityList);
@@ -147,12 +152,23 @@ public class SurveyCheckService {
             survey.setCheckmemberEntity(memberNameCheck(memberDto.getMno()));
             survey.setSstate(sstate);
             surveyRepository.save(survey);
-            return true;
+            // return true;
         }else {
             // 계량 검사 유효성 검사 실패시 false 리턴.
             return false;
         }
-
+        if (result){
+            for (int i = 0 ; i < surveyBEntityList.size() ; i++ ){
+                RawMaterialLogEntity rawMaterialLogEntity = RawMaterialLogEntity.builder()
+                        .rawMaterialEntity(surveyBEntityList.get(i).getRawMaterialEntity())
+                        .rmlcount(surveyBEntityList.get(i).getSbcount())
+                        .build();
+                rawMateriallogRepository.save(rawMaterialLogEntity);
+            }
+            return true;
+        }else {
+            return false;
+        }
     }
 
     // mno 로 사원 엔티티 가져와서 리턴
