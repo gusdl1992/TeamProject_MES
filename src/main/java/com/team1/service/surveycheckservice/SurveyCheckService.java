@@ -39,7 +39,6 @@ public class SurveyCheckService {
             if (workPlanEntityList.get(i).getWstate() == 1){
                 workPlans.add(workPlanEntityList.get(i));
             }
-
         }
         System.out.println("workPlans = " + workPlans);
         return workPlans;
