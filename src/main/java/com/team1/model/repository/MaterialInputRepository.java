@@ -16,6 +16,9 @@ public interface MaterialInputRepository extends JpaRepository<MaterialInputEnti
     @Query(value = "select * from materialinput m inner join surveyb sb on m.sno2 = sb.sno where m.sno2 = :sno" , nativeQuery = true)
     List<MaterialInputEntity> findBySno(int sno);
 
-    @Query(value = "select * from materialinput m inner join surveyb sb on m.sno2 = sb.sno inner join rawmaterial as a on sb.rmno = a.rmno join product as p on p.pno = m.pno join workplan as w on m.wno2 = w.wno  where sno = :sno" , nativeQuery = true)
+    @Query(value = "select * from survey  inner join surveyb  on survey.sno = surveyb.sno " +
+            "inner join rawmaterial on rawmaterial.rmno=surveyb.rmno " +
+            "inner join workplan on workplan.wno=survey.wno " +
+            "inner join product on product.pno=workplan.pno where survey.sno= :sno" , nativeQuery = true)
     List<Map<Object,Object>> findByHard(int sno);
 }

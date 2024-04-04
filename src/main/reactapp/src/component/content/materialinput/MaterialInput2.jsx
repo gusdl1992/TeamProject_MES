@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import SurveyList from "./SurveyList";
 
-export default function MaterialInput(props){
+export default function MaterialInput2(props){
     // 1. 컨텍스트 가져오기 (로그인 정보)
 //     const { logininfo, setLogin } = useContext(LoginInfoContext);
 // console.log(logininfo);
@@ -40,10 +40,19 @@ export default function MaterialInput(props){
         }
     } , [query.get("sno")])
     
+
+    function onClickBtn(){
+        console.log( query.get("sno"))
+        axios.post("/material/input/post.do?sno="+query.get("sno"))
+        .then( (r) => {
+            console.log(r);
+        })
+        .catch( (e) => {console.log(e)})
+    }
+
+
     return(<>
-        <div id="workplanCssBox">
-            <SurveyList/>
-        </div>
+        <div>
         <h3>
             <span>생산제품 : {surveyB[0].pname}</span>
             <span>생산수량 : {surveyB[0].wcount.toLocaleString()} EA</span>
@@ -60,6 +69,8 @@ export default function MaterialInput(props){
                 }
             )}
         </ul>
+        <button type="button" onClick={onClickBtn}>등록</button>
+        </div>
 
     </>)
 }

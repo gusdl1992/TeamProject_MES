@@ -106,7 +106,7 @@ export default function MaterialInputPrintBox(props){
                                         <p>생산계획 번호 : {r.workPlanDto.wno}</p>
                                         <p>제품명 : {r.productDto.pname}</p>
                                         <p>제품수량 : {r.workPlanDto.wcount}</p>
-                                        <p>{r.surveyBDto.rmname}투입량 : {r.surveyBDto.sbcount}</p>
+                                        
                                         <p>날짜 : {r.cdate}</p>
                                         <p>담당자 : {r.inputmemberDto.mname}</p>
                                         <form ref={materialConfirmForm}>

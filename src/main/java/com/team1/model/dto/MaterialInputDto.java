@@ -38,7 +38,7 @@ public class MaterialInputDto extends BaseTimeDto {
                 .mipno(this.mipno)
                 .mipstate(this.mipstate)
                 .inputmemberEntity(this.inputmemberDto.toEntity())
-                .surveyBEntity(this.surveyBDto.toEntity())
+
                 .workPlanEntity(this.workPlanDto.toEntity())
                 .build();
 

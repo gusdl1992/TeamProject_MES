@@ -41,10 +41,6 @@ public class MaterialInputEntity extends BaseTime{
     private int mipstate; // 검사 상태
 
     @ManyToOne
-    @JoinColumn(name = "sbno2")
-    private SurveyBEntity surveyBEntity;
-
-    @ManyToOne
     @JoinColumn(name = "wno2")
     private WorkPlanEntity workPlanEntity;
 
@@ -55,7 +51,6 @@ public class MaterialInputEntity extends BaseTime{
                 .mipno(this.mipno)
                 .mipstate(this.mipstate)
                 .inputmemberDto(this.inputmemberEntity.toDto())
-                .surveyBDto(this.surveyBEntity.toDto())
                 .workPlanDto(this.workPlanEntity.toDto())
                 .build();
         materialInputDto.setCdate(this.cdate);

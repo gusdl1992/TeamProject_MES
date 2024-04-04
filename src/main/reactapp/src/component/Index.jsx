@@ -14,7 +14,7 @@ import ProductRecipieList from "./content/recipie/ProductRecipieList";
 import Survey from "./content/survey/Survey" // 승호
 import WorkPlanList from "./content/survey/WorkPlanList"; // 승호
 import Test from "./member/Test"; // 시현 사원등록 테스트
-import SurveyList from "./materialinput/SurveyList";
+import SurveyList from "./content/materialinput/SurveyList";
 import ProductLayOut from "./content/product/ProductLayOut";
 import RmLayOut from "./content/rawmaterial/RmLayOut";
 import LayoutTest from "./content/layouttest/Layouttest";
@@ -22,7 +22,8 @@ import RmWrites from "./content/rawmaterial/RmWirtes";
 import axios from "axios";
 import RmLLayOut from "./content/rawmaterial/RmLLayOut";
 import AllWorkPlanList from "./content/workplan/AllWorkPlanList";
-import MaterialInput from "./materialinput/MaterialInput";
+import MaterialInput from "./content/materialinput/MaterialInput";
+
 
 export const LoginInfoContext = React.createContext("");
 
@@ -51,7 +52,7 @@ export default function Index(props){
                     <Route path="/product" element={<LayoutTest insert={<ProductWrite/>} list={<ProductList/>} />}/>
                     <Route path="/RM" element={<LayoutTest insert={<RmWrites/>} list={<RmCount/>} />}/>
                     <Route path="/RM/log" element={<RmLLayOut/>}/>
-                    <Route path="/material/input" element={ <MaterialInput /> }/>                                                          
+                    <Route path="/material/input" element={ <MaterialInput/> }/>                                                          
                     <Route path="/survey/survey" element={<Survey/> } />
                     <Route path="/survey/plan" element={<WorkPlanList/> } />
                     <Route path="/member/test" element={<Test/> } />
