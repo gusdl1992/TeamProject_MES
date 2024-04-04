@@ -14,14 +14,12 @@ export default function ReportAll(props){
 
     const checkreport = (wno, wstate) => {
         
-        switch (wstate) {
-            case 6 || 5:
-                <Check1 wno={wno}/>;
-            case 4 || 3:
-                <Check2 wno={wno}/>;
-            case 2 || 1:
-                // <Check3 wno={wno}/>;아직 안 만든 컴포넌트
+        if (wstate == 6 || wstate == 5){
+            return(<><Check1 wno={wno}/><Check2 wno={wno}/></>)
         }
+        else if (wstate==4|| wstate ==3){
+            
+        }//이런식으로 해야할듯?
     
         // componentsToRender 배열을 반환합니다.
     };
