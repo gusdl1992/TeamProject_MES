@@ -54,6 +54,7 @@ public class SurveyService {
     // workplan 식별번호로 정보 가져오기
     public WorkPlanDto workPlanDto (int wno){
 
+
         // JPA에서 데이터 호출하기
         WorkPlanEntity workPlanEntity = workPlanEntityRepository.findBywno(wno);
 
