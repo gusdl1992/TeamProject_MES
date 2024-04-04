@@ -1,9 +1,11 @@
 package com.team1.service.surveycheckservice;
 
+import com.team1.model.dto.MemberDto;
 import com.team1.model.dto.surveyCheckDto.SurveyBCheckOutDto;
 import com.team1.model.dto.surveyCheckDto.SurveyCheckOutDto;
 import com.team1.model.entity.*;
 import com.team1.model.repository.*;
+import com.team1.service.memberserivce.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,8 @@ public class SurveyCheckService {
     RecipeEntityRepository recipeEntityRepository;
     @Autowired
     SurveyBEntityRepository surveyBEntityRepository;
+    @Autowired
+    MemberService memberService;
 
     // 1. 계량데이터 가져오기
     public Map< Object , Object >  surveyCheckView(){
@@ -59,6 +63,8 @@ public class SurveyCheckService {
                 System.out.println(surveyEntityList.get(i).getCheckmemberEntity());
                 SurveyCheckOutDto surveyCheckOutDto = SurveyCheckOutDto.builder()
                         .wno(surveyEntityList.get(i).getWorkPlanEntity().getWno())
+                        .sno(surveyEntityList.get(i).getSno())
+                        .cdate(surveyEntityList.get(i).getCdate())
                         .udate(surveyEntityList.get(i).getUdate())
                         .sstate(surveyEntityList.get(i).getSstate())
                         .inputmname(surveyEntityList.get(i).getInputmemberEntity().getMname())
@@ -125,8 +131,9 @@ public class SurveyCheckService {
 
 
     // 2. 검사 완료 체크 시 검사 완료자 데이터 저장
-    public boolean surveyCheck(int sno , int mno){
-        System.out.println("테스트 시작");
+    public boolean surveyCheck(int sno , int sstate){
+        System.out.println("테스트 시작11");
+        MemberDto memberDto = memberService.doLogininfo();
         SurveyEntity survey = surveyGetList(sno);
         WorkPlanEntity workPlan = workPlanGetList(survey.getWorkPlanEntity().getWno());
         List<RecipeEntity> recipeEntityList = recipeEntityList(workPlan.getProductEntity().getPno());
@@ -136,7 +143,8 @@ public class SurveyCheckService {
         boolean result = surveyChack(workPlan ,recipeEntityList ,surveyBEntityList);
         if (result){
             // 계량 체크가 유효성 검사가 모두 성공 했을 시 아래 문 실행.
-            survey.setCheckmemberEntity(memberNameCheck(mno));
+            survey.setCheckmemberEntity(memberNameCheck(memberDto.getMno()));
+            survey.setSstate(sstate);
             surveyRepository.save(survey);
             return true;
         }else {

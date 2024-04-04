@@ -24,6 +24,8 @@ import axios from "axios";
 import RmLLayOut from "./content/rawmaterial/RmLLayOut";
 import AllWorkPlanList from "./content/workplan/AllWorkPlanList";
 
+import SurveyCheckList from "./content/surveyCheck/SurveyCheckList"; // 시현
+
 export const LoginInfoContext = React.createContext("");
 
 export default function Index(props){

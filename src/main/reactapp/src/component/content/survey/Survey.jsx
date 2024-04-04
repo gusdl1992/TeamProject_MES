@@ -5,6 +5,9 @@ import WorkPlanList from "./WorkPlanList";
 import { LoginInfoContext } from "../../Index";
 import "./survey.css"
 
+// 박시현 추가
+import SurveyCheckList from "../surveyCheck/SurveyCheckList";
+
 
 
 export default function Survey(props){
@@ -142,7 +145,9 @@ export default function Survey(props){
 
                 </div>
                 :""}
+                <SurveyCheckList/>
             </div>
+            
         </>);
     }
 }
