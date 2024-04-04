@@ -15,4 +15,4 @@ public class PageDto {//class start
     private int count;      // 총 페이지 수
     private List<Object> data;  // 본문
 
-}//class end
+}//class end1
