@@ -1,7 +1,7 @@
 import styles from "./main.css";
 import Header from "./header/Header";
 import Login from "./login/Login";
-import Mensuration from "./content/Mensuration";
+import Main from "./content/Main";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import React, { useState } from "react";
 import ProductWrite from "./content/product/ProductWrite";
@@ -9,7 +9,7 @@ import ProductList from "./content/product/Productlist";
 import RmWrite from "./content/rawmaterial/RmWrite";
 import RmCount from "./content/rawmaterial/RmCount";
 import RmLogList from "./content/rawmaterial/RMLogList";
-import MaterialInput from "./materialinput/MaterialInput";
+import MaterialInput from "./content/materialinput/MaterialInput";
 import ProductRecipieList from "./content/recipie/ProductRecipieList";
 
 import Survey from "./content/survey/Survey" // 승호
@@ -29,7 +29,7 @@ export default function Index(props){
                 {logininfo && <span onClick={() => window.location.href='/c'}>Profile</span>}
                     <Routes>
                     <Route path="/" element={<Login/>}/>
-                    <Route path="/c" element={<Mensuration/>}/>
+                    <Route path="/c" element={<Main/>}/>
                     <Route path="/product/write" element={<ProductWrite />}/>
                     <Route path="/product" element={<ProductList/>}/>
                     <Route path="/RM/write" element={<RmWrite/>}/>

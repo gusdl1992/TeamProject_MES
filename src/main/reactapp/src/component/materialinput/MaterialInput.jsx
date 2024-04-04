@@ -7,7 +7,7 @@ export default function MaterialInput(props){
     // 1. 컨텍스트 가져오기 (로그인 정보)
 //     const { logininfo, setLogin } = useContext(LoginInfoContext);
 // console.log(logininfo);
-    
+
     // 쿼리스트링 값 가져오기 sno
     let [query, setQuery] = useSearchParams();
 
@@ -16,23 +16,23 @@ export default function MaterialInput(props){
     console.log(query.get("sno"))
 
     useEffect (() => { survey() } , [])
-    const survey = 
+    const survey =
      () =>{
      axios.get('/material/input/info/get.do', { params :{ sno :query.get("sno") }} )
     .then((response)=>{
     console.log(response);
     setSurveyB(response.data);
-    
+
 })
 }
 
 
     return(<>
-        <SurveyList />  
+        <SurveyList />
         <div id="surveyCssBox">
             <form>
             <div>
-                                       
+
                         {/* {console.log(workPlanInfo.wendtime)} */}
                     </div>
             </form>
@@ -68,16 +68,16 @@ export default function MaterialInput(props){
 // },[])
 
 // //
-// const infoGet =  useCallback ( () => { 
+// const infoGet =  useCallback ( () => {
 //     axios.get('/material/input/info/get.do', query.get("sno"))
 //     .then((response)=>{
 //         console.log(response);
 //         if(response.data != []){
 //             setTest(response.data);
-               
+
 //         }
 //     })
-// } , [ test] ) 
+// } , [ test] )
 
 
 // useEffect(  ()=>{
@@ -88,7 +88,7 @@ export default function MaterialInput(props){
 //         console.log(response);
 //         setWorkPlanInfo(response.data.workPlanDto);
 //         const result = response.data.recipeDto.map( (re) =>{return re;})// 레시피 dto state 추가하기
-//         setRecipeDtoList(result);            
+//         setRecipeDtoList(result);
 //     })
 //     .catch(re =>{console.log(re)})
 // },[])
@@ -119,7 +119,7 @@ export default function MaterialInput(props){
 //         console.log(e);
 //     })
 // }
-// const test12 = 
+// const test12 =
 //      () =>{
 //      axios.get('/material/input/info/get.do', query )
 // .then((response)=>{

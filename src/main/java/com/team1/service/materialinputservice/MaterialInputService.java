@@ -76,33 +76,13 @@ public class MaterialInputService {
 
     @Transactional
     public List<MaterialInputDto> doInputAllInfoGet(){
-//        System.out.println("MaterialInputController.doInputInfoGet");
-//        List<MaterialInputEntity> result = materialInputRepository.findAll();
-//
-//        System.out.println("result = " + result);
-//        // Entity를 Dto로 변환한다
-//        List<MaterialInputDto> materialInputDtoList = new ArrayList<>();
-//            // 1. 꺼내온 entity를 순회한다
-//        for (int i = 0; i < result.size(); i++) {
-//            // 2.하나씩 entity를 꺼낸다
-//            MaterialInputEntity materialInputEntity = result.get(i);
-//                result.get(i).getSurveyBEntity().getSbno();
-//            System.out.println("방금막쓴sno = " + materialInputEntity);
-//
-//            // 3. 해당 entity를 dto로 변환한다
-//            MaterialInputDto materialInputDto = materialInputEntity.toDto();
-//            // 4. 변환된 dto를 리스트에 담는다
-//            materialInputDtoList.add(materialInputDto);
-//
-//        }
-        List<MaterialInputDto> result = materialInputRepository.findBySno(1).stream().map( (materialInputEntity) -> {
-            return materialInputEntity.toDto();
-        }).collect(Collectors.toList());
-
-        for (MaterialInputDto materialInputDto : result) {
-            System.out.println("dddddddd"+materialInputDto);
-        }
-        return result;
+        List<MaterialInputEntity> materialInputMapList = materialInputRepository.findAll();
+        List<MaterialInputDto> materialInputDtoList = new ArrayList<>();
+        materialInputMapList.forEach((matrialInfo)->{
+            materialInputDtoList.add(matrialInfo.toDto());
+        });
+        System.out.println("모든정보 = " + materialInputDtoList);
+        return materialInputDtoList;
     }
 
 
