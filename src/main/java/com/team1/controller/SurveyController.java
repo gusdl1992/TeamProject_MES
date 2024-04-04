@@ -52,6 +52,7 @@ public class SurveyController {
         // -1 로그인 정보가 없음
         // -2 Survey 저장실패
         // -3 해당 원자재 레코드가 없음
+        // -4 검사 단계 진행됨 (수정불가능)
     @PostMapping("/insert.do")
     public int surveyInsertDo(@RequestBody SurveyInsertDto surveyInsertDto){
         System.out.println("surveyInsertDto = " + surveyInsertDto);

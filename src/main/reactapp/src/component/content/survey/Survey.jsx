@@ -7,6 +7,7 @@ import "./survey.css"
 
 // 박시현 추가
 import SurveyCheckList from "../surveyCheck/SurveyCheckList";
+import TotalBox from "../layouts/TotalBox";
 
 
 
@@ -47,9 +48,13 @@ export default function Survey(props){
     
     // console.log(recipeDtoList);
 // =============================================================
-
+    let succeseInfo = [false];
     function onClickEvent(){
         console.log("버튼눌림");
+        console.log(succeseInfo)
+        for(let i = 0; i<succeseInfo.length; i++){
+            if(!succeseInfo[i]){alert("안내) 입력값을 확인해주세요"); return;}
+        }
 
         // ul 요소 가져오기
         const ulElement = document.getElementById('surveyUl');
@@ -85,9 +90,17 @@ export default function Survey(props){
             }
           })
         .then((r)=>{// int 'sno' 반환함 => r.data
+            // -1 로그인 정보가 없음
+            // -2 Survey 저장실패
+            // -3 해당 원자재 레코드가 없음
+            // -4 검사 단계 진행됨 (수정불가능)
             console.log(r.data);
-            // window.location.href = "/material/input?sno="+r.data
-            alert("안내) 계량내용 등록성공 하였습니다.");
+            if(r.data>0){alert("안내) 계량내용 등록성공 하였습니다.");}
+            else if(r.data==-1){alert("안내) 로그인 정보가 없습니다.");}
+            else if(r.data==-2){alert("안내) 등록실패.");}
+            else if(r.data==-3){alert("안내) 해당 원자제가 등록되어있지 않습니다..");}
+            else if(r.data==-4){alert("안내) 검사단계가 진행되었습니다.(수정불가)");}
+            
         })
     }
     
@@ -97,13 +110,18 @@ export default function Survey(props){
         let recipeClass = document.querySelector(`.recipe${index}`).value; // 입력값
         // console.log(recipeClass);
         // console.log(inputCount-50)
-        if(parseInt(inputCount-50)<parseInt(recipeClass)<parseInt(inputCount+50)){
-            document.querySelector(`.validation${index}`).innerHTML="안녕자바 유효성 통과"
-        }else{document.querySelector(`.validation${index}`).innerHTML="안녕자바 유효성 실패"}
+        if(parseInt(inputCount-50)<=parseInt(recipeClass)&&parseInt(recipeClass)<=parseInt(inputCount+50)){
+            document.querySelector(`.validation${index}`).innerHTML="";
+            succeseInfo[0]= true;
+        }else{
+            document.querySelector(`.validation${index}`).innerHTML="+-50 이내로 투입해주세요";
+            succeseInfo[0] = false;
+        }
     }
 
     if(logininfo!=null){ // 로그인 정보가 로딩되지 않았다면 return 안함
         return(<>
+            <TotalBox/>
             <WorkPlanList/>
 
             {workPlanInfo.wcount!=""?
