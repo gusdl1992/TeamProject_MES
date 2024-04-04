@@ -1,5 +1,6 @@
 package com.team1.model.repository;
 
+import com.team1.model.entity.ProductEntity;
 import com.team1.model.entity.RawMaterialEntity;
 import com.team1.model.entity.RawMaterialLogEntity;
 import com.team1.model.entity.RecipeEntity;
@@ -15,6 +16,7 @@ public interface RecipeEntityRepository extends JpaRepository<RecipeEntity , Int
     // pno 로 원재료 뭐 들어가는지 가져오기
     @Query(value = "select * from recipe where pno =:pno ",nativeQuery = true)
     List<RecipeEntity> findByPnoSql(int pno);
+
 
 
 

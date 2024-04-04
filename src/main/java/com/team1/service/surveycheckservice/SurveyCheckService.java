@@ -1,5 +1,6 @@
 package com.team1.service.surveycheckservice;
 
+import com.team1.model.dto.surveyCheckDto.SurveyBCheckOutDto;
 import com.team1.model.dto.surveyCheckDto.SurveyCheckOutDto;
 import com.team1.model.entity.*;
 import com.team1.model.repository.*;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.imageio.plugins.tiff.TIFFImageReadParam;
 import java.util.*;
 
 @Service
@@ -27,7 +29,7 @@ public class SurveyCheckService {
 
     // 1. 계량데이터 가져오기
     public Map< Object , Object >  surveyCheckView(){
-        return null; // 임의 수정 - 김건우
+        return null;
     }
 
     // state 로 계량 완료 된것만 가져오기
@@ -47,10 +49,14 @@ public class SurveyCheckService {
     // Survey 이용 하여 sno번호 제품명 계량날짜 계량원 상태 가져오기
     public List<SurveyCheckOutDto> roadCheckSurvey(){
         System.out.println("SurveyCheckService.roadCheckSurvey");
+
+
         List<SurveyEntity> surveyEntityList =  surveyRepository.findAll();
         List<SurveyCheckOutDto> surveyCheckOutDtoList = new ArrayList<>();
         if (!surveyEntityList.isEmpty()){
             for (int i = 0 ; i < surveyEntityList.size(); i++){
+                System.out.println("시작");
+                System.out.println(surveyEntityList.get(i).getCheckmemberEntity());
                 SurveyCheckOutDto surveyCheckOutDto = SurveyCheckOutDto.builder()
                         .wno(surveyEntityList.get(i).getWorkPlanEntity().getWno())
                         .udate(surveyEntityList.get(i).getUdate())
@@ -59,11 +65,62 @@ public class SurveyCheckService {
                         .pname(surveyEntityList.get(i).getWorkPlanEntity().getProductEntity().getPname())
                         .wcount(surveyEntityList.get(i).getWorkPlanEntity().getWcount())
                         .build();
+                surveyCheckOutDto = 레시피(surveyCheckOutDto);
+                if (surveyEntityList.get(i).getCheckmemberEntity() != null){
+                    surveyCheckOutDto.setCheckmname(surveyEntityList.get(i).getCheckmemberEntity().getMname());
+                }
                 surveyCheckOutDtoList.add(surveyCheckOutDto);
             }
-            return surveyCheckOutDtoList;
         }
-        return null;
+        return surveyCheckOutDtoList;
+    }
+
+    // 테스트 레시피 가져오기
+    public SurveyCheckOutDto 레시피( SurveyCheckOutDto surveyCheckOutDto){
+        System.out.println("SurveyCheckService.레시피");
+        System.out.println("surveyCheckOutDto = " + surveyCheckOutDto);
+        int wno = surveyCheckOutDto.getWno();
+        System.out.println("wno = " + wno);
+        WorkPlanEntity workPlan = workPlanEntityRepository.findBywno(wno);
+        System.out.println("workPlan = " + workPlan);
+        System.out.println("workPlan.getProductEntity().getPno() = " + workPlan.getProductEntity().getPno());
+        int pno = workPlan.getProductEntity().getPno();
+        List<RecipeEntity> recipes = recipeEntityRepository.findByPnoSql(pno);
+        System.out.println("recipes = " + recipes);
+
+        List<SurveyBCheckOutDto> list = new ArrayList<>();
+        for (int i = 0 ; i < recipes.size() ; i++){
+            SurveyBCheckOutDto surveyBCheckOutDto = new SurveyBCheckOutDto();
+            surveyBCheckOutDto.setRmname(recipes.get(i).getRawMaterialEntity().getRmname());
+            surveyBCheckOutDto.setRmno(recipes.get(i).getRawMaterialEntity().getRmno());
+            surveyBCheckOutDto.setReamount(recipes.get(i).getReamount() * workPlan.getWcount());
+            list.add(surveyBCheckOutDto);
+        }
+        surveyCheckOutDto.setSurveybList(list);
+
+        return 계량값(surveyCheckOutDto);
+    }
+
+    // 계량한 값 가져오기
+    public SurveyCheckOutDto 계량값(SurveyCheckOutDto surveyCheckOutDto){
+        System.out.println("SurveyCheckService.계량값");
+        System.out.println("surveyCheckOutDto = " + surveyCheckOutDto);
+        System.out.println("surveyCheckOutDto.getSurveybList().get(1).getRmno() = " + surveyCheckOutDto.getSurveybList().get(1).getRmno());
+        int wno = surveyCheckOutDto.getWno();
+        System.out.println("wno = " + wno);
+
+        List<SurveyBEntity> surveyBEntityList = surveyBEntityRepository.findAll();
+        System.out.println("surveyBEntityList = " + surveyBEntityList);
+
+        for (int i = 0 ; i < surveyBEntityList.size() ; i++){
+            for (int j = 0 ; j < surveyCheckOutDto.getSurveybList().size() ; j++){
+
+                if (surveyBEntityList.get(i).getRawMaterialEntity().getRmno() == surveyCheckOutDto.getSurveybList().get(j).getRmno()){
+                    surveyCheckOutDto.getSurveybList().get(j).setSbcount(surveyBEntityList.get(i).getSbcount());
+                }
+            }
+        }
+        return surveyCheckOutDto;
     }
 
 
@@ -72,7 +129,6 @@ public class SurveyCheckService {
         System.out.println("테스트 시작");
         SurveyEntity survey = surveyGetList(sno);
         WorkPlanEntity workPlan = workPlanGetList(survey.getWorkPlanEntity().getWno());
-        ProductEntity product = productEntityList(workPlan.getProductEntity().getPno());
         List<RecipeEntity> recipeEntityList = recipeEntityList(workPlan.getProductEntity().getPno());
         List<SurveyBEntity> surveyBEntityList = surveyBEntityList(sno);
 
@@ -223,7 +279,7 @@ public class SurveyCheckService {
             Integer key = entry.getKey();
             Double value = entry.getValue();
             System.out.println("Key: " + key + ", Value: " + value);
-            
+
             // 레시피와 계량 값 비교 후 Boolean 배열에 저장
             if (map2.get(key) >= entry.getValue() - num && map2.get(key) <= entry.getValue() + num ){
                 System.out.println("테스트 들어왔다");
@@ -234,7 +290,7 @@ public class SurveyCheckService {
                 result.add(false);
             }
         }
-        
+
         // 비교값을 Boolean 배열에 넣고 false 가 있는지 비교 있으면 검사 불합격 
         for (int i = 0 ; i < result.size() ; i++){
             if (!result.get(i)){
