@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 export default function MaterialInputPrintBox(props){
     let [material,setMaterial] = useState([]);
     const [confirmstate , setConfirmState] = useState('0');
-    let [confirmrender , setConfirmReder] = useState(false);
+    let [confirmmembername , setConfirmMemberName] = useState('');
 
     // 출력
     useEffect(() =>{
@@ -23,10 +23,12 @@ export default function MaterialInputPrintBox(props){
         e.preventDefault();
     }
 
-    let materialConfirmForm = useRef();
+    let onMaterialConfirm = (index)=>{
+        const confirmForm = document.querySelector(`.confirmForm${index}`);
 
-    let onMaterialConfirm = ()=>{
-        axios.put('/materialinput/confirm.do',materialConfirmForm.current)
+        const confirmFormData = new FormData(confirmForm);
+        
+        axios.put('/materialinput/confirm.do',confirmFormData)
         .then(r=>{
             console.log(r);
             if(r.data){
@@ -36,6 +38,10 @@ export default function MaterialInputPrintBox(props){
         .catch(e=>{
             console.log(e);
         })
+    }
+
+    let checkMemberNameInput = (e)=>{
+        setConfirmMemberName(e.target.value);
     }
     
     return(
@@ -70,7 +76,7 @@ export default function MaterialInputPrintBox(props){
                 </thead>
                 <tbody>
                     {
-                        material.map((r)=>{
+                        material.map((r,index)=>{
                             let cdate = r.cdate.split('T')[0];
                             let udate = r.udate.split('T')[0];
 
@@ -102,9 +108,9 @@ export default function MaterialInputPrintBox(props){
                                         <p>{r.surveyBDto.rmname}투입량 : {r.surveyBDto.sbcount}</p>
                                         <p>날짜 : {cdate}</p>
                                         <p>담당자 : {r.inputmemberDto.mname}</p>
-                                        <form ref={materialConfirmForm}>
-                                            <input type="text" value="1" style={{display:'none'}} name="mipno"/>
-                                            검사자 : <input disabled={r.checkmemberDto != null ? true : false }  value={r.checkmemberDto != null ? r.checkmemberDto.mname : ''} className="checkMemberInput" type="text" name="mname"/>
+                                        <form className={"confirmForm"+index} >
+                                            <input type="text" value={r.mipno} name="mipno"/>
+                                            검사자 : <input onChange={checkMemberNameInput} disabled={r.checkmemberDto != null ? true : false }  value={r.checkmemberDto != null ? r.checkmemberDto.mname : confirmmembername} className="checkMemberInput" type="text"/>
                                             검사상태
                                             <select name="mipstate" value={confirmstate} onChange={confirmStateChange}>
                                                 <option value="0">
@@ -117,7 +123,7 @@ export default function MaterialInputPrintBox(props){
                                                     검사합격
                                                 </option>
                                             </select>
-                                            <button type="button" onClick={onMaterialConfirm}>검사 완료</button>
+                                            <button disabled={r.checkmemberDto != null ? true : false } type="button" onClick={()=>{onMaterialConfirm(index)}}>검사 완료</button>
                                         </form>
                                         <button onClick={()=>{document.querySelector('.modal'+r.mipno).style.display = 'none'}} type="button">x</button>
                                     </div>

@@ -81,7 +81,6 @@ public class MaterialInputService {
         materialInputMapList.forEach((matrialInfo)->{
             materialInputDtoList.add(matrialInfo.toDto());
         });
-        System.out.println("모든정보 = " + materialInputDtoList);
         return materialInputDtoList;
     }
 
