@@ -52,9 +52,9 @@ export default function Survey(props){
     function onClickEvent(){
         console.log("버튼눌림");
         console.log(succeseInfo)
-        for(let i = 0; i<succeseInfo.length; i++){
-            if(!succeseInfo[i]){alert("안내) 입력값을 확인해주세요"); return;}
-        }
+        // for(let i = 0; i<succeseInfo.length; i++){
+        //     if(!succeseInfo[i]){alert("안내) 입력값을 확인해주세요"); return;}
+        // }
 
         // ul 요소 가져오기
         const ulElement = document.getElementById('surveyUl');
@@ -82,6 +82,7 @@ export default function Survey(props){
             "wno":query.get("wno"),
             "surveyBDto":recipeInputList
         };
+        console.log(form);
 
         // 등록 요청하기
         axios.post("/survey/insert.do",form,{

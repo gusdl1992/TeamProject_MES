@@ -138,9 +138,9 @@ public class SurveyService {
         // workplan PK 으로 등록된 surveyEntity 찾아오기
         Optional<SurveyEntity> surveyEntity = surveyRepository.findById(surveyInsertDto.getWno());
 
-        if(surveyEntity.get().getSstate()>0){
-            return -4;
-        }
+//        if(surveyEntity.get().getSstate()>0){
+//            return -4;
+//        }
 
         // 등록된 sno가 있는지 없는지 파악
         if(!surveyEntity.isPresent()){// 워크플랜 번로와 같은 sno가 없다면
