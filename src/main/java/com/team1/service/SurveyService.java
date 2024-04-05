@@ -141,7 +141,7 @@ public class SurveyService {
 
 //        if(surveyEntity.get().getSstate()>0){
 //            return -4;
-//        }
+//        }//수정필요
 
         // 등록된 sno가 있는지 없는지 파악
         if(!surveyEntity.isPresent()){// 워크플랜 번로와 같은 sno가 없다면
