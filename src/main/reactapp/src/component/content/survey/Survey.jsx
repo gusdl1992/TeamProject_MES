@@ -52,9 +52,9 @@ export default function Survey(props){
     function onClickEvent(){
         console.log("버튼눌림");
         console.log(succeseInfo)
-        // for(let i = 0; i<succeseInfo.length; i++){
-        //     if(!succeseInfo[i]){alert("안내) 입력값을 확인해주세요"); return;}
-        // }
+        for(let i = 0; i<succeseInfo.length; i++){
+            if(!succeseInfo[i]){alert("안내) 입력값을 확인해주세요"); return;}
+        }
 
         // ul 요소 가져오기
         const ulElement = document.getElementById('surveyUl');
@@ -106,16 +106,15 @@ export default function Survey(props){
     }
     
     function onChangeEvent(index,inputCount){
-        // console.log(index);
-        // console.log(inputCount);
-        let recipeClass = document.querySelector(`.recipe${index}`).value; // 입력값
-        // console.log(recipeClass);
-        // console.log(inputCount-50)
-        if(parseInt(inputCount-50)<=parseInt(recipeClass)&&parseInt(recipeClass)<=parseInt(inputCount+50)){
+        
+        let recipeClass = document.querySelector(`.recipe${index}`).value; // 입력값 가져오기
+    
+        if(parseInt(inputCount+inputCount*0.01)<=parseInt(recipeClass)&&parseInt(recipeClass)<=parseInt(inputCount+inputCount*0.01)){
+            // 입력값이 투입해야하는 양보다 1% 이상 오차가 없다면 (성공)
             document.querySelector(`.validation${index}`).innerHTML="";
             succeseInfo[0]= true;
         }else{
-            document.querySelector(`.validation${index}`).innerHTML="+-50 이내로 투입해주세요";
+            document.querySelector(`.validation${index}`).innerHTML=`+-${(inputCount+inputCount*0.01).toLocaleString()} 이내로 투입해주세요`;
             succeseInfo[0] = false;
         }
     }
