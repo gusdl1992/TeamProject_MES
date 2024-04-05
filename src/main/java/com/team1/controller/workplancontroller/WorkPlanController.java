@@ -3,6 +3,7 @@ package com.team1.controller.workplancontroller;
 
 import com.team1.model.dto.WorkPlanDto;
 import com.team1.model.entity.WorkPlanEntity;
+import com.team1.service.SurveyService;
 import com.team1.service.workplanservice.WorkPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,8 +20,14 @@ public class WorkPlanController {
     @Autowired
     WorkPlanService workPlanService;
 
+    @Autowired
+    SurveyService surveyService;
+
+
     @GetMapping("/list/get.do")
     public List<WorkPlanDto> findWPList(){
         return workPlanService.findWPList();
     }
+
+
 }

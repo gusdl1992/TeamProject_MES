@@ -40,7 +40,7 @@ export default function Header(props){
 
 
 
-    const checklogin = logininfo ? <li>{logininfo.mname}님 환영합니다! <span onClick={logoutHandler}> 로그아웃</span> </li>:<li> <a href='/member/login'> 로그인</a></li>
+    const checklogin = logininfo ? <li id='loginCss'>{logininfo.mname}님 환영합니다! <span className='logoutSpan' onClick={logoutHandler}> 로그아웃</span> </li>:<li> <a href='/member/login'> 로그인</a></li>
 
     return (
         <div id='menuWrap'>
@@ -48,7 +48,7 @@ export default function Header(props){
                 로고
             </div>
             <div id='sideNav'>
-                <ul>
+                <ul style={{position: 'absolute'}}>
                     {checklogin}
                     <li onClick={clickMenu}>
                         <a className='topMenu' href='#'>

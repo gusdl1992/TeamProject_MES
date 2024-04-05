@@ -1,13 +1,14 @@
 import axios from "axios";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import SurveyList from "./SurveyList";
+import { LoginInfoContext } from "../../Index";
 
 export default function MaterialInput2(props){
     // 1. 컨텍스트 가져오기 (로그인 정보)
-//     const { logininfo, setLogin } = useContext(LoginInfoContext);
-// console.log(logininfo);
-    
+    const { logininfo, setLogin } = useContext(LoginInfoContext);
+    //console.log(logininfo); 
+
 
     // 쿼리스트링 값 가져오기 sno
     let [query, setQuery] = useSearchParams();
@@ -50,7 +51,7 @@ export default function MaterialInput2(props){
         .catch( (e) => {console.log(e)})
     }
 
-
+    if(logininfo != null ){
     return(<>
         <div>
         <h3>
@@ -72,7 +73,8 @@ export default function MaterialInput2(props){
         <button type="button" onClick={onClickBtn}>등록</button>
         </div>
 
-    </>)
+    </>);
+    }
 }
 
 

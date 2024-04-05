@@ -61,7 +61,7 @@ export default function Index(props){
                     <Route path="/survey/plan" element={<WorkPlanList/> } />
                     <Route path="/member/test" element={<Test/> } />
                     <Route path="/product/recipie/get" element={<ProductLayOut/>}/>
-                    <Route path="/wp/list" element={<AllWorkPlanList/>}/>
+                    <Route path="/wp/list" element={<LayoutTest list={<AllWorkPlanList/>} />}/>
                     <Route path="/wp/report" element={<ReportAll/>}/>
                     </Routes>
                 </div>

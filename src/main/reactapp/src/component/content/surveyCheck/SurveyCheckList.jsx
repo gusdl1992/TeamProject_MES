@@ -86,8 +86,8 @@ export default function SurveyCheckList(props){
                 <tbody>
                     {
                         surveyb.map((r,index)=>{
-                            let cdate = r.cdate.split('T')[0];
-                            let udate = r.udate.split('T')[0];
+                            let cdate = r.cdate?.split('T')[0];
+                            let udate = r.udate?.split('T')[0];
 
                             return(
                                 <>

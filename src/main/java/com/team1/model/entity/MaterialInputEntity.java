@@ -5,11 +5,12 @@ import com.team1.model.dto.MaterialInputDto;
 import com.team1.model.dto.MemberDto;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(name = "materialinput")
-@Builder
+@SuperBuilder
 @Setter
 @Getter
 @ToString

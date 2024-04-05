@@ -4,11 +4,12 @@ import com.team1.model.dto.RawMaterrialDto;
 import com.team1.model.dto.SurveyDto;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 
 @Entity
 @Table(name = "survey")
-@Builder
+@SuperBuilder
 @Setter
 @Getter
 @ToString

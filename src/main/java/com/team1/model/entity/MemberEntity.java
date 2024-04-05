@@ -4,10 +4,11 @@ package com.team1.model.entity;
 import com.team1.model.dto.MemberDto;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "member")
-@Builder
+@SuperBuilder
 @Setter
 @Getter
 @ToString
