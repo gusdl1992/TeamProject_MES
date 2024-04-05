@@ -164,7 +164,6 @@ public class SurveyCheckService {
                         .rmlcount(surveyBEntityList.get(i).getSbcount() * -1)
                         .build();
                 rawMateriallogRepository.save(rawMaterialLogEntity);
-
             }
             return true;
         }else {
