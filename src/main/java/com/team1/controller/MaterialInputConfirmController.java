@@ -39,6 +39,7 @@ public class MaterialInputConfirmController {
 }
 
 /*
+    1
     수주
     번호,거래처,제품명,제품수량,수주받은날짜,생산완료날짜
 
