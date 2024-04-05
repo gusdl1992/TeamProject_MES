@@ -37,6 +37,7 @@ public class SurveyService {
     @Autowired
     private MemberRepository memberRepository;
 
+
     // workplan 정보 가져오기
     public List<WorkPlanDto> workPlanDtoList (){
         // 반환할꺼 담을 DTO 리스트
@@ -137,6 +138,11 @@ public class SurveyService {
 
         // workplan PK 으로 등록된 surveyEntity 찾아오기
         Optional<SurveyEntity> surveyEntity = surveyRepository.findById(surveyInsertDto.getWno());
+
+        if(surveyEntity.get().getSstate()>0){
+            return -4;
+        }
+
         // 등록된 sno가 있는지 없는지 파악
         if(!surveyEntity.isPresent()){// 워크플랜 번로와 같은 sno가 없다면
 
@@ -152,9 +158,9 @@ public class SurveyService {
             // SurveyB 저장 ( 원재료 수만큼 등록해야함 )
             for (int i = 0; i < surveyInsertDto.getSurveyBDto().size(); i++) {
                 // 원재료 식별번호로 값 호출
-                Optional<RawMaterialEntity> rawMaterrialDto = rawMaterialEntityRepository
+                Optional<RawMaterialEntity> rawMaterialEntity = rawMaterialEntityRepository
                         .findById(surveyInsertDto.getSurveyBDto().get(i).getRmno());
-                if(!rawMaterrialDto.isPresent())return -3;
+                if(!rawMaterialEntity.isPresent())return -3;
 
                 // SurveyB 저장
                 SurveyBEntity savedSurveyBEntity = surveyBRepository.save(
@@ -162,8 +168,10 @@ public class SurveyService {
                                 .surveyEntity(savedSurveyEntity)
                                 .sbcount(surveyInsertDto.getSurveyBDto().get(i).getSbcount())
                                 .build());
-                savedSurveyBEntity.setRawMaterialEntity(rawMaterrialDto.get());
+                savedSurveyBEntity.setRawMaterialEntity(rawMaterialEntity.get());
                 savedSurveyBEntity.setSurveyEntity(savedSurveyEntity);
+                
+
             }// SurveyB 저장 for End
             workPlanEntity.setWstate(1);
 
