@@ -4,12 +4,13 @@ import com.team1.model.dto.RawMaterialLogDto;
 import com.team1.model.dto.RawMaterrialDto;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "rawmateriallog")
-@Builder
+@SuperBuilder
 @Setter
 @Getter
 @ToString

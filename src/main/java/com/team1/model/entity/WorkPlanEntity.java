@@ -3,12 +3,13 @@ package com.team1.model.entity;
 import com.team1.model.dto.WorkPlanDto;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "workplan")
-@Builder
+@SuperBuilder
 @Setter
 @Getter
 @ToString

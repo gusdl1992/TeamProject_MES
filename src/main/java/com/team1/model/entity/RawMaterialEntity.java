@@ -3,10 +3,11 @@ package com.team1.model.entity;
 import com.team1.model.dto.RawMaterrialDto;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "rawmaterial")
-@Builder
+@SuperBuilder
 @Setter
 @Getter
 @ToString

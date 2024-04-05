@@ -4,10 +4,11 @@ package com.team1.model.entity;
 import com.team1.model.dto.ProductDto;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "product")
-@Builder
+@SuperBuilder
 @Setter
 @Getter
 @ToString
@@ -21,6 +22,15 @@ public class ProductEntity extends BaseTime{
 
     @Column(nullable = false)
     private String pname; // 제품 이름
+
+    @Column(columnDefinition = "int default 0 ")
+    private int ferment; //숙성기간(단위:일)
+    @Column(columnDefinition = "int default 0 ")
+    private int standard; //한제품에 들어가는 용량?(소분용)
+    @Column(columnDefinition = "int default 0 ")
+    private int packagingcount; //한빡스당 들어가는 제품 개수
+    @Column(columnDefinition = "int default 0 ")
+    private int period; //유통기한
 
     public ProductDto toDto(){
         ProductDto productDto = ProductDto.builder()

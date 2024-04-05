@@ -5,10 +5,11 @@ import com.team1.model.dto.ProductDto;
 import com.team1.model.dto.RecipeDto;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "recipe")
-@Builder
+@SuperBuilder
 @Setter
 @Getter
 @ToString

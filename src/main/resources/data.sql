@@ -11,9 +11,9 @@ insert into member (mno , pno , cdate , udate , mid , mpw , mname ) values (9,4,
 insert into member (mno , pno , cdate , udate , mid , mpw , mname ) values (10,1,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id9' , 'id9', "사원6" );
 
 
-insert into product ( pno , cdate , udate , pname ) values ( 1 , '2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456' , '수분크림' );
-insert into product ( pno , cdate , udate , pname ) values ( 2 , '2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456' , '페브리즈' );
-insert into product ( pno , cdate , udate , pname ) values ( 3 , '2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456' , '로션' );
+insert into product ( pno , cdate , udate , pname , ferment , standard , packagingcount , period ) values ( 1 , '2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456' , '수분크림' , 30 , 30 , 15 , 365);
+insert into product ( pno , cdate , udate , pname , ferment , standard , packagingcount , period) values ( 2 , '2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456' , '페브리즈' , 20 , 20 , 10 , 30);
+insert into product ( pno , cdate , udate , pname , ferment , standard , packagingcount , period) values ( 3 , '2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456' , '로션' , 0 , 10 , 5 , 7);
 
 
 insert into rawmaterial ( rmno , cdate , udate , rmname ) values ( 1 , '2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456' , '로션원액' );
