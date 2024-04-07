@@ -8,6 +8,7 @@ export default function Header(props) {
     // 상태 변수(info)를 정의하고 초기값으로 빈 객체를 설정
     const [info, setInfo] = useState({});
 
+    
     // useEffect 사용하여 이미 로그인 했으면 로그인화면 말고 메인화면으로 보내기  // 시현 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,9 +23,9 @@ export default function Header(props) {
                 console.log(error); 
             }
         };
-
         fetchData(); // fetchData 함수를 호출하여 데이터를 가져옵니다.
     }, []); // [] 처음 렌더링될 때 한 번만 실행
+    
 
     // 사용자가 ID 입력 필드를 변경할 때마다 호출
     const handleMidChange = (e) => {
@@ -62,14 +63,39 @@ export default function Header(props) {
     }
 
     // 컴포넌트를 렌더링합니다.
-    return (
+    return (  
+<div id='loginWrap'>
+    <div class="loginHeader">
+        <h2>로그인</h2>
+    </div>
+    <form>
+        <div class="inputGroup , InputID">
+            <span>ID &nbsp;&nbsp;:</span>
+            <input type='text' placeholder="아이디를 입력해주세요" onChange={handleMidChange} />
+        </div>
+        <div class="inputGroup , InputPw">
+            <span>PW :</span>
+            <input type='password' placeholder="비밀번호를 입력해주세요" onChange={handleMpwChange} />
+        </div>
+    </form>
+    <div class="inputButtonCenter">
+    <button type='button' onClick={doLogin}>로그인</button>
+    </div>
+</div>
+    );
+}
+
+// 로그인 백업
+/*
+
         <div id='loginWrap'>
             <h2>로그인</h2>
             <form>
-                ID : <input type='text' onChange={handleMidChange} /> {/* ID 입력 필드 */}
-                PassWord : <input type='password' onChange={handleMpwChange} /> {/* 비밀번호 입력 필드 */}
+                <span >ID :</span> <input type='text' onChange={handleMidChange} /> 
+                <span >PassWord :</span> <input type='password' onChange={handleMpwChange} /> 
             </form>
-            <button type='button' onClick={doLogin}>로그인</button> {/* 로그인 버튼 */}
+            <button type='button' onClick={doLogin}>로그인</button>
         </div>
-    );
-}
+
+
+*/
