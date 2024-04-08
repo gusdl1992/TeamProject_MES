@@ -26,6 +26,7 @@ export default function Header(props){
 
     // 로그인 정보 저장
     const { logininfo, setLogin } = useContext(LoginInfoContext);
+    
 
 
     
