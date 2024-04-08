@@ -18,4 +18,6 @@ public interface SurveyRepository extends JpaRepository<SurveyEntity,Integer> {
     @Query(value = "select * from survey as s join workplan as w on s.wno = w.wno where s.sno = :sno" , nativeQuery = true)
     Map<Object , Object> findBySurveyCheckCountSQL(int sno);
 
+    @Query(value = "select sno from survey where wno=:wno",nativeQuery = true)
+    Integer findSnoBywno(int wno);
 }
