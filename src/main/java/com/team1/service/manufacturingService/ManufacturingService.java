@@ -8,6 +8,7 @@ import com.team1.model.repository.ManufacturingEntityRepository;
 import com.team1.model.repository.MaterialInputEntityRepository;
 import com.team1.model.repository.SurveyBRepository;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,6 +55,7 @@ public class ManufacturingService {//class start
         return materialInputDto;
     }
 
+
     // survey 식별번호로 투입한 수량/내용 알아오기
     public List<SurveyBDto> surveyInfoDo(int sno){
         // 엔티티 찾아오기
@@ -68,6 +70,17 @@ public class ManufacturingService {//class start
         }
 
         return surveyBDtoList;
+    }
+
+    // 등록버튼을 눌렀을때
+    // 1. 벌크테이블에 벌크가 등록되어야함
+    // 2. 벌크로그테이블에 기록되어야함
+    // 유효성 검사 해야하는부분
+    // 반환 = 1 이상은 성공
+    @Transactional
+    public int ManufacturingInsertDo(){
+
+        return 0;
     }
 
 }// class end

@@ -1,5 +1,6 @@
 package com.team1.model.entity;
 
+import com.team1.model.dto.ManufacturingDto.ManufacturingDto;
 import com.team1.model.dto.MaterialInputDto;
 import jakarta.persistence.*;
 import lombok.*;
@@ -30,7 +31,17 @@ public class ManufacturingEntity extends BaseTime{
     @JoinColumn(name = "checkmno")
     private MemberEntity checkmemberEntity; // 검사자
 
-
-
-
+    public ManufacturingDto toDto(){
+        return ManufacturingDto.builder()
+                .mfno(this.mfno)
+                .materialInputDto(this.materialInputEntity.toDto())
+                .inputmemberDto(this.inputmemberEntity.toDto())
+                .checkmemberDto(this.checkmemberEntity.toDto())
+                .cdate(this.cdate)
+                .udate(this.udate)
+                .build();
+    }
 }
+
+
+

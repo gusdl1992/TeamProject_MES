@@ -44,8 +44,8 @@ public class ManufacturingController {//class star
     // 유효성 검사 해야하는부분
     // 반환 = 1 이상은 성공
     @PostMapping("/insert.do")
-    public int ManufacturingInsertDo(){
-        return 0;
+    public int ManufacturingInsertDo(@RequestBody int mipno) {
+        return manufacturingService.ManufacturingInsertDo();
     }
 
 
