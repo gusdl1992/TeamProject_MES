@@ -50,7 +50,6 @@ export default function Header(props){
             </div>
             <div id='sideNav'>
                 <ul style={{position: 'absolute'}}>
-                    {checklogin}
                     <li onClick={clickMenu}>
                         <a className='topMenu' href='#'>
                             자재관리
@@ -88,20 +87,22 @@ export default function Header(props){
                     <li>
                         경영통계
                     </li>
-                    <li onClick={clickMenu} >
+                    {logininfo.pno == -1 && (
+                        <li onClick={clickMenu} >
                         관리자페이지
-                        <div className='subMenu'>
-                            <ul>
-                                <li>
-                                <Link to="/member/test">사원등록</Link>
-                                </li>
-                                <li>
-                                    메뉴99
-                                </li>
-
-                            </ul>
-                        </div>
-                    </li>
+                            <div className='subMenu'>
+                                <ul>
+                                    <li>
+                                    <Link to="/member">사원등록</Link>
+                                    </li>
+                                    <li>
+                                        메뉴99
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    )}
+                    {checklogin}
                 </ul>
             </div>
         </div>

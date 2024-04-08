@@ -151,7 +151,12 @@ public class SurveyCheckService {
             // 계량 체크가 유효성 검사가 모두 성공 했을 시 아래 문 실행.
             survey.setCheckmemberEntity(memberNameCheck(memberDto.getMno()));
             survey.setSstate(sstate);
+            // 해당 워크플랜을 상태 변경
+            workPlan.setWstate(2);
             surveyRepository.save(survey);
+            // 상태변경한 워크플랜을 DB에 저장
+            workPlanEntityRepository.save(workPlan);
+
             // return true;
         }else {
             // 계량 검사 유효성 검사 실패시 false 리턴.
