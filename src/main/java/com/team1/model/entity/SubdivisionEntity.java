@@ -1,5 +1,6 @@
 package com.team1.model.entity;
 
+import com.team1.model.dto.SubDivisionDto;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -33,7 +34,18 @@ public class SubdivisionEntity extends BaseTime{//class start
 
     private int successCount;   // 성공수량
 
-    
+    public SubDivisionDto toDto(){
+        SubDivisionDto subDivisionDto = SubDivisionDto.builder()
+                .sdno(this.sdno)
+                .manufacturingDto(this.manufacturingEntity.toDto())
+                .inputmemberDto(this.inputmemberEntity.toDto())
+                .checkmemberDto(this.checkmemberEntity.toDto())
+                .failcount(this.failCount)
+                .successcount(this.successCount)
+                .build();
+
+        return subDivisionDto;
+    }
 
 
 }//class end
