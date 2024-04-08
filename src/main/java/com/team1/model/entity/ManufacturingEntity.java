@@ -34,9 +34,9 @@ public class ManufacturingEntity extends BaseTime{
     public ManufacturingDto toDto(){
         return ManufacturingDto.builder()
                 .mfno(this.mfno)
-                .materialInputEntity(this.materialInputEntity.toDto())
-                .inputmemberEntity(this.inputmemberEntity.toDto())
-                .checkmemberEntity(this.checkmemberEntity.toDto())
+                .materialInputDto(this.materialInputEntity.toDto())
+                .inputmemberDto(this.inputmemberEntity.toDto())
+                .checkmemberDto(this.checkmemberEntity.toDto())
                 .cdate(this.cdate)
                 .udate(this.udate)
                 .build();
