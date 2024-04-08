@@ -17,9 +17,15 @@ import lombok.experimental.SuperBuilder;
 public class ProductDto extends BaseTimeDto {
 
     private int pno;
-
-
     private String pname;
+
+    private int ferment; //숙성기간(단위:일)
+
+    private int standard; //한제품에 들어가는 용량?(소분용)
+
+    private int packagingcount; //한빡스당 들어가는 제품 개수
+
+    private int period; //유통기한
 
     public ProductEntity toEntity(){
         return ProductEntity.builder()

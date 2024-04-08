@@ -36,6 +36,10 @@ public class ProductEntity extends BaseTime{
         ProductDto productDto = ProductDto.builder()
                 .pno(this.pno)
                 .pname(this.pname)
+                .ferment(this.ferment)
+                .standard(this.standard)
+                .packagingcount(this.packagingcount)
+                .period(this.period)
                 .build();
         productDto.setCdate(this.cdate);
         productDto.setUdate(this.udate);

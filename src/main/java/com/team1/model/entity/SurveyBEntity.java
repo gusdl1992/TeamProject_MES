@@ -32,10 +32,10 @@ public class SurveyBEntity {
 
     public SurveyBDto toDto(){ // R
         return SurveyBDto.builder()
-                .rmname(this.rawMaterialEntity.getRmname())
+                .sbno(this.sbno)
                 .sbcount(this.sbcount)
+                .rmname(this.rawMaterialEntity.getRmname())
                 .sno(this.surveyEntity.getSno())
-
                 .build();
     }
 
