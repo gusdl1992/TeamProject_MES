@@ -1,10 +1,87 @@
+#loginWrap {
+    max-width: 400px;
+    margin: 180px auto 0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: #cac6c6;
+}
+
+.loginHeader {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.loginHeader h2 {
+    margin: 0;
+    color: #333;
+    font-size: 24px;
+}
+
+.inputGroup {
+    margin-bottom: 20px;
+}
+
+
+.inputGroup span {
+    display: inline;
+    margin-bottom: 5px;
+    color: #555;
+    font-size: 16px;
+}
+
+.InputID > span{
+    margin-right: 22px;
+}
+.InputPw > span{
+    margin-right: 22px;
+}
+
+.inputGroup input {
+    width: calc(100% - 100px);
+    padding: 10px;
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.inputButtonCenter{
+    margin: 0 auto;
+    text-align: center;
+}
+
+#loginWrap button {
+    width: 30%;
+    display :inline-block;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    background-color: #0d82ff;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#loginWrap button:hover {
+    background-color: #022447;
+}
+
+
+
+/* 
+이전 코드 모음
+
+
 @media screen and (min-width:1367px){
     #loginWrap{
         width: 750px;
         height: 600px;
         margin: 0 auto;
-        border: 1px solid red;
+        border: 1px solid black;
         margin-top: 180px;
+
+        
     }
 }
 @media screen and (min-width:768px) and (max-width:1366px){
@@ -25,3 +102,8 @@
         margin-top: 180px;
     }
 }
+
+
+
+
+*/

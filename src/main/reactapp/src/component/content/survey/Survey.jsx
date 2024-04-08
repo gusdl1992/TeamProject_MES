@@ -95,7 +95,7 @@ export default function Survey(props){
             // -3 해당 원자재 레코드가 없음
             // -4 검사 단계 진행됨 (수정불가능)
             console.log(r.data);
-            if(r.data>0){alert("안내) 계량내용 등록성공 하였습니다.");}
+            if(r.data>0){alert("안내) 계량내용 등록성공 하였습니다."); window.location.href='/survey/survey';}
             else if(r.data==-1){alert("안내) 로그인 정보가 없습니다.");}
             else if(r.data==-2){alert("안내) 등록실패.");}
             else if(r.data==-3){alert("안내) 해당 원자제가 등록되어있지 않습니다..");}
