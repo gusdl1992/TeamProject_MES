@@ -38,7 +38,7 @@ export default function SurveyCheckList(props){
             console.log("35");
             console.log(r);
             if(r.data){
-                window.location.href='/material/input';
+                window.location.href='/survey/survey';
             }
         })
         .catch(e=>{
