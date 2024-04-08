@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/manufacturing")
+@RequestMapping("/manufacturing") // 벌크 제조 컨트롤
 @RestController
 public class ManufacturingController {//class star
 
@@ -37,6 +37,19 @@ public class ManufacturingController {//class star
     public List<SurveyBDto> surveyInfoDo(@RequestParam int sno){
         return manufacturingService.surveyInfoDo(sno);
     }
+
+    // 등록버튼을 눌렀을때
+    // 1. 벌크테이블에 벌크가 등록되어야함
+    // 2. 벌크로그테이블에 기록되어야함
+    // 유효성 검사 해야하는부분
+    // 반환 = 1 이상은 성공
+    @PostMapping("/insert.do")
+    public int ManufacturingInsertDo(){
+        return 0;
+    }
+
+
+    // 검사기능
 
 
 }//class end

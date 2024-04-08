@@ -89,7 +89,7 @@ export default function Survey(props){
             headers: {
               'Content-Type': 'application/json' // 예: JSON 데이터 전송
             }
-          })
+        })
         .then((r)=>{// int 'sno' 반환함 => r.data
             // -1 로그인 정보가 없음
             // -2 Survey 저장실패
@@ -103,13 +103,14 @@ export default function Survey(props){
             else if(r.data==-4){alert("안내) 검사단계가 진행되었습니다.(수정불가)");}
             
         })
+        .catch((re)=>{console.log(re);})
     }
     
     function onChangeEvent(index,inputCount){
         
         let recipeClass = document.querySelector(`.recipe${index}`).value; // 입력값 가져오기
     
-        if(parseInt(inputCount+inputCount*0.01)<=parseInt(recipeClass)&&parseInt(recipeClass)<=parseInt(inputCount+inputCount*0.01)){
+        if(parseInt(inputCount-inputCount*0.01)<=parseInt(recipeClass)&&parseInt(recipeClass)<=parseInt(inputCount+inputCount*0.01)){
             // 입력값이 투입해야하는 양보다 1% 이상 오차가 없다면 (성공)
             document.querySelector(`.validation${index}`).innerHTML="";
             succeseInfo[0]= true;

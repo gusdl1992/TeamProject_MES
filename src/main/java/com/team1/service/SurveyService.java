@@ -142,8 +142,6 @@ public class SurveyService {
 
         // 등록된 sno가 있는지 없는지 파악
         if(!surveyEntity.isPresent()){// 워크플랜 번로와 같은 sno가 없다면
-            if(surveyEntity.get().getSstate()>0){return -4;}//수정필요
-
 
             // Survey 저장
             SurveyEntity savedSurveyEntity = surveyRepository.save(SurveyEntity.builder()
@@ -205,25 +203,3 @@ public class SurveyService {
 
 
 }//class end
-
-/*
-
-    박시현 리포지토리 에서 쿼리문 사용 예제 컨트롤러 만들어서 시험 예정
-    @Autowired
-    private MyRepository myRepository;
-
-    public List<Object[]> fetchMyData() {
-        String jpql = "SELECT s, w, r, rm " +
-                      "FROM Survey s " +
-                      "JOIN Workplan w ON s.wno = w.wno " +
-                      "JOIN Recipe r ON w.pno = r.pno " +
-                      "JOIN RawMaterial rm ON r.rmno = rm.rmno " +
-                      "WHERE r.pno = :pno";
-        return myRepository.getEntityManager()
-                            .createQuery(jpql)
-                            .setParameter("pno", 1)
-                            .getResultList();
-    }
-
-
-*/
