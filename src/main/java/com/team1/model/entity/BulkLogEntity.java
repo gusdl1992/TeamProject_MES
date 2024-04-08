@@ -1,5 +1,7 @@
 package com.team1.model.entity;
 
+import com.team1.model.dto.ManufacturingDto.BulkDto;
+import com.team1.model.dto.ManufacturingDto.BulkLogDto;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -25,5 +27,14 @@ public class BulkLogEntity extends BaseTime{
 
 
     //이 벌크로그는 실제로 벌크가 입/출고된것을 체크하는 테이블입니다. 실제 벌크작업완료시 이곳에 추가해야합니다.
+    public BulkLogDto toDTo(){
+        return BulkLogDto.builder()
+                .blno(this.blno)
+                .bulkDto(this.bulkEntity.toDto())
+                .blcount(this.blcount)
+                .cdate(this.cdate)
+                .udate(this.udate)
+                .build();
+    }
 
 }
