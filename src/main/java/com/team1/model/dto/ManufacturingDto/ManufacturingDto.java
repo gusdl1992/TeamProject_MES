@@ -19,7 +19,11 @@ import lombok.experimental.SuperBuilder;
 public class ManufacturingDto extends BaseTimeDto {
     private int mfno;       // 식별번호 (제조(벌크) 테이블)
 
-    private MaterialInputDto materialInputDto;
+    private MaterialInputDto materialInputDto; // 투입테이블
+
+    private int mfcount; // 수량
+
+    private int mfstate; // 검사 상태
 
     private MemberDto inputmemberDto; // 등록자
 

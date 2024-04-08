@@ -16,7 +16,7 @@ public class BulkLogDto extends BaseTime {
 
     private int blno;       // 식별번호 (벌크 테이블)
 
-    private BulkDto bulkDto;
+    private ManufacturingDto manufacturingDto;
 
     private int blcount; //벌크 그람수
 

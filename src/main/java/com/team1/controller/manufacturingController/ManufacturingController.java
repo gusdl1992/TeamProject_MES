@@ -26,7 +26,6 @@ public class ManufacturingController {//class star
     // mipno
     @GetMapping("/MaterialInput/click.do")
     public MaterialInputDto MaterialInputClickDo(@RequestParam int mipno){
-
         System.out.println("mipno = " + mipno);
 
         return manufacturingService.MaterialInputClickDo(mipno);
@@ -43,9 +42,12 @@ public class ManufacturingController {//class star
     // 2. 벌크로그테이블에 기록되어야함
     // 유효성 검사 해야하는부분
     // 반환 = 1 이상은 성공
+    // -1 = 로그인 정보없음
+    // -2 투입공정 내용을 찾을 수 없음
+    // -3 값이 이미 등록되어있음
     @PostMapping("/insert.do")
-    public int ManufacturingInsertDo(@RequestBody int mipno) {
-        return manufacturingService.ManufacturingInsertDo();
+    public int ManufacturingInsertDo(@RequestParam int mipno) {
+        return manufacturingService.ManufacturingInsertDo(mipno);
     }
 
 

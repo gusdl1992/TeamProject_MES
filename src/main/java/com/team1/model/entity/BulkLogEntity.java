@@ -20,8 +20,8 @@ public class BulkLogEntity extends BaseTime{
     private int blno;       // 식별번호 (벌크 테이블)
 
     @ManyToOne
-    @JoinColumn(name = "bno")
-    private BulkEntity bulkEntity;
+    @JoinColumn(name = "mfno")
+    private ManufacturingEntity manufacturingEntity;
 
      private int blcount; //벌크 그람수
 
@@ -30,7 +30,7 @@ public class BulkLogEntity extends BaseTime{
     public BulkLogDto toDTo(){
         return BulkLogDto.builder()
                 .blno(this.blno)
-                .bulkDto(this.bulkEntity.toDto())
+                .manufacturingDto(this.manufacturingEntity.toDto())
                 .blcount(this.blcount)
                 .cdate(this.cdate)
                 .udate(this.udate)
