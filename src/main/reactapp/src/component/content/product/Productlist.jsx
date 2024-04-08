@@ -12,7 +12,7 @@ export default function ProductList(props){
                 console.error("Error:", error);
             });
 
-        },[]
+        },[props.reroad]
     )
 
     console.log(infos)

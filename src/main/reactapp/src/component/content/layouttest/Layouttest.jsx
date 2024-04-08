@@ -1,3 +1,4 @@
+import { useState } from "react";
 import PrintBox from "../layouts/PrintBox";
 import TotalBox from "../layouts/TotalBox";
 

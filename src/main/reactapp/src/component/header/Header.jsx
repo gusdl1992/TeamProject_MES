@@ -96,7 +96,7 @@ export default function Header(props){
                                 <Link to="/member/test">사원등록</Link>
                                 </li>
                                 <li>
-                                    메뉴99
+                                    <Link to="/wp/list">전체 보고서 출력</Link>
                                 </li>
 
                             </ul>

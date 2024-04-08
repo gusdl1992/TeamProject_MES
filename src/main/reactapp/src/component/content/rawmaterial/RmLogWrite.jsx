@@ -7,7 +7,7 @@ export default function RmLogWrite(props){
 
     useEffect(()=>{
         axios.get("/RM/get.do").then( e=>{setrmlist(e.data)})
-    },[])
+    },[props.rerender])
 
     const handleSubmit = (e) => {
         const formdata = new FormData(boardWriteFormRef.current);
@@ -16,7 +16,7 @@ export default function RmLogWrite(props){
                 if(response.data){
                     alert("글 작성 성공");
                     // 성공 시 처리
-                    window.location.href="/RM"
+                    props.setrerender(!props.rerender)
                 }
                 else{
                     alert("작성실패")

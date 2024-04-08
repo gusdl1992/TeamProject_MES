@@ -11,7 +11,7 @@ export default function RmWrite(props){
         axios.post("/RM/post.do",formData).then( r=> {
             if(r.data){
                 alert("등록성공")
-                window.location.href="/RM"
+                props.setrerender(!props.rerender)
             }
         }).catch(e=>{console.log(e)})
     }

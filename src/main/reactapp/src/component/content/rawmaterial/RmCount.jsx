@@ -13,7 +13,7 @@ export default function RmCount(props){
                 console.error("Error:", error);
             });
 
-        },[]
+        },[props.rerender]
     )
 
     console.log(infos)

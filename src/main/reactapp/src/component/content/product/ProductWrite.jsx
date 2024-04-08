@@ -10,13 +10,12 @@ export default function ProductWrite(props){
         const formData = new FormData();
         formData.append("pname",pname);
         axios.post("/product/post.do",formData).then( r=> {if(r.data){
-            alert("등록성공")
-            window.location.href="/product"
+            props.setReroad(!props.reroad)
         }
         }).catch(e=>{console.log(e)})
     }
     return(<>
         <input value={pname} onChange={(e)=>{setPname(e.target.value)}}/>
-        <button type="button" onClick={doPost}>제품 등록</button>
+        <button type="button" onClick={doPost}>제품 등록2</button>
     </>)
 }

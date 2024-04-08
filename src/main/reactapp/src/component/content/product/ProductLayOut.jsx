@@ -17,6 +17,6 @@ export default function ProductLayOut(props){
 
 
     return(
-        <LayoutTest insert={<Productinput pno={query.get("pno")} reroad={reroad} setReroad={setReroad}/>} list={<ProductRecipieList pno={query.get("pno")} reroad={reroad}/>} />
+        <LayoutTest insert={<ProductWrite pno={query.get("pno")} reroad={reroad} setReroad={setReroad}/>} list={<ProductList pno={query.get("pno")} reroad={reroad}/>} />
     )
 }

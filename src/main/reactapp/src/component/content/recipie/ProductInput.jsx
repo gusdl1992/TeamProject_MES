@@ -7,7 +7,7 @@ export default function Productinput(props){
 
     useEffect(()=>{
         axios.get("/RM/get.do").then( e=>{setrmlist(e.data)})
-    },[])
+    },[props.reroad])
 
     const handleSubmit = (e) => {
         const formdata = new FormData(boardWriteFormRef.current);
@@ -15,9 +15,8 @@ export default function Productinput(props){
         axios.post("/product/recipie/post.do", formdata) // axios contentType : mulitpart
             .then((response) => {
                 if(response.data){
-                    alert("글 작성 성공");
                     // 성공 시 처리
-                    window.location.href="/product/recipie/get?pno="+props.pno
+                    props.setReroad(!props.reroad)
                 }
                 else{
                     alert("작성실패")

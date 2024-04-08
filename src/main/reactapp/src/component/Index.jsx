@@ -28,6 +28,7 @@ import ReportAll from "./content/workplan/ReportAll";
 
 
 import SurveyCheckList from "./content/surveyCheck/SurveyCheckList"; // 시현
+import ProductRLayOut from "./content/recipie/ProductRLayout";
 
 export const LoginInfoContext = React.createContext("");
 
@@ -53,14 +54,14 @@ export default function Index(props){
                     <Route path="/" element={<Login/>}/>
                     <Route path="/c" element={<Main/>}/>
                     {/* <Route path="/product/write" element={<ProductWrite />}/> */}
-                    <Route path="/product" element={<LayoutTest insert={<ProductWrite/>} list={<ProductList/>} />}/>
-                    <Route path="/RM" element={<LayoutTest insert={<RmWrites/>} list={<RmCount/>} />}/>
+                    <Route path="/product" element={<ProductLayOut />}/>
+                    <Route path="/RM" element={<RmLayOut/>}/>
                     <Route path="/RM/log" element={<RmLLayOut/>}/>
                     <Route path="/material/input" element={ <MaterialInput/> }/>
                     <Route path="/survey/survey" element={<Survey/> } />
                     <Route path="/survey/plan" element={<WorkPlanList/> } />
                     <Route path="/member/test" element={<Test/> } />
-                    <Route path="/product/recipie/get" element={<ProductLayOut/>}/>
+                    <Route path="/product/recipie/get" element={<ProductRLayOut/>}/>
                     <Route path="/wp/list" element={<LayoutTest list={<AllWorkPlanList/>} />}/>
                     <Route path="/wp/report" element={<ReportAll/>}/>
                     </Routes>
