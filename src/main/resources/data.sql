@@ -58,7 +58,9 @@ insert into materialinput ( mipno , wno2 , sno2  , pno , inputmno , checkmno , c
 insert into materialinput ( mipno , wno2 , sno2  , pno , inputmno , checkmno , cdate , udate ) values ( 2 , 2 , 2  , 2 , 3 , null ,'2024-03-20 12:30:12.123456','2024-03-20 12:30:12.123456');
 --insert into materialinput ( mipno , wno2 , sno2  , pno , inputmno , checkmno , cdate , udate ) values ( 3 , 3 , 3 , 3 , 3 , null ,'2024-03-20 14:30:12.123456','2024-03-20 14:30:12.123456');
 
-
+insert into packaging( mno , pgcount , sdno , cdate , udate ) values( 1 , 1000 , 1 , '2024-03-12 10:00:12.123456','2024-03-13 10:00:12.123456');
+insert into packaging( mno , pgcount , sdno , cdate , udate ) values( 2 , 2000 , 2 , '2024-03-13 10:00:12.123456','2024-03-14 10:00:12.123456');
+insert into packaging( mno , pgcount , sdno , cdate , udate  ) values( 3 , 3000 , 3 , '2024-03-14 10:00:12.123456','2024-03-15 10:00:12.123456');
 
 /* 샘플데이터 END */
 
