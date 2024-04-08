@@ -30,6 +30,8 @@ public class MemberEntity extends BaseTime {
     private String mname; // 회원 이름
 
     private int pno; // 임시 파트번호 ( 어떤 파티에서 일하는지 )
+    // -1 관리자 , 계량생산자 1 , 계량투입자 2 ,
+    // 검사자 10
 
     public MemberDto toDto(){
         MemberDto memberDto = MemberDto.builder().

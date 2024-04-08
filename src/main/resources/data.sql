@@ -1,5 +1,5 @@
 
-insert into member (mno , pno , cdate , udate , mid , mpw , mname ) values (1,0,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','admin' , 'admin' , "관리자" );
+insert into member (mno , pno , cdate , udate , mid , mpw , mname ) values (1,-1,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','admin' , 'admin' , "관리자" );
 insert into member (mno , pno , cdate , udate , mid , mpw , mname ) values (2,1,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id1' , 'id1' , "계량담당" );
 insert into member (mno , pno , cdate , udate , mid , mpw , mname ) values (3,2,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id2' , 'id2' , "투입담당" );
 insert into member (mno , pno , cdate , udate , mid , mpw , mname ) values (4,3,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id3' , 'id3' , "사원1" );
