@@ -1,3 +1,8 @@
+import axios from "axios";
+import { useEffect } from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
 export default function SubDivisionPreviousWork(props){
 
     // 계량
@@ -7,23 +12,18 @@ export default function SubDivisionPreviousWork(props){
         axios.get("/subdivision/manufacturing/get.do")
         .then( (r) => {
             console.log(r);
-            const result = r.data.map((survey) => {return survey;})
-            setSurvey(result)
+            setPreviousWork(r.data);
         })
     },[])
 
-   
-
-
     return(<>
         <div id="workPlanListBox">
-            {survey.map((s) => {
-                
+            {previousWork.map((r) => {
                 return(
                     <div>
-                        <Link to={`/material/input?sno=${s.sno}`}>
-                            <span>작업계획 {s.sno}</span>
-                            <span>등록일자 : {s.cdate}</span>
+                        <Link to={`/subdivision/input?mfno=${r.mfno}`}>
+                            <span>작업계획 {r.mfno}</span>
+                            <span>등록일자 : {r.cdate}</span>
                         </Link>
                     </div>
                 )

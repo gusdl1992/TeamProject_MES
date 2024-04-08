@@ -19,6 +19,7 @@ public class SubDivisionDto extends BaseTimeDto{
     private MemberDto checkmemberDto;
     private int failcount;
     private int successcount;
+    private int sdstate;
 
     public SubdivisionEntity toEntity(){
         return SubdivisionEntity.builder()
@@ -28,6 +29,7 @@ public class SubDivisionDto extends BaseTimeDto{
                 .checkmemberEntity(this.checkmemberDto.toEntity())
                 .failCount(this.failcount)
                 .successCount(this.successcount)
+                .sdstate(this.sdstate)
                 .build();
     }
 }

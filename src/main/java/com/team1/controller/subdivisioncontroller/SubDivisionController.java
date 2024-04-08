@@ -1,12 +1,11 @@
 package com.team1.controller.subdivisioncontroller;
 
+import com.team1.model.dto.MaterialInputDto;
 import com.team1.model.dto.SubDivisionDto;
+import com.team1.service.memberserivce.MemberService;
 import com.team1.service.subdivisionservice.SubDivisionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,10 +14,12 @@ import java.util.List;
 public class SubDivisionController {
     @Autowired
     private SubDivisionService subDivisionService;
+    @Autowired
+    private MemberService memberService;
 
     // 소분 보고서 작성
     @PostMapping("/input/post.do")
-    public boolean doSubDivisionInputPost(int mfno , int failcount , int successcount){
+    public boolean doSubDivisionInputPost(@RequestParam int mfno , int failcount , int successcount){
         return subDivisionService.doSubDivisionInputPost(mfno,failcount,successcount);
     }
 
@@ -34,5 +35,15 @@ public class SubDivisionController {
         List<Object> result = subDivisionService.doManufacturingAllinfoGet();
         System.out.println("result = " + result);
         return result;
+    }
+
+    // 품질 검사
+    @PutMapping("/confirm.do")
+    public boolean doSubDivisionConfirm(SubDivisionDto subDivisionDto){
+        System.out.println("subDivisionDto = " + subDivisionDto);
+        int mno = memberService.doLogininfo().getMno();
+        int sdno = subDivisionDto.getSdno();
+        int sdstate = subDivisionDto.getSdstate();
+        return subDivisionService.doSubDivisionConfirm(mno , sdno , sdstate);
     }
 }

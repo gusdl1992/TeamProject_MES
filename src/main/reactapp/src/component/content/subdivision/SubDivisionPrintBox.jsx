@@ -1,15 +1,18 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 export default function SubDivisionPrintBox(props){
-    let [material,setMaterial] = useState([]);
+    let [subdivision,setSubDivision] = useState([]);
     const [confirmstate , setConfirmState] = useState('0');
     let [confirmmembername , setConfirmMemberName] = useState('');
 
     // 출력
     useEffect(() =>{
-        axios.get('/material/input/allinfo/get.do')
-        .then((response)=>{
-            console.log(response);
-        if(response.data != []){
-            setMaterial(response.data);
+        axios.get('/subdivision/allinfo/get.do')
+        .then((r)=>{
+            console.log(r);
+        if(r.data != []){
+            setSubDivision(r.data);
         }
     })
     } , [])
@@ -25,11 +28,11 @@ export default function SubDivisionPrintBox(props){
 
         const confirmFormData = new FormData(confirmForm);
 
-        axios.put('/materialinput/confirm.do',confirmFormData)
+        axios.put('/subdivision/confirm.do',confirmFormData)
         .then(r=>{
             console.log(r);
             if(r.data){
-                window.location.href='/material/input';
+                window.location.href='/subdivision';
             }
         })
         .catch(e=>{
@@ -73,7 +76,7 @@ export default function SubDivisionPrintBox(props){
                 </thead>
                 <tbody>
                     {
-                        material.map((r,index)=>{
+                        subdivision.map((r,index)=>{
                             let cdate = r.cdate.split('T')[0];
                             let udate = r.udate.split('T')[0];
 
@@ -81,7 +84,7 @@ export default function SubDivisionPrintBox(props){
                                 <>
                                     <tr>
                                         <td>
-                                            {r.workPlanDto.wno}
+                                            {r.manufacturingDto.materialInputDto.workPlanDto.wno}
                                         </td>
                                         <td>
                                             {r.inputmemberDto.mname}
@@ -91,24 +94,26 @@ export default function SubDivisionPrintBox(props){
                                         </td>
                                         <td>
                                             {
-                                                r.mipstate == 0 ? '검사대기' : r.mipstate == 1 ? '검사불합격' : r.mipstate == 2 ? '검사합격' : '-'
+                                                r.sdstate == 0 ? '검사대기' : r.sdstate == 1 ? '검사불합격' : r.sdstate == 2 ? '검사합격' : '-'
                                             }
                                         </td>
                                         <td>
-                                            <button onClick={()=>{document.querySelector('.modal'+r.mipno).style.display = 'block'}} type="button">상세보기</button>
+                                            <button onClick={()=>{document.querySelector('.modal'+r.sdno).style.display = 'block'}} type="button">상세보기</button>
                                         </td>
                                     </tr>
-                                    <div style={{display:'none'}} className={"modal"+r.mipno}>
-                                        <p>생산계획 번호 : {r.workPlanDto.wno}</p>
-                                        <p>제품명 : {r.productDto.pname}</p>
-                                        <p>제품수량 : {r.workPlanDto.wcount}</p>
+                                    <div style={{display:'none'}} className={"modal"+r.sdno}>
+                                        <p>생산계획 번호 : {r.manufacturingDto.materialInputDto.workPlanDto.wno}</p>
+                                        <p>제품명 : {r.manufacturingDto.materialInputDto.productDto.pname}</p>
+                                        <p>수주량 : {r.manufacturingDto.materialInputDto.workPlanDto.wcount}</p>
+                                        <p>소분제품량 : {r.successcount}</p>
+                                        <p>불량품량 : {r.failcount}</p>
                                         <p>날짜 : {cdate}</p>
                                         <p>담당자 : {r.inputmemberDto.mname}</p>
                                         <form className={"confirmForm"+index} >
-                                            <input type="text" style={{display:'none'}} value={r.mipno} name="mipno"/>
+                                            <input type="text" style={{display:'none'}} value={r.sdno} name="sdno"/>
                                             검사자 : <input onChange={checkMemberNameInput} disabled={r.checkmemberDto != null ? true : false }  value={r.checkmemberDto != null ? r.checkmemberDto.mname : confirmmembername} className="checkMemberInput" type="text"/>
                                             검사상태
-                                            <select name="mipstate" value={confirmstate} onChange={confirmStateChange}>
+                                            <select name="sdstate" value={confirmstate} onChange={confirmStateChange}>
                                                 <option value="0">
                                                     검사대기
                                                 </option>
@@ -121,7 +126,7 @@ export default function SubDivisionPrintBox(props){
                                             </select>
                                             <button disabled={r.checkmemberDto != null ? true : false } type="button" onClick={()=>{onMaterialConfirm(index)}}>검사 완료</button>
                                         </form>
-                                        <button onClick={()=>{document.querySelector('.modal'+r.mipno).style.display = 'none'}} type="button">x</button>
+                                        <button onClick={()=>{document.querySelector('.modal'+r.sdno).style.display = 'none'}} type="button">x</button>
                                     </div>
                                 </>
                             )
