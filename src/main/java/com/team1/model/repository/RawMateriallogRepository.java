@@ -20,6 +20,7 @@ public interface RawMateriallogRepository extends JpaRepository<RawMaterialLogEn
 
 
 
+
     @Query(value ="select r.rmno,r.rmname, sum(coalesce(rmlcount,0)) as rmsum from rawmateriallog as rl right outer join rawmaterial as r on r.rmno = rl.rmno group by rmno;", nativeQuery = true)
     List<Map<Object,Object>> findsumlogsql(); //원자재 로그를 보고 원자재가 얼마나 쌓여있는지 체크하는 sql, 
     // right outer join한 이유: 원자재 테이블에는 존재하지만 원자재 로그가 없는 경우도 뽑아오기 위함 ,
