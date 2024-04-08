@@ -58,6 +58,10 @@ select * from materialinput;
 insert into materialinput ( mipno , sno , pno , inputmno , checkmembername , cdate , udate ) values ( 1 , 1 , 1 , 3 , null ,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456');
 insert into materialinput ( mipno , sno , pno , inputmno , checkmembername , cdate , udate ) values ( 2 , 2 , 2 , 3 , null ,'2024-03-20 12:30:12.123456','2024-03-20 12:30:12.123456');
 insert into materialinput ( mipno , sno , pno , inputmno , checkmembername , cdate , udate ) values ( 3 , 3 , 3 , 3 , null ,'2024-03-20 14:30:12.123456','2024-03-20 14:30:12.123456');
+
+select * from manufacturing;
+insert into manufacturing(mfno , mipno , inputmno , checkmno , cdate , udate) values(1 , 1 , 1 , 1 ,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456'),(2 , 2 , 2 , 2 ,'2024-03-20 12:30:12.123456','2024-03-20 12:30:12.123456'),(3 , 3 , 3 , 3 ,'2024-03-20 14:30:12.123456','2024-03-20 14:30:12.123456');
+
 # 샘플데이터 END ###########################################################################
 select * from member;
 select * from product;

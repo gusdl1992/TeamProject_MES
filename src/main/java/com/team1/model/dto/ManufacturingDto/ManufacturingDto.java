@@ -4,6 +4,7 @@ import com.team1.model.dto.BaseTimeDto;
 import com.team1.model.dto.MaterialInputDto;
 import com.team1.model.dto.MemberDto;
 import com.team1.model.entity.BaseTime;
+import com.team1.model.entity.ManufacturingEntity;
 import com.team1.model.entity.MaterialInputEntity;
 import com.team1.model.entity.MemberEntity;
 import jakarta.persistence.*;
@@ -25,5 +26,11 @@ public class ManufacturingDto extends BaseTimeDto {
 
     private MemberDto checkmemberDto; // 검사자
 
+    public ManufacturingEntity toEntity() {
+        return ManufacturingEntity.builder()
+                .mfno(this.mfno)
+                .materialInputEntity(this.materialInputDto.toEntity())
+                .build();
+    }
 }
 
