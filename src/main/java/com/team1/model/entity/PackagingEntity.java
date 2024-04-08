@@ -1,5 +1,6 @@
 package com.team1.model.entity;
 
+import com.team1.model.dto.packagingdto.PackagingDto;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -21,12 +22,20 @@ public class PackagingEntity extends BaseTime{//class start
     @JoinColumn(name = "sdno")
     private SubdivisionEntity subdivisionEntity;    // 소분 테이블 엔티티
 
-    private int count;      // 수량
+    private int pgcount;      // 수량
 
     @ManyToOne
     @JoinColumn(name = "mno")
     private MemberEntity memberEntity; // 등록자
 
+    public PackagingDto toDto(){
+        return PackagingDto.builder()
+                .pgno(this.pgno)
+                .productDto(this.subdivisionEntity.getManufacturingEntity().getMaterialInputEntity().getProductEntity().toDto())
+                .pgcount(this.pgcount)
+                .mno(this.memberEntity.getMno())
+                .build();
+    }
 
 
 }//class end

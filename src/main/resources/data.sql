@@ -58,6 +58,8 @@ insert into materialinput ( mipno , wno2 , sno2  , pno , inputmno , checkmno , c
 insert into materialinput ( mipno , wno2 , sno2  , pno , inputmno , checkmno , cdate , udate ) values ( 2 , 2 , 2  , 2 , 3 , null ,'2024-03-20 12:30:12.123456','2024-03-20 12:30:12.123456');
 --insert into materialinput ( mipno , wno2 , sno2  , pno , inputmno , checkmno , cdate , udate ) values ( 3 , 3 , 3 , 3 , 3 , null ,'2024-03-20 14:30:12.123456','2024-03-20 14:30:12.123456');
 
+
+
 /* 샘플데이터 END */
 
 
