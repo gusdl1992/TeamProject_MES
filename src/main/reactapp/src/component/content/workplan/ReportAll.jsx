@@ -25,10 +25,6 @@ export default function ReportAll(props){
         else if (wstate==2|| wstate ==1){
             return(<><ReportForSurvey wno={wno}/></>)
         }
-        else if(wstate == 0){
-            alert("진행 전입니다")
-            window.history.back();
-        }
     };
 
     const result = checkreport(wno,wstate)
