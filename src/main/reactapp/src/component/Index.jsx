@@ -28,7 +28,8 @@ import ReportAll from "./content/workplan/ReportAll";
 
 
 import SurveyCheckList from "./content/surveyCheck/SurveyCheckList"; // 시현
-import Manufacturing from "./content/manufacturing/manufacturing"; // 승호
+import Manufacturing from "./content/manufacturing/Manufacturing";//승호
+
 
 
 
