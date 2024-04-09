@@ -18,7 +18,9 @@ export default function Manufacturing(props){
     const [query , setQuery] = useSearchParams();
 
     //  MaterialInput 객체(전체)
-    const [ materialInputInfo , setMaterialInputInfo ] = useState({})
+    const [ materialInputInfo , setMaterialInputInfo ] = useState({
+        mipno:0
+    })
     
     // 워크플랜 객체
     const [ workPlanInfo , setWorkPlanInfo] = useState({
@@ -150,7 +152,7 @@ export default function Manufacturing(props){
                 </form>
             </div>
             :""}
-            <SurveyCheckList/>
+            {/* <SurveyCheckList/> */}
             
         </>);
     }
