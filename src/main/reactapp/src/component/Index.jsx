@@ -32,6 +32,7 @@ import ProductRLayOut from "./content/recipie/ProductRLayout";
 import SubDivision from "./content/subdivision/SubDivision";
 import Manufacturing from "./content/manufacturing/Manufacturing";//승호
 import Packaging from "./content/packaging/Packaging";
+import ExpirationLayOut from "./content/expiration/ExpirationLayOut";
 
 
 
@@ -73,6 +74,7 @@ export default function Index(props){
                     <Route path="/wp/report" element={<ReportAll/>}/>
                     <Route path="/manufacturing/info" element={<Manufacturing/>}/>
                     <Route path="/packaging" element={<Packaging />} />
+                    <Route path="/expirationlayout" element={<ExpirationLayOut/>}/>
                     </Routes>
                 </div>
         </BrowserRouter>

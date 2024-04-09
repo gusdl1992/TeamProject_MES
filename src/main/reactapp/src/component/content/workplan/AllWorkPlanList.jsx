@@ -18,6 +18,9 @@ export default function AllWorkPlanList(props){
     
     const state = ["진행전","계량확인전","계량확인완료","투입확인전","투입완료"] //추후 추가
     
+
+
+
     console.log(Planlist);
     return (
         <table>
@@ -31,7 +34,12 @@ export default function AllWorkPlanList(props){
                         {e.wno}
                     </td>
                     <td>
-                        <Link to={"/wp/report?wno="+e.wno+"&wstate="+e.wstate} wno={e.wno} wstate={e.wstate}>{e.pname}</Link>
+                        <Link to={"/wp/report?wno="+e.wno+"&wstate="+e.wstate} wno={e.wno} wstate={e.wstate}  onClick={(event) => {
+                         if (!e.wstate) {
+                                event.preventDefault();
+                                alert("진행 전입니다");
+                            }
+                    }}>{e.pname} </Link>
                     </td>
                     <td>
                         {e.wcount}
