@@ -1,4 +1,4 @@
-
+@media screen and (min-width:1367px){
     #menuWrap{
         width: 280px;
         height: 100%;
@@ -45,16 +45,23 @@
         max-height: 200px;
         transition: max-height 0.8s ease;
     }
+}
+@media screen and (min-width:768px) and (max-width:1366px){
+
+}
+@media screen and (max-width:767px){
+
+}
+
 
 
 /* 로그인 정보 (로그아웃 ) */
 #loginCss{
-  position: relative;
-  top: 800px;
-  left: 40px;
+  margin-top: 700px;
+  margin-left: 30px;
 }
 .logoutSpan{
   display: inline-block;
-  border: 1px solid red;
-  
+  padding: 5px;
+  cursor: pointer;
 }

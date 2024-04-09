@@ -14,7 +14,7 @@ import ProductRecipieList from "./content/recipie/ProductRecipieList";
 
 import Survey from "./content/survey/Survey" // 승호
 import WorkPlanList from "./content/survey/WorkPlanList"; // 승호
-import Test from "./member/Test"; // 시현 사원등록 테스트
+import Member from "./member/Member"; // 시현 사원등록 테스트
 import SurveyList from "./content/materialinput/SurveyList";
 import ProductLayOut from "./content/product/ProductLayOut";
 import RmLayOut from "./content/rawmaterial/RmLayOut";
@@ -60,7 +60,7 @@ export default function Index(props){
                     <Route path="/material/input" element={ <MaterialInput/> }/>
                     <Route path="/survey/survey" element={<Survey/> } />
                     <Route path="/survey/plan" element={<WorkPlanList/> } />
-                    <Route path="/member/test" element={<Test/> } />
+                    <Route path="/member" element={<Member/> } />
                     <Route path="/product/recipie/get" element={<ProductRLayOut/>}/>
                     <Route path="/wp/list" element={<LayoutTest list={<AllWorkPlanList/>} />}/>
                     <Route path="/wp/report" element={<ReportAll/>}/>
