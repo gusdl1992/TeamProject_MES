@@ -1,5 +1,6 @@
 package com.team1.service.subdivisionservice;
 
+import com.team1.model.dto.ManufacturingDto.ManufacturingDto;
 import com.team1.model.dto.MemberDto;
 import com.team1.model.dto.SubDivisionDto;
 import com.team1.model.entity.ManufacturingEntity;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +79,7 @@ public class SubDivisionService {
         return subDivisionDtoList;
     }
 
-    // 벌크 정보 출력
+    // 벌크 모든 정보 출력
     @Transactional
     public List<Object> doManufacturingAllinfoGet(){
         List<Object> manufacturingList = new ArrayList<>();
@@ -89,6 +91,13 @@ public class SubDivisionService {
         }
 
         return manufacturingList;
+    }
+
+    // 벌크 1개 정보 출력
+    @Transactional
+    public ManufacturingDto doManufacturingOneInfoGet(int mfno){
+        ManufacturingDto manufacturingDto = manufacturingEntityRepository.findById(mfno).get().toDto();
+        return manufacturingDto;
     }
 
     // 품질 검사

@@ -20,9 +20,9 @@ export default function SubDivisionPreviousWork(props){
         <div id="workPlanListBox">
             {previousWork.map((r) => {
                 return(
-                    <div>
-                        <Link to={`/subdivision/input?mfno=${r.mfno}`}>
-                            <span>작업계획 {r.mfno}</span>
+                    <div className="workplanCss">
+                        <Link to={`/subdivision?mfno=${r.mfno}`}>
+                            <span>벌크내역 {r.mfno}</span>
                             <span>등록일자 : {r.cdate}</span>
                         </Link>
                     </div>
