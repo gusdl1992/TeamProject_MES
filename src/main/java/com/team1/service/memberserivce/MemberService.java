@@ -6,7 +6,10 @@ import com.team1.model.repository.MemberRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,55 +18,72 @@ public class MemberService {
     @Autowired
     MemberRepository memberRepository;
 
-    //5.아이디로(이메일) 중복검사
-    public boolean getfindMemail(String memail){
+    //아이디 중복검사
+    public boolean getfindMemail(String mid){
+        System.out.println("MemberService.getfindMemail");
+        System.out.println("mid = " + mid);
         boolean result;
-        result = memberRepository.existsByMid(memail);
+        result = memberRepository.existsByMid(mid);
+        System.out.println("result = " + result);
         return result;
     };
 
-
-
-    public boolean doSignupPost( MemberDto memberDto){
-
+    // 회원가입 기능
+    @Transactional
+    public int doSignupPost( MemberDto memberDto){
+        System.out.println("memberDto = " + memberDto);
         boolean result = getfindMemail(memberDto.getMid());
-        if(!result){
-            return false;
+        // 아이디 중복이 있을시 true
+        if(result){
+            return -1;
         }
-
+        // 중복이 없을 시 사원 등록 진행
         MemberEntity savedEntity = memberRepository.save(memberDto.toEntity());
 
-        //3.엔티티 생성이 되었는지 아닌지 확인 (PK)
+        // 엔티티 생성이 되었는지 아닌지 확인 (PK)
         if(savedEntity.getMno()>0) {
-            return true;
+            System.out.println("savedEntity.getMno() = " + savedEntity.getMno());
+            System.out.println("savedEntity.getMname() = " + savedEntity.getMname());
+            return 1;
         }
-        return false;
+        // 아이디 중복이 없었지만 엔티티 생성은 실패 했을 경우.
+        return -2;
+    }
+
+    // 모든 사원 가져오기
+    @Transactional(readOnly = true) // 읽기전용
+    public List<MemberDto> doAllReadMember(){
+        List<MemberEntity> memberEntityList = memberRepository.findAll();
+        List<MemberDto> memberDtoList = new ArrayList<>();
+        System.out.println("memberEntityList = " + memberEntityList);
+        for (MemberEntity memberEntity : memberEntityList) {
+            memberDtoList.add(memberEntity.toDto());
+        }
+        return memberDtoList;
     }
 
     //* 로그인 했다는 증거/기록
-
     @Autowired private HttpServletRequest request;
 
-    // 2.로그인
+    // 로그인
     public boolean doLoginPost(MemberDto memberDto){ //로그인
 
-        MemberEntity memberEntity1 = memberRepository.findByLoginSql(memberDto.getMid(), memberDto.getMpw());
-        if(memberEntity1 == null){
+        MemberEntity memberEntity = memberRepository.findByLoginSql(memberDto.getMid(), memberDto.getMpw());
+        if(memberEntity == null){
             return false;
         }
-        System.out.println(memberEntity1);
-        request.getSession().setAttribute("logindto",memberEntity1.toDto());
-//        findByMyBoardList(); // 내가쓴글 리스트
+        System.out.println(memberEntity);
+        request.getSession().setAttribute("logindto",memberEntity.toDto());
         return true;
     }
 
-    //3로그아웃
+    // 로그아웃
     public boolean doLogoutGet(){
         request.getSession().setAttribute("logindto",null);
         return true;
     }
 
-    //4.현재 로그인 회원정보 호출 (세션 값 반환/호출)
+    // 현재 로그인 회원정보 호출 (세션 값 반환/호출)
     public MemberDto doLogininfo(){
         Object object = request.getSession().getAttribute("logindto");
         if(object != null){

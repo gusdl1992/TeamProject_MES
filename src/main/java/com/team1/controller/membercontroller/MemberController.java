@@ -17,7 +17,7 @@ public class MemberController {
     @Autowired
     MemberService memberService;
     @PostMapping("/signup/post.do")
-    public boolean doSignupPost(@RequestBody MemberDto memberDto){ //회원가입
+    public int doSignupPost(@RequestBody MemberDto memberDto){ //회원가입
         System.out.println(memberDto);
         System.out.println("안녕");
         return memberService.doSignupPost(memberDto);
@@ -28,6 +28,12 @@ public class MemberController {
         System.out.println(memberDto);
         System.out.println("안녕");
         return memberService.doLoginPost(memberDto);
+    }
+
+    @GetMapping("/all/get.do")
+    public List<MemberDto> doAllReadMember(){
+        System.out.println("MemberController.doAllReadMember");
+        return memberService.doAllReadMember();
     }
 
     @GetMapping("/logout/get.do")   //로그아웃
