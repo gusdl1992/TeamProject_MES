@@ -76,6 +76,9 @@ export default function Header(props){
                                     <Link to="/material/input">원료투입</Link>
                                 </li>
                                 <li>
+                                    <Link to="/manufacturing/info">벌크제조</Link>
+                                </li>
+                                <li>
                                     <Link to="/subdivision">소분작업</Link>
                                 </li>
                             </ul>

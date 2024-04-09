@@ -8,6 +8,8 @@ import "./manufacturingCSS.css"
 import SurveyCheckList from "../surveyCheck/SurveyCheckList";
 import TotalBox from "../layouts/TotalBox";
 import MaterialinputList from "./MaterialinputList";
+import ManufacturingCheckList from "./ManufacturingCheckList";
+
 
 
 
@@ -27,101 +29,78 @@ export default function Manufacturing(props){
         wcount:0,
         wendtime:"2024-03-30T10:00:12.123456"
     });
+    // 숙성날자(계산용)
+    const [ fermentDate , setFermentDate ] =useState(new Date())
+
+    // 레시피 리스트
+    const [ recipeDtoList , setRecipeDtoList] = useState( [
+        { pname : '' }// 최초 렌더링 할때 오류 발생 : 초기임의의 값을 넣어줌
+    ] );
+    
     
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("/manufacturing/MaterialInput/click.do", { params: { mipno: query.get("mipno") } });
+                console.log(response);
+                setWorkPlanInfo(response.data.workPlanDto);
+                setMaterialInputInfo(response.data);
+                // 시간계산
+                const newFermentDate = new Date(response.data.cdate.split('T')[0]);
+                const newFermentedDate = new Date(newFermentDate.setDate(newFermentDate.getDate() + response.data.productDto.ferment));
+                setFermentDate(newFermentedDate);
 
+
+                // 투입했던 레시피 찾아오기
+                const formData = new FormData();
+                formData.append("wno",response.data.workPlanDto.wno);
+                const response2 = await axios.post("/survey/workplan/clilck.do",formData);
+                const result = response2.data.recipeDto.map( (re) =>{return re;})// 레시피 dto state 추가하기
+                setRecipeDtoList(result);
+                
+                
+            } catch (error) {
+                console.log(error);
+            }
+        };
     
+        fetchData();
+    }, [query]);
 
-    useEffect(  ()=>{
-        axios.get("/manufacturing/MaterialInput/click.do",{ params :{ mipno :query.get("mipno") }})
-        .then((response)=>{
-            console.log(response);
-            setWorkPlanInfo(response.data.workPlanDto);
-            setMaterialInputInfo(response.data);
-            
-        })
-        .catch(re =>{console.log(re)})
-    },[query])
     
 // =============================================================
-    let succeseInfo = [false];
-    // function onClickEvent(){
-    //     console.log("버튼눌림");
-    //     console.log(succeseInfo)
-    //     for(let i = 0; i<succeseInfo.length; i++){
-    //         if(!succeseInfo[i]){alert("안내) 입력값을 확인해주세요"); return;}
-    //     }
+    function onClickEvent(){
+        console.log("버튼눌림");
 
-    //     // ul 요소 가져오기
-    //     const ulElement = document.getElementById('surveyUl');
-    //     // ul 요소 안의 li 요소 개수 파악(li개수 = 입력해야하는 레시피 수)
-    //     const listItemCount = ulElement.getElementsByTagName('li').length;
-        
-    //     // 전송할 객체만들기
-    //     let recipeInputList = [];
-    //     for(let i = 0 ; i<listItemCount; i++){
-    //         let recipeClass = document.querySelector(`.recipe${i}`).value; // 입력값
-    //         let recipeId = document.querySelector(`.recipe${i}`).id // 이거 rmno로 쓰는중(객체 생성용)
+        // 등록 요청하기
+        console.log(query.get("mipno"))
+        axios.post("/manufacturing/insert.do?mipno="+query.get("mipno"))
+        .then((r)=>{// int 'mfno' 반환함 => r.data
+            // 반환 = 1 이상은 성공
+            // -1 = 로그인 정보없음
+            // -2 투입공정 내용을 찾을 수 없음
+            // -3 값이 이미 등록되어있음
+            if(r.data>0){alert("안내) 제조 등록성공 하였습니다.");}
+            else if(r.data==-1){alert("안내) 로그인 정보가 없습니다.");}
+            else if(r.data==-2){alert("안내) 이전 공정(투입)에대한 자료가 없습니다.");}
+            else if(r.data==-3){alert("안내) 이미 등록 완료된 공정입니다.");}
+            else if(r.data==-4){alert("안내) 검사단계가 진행되었습니다.(수정불가)");}
             
-    //         if(isNaN(recipeClass)){alert("계량) 숫자로 입력해주세요!"); return;}
-    //         else if(recipeClass==""){alert("계량) 값을 입력해주세요!"); return;}
-            
-    //         // 객체생성해서 리스트에 저장
-    //         let test = {"rmno":recipeId,
-    //                     "sbcount":recipeClass
-    //                     }
-    //         recipeInputList.push(test);
-    //     }// for END
-        
-    //     // 전송용 객체
-    //     let form ={
-    //         "wno":query.get("wno"),
-    //         "surveyBDto":recipeInputList
-    //     };
-    //     console.log(form);
+        })
+        .catch((error)=>{console.log(error);})
+    }
+    
 
-    //     // 등록 요청하기
-    //     axios.post("/survey/insert.do",form,{
-    //         headers: {
-    //           'Content-Type': 'application/json' // 예: JSON 데이터 전송
-    //         }
-    //     })
-    //     .then((r)=>{// int 'sno' 반환함 => r.data
-    //         // -1 로그인 정보가 없음
-    //         // -2 Survey 저장실패
-    //         // -3 해당 원자재 레코드가 없음
-    //         // -4 검사 단계 진행됨 (수정불가능)
-    //         console.log(r.data);
-    //         if(r.data>0){alert("안내) 계량내용 등록성공 하였습니다."); window.location.href='/survey/survey';}
-    //         else if(r.data==-1){alert("안내) 로그인 정보가 없습니다.");}
-    //         else if(r.data==-2){alert("안내) 등록실패.");}
-    //         else if(r.data==-3){alert("안내) 해당 원자제가 등록되어있지 않습니다..");}
-    //         else if(r.data==-4){alert("안내) 검사단계가 진행되었습니다.(수정불가)");}
-            
-    //     })
-    //     .catch((re)=>{console.log(re);})
-    // }
-    
-    // function onChangeEvent(index,inputCount){
-        
-    //     let recipeClass = document.querySelector(`.recipe${index}`).value; // 입력값 가져오기
-    
-    //     if(parseInt(inputCount-inputCount*0.01)<=parseInt(recipeClass)&&parseInt(recipeClass)<=parseInt(inputCount+inputCount*0.01)){
-    //         // 입력값이 투입해야하는 양보다 1% 이상 오차가 없다면 (성공)
-    //         document.querySelector(`.validation${index}`).innerHTML="";
-    //         succeseInfo[0]= true;
-    //     }else{
-    //         document.querySelector(`.validation${index}`).innerHTML=`+-${(inputCount+inputCount*0.01).toLocaleString()} 이내로 투입해주세요`;
-    //         succeseInfo[0] = false;
-    //     }
-    // }
+
 
     if(logininfo!=null){ // 로그인 정보가 로딩되지 않았다면 return 안함
         return(<>
+        <div style={{maxWidth:'66%',minWidth:'1100px',margin:'0 auto',border:'1px solid red'}}>
             <TotalBox/>
             <MaterialinputList/>
             
-            {materialInputInfo.mipno!=""?
+            {materialInputInfo.mipno!=0?
             <div id="surveyCssBox">
                 {console.log(materialInputInfo)}
                 <form>
@@ -130,30 +109,26 @@ export default function Manufacturing(props){
                         <span>생산수량 : {workPlanInfo.wcount.toLocaleString()} EA</span>
                         <span>생산기한 : {workPlanInfo.wendtime.split('T')[0]} 까지</span>
                         <div>숙성 소요 기한 : {materialInputInfo.productDto.ferment} 일</div>
-                        <div>예상 완료 기한 : </div>
+                        <div>예상 완료 기한 : {fermentDate.getFullYear()}년{fermentDate.getMonth()+1}월{fermentDate.getDate()}일</div>
                     </h3>
-                    {/* <div>
+                    <div>
                         <ul id="surveyUl">
                         {
-                            recipeDtoList.map((r,index)=>{
+                            recipeDtoList.map((r)=>{
                                 return(<>
-                                    <li>투입재료 : {r.rmname} 투입 해야하는 양 = {(r.reamount*workPlanInfo.wcount).toLocaleString()}g</li>
-                                    <div>
-                                        입력된 양 : <input type="text" onChange={()=>{onChangeEvent(index , r.reamount*workPlanInfo.wcount)}} className={"recipe"+index} id={r.rmno} { ...(logininfo.pno === 1 || logininfo.pno === 0? { disabled: false }: { disabled: true })} />
-                                        <span className={"validation"+index}></span>
-                                    </div>
+                                    <li>투입재료 : <span className="inputCon">{r.rmname}</span> 투입되어있는 양 : <span className="inputCon">{(r.reamount*workPlanInfo.wcount).toLocaleString()}g</span></li>
                                 </>
                                 );
                             })
                         }
                         </ul>
                         <button id="surveyBtn" type="button" onClick={onClickEvent}>버튼</button>
-                    </div> */}
+                    </div>
                 </form>
             </div>
             :""}
-            {/* <SurveyCheckList/> */}
-            
+            <ManufacturingCheckList materialInputInfo={materialInputInfo} />
+        </div>
         </>);
     }
 }
