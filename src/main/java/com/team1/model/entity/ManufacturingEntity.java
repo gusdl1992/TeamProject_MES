@@ -5,6 +5,7 @@ import com.team1.model.dto.MaterialInputDto;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(name = "manufacturing")
@@ -23,6 +24,12 @@ public class ManufacturingEntity extends BaseTime{
     @JoinColumn(name = "mipno")
     private MaterialInputEntity materialInputEntity;
 
+    @ColumnDefault("0")
+    private int mfcount; // 벌크수량
+
+    @ColumnDefault("0")
+    private int mfstate; // 검사 상태
+
     @ManyToOne
     @JoinColumn(name = "inputmno")
     private MemberEntity inputmemberEntity; // 등록자
@@ -35,6 +42,8 @@ public class ManufacturingEntity extends BaseTime{
         return ManufacturingDto.builder()
                 .mfno(this.mfno)
                 .materialInputDto(this.materialInputEntity.toDto())
+                .mfcount(this.mfcount)
+                .mfstate(this.mfstate)
                 .inputmemberDto(this.inputmemberEntity.toDto())
                 .checkmemberDto(this.checkmemberEntity.toDto())
                 .cdate(this.cdate)

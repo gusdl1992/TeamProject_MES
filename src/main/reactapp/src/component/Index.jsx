@@ -30,6 +30,10 @@ import ReportAll from "./content/workplan/ReportAll";
 import SurveyCheckList from "./content/surveyCheck/SurveyCheckList"; // 시현
 import ProductRLayOut from "./content/recipie/ProductRLayout";
 import SubDivision from "./content/subdivision/SubDivision";
+import Manufacturing from "./content/manufacturing/Manufacturing";//승호
+
+
+
 
 export const LoginInfoContext = React.createContext("");
 
@@ -66,6 +70,7 @@ export default function Index(props){
                     <Route path="/product/recipie/get" element={<ProductRLayOut/>}/>
                     <Route path="/wp/list" element={<LayoutTest list={<AllWorkPlanList/>} />}/>
                     <Route path="/wp/report" element={<ReportAll/>}/>
+                    <Route path="/manufacturing/info" element={<Manufacturing/>}/>
                     </Routes>
                 </div>
         </BrowserRouter>

@@ -1,12 +1,10 @@
 package com.team1.service.manufacturingService;
 
 import com.team1.model.dto.MaterialInputDto;
+import com.team1.model.dto.MemberDto;
 import com.team1.model.dto.SurveyBDto;
-import com.team1.model.entity.MaterialInputEntity;
-import com.team1.model.entity.SurveyBEntity;
-import com.team1.model.repository.ManufacturingEntityRepository;
-import com.team1.model.repository.MaterialInputEntityRepository;
-import com.team1.model.repository.SurveyBRepository;
+import com.team1.model.entity.*;
+import com.team1.model.repository.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.Getter;
@@ -25,7 +23,9 @@ public class ManufacturingService {//class start
     @Autowired HttpServletRequest request;
     @Autowired MaterialInputEntityRepository materialInputEntityRepository;
     @Autowired SurveyBRepository surveyBRepository;
+    @Autowired MemberRepository memberRepository;
     @Autowired ManufacturingEntityRepository manufacturingEntityRepository;
+    @Autowired BulkLogRepository bulkLogRepository;
 
     //MaterialInput 정보 전부 가져오기
     public List<MaterialInputDto> materialInputDtoList(){
@@ -77,10 +77,55 @@ public class ManufacturingService {//class start
     // 2. 벌크로그테이블에 기록되어야함
     // 유효성 검사 해야하는부분
     // 반환 = 1 이상은 성공
+    // -1 = 로그인 정보없음
+    // -2 투입공정 내용을 찾을 수 없음
+    // -3 값이 이미 등록되어있음
     @Transactional
-    public int ManufacturingInsertDo(){
+    public int ManufacturingInsertDo(int mipno){
 
-        return 0;
+        // 이미등록되어있으면 취소
+        Optional<ManufacturingEntity> manufacturingEntity = manufacturingEntityRepository.findByMipno(mipno);
+        if(manufacturingEntity.isPresent()){return -3;}
+
+
+        // 로그인한 회원정보를 가져온다
+        Object object =request.getSession().getAttribute("logindto");
+        if(object==null){return -1;} // 값없으면 실패 받환
+        MemberDto memberDto = (MemberDto)object; // 형변환
+        // 받아온 mno-> member 엔티티 객체 찾아오기
+        Optional<MemberEntity> memberEntity = memberRepository.findById(memberDto.getMno());
+        if(!memberEntity.isPresent())return -1; // 찾은값이 없으면 실패 반환
+
+        // 투입공정 엔티티 찾아오기
+        Optional<MaterialInputEntity> materialInputEntity = materialInputEntityRepository.findById(mipno);
+        if (!materialInputEntity.isPresent())return -2;
+
+        // 투입한 수량 찾아오기
+            // 투입공정 엔티티의 sno 를 값으로 줌
+        List<SurveyBEntity> surveyBEntityList = surveyBRepository.findBySno(materialInputEntity.get().getSurveyEntity().getSno());
+        // 반복문 돌려서 전채 수량 합치기
+        int count = 0;
+        for (int i = 0; i < surveyBEntityList.size(); i++) {
+            count += surveyBEntityList.get(i).getSbcount();
+        }
+
+        // Manufacturing 테이블 등록
+        ManufacturingEntity saveManufacturingEntity = manufacturingEntityRepository.save(ManufacturingEntity.builder()
+                        .materialInputEntity(materialInputEntity.get()) // 해당 투입공정 입력
+                        .mfcount(count) // 벌크 수량
+                        .mfstate(1)// 상태 변경
+                        .inputmemberEntity(memberEntity.get()) // 등록자 회원정보 등록
+                .build());
+
+
+        // bulkLog 테이블 등록
+        BulkLogEntity bulkLogEntity = bulkLogRepository.save(BulkLogEntity.builder()
+                        .blcount(count)
+                        .manufacturingEntity(saveManufacturingEntity)
+                .build());
+
+
+        return saveManufacturingEntity.getMfno();
     }
 
 }// class end
