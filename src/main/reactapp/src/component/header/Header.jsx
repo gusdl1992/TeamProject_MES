@@ -76,6 +76,9 @@ export default function Header(props){
                                     <Link to="/material/input">원료투입</Link>
                                 </li>
                                 <li>
+                                    <Link to="/manufacturing/info">벌크제조</Link>
+                                </li>
+                                <li>
                                     <Link to="/subdivision">소분작업</Link>
                                 </li>
                             </ul>
@@ -93,7 +96,7 @@ export default function Header(props){
                         <div className='subMenu'>
                             <ul>
                                 <li>
-                                <Link to="/member/test">사원등록</Link>
+                                <Link to="/member">사원등록</Link>
                                 </li>
                                 <li>
                                     <Link to="/workPlan">생산일정 등록</Link>

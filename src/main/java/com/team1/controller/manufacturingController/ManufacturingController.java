@@ -1,5 +1,6 @@
 package com.team1.controller.manufacturingController;
 
+import com.team1.model.dto.ManufacturingDto.ManufacturingDto;
 import com.team1.model.dto.MaterialInputDto;
 import com.team1.model.dto.SurveyBDto;
 import com.team1.service.manufacturingService.ManufacturingService;
@@ -51,7 +52,12 @@ public class ManufacturingController {//class star
     }
 
 
-    // 검사기능
+    // 검사기능=======================================================
+    // 제조 리스트 받아오기
+    @GetMapping("/manufacturingInfo.do")
+    public List<ManufacturingDto> manufacturingDtoListDO(){
+        return manufacturingService.manufacturingDtoListDO();
+    }
 
 
 }//class end
