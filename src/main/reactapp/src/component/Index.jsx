@@ -31,6 +31,7 @@ import SurveyCheckList from "./content/surveyCheck/SurveyCheckList"; // 시현
 import ProductRLayOut from "./content/recipie/ProductRLayout";
 import SubDivision from "./content/subdivision/SubDivision";
 import Manufacturing from "./content/manufacturing/Manufacturing";//승호
+import Packaging from "./content/packaging/Packaging";
 
 
 
@@ -71,6 +72,7 @@ export default function Index(props){
                     <Route path="/wp/list" element={<LayoutTest list={<AllWorkPlanList/>} />}/>
                     <Route path="/wp/report" element={<ReportAll/>}/>
                     <Route path="/manufacturing/info" element={<Manufacturing/>}/>
+                    <Route path="/packaging" element={<Packaging />} />
                     </Routes>
                 </div>
         </BrowserRouter>

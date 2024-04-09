@@ -93,7 +93,7 @@ export default function Header(props){
                         <div className='subMenu'>
                             <ul>
                                 <li>
-                                <Link to="/member/test">사원등록</Link>
+                                <Link to="/member">사원등록</Link>
                                 </li>
                                 <li>
                                     <Link to="/wp/list">전체 보고서 출력</Link>

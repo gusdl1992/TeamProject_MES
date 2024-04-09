@@ -12,4 +12,7 @@ import java.util.List;
 public interface PackagingRepository extends JpaRepository<PackagingEntity , Integer > {
     @Query(value = "select packaging.* , pname , packagingcount , period from packaging inner join subdivision on packaging.sdno = subdivision.sdno inner join manufacturing on subdivision.mfno = manufacturing.mfno inner join materialinput on manufacturing.mipno = materialinput.mipno inner join product on materialinput.pno = product.pno where pgno=:pgno" , nativeQuery = true)
     List<PackagingEntity> findByPgno(int pgno);
+
+
+
 }
