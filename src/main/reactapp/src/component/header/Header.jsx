@@ -76,7 +76,7 @@ export default function Header(props){
                                     <Link to="/material/input">원료투입</Link>
                                 </li>
                                 <li>
-                                    메뉴3
+                                    <Link to="/subdivision">소분작업</Link>
                                 </li>
                             </ul>
                         </div>

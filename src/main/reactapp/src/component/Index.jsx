@@ -29,6 +29,7 @@ import ReportAll from "./content/workplan/ReportAll";
 
 import SurveyCheckList from "./content/surveyCheck/SurveyCheckList"; // 시현
 import ProductRLayOut from "./content/recipie/ProductRLayout";
+import SubDivision from "./content/subdivision/SubDivision";
 
 export const LoginInfoContext = React.createContext("");
 
@@ -58,6 +59,7 @@ export default function Index(props){
                     <Route path="/RM" element={<RmLayOut/>}/>
                     <Route path="/RM/log" element={<RmLLayOut/>}/>
                     <Route path="/material/input" element={ <MaterialInput/> }/>
+                    <Route path="/subdivision" element={ <SubDivision/> }/>
                     <Route path="/survey/survey" element={<Survey/> } />
                     <Route path="/survey/plan" element={<WorkPlanList/> } />
                     <Route path="/member" element={<Member/> } />

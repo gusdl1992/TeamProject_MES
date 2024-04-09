@@ -1,32 +1,18 @@
+import SubDivisionPreviousWork from "./SubDivisionPreviousWork";
 import SubDivisionPrintBox from "./SubDivisionPrintBox";
+import SubDivisionTotalBox from "./SubDivisionTotalBox";
+import SubDivisionWriteBox from "./SubDivisionWriteBox";
 
 export default function SubDivision(props){
 
     return(
         <div style={{maxWidth:'66%',minWidth:'1100px',margin:'0 auto',border:'1px solid red'}}>
-            
-            <div className="statistics">
-                <h3>통계</h3>
-                <div className="statisticsWrap">
-                    <div className="statisticsBox">
-                        
-                    </div>
-                    <div className="statisticsBox">
-                        
-                    </div>
-                    <div className="statisticsBox">
-                        
-                    </div>
-                    <div className="statisticsBox">
-                        
-                    </div>
-                </div>
+            <SubDivisionTotalBox/>
+            <div id="workplanCssBox">
+                <SubDivisionPreviousWork/>
             </div>
             <div id="workplanCssBox">
-                <SurveyList/>
-            </div>
-            <div id="workplanCssBox">
-                <MaterialInput2/>
+                <SubDivisionWriteBox/>
             </div>
             <SubDivisionPrintBox/>
         </div>

@@ -3,6 +3,7 @@ package com.team1.service.subdivisionservice;
 import com.team1.model.dto.MemberDto;
 import com.team1.model.dto.SubDivisionDto;
 import com.team1.model.entity.ManufacturingEntity;
+import com.team1.model.entity.MaterialInputEntity;
 import com.team1.model.entity.MemberEntity;
 import com.team1.model.entity.SubdivisionEntity;
 import com.team1.model.repository.ManufacturingEntityRepository;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,5 +89,27 @@ public class SubDivisionService {
         }
 
         return manufacturingList;
+    }
+
+    // 품질 검사
+    @Transactional
+    public boolean doSubDivisionConfirm(int mno , int sdno , int sdstate){
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberInfo(mno);
+        if(!optionalMemberEntity.isPresent()){
+            return false;
+        }
+        System.out.println("optionalMemberEntity"+optionalMemberEntity);
+
+        SubdivisionEntity subdivisionEntity = subDivisionRepository.findById(sdno).get();
+
+        subdivisionEntity.setCheckmemberEntity(optionalMemberEntity.get());
+        subdivisionEntity.setSdstate(sdstate);
+
+        System.out.println("subdivisionEntity"+subdivisionEntity);
+
+        if (subdivisionEntity.getCheckmemberEntity() == null){
+            return false;
+        }
+        return true;
     }
 }

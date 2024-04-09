@@ -4,6 +4,7 @@ import com.team1.model.dto.SubDivisionDto;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(name = "subdivision")
@@ -30,19 +31,27 @@ public class SubdivisionEntity extends BaseTime{//class start
     @JoinColumn(name = "checkmno")
     private MemberEntity checkmemberEntity; // 검사자
 
+    @ColumnDefault("0")
     private int failCount;      // 불량품 개수
 
+    @ColumnDefault("0")
     private int successCount;   // 성공수량
+
+    @ColumnDefault("0")
+    private int sdstate; // 검사상태
 
     public SubDivisionDto toDto(){
         SubDivisionDto subDivisionDto = SubDivisionDto.builder()
                 .sdno(this.sdno)
                 .manufacturingDto(this.manufacturingEntity.toDto())
                 .inputmemberDto(this.inputmemberEntity.toDto())
-                .checkmemberDto(this.checkmemberEntity.toDto())
+                .checkmemberDto(this.checkmemberEntity != null ? this.checkmemberEntity.toDto() : null)
                 .failcount(this.failCount)
                 .successcount(this.successCount)
+                .sdstate(this.sdstate)
                 .build();
+        subDivisionDto.setCdate(this.cdate);
+        subDivisionDto.setUdate(this.udate);
 
         return subDivisionDto;
     }
