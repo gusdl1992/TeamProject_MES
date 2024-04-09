@@ -34,6 +34,8 @@ public class PackagingEntity extends BaseTime{//class start
                 .productDto(this.subdivisionEntity.getManufacturingEntity().getMaterialInputEntity().getProductEntity().toDto())
                 .pgcount(this.pgcount)
                 .mno(this.memberEntity.getMno())
+                .cdate(this.cdate)
+                .udate(this.udate)
                 .build();
     }
 
