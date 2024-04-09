@@ -45,7 +45,7 @@ public class ManufacturingEntity extends BaseTime{
                 .mfcount(this.mfcount)
                 .mfstate(this.mfstate)
                 .inputmemberDto(this.inputmemberEntity.toDto())
-                .checkmemberDto(this.checkmemberEntity.toDto())
+                .checkmemberDto(this.checkmemberEntity != null ? this.checkmemberEntity.toDto() : null)
                 .cdate(this.cdate)
                 .udate(this.udate)
                 .build();
