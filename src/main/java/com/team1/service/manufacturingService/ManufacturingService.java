@@ -1,5 +1,6 @@
 package com.team1.service.manufacturingService;
 
+import com.team1.model.dto.ManufacturingDto.ManufacturingDto;
 import com.team1.model.dto.MaterialInputDto;
 import com.team1.model.dto.MemberDto;
 import com.team1.model.dto.SurveyBDto;
@@ -26,6 +27,7 @@ public class ManufacturingService {//class start
     @Autowired MemberRepository memberRepository;
     @Autowired ManufacturingEntityRepository manufacturingEntityRepository;
     @Autowired BulkLogRepository bulkLogRepository;
+    @Autowired WorkPlanEntityRepository workPlanEntityRepository;
 
     //MaterialInput 정보 전부 가져오기
     public List<MaterialInputDto> materialInputDtoList(){
@@ -123,9 +125,28 @@ public class ManufacturingService {//class start
                         .blcount(count)
                         .manufacturingEntity(saveManufacturingEntity)
                 .build());
+        
+        // workplan 상태 수정
+        WorkPlanEntity workPlanEntity = workPlanEntityRepository.findBywno(materialInputEntity.get().getWorkPlanEntity().getWno());
+        workPlanEntity.setWstate(5);
 
 
         return saveManufacturingEntity.getMfno();
+    }
+
+    // 검사기능 =========================================
+    public List<ManufacturingDto> manufacturingDtoListDO(){
+        // 반환할 배열
+        List<ManufacturingDto> manufacturingDtoList = new ArrayList<>();
+
+        // entity 불러오기
+        List<ManufacturingEntity> materialInputEntityList = manufacturingEntityRepository.findAll();
+        for (int i = 0; i < materialInputEntityList.size(); i++) {
+            // entity 객체화
+            manufacturingDtoList.add(materialInputEntityList.get(i).toDto());
+        }
+
+        return manufacturingDtoList;
     }
 
 }// class end
