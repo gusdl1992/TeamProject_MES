@@ -70,11 +70,11 @@ export default function Header(props) {
     </div>
     <form>
         <div class="inputGroup , InputID">
-            <span>ID &nbsp;&nbsp;:</span>
+            <span>ID &nbsp;&nbsp;</span>
             <input type='text' placeholder="아이디를 입력해주세요" onChange={handleMidChange} />
         </div>
         <div class="inputGroup , InputPw">
-            <span>PW :</span>
+            <span>PW </span>
             <input type='password' placeholder="비밀번호를 입력해주세요" onChange={handleMpwChange} />
         </div>
     </form>

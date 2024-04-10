@@ -1,6 +1,7 @@
 package com.team1.controller.packagingcontroller;
 
 import com.team1.model.dto.SubDivisionDto;
+import com.team1.model.dto.packagingdto.PackagingDto;
 import com.team1.model.entity.PackagingEntity;
 import com.team1.service.packagingservice.PackagingService;
 import lombok.Getter;
@@ -17,34 +18,38 @@ public class PackagingController {
     private PackagingService packagingService;
 
     @GetMapping("/info/get.do")
-    public List<Object> doPackInfoGet(@RequestParam int pgno){
+    public List<PackagingDto> doPackInfoGet(){
         System.out.println("PackagingController.doPackInfoGet");
-        System.out.println("★pgno = " + pgno);
-        return packagingService.doPackInfoGet(pgno);
+        return packagingService.doPackInfoGet();
     }
 
     @GetMapping("/subdivision/info/get.do")
     public SubDivisionDto doSubdivisionInfoGet(@RequestParam int sdno){
-        System.out.println("PackagingController.doSubdivisionInfoGet");
+        System.out.println("★PackagingController.doSubdivisionInfoGet");
         System.out.println("sdno = " + sdno);
 
         return packagingService.doSubdivisionInfoGet(sdno);
     }
 
     @PostMapping("/post.do")
-    public boolean doMemberPost(int sdno){
+    public boolean doMemberPost(int sdno , PackagingDto packagingDto){
+        System.out.println("☆☆☆sdno = " + sdno);
         System.out.println("PackagingController.doMemberPost");
-        return packagingService.doMemberPost(sdno);
+        int pgbox = 1000;
+        int pgcount = packagingDto.getPgcount();
+        System.out.println("★pgcount = " + pgcount);
+
+        return packagingService.doMemberPost(sdno , pgbox , pgcount);
     }
 
     // sdno 정보 뽑아오기
     @GetMapping("/subdivision.do")
     public List<Object> subdivisionDtoList(){
-
         List<Object> result = packagingService.subdivisionDtoList();
         System.out.println("result = " + result);
 
         return result;
     }
+
 
 }

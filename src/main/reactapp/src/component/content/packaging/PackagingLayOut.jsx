@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 export default function PackagingLayOut(props){
 
     // 계량
-    const [ subdivision , setSubdivision ] = useState([]);
-    console.log(subdivision);
+    const [ subdivision , setSubdivision ] = useState([]);    
     useEffect( ( ) => {
         axios.get("/packaging/subdivision.do")
         .then( (r) => {

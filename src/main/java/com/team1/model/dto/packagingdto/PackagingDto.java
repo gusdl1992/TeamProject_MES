@@ -1,6 +1,7 @@
 package com.team1.model.dto.packagingdto;
 
 import com.team1.model.dto.BaseTimeDto;
+import com.team1.model.dto.MemberDto;
 import com.team1.model.dto.ProductDto;
 import com.team1.model.entity.PackagingEntity;
 import lombok.*;
@@ -20,7 +21,8 @@ public class PackagingDto extends BaseTimeDto {
 
     private int pgcount; // 수량
 
-    private int mno; // 등록자
+    private MemberDto memberDto; // 등록자
+
 
     public PackagingEntity toEntity(){
         return PackagingEntity.builder()

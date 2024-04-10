@@ -32,9 +32,11 @@
 
 .InputID > span{
     margin-right: 22px;
+    font-weight: bolder;
 }
 .InputPw > span{
     margin-right: 22px;
+    font-weight: bolder;
 }
 
 .inputGroup input {

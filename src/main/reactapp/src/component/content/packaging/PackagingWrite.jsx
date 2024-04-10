@@ -8,7 +8,11 @@ export default function PackagingWrite(props){
     const { logininfo, setLogin } = useContext(LoginInfoContext);
     //console.log(logininfo); 
 
-    const [ packagingInfo , setPackagingInfo] = useState([]);
+    const [ packagingInfo , setPackagingInfo] = useState("");
+
+    const [ render , setRender ] = useState(false);
+    
+    const [ 박스개수 , set박스개수 ] = useState("");
 
     // 쿼리스트링 값 가져오기 sdno
     let [query, setQuery] = useSearchParams();
@@ -16,37 +20,55 @@ export default function PackagingWrite(props){
     const packaging = ()=>{
         axios.get("/packaging/subdivision/info/get.do", { params :{ sdno :query.get("sdno") }} )
         .then((r)=>{
-            console.log(r);
+            console.log(r); 
+
+            setRender(true);
+            setPackagingInfo(r.data);            
         }).catch( (e) => {console.log(e)})
     }   
 
+    const 박스개수처리 = (event) => {
+        console.log(event.target.value);
+        console.log(packagingInfo.manufacturingDto.materialInputDto.productDto.packagingcount);
+        console.log(parseInt((박스개수)/(packagingInfo.manufacturingDto.materialInputDto.productDto.packagingcount)));
+        set박스개수(event.target.value);
+    }
+    
+    
+
+    const packaginPost = () => {
+        let packagingForm = document.querySelector(".packagingForm");
+        let packagingFormData = new FormData(packagingForm);
+        
+        axios.post("/packaging/post.do?sdno="+query.get('sdno') , packagingFormData)
+        .then((r)=>{
+            console.log(r);
+        }).catch((e) => {console.log(e)})
+    }
+
+
     useEffect( () => { packaging(); },[query])
 
-    if(logininfo != null ){
+    if(logininfo != null && render ){
     return(<>
         <div>
+        <form className="packagingForm">
         <h3>
-            <span>포장제품 : {}</span>
-            <span>포장수량 : {} EA</span>
-            <span>포장기한 : {} 까지</span>
-            
+            <span>포장제품 : {packagingInfo.manufacturingDto.materialInputDto.workPlanDto.pname}</span>
+            <span>포장수량 : {packagingInfo.manufacturingDto.materialInputDto.workPlanDto.wcount} EA</span>
+            <span>포장기한 : {packagingInfo.manufacturingDto.materialInputDto.workPlanDto.wendtime.split('T')[0]} 까지</span>            
         </h3>
-        <ul>
-            
-        </ul>
-        {/* <button type="button" onClick={onClickBtn}>등록</button> */}
+        <div>
+            소분완료량 : {packagingInfo.successcount}            
+            <input type="text" name="successcount" onChange={박스개수처리}/>
+            박스개수 : <input type="text" name="pgcount" value={parseInt((박스개수)/(packagingInfo.manufacturingDto.materialInputDto.productDto.packagingcount))}/>            
+        </div>
+            <button type="button" onClick={packaginPost}>등록</button>
+            </form>
         </div>
 
     </>);
+    }else{
+       return(<></>) 
     }
 }
-/*
-{query.map((r,index)=>
-                {
-                    return (<>
-                        <li>투입재료 : {r.rmname} 계량된 값 = {r.sbcount}g</li>
-                        <div>입력된 양 : <input type="text"  /></div>
-                    </>)
-                }
-            )}
-*/
