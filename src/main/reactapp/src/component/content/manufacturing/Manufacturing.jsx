@@ -127,7 +127,7 @@ export default function Manufacturing(props){
                 </form>
             </div>
             :""}
-            <ManufacturingCheckList materialInputInfo={materialInputInfo} />
+            <ManufacturingCheckList query={query} />
         </div>
         </>);
     }
