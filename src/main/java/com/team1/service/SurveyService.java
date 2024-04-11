@@ -146,6 +146,7 @@ public class SurveyService {
             // Survey 저장
             SurveyEntity savedSurveyEntity = surveyRepository.save(SurveyEntity.builder()
                             .sno(wno)
+
                     .build());
             savedSurveyEntity.setInputmemberEntity(memberEntity.get());
             savedSurveyEntity.setWorkPlanEntity(workPlanEntity);
@@ -178,6 +179,7 @@ public class SurveyService {
             if(surveyEntity.get().getSstate()>0){return -4;}// 검사 완료됫으면 수정불가
             // Survey 업데이트 하기
             surveyEntity.get().setInputmemberEntity(memberEntity.get()); // 계량 등록한사람
+
 
             // SurveyB 업데이트 하기
             for (int i = 0; i < surveyInsertDto.getSurveyBDto().size(); i++) {

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -147,6 +148,18 @@ public class ManufacturingService {//class start
         }
 
         return manufacturingDtoList;
+    }
+
+    // 검사완료 버튼 클릭시 스테이터스 수정
+    public int manufacturingStateUpdateDo(int mfno,int state){
+
+        Optional<ManufacturingEntity> manufacturingEntity = manufacturingEntityRepository.findById(mfno);
+        if (!manufacturingEntity.isPresent())return 0;
+
+        manufacturingEntity.get().setMfstate(state);
+
+        return manufacturingEntity.get().getMfno();
+
     }
 
 }// class end
