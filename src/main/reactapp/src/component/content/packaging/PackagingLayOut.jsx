@@ -21,7 +21,7 @@ export default function PackagingLayOut(props){
                 return(
                     <div>
                         <Link to={`/packaging?sdno=${r.sdno}`}>
-                            <span>작업계획 {r.sdno}</span>
+                            <span>소분내역 : {r.sdno}</span>
                             <span>등록일자 : {r.cdate}</span>
                         </Link>
                     </div>
