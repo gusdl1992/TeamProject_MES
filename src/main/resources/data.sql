@@ -35,9 +35,9 @@ insert into recipe ( pno , reamount , reno , rmno , cdate , udate ) values ( 3 ,
 
 
 
-insert into workplan ( pno , wcount , wno , cdate , udate , wstarttime , wendtime , wstate ) values ( 1 , 1000 , 1 ,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456' , '2024-03-20 10:00:12.123456' , '2024-03-30 10:00:12.123456' , 0 );
-insert into workplan ( pno , wcount , wno , cdate , udate , wstarttime , wendtime , wstate ) values ( 2 , 500 , 2 ,'2024-03-20 10:00:12.123456','2024-03-20 10:00:12.123456' , '2024-03-20 10:00:12.123456' , '2024-03-30 10:00:12.123456' , 0 );
-insert into workplan ( pno , wcount , wno , cdate , udate , wstarttime , wendtime , wstate ) values ( 3 , 800 , 3 ,'2024-03-20 10:00:12.123456','2024-03-20 10:00:12.123456' , '2024-03-20 10:00:12.123456' , '2024-03-30 10:00:12.123456' , 0 );
+insert into workplan ( pno , wcount , wno , cdate , udate , wendtime , wstate ) values ( 1 , 1000 , 1 ,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456' , '2024-03-30 10:00:12.123456' , 0 );
+insert into workplan ( pno , wcount , wno , cdate , udate , wendtime , wstate ) values ( 2 , 500 , 2 ,'2024-03-20 10:00:12.123456','2024-03-20 10:00:12.123456' , '2024-03-30 10:00:12.123456' , 0 );
+insert into workplan ( pno , wcount , wno , cdate , udate , wendtime , wstate ) values ( 3 , 800 , 3 ,'2024-03-20 10:00:12.123456','2024-03-20 10:00:12.123456' , '2024-03-30 10:00:12.123456' , 0 );
 
 
 
@@ -71,10 +71,3 @@ insert into packaging( pgno , mno , pgcount , sdno , cdate , udate ) values( 2 ,
 
 
 /* 샘플데이터 END */
-
-
-/*  박시현 테스트 */
-
-insert into workplan ( pno , wcount , wno , cdate , udate , wstarttime , wendtime , wstate ) values ( 1 , 800 , 4 ,'2024-03-20 10:00:12.123456','2024-03-20 10:00:12.123456' , '2024-03-20 10:00:12.123456' , '2024-03-30 10:00:12.123456' , 1 );
-insert into workplan ( pno , wcount , wno , cdate , udate , wstarttime , wendtime , wstate ) values ( 2 , 800 , 5 ,'2024-03-20 10:00:12.123456','2024-03-20 10:00:12.123456' , '2024-03-20 10:00:12.123456' , '2024-03-30 10:00:12.123456' , 1 );
-insert into workplan ( pno , wcount , wno , cdate , udate , wstarttime , wendtime , wstate ) values ( 3 , 800 , 6 ,'2024-03-20 10:00:12.123456','2024-03-20 10:00:12.123456' , '2024-03-20 10:00:12.123456' , '2024-03-30 10:00:12.123456' , 1 );

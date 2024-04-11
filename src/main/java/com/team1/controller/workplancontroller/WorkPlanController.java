@@ -24,6 +24,7 @@ public class WorkPlanController {
 
     @PostMapping("/write/post.do")
     public boolean postWPWriteDo(WorkPlanDto workPlanDto){
+        System.out.println("컨트롤러workPlanDto = " + workPlanDto);
         return workPlanService.postWPWriteDo(workPlanDto);
     }
 

@@ -22,9 +22,7 @@ public class WorkPlanEntity extends BaseTime{
     @Column( nullable = false)
     private int wcount; // 작업 수량
     @Column( nullable = false )
-    private LocalDateTime wstarttime; // 공정 시작일
-    @Column( nullable = false )
-    private LocalDateTime wendtime; // 납기 일
+    private String wendtime; // 납기 일
     @Column( nullable = false , columnDefinition = " int default 0 ")
     private int wstate; // 보고서 진행상황
     @ManyToOne
@@ -38,7 +36,6 @@ public class WorkPlanEntity extends BaseTime{
         WorkPlanDto workPlanDto = WorkPlanDto.builder()
                 .wno(this.wno)
                 .wcount(this.wcount)
-                .wstarttime(this.wstarttime)
                 .wendtime(this.wendtime)
                 .wstate(this.wstate)
                 .pno(this.productEntity.getPno())

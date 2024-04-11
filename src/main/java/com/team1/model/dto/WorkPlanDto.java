@@ -22,9 +22,7 @@ public class WorkPlanDto extends BaseTimeDto {
 
     private int wcount; // 작업 수량
 
-    private LocalDateTime wstarttime; // 공정 시작일
-
-    private LocalDateTime wendtime; // 납기 일
+    private String wendtime; // 납기 일
 
     private int wstate; // 보고서 진행상황
 
@@ -37,7 +35,6 @@ public class WorkPlanDto extends BaseTimeDto {
         return WorkPlanEntity.builder()
                 .wno(this.wno)
                 .wcount(this.wcount)
-                .wstarttime(this.wstarttime)
                 .wendtime(this.wendtime)
                 .wstate(this.wstate)
                 .build();
