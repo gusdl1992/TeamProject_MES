@@ -23,8 +23,8 @@ public class WorkPlanController {
     WorkPlanService workPlanService;
 
     @PostMapping("/write/post.do")
-    public boolean postWPWriteDo(){
-        return workPlanService.postWPWriteDo();
+    public boolean postWPWriteDo(WorkPlanDto workPlanDto){
+        return workPlanService.postWPWriteDo(workPlanDto);
     }
 
 
