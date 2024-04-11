@@ -9,6 +9,7 @@ import com.team1.service.workplanservice.WorkPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +22,10 @@ public class WorkPlanController {
     @Autowired
     WorkPlanService workPlanService;
 
-
+    @PostMapping("/write/post.do")
+    public boolean postWPWriteDo(){
+        return workPlanService.postWPWriteDo();
+    }
 
 
     @GetMapping("/list/get.do")
