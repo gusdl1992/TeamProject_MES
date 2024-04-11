@@ -21,7 +21,7 @@ public class WorkPlanService {
     SurveyRepository surveyRepository;
 
     public boolean postWPWriteDo(){
-        return workPlanService.postWPWriteDo();
+        return false; //workPlanService.postWPWriteDo();
     }
 
     public List<WorkPlanDto> findWPList(){
