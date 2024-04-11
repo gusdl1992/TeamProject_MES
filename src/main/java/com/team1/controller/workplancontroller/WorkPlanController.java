@@ -38,11 +38,12 @@ public class WorkPlanController {
     }
 
     @PutMapping("/changestate/put.do")
-    public boolean putChangeStateDo(Integer wno , Integer wstate){
+    public boolean putChangeStateDo(@RequestBody WorkPlanDto workPlanDto){
         System.out.println("WorkPlanController.putChangeStateDo");
-        System.out.println("wno = " + wno);
-        System.out.println("wstate = " + wstate);
-        //return workPlanService.putChangeStateDo(wno , wstate);
-        return false;
+        System.out.println("wno = " + workPlanDto.getWno());
+        System.out.println("wstate = " + workPlanDto.getWstate());
+        int wno = workPlanDto.getWno();
+        int wstate = workPlanDto.getWstate();
+        return workPlanService.putChangeStateDo(wno , wstate);
     }
 }

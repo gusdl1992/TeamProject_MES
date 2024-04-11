@@ -100,7 +100,7 @@ export default function Survey(props){
                 alert("안내) 계량내용 등록성공 하였습니다.");
                 // wstate 변경
                 let data = {
-                    wno : workPlanInfo.wno,
+                    wno : query.get("wno"),
                     wstate : 1
                 }
                 axios.put('/wp/changestate/put.do',data)
