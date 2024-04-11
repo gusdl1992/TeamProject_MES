@@ -40,7 +40,7 @@ export default function ManufacturingCheckList(props){
         
     }
 
-    let completeBtn = (r)=>{
+    function completeBtn(r){
         console.log(r);
     }
     
@@ -100,7 +100,7 @@ export default function ManufacturingCheckList(props){
                                         </td>
                                         <td>
                                             {
-                                                r.mfstate == 0 ? '검사대기' : r.mfstate == 1 ? '검사불합격' : r.mfstate == 2 ? '검사합격' : '-'
+                                                r.mfstate == 1 ? '검사대기' : r.mfstate == 2 ? '검사불합격' : r.mfstate == 3 ? '검사합격' : '-'
                                             }
                                         </td>
                                         <td>
@@ -117,18 +117,18 @@ export default function ManufacturingCheckList(props){
                                         <form className={"confirmForm"+index} >
                                             검사자 : <input disabled={r.checkmemberDto.mname == null ? false : true }  value={r.checkmemberDto.mname == null ? "" : r.checkmemberDto.mname } className="checkMemberInput" type="text"/> 
                                             검사상태
-                                            <select name="state" value={confirmstate} onChange={confirmStateChange}>
-                                                <option value="0">
+                                            <select name="state" className={"stateSelect"+r.mfno} value={confirmstate} onChange={confirmStateChange}>
+                                                <option value="1">
                                                     검사대기
                                                 </option>
-                                                <option value="1">
+                                                <option value="2">
                                                     검사불합격
                                                 </option>
-                                                <option value="2">
+                                                <option value="3">
                                                     검사합격
                                                 </option>
                                             </select>
-                                            <button disabled={r.checkmemberDto.mname != null ? true : false } type="button" onClick={()=>{completeBtn(r)}}>검사 완료</button>
+                                            <button disabled={r.checkmemberDto.mname == null ? false : false } type="button" onClick={()=>{completeBtn(r)}}>검사 완료</button>
                                         </form>
                                         <button onClick={()=>{document.querySelector('.modal'+r.mfno).style.display = 'none'}} type="button">x</button>
                                     </div>
