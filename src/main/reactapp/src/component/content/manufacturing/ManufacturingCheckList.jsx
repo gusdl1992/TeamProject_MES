@@ -40,8 +40,19 @@ export default function ManufacturingCheckList(props){
         
     }
 
+    
+
+    // 검사 상태 등록버튼
     function completeBtn(r){
         console.log(r);
+        let state = document.querySelector(`.stateSelect${r.mfno}`).value;
+        axios.post("/manufacturing/updateState.do",{ params: { mfno: r.mfno , state : state}})
+        .then((response)=>{
+            // 0보다 크면 성공
+            if(response>0){ alert("안내) 검사 내용 등록 성공")}
+            else{ alert("안내) 검사 내용 등록 실패")}
+        })
+        .catch((error)=>{console.log(error)})
     }
     
 

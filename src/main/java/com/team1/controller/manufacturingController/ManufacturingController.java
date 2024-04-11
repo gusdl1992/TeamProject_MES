@@ -55,9 +55,16 @@ public class ManufacturingController {//class star
     // 검사기능=======================================================
     // 제조 리스트 받아오기
     @GetMapping("/manufacturingInfo.do")
-    public List<ManufacturingDto> manufacturingDtoListDO(){
+    public List<ManufacturingDto> manufacturingDtoListDo(){
         return manufacturingService.manufacturingDtoListDO();
     }
 
+
+    // 검사완료 버튼 클릭시 스테이터스 수정
+    @PostMapping("/updateState.do")
+    public int manufacturingStateUpdateDo(@RequestParam int mfno , @RequestParam int state){
+
+        return manufacturingService.manufacturingStateUpdateDo(mfno,state);
+    }
 
 }//class end/
