@@ -35,6 +35,8 @@ export default function Manufacturing(props){
     const [ recipeDtoList , setRecipeDtoList] = useState( [
         { pname : '' }// 최초 렌더링 할때 오류 발생 : 초기임의의 값을 넣어줌
     ] );
+    // 재 랜더링용
+    const [ render ,setRender]=useState(0);
     
     
 
@@ -42,7 +44,7 @@ export default function Manufacturing(props){
         const fetchData = async () => {
             try {
                 const response = await axios.get("/manufacturing/MaterialInput/click.do", { params: { mipno: query.get("mipno") } });
-                console.log(response);
+                // console.log(response);
                 setWorkPlanInfo(response.data.workPlanDto);
                 setMaterialInputInfo(response.data);
                 // 시간계산
@@ -65,7 +67,7 @@ export default function Manufacturing(props){
         };
     
         fetchData();
-    }, [query]);
+    }, [query,render]);
 
     
 // =============================================================
@@ -73,7 +75,7 @@ export default function Manufacturing(props){
         console.log("버튼눌림");
 
         // 등록 요청하기
-        console.log(query.get("mipno"))
+        
         axios.post("/manufacturing/insert.do?mipno="+query.get("mipno"))
         .then((r)=>{// int 'mfno' 반환함 => r.data
             // 반환 = 1 이상은 성공
@@ -85,7 +87,9 @@ export default function Manufacturing(props){
             else if(r.data==-2){alert("안내) 이전 공정(투입)에대한 자료가 없습니다.");}
             else if(r.data==-3){alert("안내) 이미 등록 완료된 공정입니다.");}
             else if(r.data==-4){alert("안내) 검사단계가 진행되었습니다.(수정불가)");}
-            
+
+            setRender(render+1);
+
         })
         .catch((error)=>{console.log(error);})
     }
@@ -101,7 +105,7 @@ export default function Manufacturing(props){
             
             {materialInputInfo.mipno!=0?
             <div id="surveyCssBox">
-                {console.log(materialInputInfo)}
+                
                 <form>
                     <h3>
                         <span>생산제품 : {workPlanInfo.pname}</span>
@@ -126,7 +130,7 @@ export default function Manufacturing(props){
                 </form>
             </div>
             :""}
-            <ManufacturingCheckList query={query} />
+            <ManufacturingCheckList />
         </div>
         </>);
     }

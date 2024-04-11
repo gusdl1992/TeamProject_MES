@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RequestMapping("/manufacturing") // 벌크 제조 컨트롤
@@ -61,8 +62,17 @@ public class ManufacturingController {//class star
 
 
     // 검사완료 버튼 클릭시 스테이터스 수정
+        // 1이상 = 성공
+        // 0 = 실패
+        // -1 = 로그인정보가 없음
+        // -2 = 숙성시간이 도달되지 못함
+        // -3 = 권한이 없음
     @PostMapping("/updateState.do")
-    public int manufacturingStateUpdateDo(@RequestParam int mfno , @RequestParam int state){
+    public int manufacturingStateUpdateDo(int mfno , int state){
+        System.out.println("mfno = " + mfno);
+        System.out.println("state = " + state);
+
+
 
         return manufacturingService.manufacturingStateUpdateDo(mfno,state);
     }

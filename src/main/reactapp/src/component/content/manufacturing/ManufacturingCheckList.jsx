@@ -7,6 +7,10 @@ export default function ManufacturingCheckList(props){
     const [confirmstate , setConfirmState] = useState('0');
 
     let [confirmmembername , setConfirmMemberName] = useState('');
+    // 검사 input BOX
+    const confirmmembernameChange = (e)=>{
+        setConfirmMemberName(e.target.value);
+    }
 
     // 투입 리스트
     const [ manufacturing , setManufacturing] = useState([]);
@@ -17,6 +21,9 @@ export default function ManufacturingCheckList(props){
         setConfirmState(e.target.value);
         e.preventDefault();
     }
+
+    // 재 랜더링용
+    const [ render ,setRender]=useState(0);
 
 
     useEffect(() => {
@@ -30,7 +37,7 @@ export default function ManufacturingCheckList(props){
             } catch (error) {console.log(error);}
         };
         fetchData();
-    }, [confirmstate]);
+    }, [render]);
 
 
     let timecalculator = (response) => {
@@ -44,13 +51,29 @@ export default function ManufacturingCheckList(props){
 
     // 검사 상태 등록버튼
     function completeBtn(r){
-        console.log(r);
+        
         let state = document.querySelector(`.stateSelect${r.mfno}`).value;
-        axios.post("/manufacturing/updateState.do",{ params: { mfno: r.mfno , state : state}})
+        const formData = new FormData();
+        
+        formData.append("mfno",r.mfno);
+        formData.append("state",state);
+        
+
+        axios.post(`/manufacturing/updateState.do`,formData)
         .then((response)=>{
-            // 0보다 크면 성공
-            if(response>0){ alert("안내) 검사 내용 등록 성공")}
+            
+            // 1이상 = 성공
+            // 0 = 실패
+            // -1 = 로그인정보가 없음
+            // -2 = 숙성시간이 도달되지 못함
+            // -3 = 권한이 없음
+            if(response.data>0){ alert("안내) 검사 내용 등록 성공")}
+            else if(response.data == -1){ alert("안내) 로그인정보가 없습니다.")}
+            else if(response.data == -2){ alert("안내) 숙성이 완료되지않아 처리할 수 없습니다.")}
+            else if(response.data == -3){ alert("안내) 해당 작업 담당자가 아닙니다.")}
             else{ alert("안내) 검사 내용 등록 실패")}
+            
+            setRender(render+1);
         })
         .catch((error)=>{console.log(error)})
     }
@@ -126,7 +149,8 @@ export default function ManufacturingCheckList(props){
                                         <p>벌크숙성 완료 날짜 : { timecalculator(r).getFullYear() }년{ timecalculator(r).getMonth()+1}월{ timecalculator(r).getDate()}일</p>
                                         <p>담당자 : {r.inputmemberDto.mname}</p>
                                         <form className={"confirmForm"+index} >
-                                            검사자 : <input disabled={r.checkmemberDto.mname == null ? false : true }  value={r.checkmemberDto.mname == null ? "" : r.checkmemberDto.mname } className="checkMemberInput" type="text"/> 
+                                            
+                                            검사자 : <input onChange={confirmmembernameChange} disabled={r.checkmemberDto == null ? false : true }  value={r.checkmemberDto == null ? confirmmembername : r.checkmemberDto.mname } className="checkMemberInput" type="text"/> 
                                             검사상태
                                             <select name="state" className={"stateSelect"+r.mfno} value={confirmstate} onChange={confirmStateChange}>
                                                 <option value="0">
@@ -139,7 +163,7 @@ export default function ManufacturingCheckList(props){
                                                     검사합격
                                                 </option>
                                             </select>
-                                            <button disabled={r.checkmemberDto.mname == null ? false : false } type="button" onClick={()=>{completeBtn(r)}}>검사 완료</button>
+                                            <button disabled={r.checkmemberDto == null ? false : r.mfstate==2?true:false } type="button" onClick={()=>{completeBtn(r)}}>검사 완료</button>
                                         </form>
                                         <button onClick={()=>{document.querySelector('.modal'+r.mfno).style.display = 'none'}} type="button">x</button>
                                     </div>

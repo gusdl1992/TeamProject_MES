@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -151,15 +153,58 @@ public class ManufacturingService {//class start
     }
 
     // 검사완료 버튼 클릭시 스테이터스 수정
+    // 1이상 = 성공
+    // 0 = 실패
+    // -1 = 로그인정보가 없음
+    // -2 = 숙성시간이 도달되지 못함
+    // -3 = 권한이 없음
+    @Transactional
     public int manufacturingStateUpdateDo(int mfno,int state){
+
+        // 로그인한 회원정보를 가져온다
+        Object object =request.getSession().getAttribute("logindto");
+        if(object==null){return -1;} // 값없으면 실패 받환
+        MemberDto memberDto = (MemberDto)object; // 형변환
+        // 받아온 mno-> member 엔티티 객체 찾아오기
+        Optional<MemberEntity> memberEntity = memberRepository.findById(memberDto.getMno());
+        if(!memberEntity.isPresent())return -1; // 찾은값이 없으면 실패 반환
+
+        // 만약 검사자 또는 관리자 가 아니라면 등록 실패
+        if (memberEntity.get().getPno() != 10 && memberEntity.get().getPno() != -1) {
+            return -3;
+        }
+
 
         Optional<ManufacturingEntity> manufacturingEntity = manufacturingEntityRepository.findById(mfno);
         if (!manufacturingEntity.isPresent())return 0;
 
+        if(state==2){
+            // 만약 선택한 상태가 검사 완료일 경우
+            // 벌크 숙성시간이 완료되었는지 확인
+                // 현재 시간
+            LocalDateTime now = LocalDateTime.now();
+                // 벌크제조 등록일자
+            LocalDateTime result = manufacturingEntity.get().getCdate();
+                // 만들제품의 필요한 숙성기간
+            int result2 = manufacturingEntity.get().getMaterialInputEntity().getWorkPlanEntity().getProductEntity().getFerment();
+
+            if(result.plusDays(result2).isAfter(now)){
+                // 만약 현제날짜가 벌크 숙성 완료 일자보다 크면 통과 // 아니면 -2 반환
+                return -2;
+            }
+
+
+        }
+        // 검사 상태변경
         manufacturingEntity.get().setMfstate(state);
 
-        return manufacturingEntity.get().getMfno();
+        // 검사 등록자 등록
+        manufacturingEntity.get().setCheckmemberEntity(memberEntity.get());
 
+        manufacturingEntity.get().getMaterialInputEntity().getWorkPlanEntity().setWstate(6);
+
+
+        return manufacturingEntity.get().getMfno();
     }
 
 }// class end
