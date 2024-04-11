@@ -47,6 +47,7 @@ export default function MaterialInput2(props){
         axios.post("/material/input/post.do?sno="+query.get("sno"))
         .then( (r) => {
             console.log(r);
+            window.location.href="/material/input"
         })
         .catch( (e) => {console.log(e)})
     }

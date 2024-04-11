@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 export default function PackagingLayOut(props){
 
     // 계량
-    const [ subdivision , setSubdivision ] = useState([]);
-    console.log(subdivision);
+    const [ subdivision , setSubdivision ] = useState([]);    
     useEffect( ( ) => {
         axios.get("/packaging/subdivision.do")
         .then( (r) => {
@@ -22,7 +21,7 @@ export default function PackagingLayOut(props){
                 return(
                     <div>
                         <Link to={`/packaging?sdno=${r.sdno}`}>
-                            <span>작업계획 {r.sdno}</span>
+                            <span>소분내역 : {r.sdno}</span>
                             <span>등록일자 : {r.cdate}</span>
                         </Link>
                     </div>

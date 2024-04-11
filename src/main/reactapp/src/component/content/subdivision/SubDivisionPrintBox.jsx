@@ -11,6 +11,7 @@ export default function SubDivisionPrintBox(props){
         axios.get('/subdivision/allinfo/get.do')
         .then((r)=>{
             console.log(r);
+            console.log(r.data);
         if(r.data != []){
             setSubDivision(r.data);
         }

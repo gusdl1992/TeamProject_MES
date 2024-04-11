@@ -19,14 +19,12 @@ public class MemberController {
     @PostMapping("/signup/post.do")
     public int doSignupPost(@RequestBody MemberDto memberDto){ //회원가입
         System.out.println(memberDto);
-        System.out.println("안녕");
         return memberService.doSignupPost(memberDto);
     }
 
     @PostMapping("/login/post.do")
     public boolean doLoginPost(MemberDto memberDto){ //로그인
         System.out.println(memberDto);
-        System.out.println("안녕");
         return memberService.doLoginPost(memberDto);
     }
 
@@ -48,7 +46,7 @@ public class MemberController {
     }
 
 
-    @GetMapping("/find/email/get.do") //수업시간에한거
+    @GetMapping("/find/email/get.do")
     public boolean getfindMemail(String memail){
         return memberService.getfindMemail(memail);
     }

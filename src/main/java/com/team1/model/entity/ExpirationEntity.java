@@ -27,6 +27,7 @@ public class ExpirationEntity extends BaseTime {
 
     int pno; //프로덕트 번호 ?  <<<<<<<<<<<<<<<이 테이블은 input을 스케쥴러로 할 건데 productEntity를 넣어야 하는가에 대해 고민
 
+
     int plcount; //분량
 
     public ExpirationDTO toDto(){

@@ -5,7 +5,6 @@ import { LoginInfoContext } from "../../Index";
 import "./manufacturingCSS.css"
 
 // 다른 컴포넌트
-import SurveyCheckList from "../surveyCheck/SurveyCheckList";
 import TotalBox from "../layouts/TotalBox";
 import MaterialinputList from "./MaterialinputList";
 import ManufacturingCheckList from "./ManufacturingCheckList";
@@ -127,7 +126,7 @@ export default function Manufacturing(props){
                 </form>
             </div>
             :""}
-            <ManufacturingCheckList materialInputInfo={materialInputInfo} />
+            <ManufacturingCheckList query={query} />
         </div>
         </>);
     }

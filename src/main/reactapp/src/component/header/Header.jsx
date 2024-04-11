@@ -81,6 +81,9 @@ export default function Header(props){
                                 <li>
                                     <Link to="/subdivision">소분작업</Link>
                                 </li>
+                                <li>
+                                    <Link to="/packaging">포장</Link>
+                                </li>
                             </ul>
                         </div>
                     </li>

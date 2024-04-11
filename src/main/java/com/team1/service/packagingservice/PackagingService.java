@@ -31,15 +31,15 @@ public class PackagingService {
     @Autowired
     private SubDivisionRepository subDivisionRepository;
 
-    public List<Object> doPackInfoGet(int pgno) {
+    public List<PackagingDto> doPackInfoGet() {
 
-        List<Object> list = new ArrayList<>();
+        List<PackagingDto> list = new ArrayList<>();
 
-        List<PackagingEntity> packagingEntityList = packagingRepository.findByPgno(pgno);
-        System.out.println("★packagingEntityList = " + packagingEntityList);
+        List<PackagingEntity> packagingEntityList = packagingRepository.findAll();
 
-
-        packagingEntityList.forEach( (packaging) -> { list.add(packaging.toDto()); });
+        for (int i = 0 ; i < packagingEntityList.size() ; i++){
+            list.add( packagingEntityList.get(i).toDto() );
+        }
 
         return list;
     }
@@ -52,9 +52,9 @@ public class PackagingService {
     }
 
     @Transactional
-    public boolean doMemberPost(int sdno){
+    public boolean doMemberPost(int sdno , int pgbox , int pgcount ){
         System.out.println("PackagingService.doMemberPost");
-
+        System.out.println("★pgcount = " + pgcount);
         MemberDto loginDto = memberService.doLogininfo();
         if ( loginDto == null ) return false;
 
@@ -73,6 +73,7 @@ public class PackagingService {
         if (savePackaging.getPgno() >= 1){
             savePackaging.setMemberEntity( memberEntity );
             savePackaging.setSubdivisionEntity( subdivisionEntity );
+            savePackaging.setPgcount( pgcount );
 
             return true;
         }
