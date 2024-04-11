@@ -7,7 +7,7 @@ import "./survey.css"
 
 // 박시현 추가
 import SurveyCheckList from "../surveyCheck/SurveyCheckList";
-import TotalBox from "../layouts/TotalBox";
+import SurveyTotalBox from "./SurveyTotalBox";
 
 
 
@@ -49,7 +49,7 @@ export default function Survey(props){
     // console.log(recipeDtoList);
 // =============================================================
     let succeseInfo = [false];
-    function onClickEvent(){
+    async function onClickEvent(){
         console.log("버튼눌림");
         console.log(succeseInfo)
         for(let i = 0; i<succeseInfo.length; i++){
@@ -85,7 +85,7 @@ export default function Survey(props){
         console.log(form);
 
         // 등록 요청하기
-        axios.post("/survey/insert.do",form,{
+        await axios.post("/survey/insert.do",form,{
             headers: {
               'Content-Type': 'application/json' // 예: JSON 데이터 전송
             }
@@ -96,7 +96,19 @@ export default function Survey(props){
             // -3 해당 원자재 레코드가 없음
             // -4 검사 단계 진행됨 (수정불가능)
             console.log(r.data);
-            if(r.data>0){alert("안내) 계량내용 등록성공 하였습니다."); window.location.href='/survey/survey';}
+            if(r.data>0){
+                alert("안내) 계량내용 등록성공 하였습니다.");
+                // wstate 변경
+                let data = {
+                    wno : workPlanInfo.wno,
+                    wstate : 1
+                }
+                axios.put('/wp/changestate/put.do',data)
+                .then(r=>{
+                    console.log(r);
+                })
+                // window.location.href='/survey/survey';
+            }
             else if(r.data==-1){alert("안내) 로그인 정보가 없습니다.");}
             else if(r.data==-2){alert("안내) 등록실패.");}
             else if(r.data==-3){alert("안내) 해당 원자제가 등록되어있지 않습니다..");}
@@ -119,11 +131,12 @@ export default function Survey(props){
             succeseInfo[0] = false;
         }
     }
+    
 
     if(logininfo!=null){ // 로그인 정보가 로딩되지 않았다면 return 안함
         return(<>
         <div style={{maxWidth:'66%',minWidth:'1100px',margin:'0 auto',border:'1px solid red'}}>
-            <TotalBox/>
+            <SurveyTotalBox/>
             <WorkPlanList/>
 
             {workPlanInfo.wcount!=""?

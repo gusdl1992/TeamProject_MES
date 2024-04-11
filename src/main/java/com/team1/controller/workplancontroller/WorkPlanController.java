@@ -8,10 +8,7 @@ import com.team1.service.SurveyService;
 import com.team1.service.workplanservice.WorkPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,5 +35,14 @@ public class WorkPlanController {
     public int findSno(int wno){
         System.out.println("임시테스트용"+wno);
         return workPlanService.findSno(wno);
+    }
+
+    @PutMapping("/changestate/put.do")
+    public boolean putChangeStateDo(Integer wno , Integer wstate){
+        System.out.println("WorkPlanController.putChangeStateDo");
+        System.out.println("wno = " + wno);
+        System.out.println("wstate = " + wstate);
+        //return workPlanService.putChangeStateDo(wno , wstate);
+        return false;
     }
 }

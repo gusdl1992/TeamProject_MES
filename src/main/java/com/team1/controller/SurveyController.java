@@ -21,7 +21,6 @@ public class SurveyController {
     public List<WorkPlanDto> workPlanDtoList (){
 
         List<WorkPlanDto> result = surveyService.workPlanDtoList();
-        System.out.println("result = " + result);
 
         return result;
     }
@@ -29,9 +28,7 @@ public class SurveyController {
     // workplan 식별번호로 정보 가져오기
     @PostMapping("/workplanoneinfo.do")
     public WorkPlanDto workPlanDto (int wno){
-        System.out.println("wno = " + wno);
         WorkPlanDto result = surveyService.workPlanDto(wno);
-        System.out.println("result = " + result);
 
         return result;
     }
@@ -41,7 +38,6 @@ public class SurveyController {
     // 3. 반환해야하는것 = 제품명 / 수량 / 원재료종류수량 / 각 원재료별 필요한수량(수량*원재료비율)=> 계산 뷰에서
     @PostMapping("/workplan/clilck.do")
     public SurveyPlanInfoDto surveyClilckDo(int wno){
-        System.out.println("wno = " + wno);
         return surveyService.surveyClilckDo(wno);
     }
 
@@ -55,7 +51,6 @@ public class SurveyController {
         // -4 검사 단계 진행됨 (수정불가능).
     @PostMapping("/insert.do")
     public int surveyInsertDo(@RequestBody SurveyInsertDto surveyInsertDto){
-        System.out.println("surveyInsertDto = " + surveyInsertDto);
         //System.out.println("surveyInsertDto.getSurveyBDto().get(0) = " + surveyInsertDto.getSurveyBDto().get(0));
         return surveyService.surveyInsertDo(surveyInsertDto);
     }

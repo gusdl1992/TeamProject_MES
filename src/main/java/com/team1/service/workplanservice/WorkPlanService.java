@@ -73,5 +73,8 @@ public class WorkPlanService {
         return 0;
     }
 
+    public boolean putChangeStateDo(int wno , int wstate){
 
+        return false;
+    }
 }

@@ -171,7 +171,6 @@ public class SurveyService {
                 
 
             }// SurveyB 저장 for End
-            workPlanEntity.setWstate(1);
 
             return savedSurveyEntity.getSno();
 
@@ -194,7 +193,6 @@ public class SurveyService {
                 surveyBEntity.setSbcount(surveyInsertDto.getSurveyBDto().get(i).getSbcount());
 
             }
-            workPlanEntity.setWstate(1);
 
             return surveyEntity.get().getSno();
         }
