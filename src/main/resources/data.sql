@@ -1,14 +1,14 @@
 
-insert into member (mno , pno , cdate , udate , mid , mpw , mname ) values (1,-1,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','admin' , 'admin' , "관리자" );
-insert into member (mno , pno , cdate , udate , mid , mpw , mname ) values (2,1,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id1' , 'id1' , "계량담당" );
-insert into member (mno , pno , cdate , udate , mid , mpw , mname ) values (3,2,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id2' , 'id2' , "투입담당" );
-insert into member (mno , pno , cdate , udate , mid , mpw , mname ) values (4,3,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id3' , 'id3' , "사원1" );
-insert into member (mno , pno , cdate , udate , mid , mpw , mname ) values (5,4,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id4' , 'id4', "사원1" );
-insert into member (mno , pno , cdate , udate , mid , mpw , mname ) values (6,1,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id5' , 'id5', "사원2" );
-insert into member (mno , pno , cdate , udate , mid , mpw , mname ) values (7,2,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id6' , 'id6', "사원3" );
-insert into member (mno , pno , cdate , udate , mid , mpw , mname ) values (8,3,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id7' , 'id7', "사원4" );
-insert into member (mno , pno , cdate , udate , mid , mpw , mname ) values (9,4,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id8' , 'id8', "사원5" );
-insert into member (mno , pno , cdate , udate , mid , mpw , mname ) values (10,1,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id9' , 'id9', "사원6" );
+insert into member (mno , part , cdate , udate , mid , mpw , mname ) values (1,-1,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','admin' , 'admin' , "관리자" );
+insert into member (mno , part , cdate , udate , mid , mpw , mname ) values (2,1,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id1' , 'id1' , "계량담당" );
+insert into member (mno , part , cdate , udate , mid , mpw , mname ) values (3,2,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id2' , 'id2' , "투입담당" );
+insert into member (mno , part , cdate , udate , mid , mpw , mname ) values (4,3,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id3' , 'id3' , "사원1" );
+insert into member (mno , part , cdate , udate , mid , mpw , mname ) values (5,4,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id4' , 'id4', "사원1" );
+insert into member (mno , part , cdate , udate , mid , mpw , mname ) values (6,1,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id5' , 'id5', "사원2" );
+insert into member (mno , part , cdate , udate , mid , mpw , mname ) values (7,2,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id6' , 'id6', "사원3" );
+insert into member (mno , part , cdate , udate , mid , mpw , mname ) values (8,3,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id7' , 'id7', "사원4" );
+insert into member (mno , part , cdate , udate , mid , mpw , mname ) values (9,4,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id8' , 'id8', "사원5" );
+insert into member (mno , part , cdate , udate , mid , mpw , mname ) values (10,1,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id9' , 'id9', "사원6" );
 
 
 insert into product ( pno , cdate , udate , pname , ferment , standard , packagingcount , period ) values ( 1 , '2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456' , '수분크림' , 30 , 30 , 15 , 365);

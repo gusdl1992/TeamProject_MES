@@ -14,7 +14,6 @@ import ProductRecipieList from "./content/recipie/ProductRecipieList";
 
 import Survey from "./content/survey/Survey" // 승호
 import WorkPlanList from "./content/survey/WorkPlanList"; // 승호
-import Member from "./member/Member"; // 시현 사원등록 테스트
 import SurveyList from "./content/materialinput/SurveyList";
 import ProductLayOut from "./content/product/ProductLayOut";
 import RmLayOut from "./content/rawmaterial/RmLayOut";
@@ -28,12 +27,14 @@ import WorkPlan from "./content/workplan/WorkPlan";
 
 
 
-import SurveyCheckList from "./content/surveyCheck/SurveyCheckList"; // 시현
 import ProductRLayOut from "./content/recipie/ProductRLayout";
 import SubDivision from "./content/subdivision/SubDivision";
 import Manufacturing from "./content/manufacturing/Manufacturing";//승호
 import Packaging from "./content/packaging/Packaging";
 import ExpirationLayOut from "./content/expiration/ExpirationLayOut";
+import MeberList from "./member/MeberList"; // 시현 멤버 리스트 출력
+
+
 
 
 
@@ -69,7 +70,6 @@ export default function Index(props){
                     <Route path="/subdivision" element={ <SubDivision/> }/>
                     <Route path="/survey/survey" element={<Survey/> } />
                     <Route path="/survey/plan" element={<WorkPlanList/> } />
-                    <Route path="/member" element={<Member/> } />
                     <Route path="/product/recipie/get" element={<ProductRLayOut/>}/>
                     <Route path="/wp/list" element={<LayoutTest list={<AllWorkPlanList/>} />}/>
                     <Route path="/wp/write" element={<WorkPlan/>}/>
@@ -77,6 +77,7 @@ export default function Index(props){
                     <Route path="/manufacturing/info" element={<Manufacturing/>}/>
                     <Route path="/packaging" element={<Packaging />} />
                     <Route path="/expirationlayout" element={<ExpirationLayOut/>}/>
+                    <Route path="/member/List" element={<MeberList/>}/>
                     </Routes>
                 </div>
         </BrowserRouter>

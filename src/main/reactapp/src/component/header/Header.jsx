@@ -93,13 +93,13 @@ export default function Header(props){
                     <li>
                         경영통계
                     </li>
-                    {logininfo.pno == -1 && (
+                    {logininfo.part == -1 && (
                         <li onClick={clickMenu} >
                         관리자페이지
                         <div className='subMenu'>
                             <ul>
                                 <li>
-                                <Link to="/member">사원등록</Link>
+                                <Link to="/member/List">사원조회</Link>
                                 </li>
                                 <li>
                                     <Link to="/wp/write">생산일정 등록</Link>

@@ -27,7 +27,8 @@ public class MemberController {
         System.out.println(memberDto);
         return memberService.doLoginPost(memberDto);
     }
-
+    
+    // 멤버 전부 가져오기 
     @GetMapping("/all/get.do")
     public List<MemberDto> doAllReadMember(){
         System.out.println("MemberController.doAllReadMember");

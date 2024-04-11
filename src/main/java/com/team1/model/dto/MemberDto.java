@@ -25,14 +25,14 @@ public class MemberDto extends BaseTimeDto {
 
     private String mname;
 
-    private int pno; // 임시 파트번호
+    private int part; // 임시 파트번호
 
     public MemberEntity toEntity(){
         return MemberEntity.builder()
                 .mno(this.mno)
                 .mid(this.mid)
                 .mpw(this.mpw)
-                .pno(this.pno)
+                .part(this.part)
                 .mname(this.mname)
                 .build();
 
