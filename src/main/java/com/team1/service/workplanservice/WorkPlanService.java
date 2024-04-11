@@ -20,6 +20,9 @@ public class WorkPlanService {
     @Autowired
     SurveyRepository surveyRepository;
 
+    public boolean postWPWriteDo(){
+        return workPlanService.postWPWriteDo();
+    }
 
     public List<WorkPlanDto> findWPList(){
         return workPlanEntityRepository.findAll().stream().map(WorkPlanEntity::toDto).collect(Collectors.toList());

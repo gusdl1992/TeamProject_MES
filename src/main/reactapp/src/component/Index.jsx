@@ -24,6 +24,7 @@ import axios from "axios";
 import RmLLayOut from "./content/rawmaterial/RmLLayOut";
 import AllWorkPlanList from "./content/workplan/AllWorkPlanList";
 import ReportAll from "./content/workplan/ReportAll";
+import WorkPlan from "./content/workplan/WorkPlan";
 
 
 
@@ -71,6 +72,7 @@ export default function Index(props){
                     <Route path="/member" element={<Member/> } />
                     <Route path="/product/recipie/get" element={<ProductRLayOut/>}/>
                     <Route path="/wp/list" element={<LayoutTest list={<AllWorkPlanList/>} />}/>
+                    <Route path="/wp/write" element={<WorkPlan/>}/>
                     <Route path="/wp/report" element={<ReportAll/>}/>
                     <Route path="/manufacturing/info" element={<Manufacturing/>}/>
                     <Route path="/packaging" element={<Packaging />} />
