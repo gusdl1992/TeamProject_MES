@@ -37,4 +37,12 @@ public class WorkPlanService {
     }
 
 
+    public int findmipno(int wno){
+        Integer result = workPlanEntityRepository.findMipnoByWno(wno);
+        if (result != null){
+            return result.intValue();
+        }
+        return 0;
+    }
+
 }

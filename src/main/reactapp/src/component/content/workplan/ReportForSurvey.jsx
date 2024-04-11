@@ -17,11 +17,11 @@ export default function ReportForSurvey(props){
             <h4>원료 계량 보고서 </h4>
             <table>
                 <thead>
-                    <th>원자재명</th><th>투입량</th>
+                    <th>원자재명</th><th>계량</th>
                 </thead>
                 <tbody>              
                 {report2.recipeDto.map( (e)=>{
-                    return(<tr><td>{e.rmname}</td><td>{e.reamount}</td></tr>)
+                    return(<tr><td>{e.rmname}</td><td>{e.reamount*report2.workPlanDto.wcount}</td></tr>)
                 })}
                 </tbody>
             </table>

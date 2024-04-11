@@ -11,4 +11,5 @@ public interface ManufacturingEntityRepository extends JpaRepository<Manufacturi
     @Query(value = "select * from manufacturing where mipno = :mipno",nativeQuery = true)
     Optional<ManufacturingEntity> findByMipno(int mipno);
 
+
 }

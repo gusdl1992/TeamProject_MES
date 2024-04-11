@@ -162,4 +162,8 @@ public class ManufacturingService {//class start
 
     }
 
+    public ManufacturingDto findbymipno(int mipno){ //단일객체 뽑아오기
+        return manufacturingEntityRepository.findByMipno(mipno).get().toDto();
+    }
+
 }// class end

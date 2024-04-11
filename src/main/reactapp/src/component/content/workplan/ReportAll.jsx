@@ -3,6 +3,7 @@ import { useLocation, useSearchParams } from "react-router-dom";
 import LayoutTest from "../layouttest/Layouttest";
 import ReportForSurvey from "./ReportForSurvey";
 import ReportForMInput from "./ReportForMInput";
+import ReportForBulk from "./ReportForBulk";
 
 
 
@@ -17,7 +18,7 @@ export default function ReportAll(props){
     const checkreport = (wno, wstate) => {
         
         if (wstate == 6 || wstate == 5){
-            return(<><ReportForSurvey wno={wno}/><ReportForMInput wno={wno}/></>) //추가 값 대입
+            return(<><ReportForSurvey wno={wno}/><ReportForMInput wno={wno}/><ReportForBulk wno={wno}/></>) //추가 값 대입
         }
         else if (wstate==4|| wstate ==3){
             return(<><ReportForSurvey wno={wno}/><ReportForMInput wno={wno}/></>)

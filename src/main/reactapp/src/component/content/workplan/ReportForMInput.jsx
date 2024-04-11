@@ -20,6 +20,7 @@ export default function ReportForMInput(props){
     
 
     console.log(report2)
+    console.log(report2.checkmno)
     return report2[0] ? (
         <>  
             <h4>원료 투입 보고서 </h4>
@@ -29,11 +30,12 @@ export default function ReportForMInput(props){
                 </thead>
                 <tbody>              
                 {report2.map( (e)=>{
-                    return(<tr><td>{e.rmname}</td><td>{e.reamount}</td></tr>)
+                    return(<tr><td>{e.rmname}</td><td>{e.sbcount}</td></tr>)
                 })}
                 </tbody>
             </table>
             상태: {wstate > 3 ? <div>투입완료</div>:<div>투입확인전</div>}
+            작성자: {report2[0].checkmno}
         </>
     ) : null;
 }
