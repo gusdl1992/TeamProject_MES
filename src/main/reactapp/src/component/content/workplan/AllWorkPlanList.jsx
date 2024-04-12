@@ -48,7 +48,7 @@ export default function AllWorkPlanList(props){
                         {state[e.wstate]}
                     </td>
                     <td>
-                        {e.wstarttime.split("T")[0]}
+                        {e.cdate.split("T")[0]}
                     </td>
 
                 </tr>
