@@ -1,38 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
 function Test1234(props) {
-  const [open, setOpen] = useState(false);
+  // useState 대신 useEffect를 사용하여 props.message를 상태로 설정
+  const [message, setMessage] = useState(props.message);
 
-  const handleClick = () => {
+  // useEffect를 사용하여 props가 변경될 때마다 message 상태 업데이트
+  useEffect(() => {
+    setMessage(props.message);
     setOpen(true);
-  };
+  }, [props.message]);
+
+  const [open, setOpen] = useState(true);
+
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
 
-    setOpen(false);
+    setOpen(false); // handleClose 시 스낵바를 닫도록 setOpen(false)로 수정
   };
-
-  let test = () =>{
-    return props.maseege;
-  }
 
   return (
     <div>
-      <Button onClick={handleClick}>Open Snackbar</Button>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+      <Snackbar open={open} autoHideDuration={30000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} >
         <Alert
           onClose={handleClose}
           severity="success"
           variant="filled"
-          sx={{ width: '100%' }}
+          sx={{ width: '100%'}}
         >
-        {test}
+          {message}
         </Alert>
       </Snackbar>
     </div>

@@ -22,7 +22,6 @@ public class AlertSocekt extends TextWebSocketHandler {
         접속명단.add(session);
         // 2. 확인
         System.out.println("접속명단 = " + 접속명단);
-        handleTextMessage(session , new TextMessage("하이하이요"));
     }
 
     // 2. 클라이언트 으로 부터 메시지를 받았을떄 ( session : 메시지를 보낸 클라이언트 소켓 , message : 내용물 )
@@ -38,6 +37,22 @@ public class AlertSocekt extends TextWebSocketHandler {
 
         }
     }
+
+
+    // 메소드 오버로딩
+    public void sendString(TextMessage message) throws Exception{
+
+        System.out.println("message = " + message);
+        System.out.println("접속명단 = " + 접속명단);
+
+        // 1. 접속명단의 클라이언트 소켓들에게 메시지 보내기
+        for (WebSocketSession 각클라이언트소켓 : 접속명단){
+            각클라이언트소켓.sendMessage(message);
+            // DB 처리시 여기서 DB 처리 한다.
+
+        }
+    }
+
 
     // 3. 클라이언트 소켓과 접속 종료 되었을떄 ( session : 접속이 종료된 클라이언트 소켓 정보 )
     @Override
