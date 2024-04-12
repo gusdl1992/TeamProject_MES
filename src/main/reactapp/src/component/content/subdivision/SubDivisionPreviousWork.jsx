@@ -19,7 +19,7 @@ export default function SubDivisionPreviousWork(props){
     return(<>
         <div id="workPlanListBox">
             {previousWork.map((r) => {
-                if(r.materialInputEntity.workPlanEntity.wstate == 6){
+                if(r.materialInputEntity.workPlanEntity.wstate == 6 && r.mfstate == 2){
                     return(
                         <div className="workplanCss">
                             <Link to={`/subdivision?mfno=${r.mfno}`}>

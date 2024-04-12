@@ -18,7 +18,7 @@ export default function PackagingLayOut(props){
     return(<>
         <div id="workPlanListBox">
             {subdivision.map((r) => {
-                if(r.manufacturingDto.materialInputDto.workPlanDto.wstate == 8){
+                if(r.manufacturingDto.materialInputDto.workPlanDto.wstate == 8 && r.sdstate == 2){
                     return(
                         <div>
                             <Link to={`/packaging?sdno=${r.sdno}`}>

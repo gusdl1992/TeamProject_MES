@@ -16,8 +16,7 @@ export default function MaterialinputList(){
     useEffect(()=>{
         axios.get("/manufacturing/MaterialInput.do")
         .then((response)=>{
-            const result = response.data.map((materialinput)=>{return materialinput;})
-            setMaterialinput(result);
+            setMaterialinput(response.data);
             console.log(materialinput);
         })
     },[render])
@@ -25,7 +24,7 @@ export default function MaterialinputList(){
     return(<>
         <div id="materialinputCssBox">
             {materialinput.map((mip)=>{
-                if(mip.workPlanDto.wstate == 4){
+                if(mip.workPlanDto.wstate == 4 && mip.mipstate == 2){
                     return(
                         <>
                             <div className="materialinputCss">

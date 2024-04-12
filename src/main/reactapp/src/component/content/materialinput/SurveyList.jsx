@@ -22,7 +22,7 @@ export default function SurveyList(props){
     return(<>
         <div id="workPlanListBox">
             {survey.map((s) => {
-                if(s.workPlanDto.wstate == 2){
+                if(s.workPlanDto.wstate == 2 && s.sstate == 2){
                     return(
                         <div>
                             <Link to={`/material/input?sno=${s.sno}`}>
