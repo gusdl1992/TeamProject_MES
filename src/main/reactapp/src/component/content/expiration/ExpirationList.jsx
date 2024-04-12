@@ -13,8 +13,13 @@ export default function ExpirationList(props){
     return(<>
         <table>
             <thead>
-                <tr><th>제품명</th><th>분량</th><th>비고</th></tr>
+                <tr><th>제품명</th><th>분량</th></tr>
             </thead>
+            <tbody>
+                {elist.map(e=>{
+                     return(<tr><td>{e.rmname}</td><td>{e.reamount*report2.workPlanDto.wcount}</td></tr>)
+                })}
+            </tbody>
         </table>
     </>)
 }

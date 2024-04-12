@@ -76,7 +76,7 @@ public class WorkPlanService {
     public boolean putChangeStateDo(int wno , int wstate){
         System.out.println("wno = " + wno);
         System.out.println("wstate = " + wstate);
-        
+
         Optional<WorkPlanEntity> optionalWorkPlanEntity = workPlanEntityRepository.findById(wno);
 
         WorkPlanEntity workPlan = optionalWorkPlanEntity.get();
@@ -91,4 +91,12 @@ public class WorkPlanService {
         }
         return false;
     }
+    public int findmipno(int wno){
+        Integer result = workPlanEntityRepository.findMipnoByWno(wno);
+        if (result != null){
+            return result.intValue();
+        }
+        return 0;
+    }
+
 }
