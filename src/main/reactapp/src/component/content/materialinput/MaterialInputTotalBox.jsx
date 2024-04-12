@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import axios from "axios";
 
-export default function PackagingTotalBox(props){
+export default function MaterialInputTotalBox(props){
     const [previous , setPrevious] = useState(0);
     const [now , setNow] = useState(0);
     const [success , setSuccess] = useState(0);
@@ -11,7 +11,7 @@ export default function PackagingTotalBox(props){
         const fetchData = async () => {
             try {
                 const response = await axios.get("/wp/list/get.do");
-                const filteredData = response.data.filter((result) => result.wstate <= 8);
+                const filteredData = response.data.filter((result) => result.wstate <= 2);
                 setPrevious(filteredData.length);
             } catch (error) {
                 console.log(error);
@@ -20,10 +20,10 @@ export default function PackagingTotalBox(props){
 
         const fetchData2 = async () => {
             try {
-                const response2 = await axios.get('/packaging/info/get.do');
-                const nowlength = response2.data.filter((result) => result.sdstate === 0);
-                const successlength = response2.data.filter((result) => result.sdstate === 2);
-                const faillength = response2.data.filter((result) => result.sdstate === 1);
+                const response2 = await axios.get('/material/input/allinfo/get.do');
+                const nowlength = response2.data.filter((result) => result.mipstate === 0);
+                const successlength = response2.data.filter((result) => result.mipstate === 2);
+                const faillength = response2.data.filter((result) => result.mipstate === 1);
                 setNow(nowlength.length);
                 setSuccess(successlength.length);
                 setFail(faillength.length);

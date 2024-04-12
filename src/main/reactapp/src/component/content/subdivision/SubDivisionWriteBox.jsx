@@ -40,6 +40,16 @@ export default function SubDivisionWriteBox(props){
         axios.post("/subdivision/input/post.do?mfno="+query.get('mfno'),subdivisionFormData)
         .then( (r) => {
             console.log(r);
+            if(r){
+                let data = {
+                    wno : manufacturingInfo.materialInputDto.workPlanDto.wno,
+                    wstate : 7
+                }
+                axios.put('/wp/changestate/put.do',data)
+                .then(r=>{
+                    console.log(r);
+                })
+            }
         })
         .catch( (e) => {console.log(e)})
     }

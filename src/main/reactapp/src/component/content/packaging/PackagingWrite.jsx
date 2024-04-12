@@ -48,6 +48,16 @@ export default function PackagingWrite(props){
         axios.post("/packaging/post.do?sdno="+query.get('sdno') , packagingFormData)
         .then((r)=>{
             console.log(r);
+            if(r){
+                let data = {
+                    wno : packagingInfo.manufacturingDto.materialInputDto.workPlanDto.wno,
+                    wstate : 9
+                }
+                axios.put('/wp/changestate/put.do',data)
+                .then(r=>{
+                    console.log(r);
+                })
+            }
         }).catch((e) => {console.log(e)})   
         console.log(packagingForm.pgcount.value);
         console.log(packagingInfo.manufacturingDto.materialInputDto.productDto.pno)

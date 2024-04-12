@@ -7,9 +7,6 @@ export default function SurveyList(props){
     // 계량
     const [ survey , setSurvey ] = useState([]);
 
-    // 워크플랜
-    const [ workPlan , setWorkPlan] = useState([]);
-
     useEffect( ( ) => {
         axios.get("/material/surveyinfo.do")
         .then( (r) => {
@@ -25,15 +22,16 @@ export default function SurveyList(props){
     return(<>
         <div id="workPlanListBox">
             {survey.map((s) => {
-                
-                return(
-                    <div>
-                        <Link to={`/material/input?sno=${s.sno}`}>
-                            <span>작업계획 {s.sno}</span>
-                            <span>등록일자 : {s.cdate}</span>
-                        </Link>
-                    </div>
-                )
+                if(s.workPlanDto.wstate == 2){
+                    return(
+                        <div>
+                            <Link to={`/material/input?sno=${s.sno}`}>
+                                <span>작업계획 {s.sno}</span>
+                                <span>등록일자 : {s.cdate}</span>
+                            </Link>
+                        </div>
+                    )
+                }
             })}
         </div>    
     </>)

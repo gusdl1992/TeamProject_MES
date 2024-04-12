@@ -55,7 +55,7 @@ export default function ManufacturingCheckList(props){
     
 
     // 검사 상태 등록버튼
-    function completeBtn(r){
+    function completeBtn(r,wno){
         
         let state = document.querySelector(`.stateSelect${r.mfno}`).value;
         const formData = new FormData();
@@ -72,7 +72,17 @@ export default function ManufacturingCheckList(props){
             // -1 = 로그인정보가 없음
             // -2 = 숙성시간이 도달되지 못함
             // -3 = 권한이 없음
-            if(response.data>0){ alert("안내) 검사 내용 등록 성공")}
+            if(response.data>0){
+                alert("안내) 검사 내용 등록 성공");
+                let data = {
+                    wno : wno,
+                    wstate : 6
+                }
+                axios.put('/wp/changestate/put.do',data)
+                .then(r=>{
+                    console.log(r);
+                })
+            }
             else if(response.data == -1){ alert("안내) 로그인정보가 없습니다.")}
             else if(response.data == -2){ alert("안내) 숙성이 완료되지않아 처리할 수 없습니다.")}
             else if(response.data == -3){ alert("안내) 해당 작업 담당자가 아닙니다.")}
@@ -172,7 +182,7 @@ export default function ManufacturingCheckList(props){
                                                         검사합격
                                                     </option>
                                                 </select>
-                                                <button disabled={r.checkmemberDto == null ? false : r.mfstate==2?true:false } type="button" onClick={()=>{completeBtn(r)}}>검사 완료</button>
+                                                <button disabled={r.checkmemberDto == null ? false : r.mfstate==2?true:false } type="button" onClick={()=>{completeBtn(r,r.materialInputDto.workPlanDto.wno)}}>검사 완료</button>
                                             </form>
                                             <button onClick={()=>{document.querySelector('.modal'+r.mfno).style.display = 'none'}} type="button">x</button>
                                         </td>

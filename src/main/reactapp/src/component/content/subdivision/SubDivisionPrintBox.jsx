@@ -24,7 +24,7 @@ export default function SubDivisionPrintBox(props){
         e.preventDefault();
     }
 
-    let onMaterialConfirm = (index)=>{
+    let onMaterialConfirm = (index,wno)=>{
         const confirmForm = document.querySelector(`.confirmForm${index}`);
 
         const confirmFormData = new FormData(confirmForm);
@@ -33,6 +33,14 @@ export default function SubDivisionPrintBox(props){
         .then(r=>{
             console.log(r);
             if(r.data){
+                let data = {
+                    wno : wno,
+                    wstate : 8
+                }
+                axios.put('/wp/changestate/put.do',data)
+                .then(r=>{
+                    console.log(r);
+                })
                 window.location.href='/subdivision';
             }
         })
@@ -125,7 +133,7 @@ export default function SubDivisionPrintBox(props){
                                                     검사합격
                                                 </option>
                                             </select>
-                                            <button disabled={r.checkmemberDto != null ? true : false } type="button" onClick={()=>{onMaterialConfirm(index)}}>검사 완료</button>
+                                            <button disabled={r.checkmemberDto != null ? true : false } type="button" onClick={()=>{onMaterialConfirm(index,r.manufacturingDto.materialInputDto.workPlanDto.wno)}}>검사 완료</button>
                                         </form>
                                         <button onClick={()=>{document.querySelector('.modal'+r.sdno).style.display = 'none'}} type="button">x</button>
                                     </div>

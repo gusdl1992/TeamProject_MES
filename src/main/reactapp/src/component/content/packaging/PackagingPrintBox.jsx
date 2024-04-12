@@ -72,17 +72,17 @@ export default function PackagingPrintBox(props){
                                             
                                         </td>
                                         <td>
-                                        <button onClick={()=>{document.querySelector('.modal'+r.sdno).style.display = 'block'}} type="button">상세보기</button>
+                                        <button onClick={()=>{document.querySelector('.modal'+r.pgno).style.display = 'block'}} type="button">상세보기</button>
                                         </td>
                                     </tr>
-                                    <div style={{display:'none'}} className={"modal"+r.sdno}>         
+                                    <div style={{display:'none'}} className={"modal"+r.pgno}>         
                                         <p>포장계획 : {}</p>                               
                                         <p>제품명 : {}</p>
                                         <p>수주량 : {}</p>
                                         <p>포장개수 : {}</p>
                                         <p>날짜 : {}</p>
                                         <p>담당자 : {}</p>                                        
-                                        <button onClick={()=>{document.querySelector('.modal'+r.sdno).style.display = 'none'}} type="button">x</button>
+                                        <button onClick={()=>{document.querySelector('.modal'+r.pgno).style.display = 'none'}} type="button">x</button>
                                     </div>
                                 </>
                             )

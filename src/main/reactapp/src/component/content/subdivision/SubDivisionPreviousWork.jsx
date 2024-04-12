@@ -19,14 +19,16 @@ export default function SubDivisionPreviousWork(props){
     return(<>
         <div id="workPlanListBox">
             {previousWork.map((r) => {
-                return(
-                    <div className="workplanCss">
-                        <Link to={`/subdivision?mfno=${r.mfno}`}>
-                            <span>벌크내역 {r.mfno}</span>
-                            <span>등록일자 : {r.cdate}</span>
-                        </Link>
-                    </div>
-                )
+                if(r.materialInputEntity.workPlanEntity.wstate == 6){
+                    return(
+                        <div className="workplanCss">
+                            <Link to={`/subdivision?mfno=${r.mfno}`}>
+                                <span>벌크내역 {r.mfno}</span>
+                                <span>등록일자 : {r.cdate}</span>
+                            </Link>
+                        </div>
+                    )
+                }
             })}
         </div>    
     </>)

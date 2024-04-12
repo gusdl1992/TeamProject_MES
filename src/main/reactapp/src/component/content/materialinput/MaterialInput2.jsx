@@ -47,7 +47,19 @@ export default function MaterialInput2(props){
         axios.post("/material/input/post.do?sno="+query.get("sno"))
         .then( (r) => {
             console.log(r);
-            window.location.href="/material/input"
+            // wstate 변경
+            if(r){
+                let data = {
+                    wno : surveyB[0].wno,
+                    wstate : 3
+                }
+                axios.put('/wp/changestate/put.do',data)
+                .then(r=>{
+                    console.log(r);
+                })
+
+                window.location.href="/material/input"
+            }
         })
         .catch( (e) => {console.log(e)})
     }

@@ -22,7 +22,6 @@ public class SurveyEntity extends BaseTime{
     @Column( nullable = true)
     private int sstate; // 지시 수량
 
-
     @ManyToOne
     @JoinColumn(name = "inputmno")
     private MemberEntity inputmemberEntity; // 사원번호 따오기 위해 회원테이블 가져옴
@@ -43,7 +42,7 @@ public class SurveyEntity extends BaseTime{
                 .sno(this.sno)
                 .sstate(this.sstate)
                 .inputmno(this.inputmemberEntity.getMno())
-                .wno(this.workPlanEntity.getWno())
+                .workPlanDto(this.workPlanEntity.toDto())
                 .build();
 
         surveyDto.setCdate(this.cdate);
