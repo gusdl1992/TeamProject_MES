@@ -49,11 +49,11 @@ export default function Header(props){
                 로고
             </div>
             <div id='sideNav'>
-                <ul style={{position: 'absolute'}}>
-                    <li onClick={clickMenu}>
-                        <a className='topMenu' href='#'>
-                            자재관리
-                        </a>
+                <ul>
+                    <li onClick={clickMenu}>                        
+                        <div className='topMenu'>
+                                자재관리
+                        </div>                        
                         <div className='subMenu'>
                             <ul>
                                 <li>
@@ -66,7 +66,9 @@ export default function Header(props){
                         </div>
                     </li>
                     <li onClick={clickMenu}>
-                        생산관리
+                        <div className='topMenu'>
+                            생산관리
+                        </div>                       
                         <div className='subMenu'>
                             <ul>
                                 <li>
@@ -87,15 +89,17 @@ export default function Header(props){
                             </ul>
                         </div>
                     </li>
-                    <li>
+                    {/* <li>
                         로그
                     </li>
                     <li>
                         경영통계
-                    </li>
+                    </li> */}
                     {logininfo.part == -1 && (
                         <li onClick={clickMenu} >
-                        관리자페이지
+                            <div className='topMenu'>
+                                관리자페이지
+                            </div>                        
                         <div className='subMenu'>
                             <ul>
                                 <li>
