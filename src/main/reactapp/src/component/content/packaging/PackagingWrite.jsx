@@ -37,12 +37,29 @@ export default function PackagingWrite(props){
     
 
     const packaginPost = () => {
+        
+
         let packagingForm = document.querySelector(".packagingForm");
         let packagingFormData = new FormData(packagingForm);
         
+        console.log(packagingForm.pgcount.value);
+        console.log(packagingFormData.pgcount);
+
         axios.post("/packaging/post.do?sdno="+query.get('sdno') , packagingFormData)
         .then((r)=>{
             console.log(r);
+        }).catch((e) => {console.log(e)})   
+        console.log(packagingForm.pgcount.value);
+        console.log(packagingInfo.manufacturingDto.materialInputDto.productDto.pno)
+
+        let packagingFormData2 = new FormData();
+        packagingFormData2.append('pno', packagingInfo.manufacturingDto.materialInputDto.productDto.pno);
+        packagingFormData2.append('pgcount', packagingForm.pgcount.value);
+
+        
+        axios.post("/productlog/post.do" , packagingFormData2 )
+        .then( (r2) => {
+            console.log(r2);
         }).catch((e) => {console.log(e)})
     }
 
