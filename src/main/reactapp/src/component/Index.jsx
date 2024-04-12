@@ -33,6 +33,8 @@ import Manufacturing from "./content/manufacturing/Manufacturing";//승호
 import Packaging from "./content/packaging/Packaging";
 import ExpirationLayOut from "./content/expiration/ExpirationLayOut";
 import MeberList from "./member/MeberList"; // 시현 멤버 리스트 출력
+import ChartLayOut from "./content/chart/ChartLayOut";
+
 
 
 
@@ -76,8 +78,9 @@ export default function Index(props){
                     <Route path="/wp/report" element={<ReportAll/>}/>
                     <Route path="/manufacturing/info" element={<Manufacturing/>}/>
                     <Route path="/packaging" element={<Packaging />} />
-                    <Route path="/expirationlayout" element={<ExpirationLayOut/>}/>
+                    <Route path="/expiration" element={<ExpirationLayOut/>}/>
                     <Route path="/member/List" element={<MeberList/>}/>
+                    <Route path="/chart" element = {<ChartLayOut/>}/>
                     </Routes>
                 </div>
         </BrowserRouter>
