@@ -1,7 +1,12 @@
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { RenderContext } from "./Manufacturing";
 
 export default function ManufacturingCheckList(props){
+
+    // 재 랜더링용
+    // - provider 컴포넌트의 value 호출
+    const { render ,setRender } = useContext(RenderContext);
 
     // select 박스 선택한거
     const [confirmstate , setConfirmState] = useState('0');
@@ -22,8 +27,8 @@ export default function ManufacturingCheckList(props){
         e.preventDefault();
     }
 
-    // 재 랜더링용
-    const [ render ,setRender]=useState(0);
+    
+    
 
 
     useEffect(() => {
@@ -142,6 +147,7 @@ export default function ManufacturingCheckList(props){
                                         </td>
                                     </tr>
                                     <div style={{display:'none'}} className={"modal"+r.mfno}>
+                                        <p>작업계획 번호 : {r.materialInputDto.workPlanDto.wno}</p>
                                         <p>벌크제조계획 번호 : {r.mfno}</p>
                                         <p>벌크명 : {r.materialInputDto.productDto.pname}벌크</p>
                                         <p>벌크수량 : {r.mfcount}</p>

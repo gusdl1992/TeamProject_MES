@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Await, useSearchParams } from "react-router-dom";
 import { LoginInfoContext } from "../../Index";
 import "./manufacturingCSS.css"
@@ -10,7 +10,8 @@ import MaterialinputList from "./MaterialinputList";
 import ManufacturingCheckList from "./ManufacturingCheckList";
 
 
-
+// 전역변수
+export const RenderContext = React.createContext('');
 
 export default function Manufacturing(props){
     // 1. 컨텍스트 가져오기 (로그인 정보)
@@ -99,39 +100,41 @@ export default function Manufacturing(props){
 
     if(logininfo!=null){ // 로그인 정보가 로딩되지 않았다면 return 안함
         return(<>
-        <div style={{maxWidth:'66%',minWidth:'1100px',margin:'0 auto',border:'1px solid red'}}>
-            <TotalBox/>
-            <MaterialinputList/>
-            
-            {materialInputInfo.mipno!=0?
-            <div id="surveyCssBox">
+        <RenderContext.Provider value={{ render ,setRender }}>
+            <div style={{maxWidth:'66%',minWidth:'1100px',margin:'0 auto',border:'1px solid red'}}>
+                <TotalBox/>
+                <MaterialinputList/>
                 
-                <form>
-                    <h3>
-                        <span>생산제품 : {workPlanInfo.pname}</span>
-                        <span>생산수량 : {workPlanInfo.wcount.toLocaleString()} EA</span>
-                        <span>생산기한 : {workPlanInfo.wendtime.split('T')[0]} 까지</span>
-                        <div>숙성 소요 기한 : {materialInputInfo.productDto.ferment} 일</div>
-                        <div>예상 완료 기한 : {fermentDate.getFullYear()}년{fermentDate.getMonth()+1}월{fermentDate.getDate()}일</div>
-                    </h3>
-                    <div>
-                        <ul id="surveyUl">
-                        {
-                            recipeDtoList.map((r)=>{
-                                return(<>
-                                    <li>투입재료 : <span className="inputCon">{r.rmname}</span> 투입되어있는 양 : <span className="inputCon">{(r.reamount*workPlanInfo.wcount).toLocaleString()}g</span></li>
-                                </>
-                                );
-                            })
-                        }
-                        </ul>
-                        <button id="surveyBtn" type="button" onClick={onClickEvent}>버튼</button>
-                    </div>
-                </form>
+                {materialInputInfo.mipno!=0?
+                <div id="surveyCssBox">
+                    
+                    <form>
+                        <h3>
+                            <span>생산제품 : {workPlanInfo.pname}</span>
+                            <span>생산수량 : {workPlanInfo.wcount.toLocaleString()} EA</span>
+                            <span>생산기한 : {workPlanInfo.wendtime.split('T')[0]} 까지</span>
+                            <div>숙성 소요 기한 : {materialInputInfo.productDto.ferment} 일</div>
+                            <div>예상 완료 기한 : {fermentDate.getFullYear()}년{fermentDate.getMonth()+1}월{fermentDate.getDate()}일</div>
+                        </h3>
+                        <div>
+                            <ul id="surveyUl">
+                            {
+                                recipeDtoList.map((r)=>{
+                                    return(<>
+                                        <li>투입재료 : <span className="inputCon">{r.rmname}</span> 투입되어있는 양 : <span className="inputCon">{(r.reamount*workPlanInfo.wcount).toLocaleString()}g</span></li>
+                                    </>
+                                    );
+                                })
+                            }
+                            </ul>
+                            <button id="surveyBtn" type="button" onClick={onClickEvent}>버튼</button>
+                        </div>
+                    </form>
+                </div>
+                :""}
+                <ManufacturingCheckList />
             </div>
-            :""}
-            <ManufacturingCheckList />
-        </div>
+        </RenderContext.Provider>
         </>);
     }
 }

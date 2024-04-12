@@ -1,9 +1,14 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 import "./manufacturingCSS.css"
+import { RenderContext } from "./Manufacturing";
 
 export default function MaterialinputList(){
+
+    // 재 랜더링용
+    // - provider 컴포넌트의 value 호출
+    const { render ,setRender } = useContext(RenderContext);
     
     // 투입테이블
     const [ materialinput , setMaterialinput] = useState([]);
@@ -15,7 +20,7 @@ export default function MaterialinputList(){
             const result = response.data.map((materialinput)=>{return materialinput;})
             setMaterialinput(result);
         })
-    },[])
+    },[render])
     
     return(<>
         <div id="materialinputCssBox">
