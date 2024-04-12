@@ -17,6 +17,8 @@ import java.util.List;
 @Service
 public class ProductLogService {
 
+
+
     @Autowired
     private ProductLogRepository productLogRepository;
 
