@@ -90,13 +90,13 @@ export default function ManufacturingCheckList(props){
         <div className="AcontentBox">
             <h3>목록</h3>
             <table>
-                <colgroup>
+                {/* <colgroup>
                     <col width="10%"/>
                     <col width="20%"/>
                     <col width="30%"/>
                     <col width="15%"/>
                     <col width="25%"/>
-                </colgroup>
+                </colgroup> */}
                 <thead>
                     <tr>
                         <th>
@@ -149,7 +149,7 @@ export default function ManufacturingCheckList(props){
                                         </td>
                                     </tr>
                                     <tr style={{display:'none'}} className={"modal"+r.mfno}>
-                                        <td colSpan={"4"}>
+                                        <td colSpan={"5"}>
                                             <p>작업계획 번호 : {r.materialInputDto.workPlanDto.wno}</p>
                                             <p>벌크제조계획 번호 : {r.mfno}</p>
                                             <p>벌크명 : {r.materialInputDto.productDto.pname}벌크</p>
