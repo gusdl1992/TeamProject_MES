@@ -42,7 +42,7 @@ public class WorkPlanService {
 
         if( !optionalMemberEntity.isPresent() ) return false;
 
-        if(optionalMemberEntity.get().getPno() != -1) return false;
+        if(optionalMemberEntity.get().getPart() != -1) return false;
 
         ProductEntity productEntity = productRepository.findByPname(workPlanDto.getPname());
 
