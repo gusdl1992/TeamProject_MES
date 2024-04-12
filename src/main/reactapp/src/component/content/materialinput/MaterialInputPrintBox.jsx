@@ -23,7 +23,7 @@ export default function MaterialInputPrintBox(props){
         e.preventDefault();
     }
 
-    let onMaterialConfirm = (index)=>{
+    let onMaterialConfirm = (index,wno)=>{
         const confirmForm = document.querySelector(`.confirmForm${index}`);
 
         const confirmFormData = new FormData(confirmForm);
@@ -32,7 +32,18 @@ export default function MaterialInputPrintBox(props){
         .then(r=>{
             console.log(r);
             if(r.data){
-                window.location.href='/material/input';
+                if(r.data){
+                    let data = {
+                        wno : wno,
+                        wstate : 4
+                    }
+                    axios.put('/wp/changestate/put.do',data)
+                    .then(r=>{
+                        console.log(r);
+                    })
+
+                    window.location.href='/material/input';
+                }
             }
         })
         .catch(e=>{
@@ -122,7 +133,7 @@ export default function MaterialInputPrintBox(props){
                                                     검사합격
                                                 </option>
                                             </select>
-                                            <button disabled={r.checkmemberDto != null ? true : false } type="button" onClick={()=>{onMaterialConfirm(index)}}>검사 완료</button>
+                                            <button disabled={r.checkmemberDto != null ? true : false } type="button" onClick={()=>{onMaterialConfirm(index,r.workPlanDto.wno)}}>검사 완료</button>
                                         </form>
                                         <button onClick={()=>{document.querySelector('.modal'+r.mipno).style.display = 'none'}} type="button">x</button>
                                     </div>

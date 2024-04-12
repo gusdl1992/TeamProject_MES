@@ -8,6 +8,7 @@ import "./manufacturingCSS.css"
 import TotalBox from "../layouts/TotalBox";
 import MaterialinputList from "./MaterialinputList";
 import ManufacturingCheckList from "./ManufacturingCheckList";
+import ManufacturingTotalBox from "./ManufacturingTotalBox";
 
 
 // 전역변수
@@ -83,7 +84,17 @@ export default function Manufacturing(props){
             // -1 = 로그인 정보없음
             // -2 투입공정 내용을 찾을 수 없음
             // -3 값이 이미 등록되어있음
-            if(r.data>0){alert("안내) 제조 등록성공 하였습니다.");}
+            if(r.data>0){
+                alert("안내) 제조 등록성공 하였습니다.");
+                let data = {
+                    wno : workPlanInfo.wno,
+                    wstate : 5
+                }
+                axios.put('/wp/changestate/put.do',data)
+                .then(r=>{
+                    console.log(r);
+                })
+            }
             else if(r.data==-1){alert("안내) 로그인 정보가 없습니다.");}
             else if(r.data==-2){alert("안내) 이전 공정(투입)에대한 자료가 없습니다.");}
             else if(r.data==-3){alert("안내) 이미 등록 완료된 공정입니다.");}
@@ -102,7 +113,7 @@ export default function Manufacturing(props){
         return(<>
         <RenderContext.Provider value={{ render ,setRender }}>
             <div style={{maxWidth:'66%',minWidth:'1100px',margin:'0 auto',border:'1px solid red'}}>
-                <TotalBox/>
+                <ManufacturingTotalBox/>
                 <MaterialinputList/>
                 
                 {materialInputInfo.mipno!=0?

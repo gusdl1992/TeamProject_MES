@@ -22,7 +22,7 @@ public class SurveyDto extends BaseTimeDto {
     private int inputmno;
     private int checkmno; // 담당자
 
-    private int wno; // 워크플랜 식별번호
+    private WorkPlanDto workPlanDto; // 워크플랜 식별번호
 
 
 
