@@ -74,7 +74,21 @@ public class WorkPlanService {
     }
 
     public boolean putChangeStateDo(int wno , int wstate){
+        System.out.println("wno = " + wno);
+        System.out.println("wstate = " + wstate);
+        
+        Optional<WorkPlanEntity> optionalWorkPlanEntity = workPlanEntityRepository.findById(wno);
 
+        WorkPlanEntity workPlan = optionalWorkPlanEntity.get();
+
+        workPlan.setWstate(wstate);
+
+        System.out.println("workPlan.getWstate() = " + workPlan.getWstate());
+
+        if(workPlan.getWstate() != 0){
+            workPlanEntityRepository.save(workPlan);
+            return true;
+        }
         return false;
     }
 }

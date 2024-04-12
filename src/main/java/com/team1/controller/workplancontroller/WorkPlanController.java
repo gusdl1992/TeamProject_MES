@@ -39,9 +39,6 @@ public class WorkPlanController {
 
     @PutMapping("/changestate/put.do")
     public boolean putChangeStateDo(@RequestBody WorkPlanDto workPlanDto){
-        System.out.println("WorkPlanController.putChangeStateDo");
-        System.out.println("wno = " + workPlanDto.getWno());
-        System.out.println("wstate = " + workPlanDto.getWstate());
         int wno = workPlanDto.getWno();
         int wstate = workPlanDto.getWstate();
         return workPlanService.putChangeStateDo(wno , wstate);

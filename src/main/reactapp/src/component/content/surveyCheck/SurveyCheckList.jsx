@@ -25,7 +25,7 @@ export default function SurveyCheckList(props){
         e.preventDefault();
     }
     
-    let onMaterialConfirm = (index)=>{
+    let onMaterialConfirm = (index,wno)=>{
         const confirmForm = document.querySelector(`.confirmForm${index}`);
         console.log(confirmForm);
         
@@ -38,6 +38,15 @@ export default function SurveyCheckList(props){
             console.log("35");
             console.log(r);
             if(r.data){
+                // wstate 변경
+                let data = {
+                    wno : wno,
+                    wstate : 2
+                }
+                axios.put('/wp/changestate/put.do',data)
+                .then(r=>{
+                    console.log(r);
+                })
                 window.location.href='/survey/survey';
             }
         })
@@ -135,7 +144,7 @@ export default function SurveyCheckList(props){
                                                     검사합격
                                                 </option>
                                             </select>
-                                            <button disabled={r.checkmname != null ? true : false } type="button" onClick={()=>{onMaterialConfirm(index)}}>검사 완료</button>
+                                            <button disabled={r.checkmname != null ? true : false } type="button" onClick={()=>{onMaterialConfirm(index,r.wno)}}>검사 완료</button>
                                         </form>
                                         <button onClick={()=>{document.querySelector('.modal'+r.sno).style.display = 'none'}} type="button">x</button>
                                     </div>

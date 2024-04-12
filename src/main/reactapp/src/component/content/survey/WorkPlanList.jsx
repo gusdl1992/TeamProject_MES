@@ -21,15 +21,17 @@ export default function WorkPlanList(){
     return(<>
         <div id="workplanCssBox">
         {workPlan.map((w)=>{
-            return(
-                <div className="workplanCss">
-                    <Link to={`/survey/survey?wno=${w.wno}`}>
-                        <h4>작업계획{w.wno}</h4>
-                        <div>PlanNumber : {w.wno}</div>
-                        <div>등록일자 : {w.cdate.split('T')[0].split('-')[0]}년 {w.cdate.split('T')[0].split('-')[1]}월 {w.cdate.split('T')[0].split('-')[2]}일</div>
-                    </Link>
-                </div>
-                )
+            if(w.wstate == 0){
+                return(
+                    <div className="workplanCss">
+                        <Link to={`/survey/survey?wno=${w.wno}`}>
+                            <h4>작업계획{w.wno}</h4>
+                            <div>PlanNumber : {w.wno}</div>
+                            <div>등록일자 : {w.cdate.split('T')[0].split('-')[0]}년 {w.cdate.split('T')[0].split('-')[1]}월 {w.cdate.split('T')[0].split('-')[2]}일</div>
+                        </Link>
+                    </div>
+                    )
+            }
         })}
         </div>
     </>)

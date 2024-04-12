@@ -107,7 +107,7 @@ export default function Survey(props){
                 .then(r=>{
                     console.log(r);
                 })
-                // window.location.href='/survey/survey';
+                window.location.href='/survey/survey';
             }
             else if(r.data==-1){alert("안내) 로그인 정보가 없습니다.");}
             else if(r.data==-2){alert("안내) 등록실패.");}
