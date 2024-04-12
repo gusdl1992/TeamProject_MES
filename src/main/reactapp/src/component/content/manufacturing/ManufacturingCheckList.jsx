@@ -143,36 +143,40 @@ export default function ManufacturingCheckList(props){
                                             }
                                         </td>
                                         <td>
-                                            <button onClick={()=>{document.querySelector('.modal'+r.mfno).style.display = 'block'}} type="button">상세보기</button>
+                                            <button onClick={()=>{document.querySelector('.modal'+r.mfno).style.display='block'}} type="button">상세보기</button>
+
+                                            {/* {console.log(document.querySelector('.modal'+r.mfno))} */}
                                         </td>
                                     </tr>
-                                    <div style={{display:'none'}} className={"modal"+r.mfno}>
-                                        <p>작업계획 번호 : {r.materialInputDto.workPlanDto.wno}</p>
-                                        <p>벌크제조계획 번호 : {r.mfno}</p>
-                                        <p>벌크명 : {r.materialInputDto.productDto.pname}벌크</p>
-                                        <p>벌크수량 : {r.mfcount}</p>
-                                        <p>벌크제조 완료 날짜 : {r.cdate.split('T')[0]}</p>
-                                        <p>벌크숙성 완료 날짜 : { timecalculator(r).getFullYear() }년{ timecalculator(r).getMonth()+1}월{ timecalculator(r).getDate()}일</p>
-                                        <p>담당자 : {r.inputmemberDto.mname}</p>
-                                        <form className={"confirmForm"+index} >
-                                            
-                                            검사자 : <input onChange={confirmmembernameChange} disabled={r.checkmemberDto == null ? false : true }  value={r.checkmemberDto == null ? confirmmembername : r.checkmemberDto.mname } className="checkMemberInput" type="text"/> 
-                                            검사상태
-                                            <select name="state" className={"stateSelect"+r.mfno} value={confirmstate} onChange={confirmStateChange}>
-                                                <option value="0">
-                                                    검사대기
-                                                </option>
-                                                <option value="1">
-                                                    검사불합격
-                                                </option>
-                                                <option value="2">
-                                                    검사합격
-                                                </option>
-                                            </select>
-                                            <button disabled={r.checkmemberDto == null ? false : r.mfstate==2?true:false } type="button" onClick={()=>{completeBtn(r)}}>검사 완료</button>
-                                        </form>
-                                        <button onClick={()=>{document.querySelector('.modal'+r.mfno).style.display = 'none'}} type="button">x</button>
-                                    </div>
+                                    <tr style={{display:'none'}} className={"modal"+r.mfno}>
+                                        <td colSpan={"4"}>
+                                            <p>작업계획 번호 : {r.materialInputDto.workPlanDto.wno}</p>
+                                            <p>벌크제조계획 번호 : {r.mfno}</p>
+                                            <p>벌크명 : {r.materialInputDto.productDto.pname}벌크</p>
+                                            <p>벌크수량 : {r.mfcount}</p>
+                                            <p>벌크제조 완료 날짜 : {r.cdate.split('T')[0]}</p>
+                                            <p>벌크숙성 완료 날짜 : { timecalculator(r).getFullYear() }년{ timecalculator(r).getMonth()+1}월{ timecalculator(r).getDate()}일</p>
+                                            <p>담당자 : {r.inputmemberDto.mname}</p>
+                                            <form className={"confirmForm"+index} >
+                                                
+                                                검사자 : <input onChange={confirmmembernameChange} disabled={r.checkmemberDto == null ? false : true }  value={r.checkmemberDto == null ? confirmmembername : r.checkmemberDto.mname } className="checkMemberInput" type="text"/> 
+                                                검사상태
+                                                <select name="state" className={"stateSelect"+r.mfno} value={confirmstate} onChange={confirmStateChange}>
+                                                    <option value="0">
+                                                        검사대기
+                                                    </option>
+                                                    <option value="1">
+                                                        검사불합격
+                                                    </option>
+                                                    <option value="2">
+                                                        검사합격
+                                                    </option>
+                                                </select>
+                                                <button disabled={r.checkmemberDto == null ? false : r.mfstate==2?true:false } type="button" onClick={()=>{completeBtn(r)}}>검사 완료</button>
+                                            </form>
+                                            <button onClick={()=>{document.querySelector('.modal'+r.mfno).style.display = 'none'}} type="button">x</button>
+                                        </td>
+                                    </tr>
                                 </>
                             )
                         })
