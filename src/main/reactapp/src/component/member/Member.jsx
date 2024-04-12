@@ -9,11 +9,11 @@ export default function Test(props){
     // 1. 컨텍스트 가져오기 (로그인 정보)
     const { logininfo, setLogin } = useContext(LoginInfoContext);
 
-    const [pno, setPno] = useState(""); // 유형 상태 초기화
+    const [part, setPart] = useState(""); // 유형 상태 초기화
 
     const handleUserTypeChange = (e) => {
-        setPno(e.target.value); // select 요소의 값 업데이트
-        console.log(pno);
+        setPart(e.target.value); // select 요소의 값 업데이트
+        console.log(part);
     }
 
     // // 1. 상태변수
@@ -43,8 +43,8 @@ export default function Test(props){
             window.location.href='/';
             // http://localhost:3000/member/test
         }
-        // pno 가 관리자가 아닐경우 메인페이지 이동
-        else if(logininfo.pno !== -1){
+        // part 가 관리자가 아닐경우 메인페이지 이동
+        else if(logininfo.part !== -1){
             window.location.href='/c';
         }
     }
@@ -57,7 +57,7 @@ export default function Test(props){
         console.log(mpw);
         console.log(mname);
 
-        let info = { mid : mid , mpw : mpw , mname : mname , pno : pno}
+        let info = { mid : mid , mpw : mpw , mname : mname , part : part}
         console.log(info); console.log('인포')
         axios.post("/member/signup/post.do" , info)
         .then(response => {
@@ -67,7 +67,8 @@ export default function Test(props){
                 setMid('');
                 setMname('');
                 setMpassword('');
-                setPno('');
+                setPart('');
+                window.location.href='/member/List';
             }else if(response.data == -1){
                 alert('아이디 중복');
             }else if(response.data == -2){
@@ -105,7 +106,7 @@ export default function Test(props){
             </div>
             <div class="form-group">
                 <label for="userType">업무부서:</label>
-                <select id="userType" name="pno" value={pno} onChange={handleUserTypeChange} required>
+                <select id="userType" name="part" value={part} onChange={handleUserTypeChange} required>
                     <option value="">업무부서를 선택하세요</option>
                     <option value="1">계량원</option>
                     <option value="2">투입원</option>

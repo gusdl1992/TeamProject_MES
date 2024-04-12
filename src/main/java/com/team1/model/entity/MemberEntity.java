@@ -29,7 +29,7 @@ public class MemberEntity extends BaseTime {
     @Column(nullable = false)
     private String mname; // 회원 이름
 
-    private int pno; // 임시 파트번호 ( 어떤 파티에서 일하는지 )
+    private int part; // 임시 파트번호 ( 어떤 파티에서 일하는지 )
     // -1 관리자 , 계량생산자 1 , 계량투입자 2 ,
     // 검사자 10
 
@@ -38,7 +38,7 @@ public class MemberEntity extends BaseTime {
                 mno(this.mno).
                 mid(this.mid).
                 mpw(this.mpw).
-                pno(this.pno).
+                part(this.part).
                 mname(this.mname).build();
         memberDto.setCdate(this.cdate);
         memberDto.setUdate(this.udate);
