@@ -47,7 +47,6 @@ public class SafetySocket extends TextWebSocketHandler implements DisposableBean
     public void startScheduler() {
         scheduledFuture = taskScheduler.scheduleAtFixedRate(this::doPost, 10000);
     }
-
     public void stopScheduler() {
         if (scheduledFuture != null) {
             scheduledFuture.cancel(true);
