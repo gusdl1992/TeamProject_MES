@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Await, useSearchParams } from "react-router-dom";
 import WorkPlanList from "./WorkPlanList";
 import { LoginInfoContext } from "../../Index";
@@ -9,7 +9,8 @@ import "./survey.css"
 import SurveyCheckList from "../surveyCheck/SurveyCheckList";
 import SurveyTotalBox from "./SurveyTotalBox";
 
-
+// 전역변수
+export const RenderContext = React.createContext('');
 
 export default function Survey(props){
     // 1. 컨텍스트 가져오기 (로그인 정보)
@@ -31,6 +32,8 @@ export default function Survey(props){
         { pname : '' }// 최초 렌더링 할때 오류 발생 : 초기임의의 값을 넣어줌
     ] );
     
+    // 재 랜더링용
+    const [ render ,setRender]=useState(0);
 
     useEffect(  ()=>{
         const formData = new FormData();
@@ -41,10 +44,11 @@ export default function Survey(props){
             setWorkPlanInfo(response.data.workPlanDto);
             const result = response.data.recipeDto.map( (re) =>{return re;})// 레시피 dto state 추가하기
             setRecipeDtoList(result);
+
             
         })
         .catch(re =>{console.log(re)})
-    },[query])
+    },[query,render])
     
     // console.log(recipeDtoList);
 // =============================================================
@@ -107,12 +111,15 @@ export default function Survey(props){
                 .then(r=>{
                     console.log(r);
                 })
-                window.location.href='/survey/survey';
+                // window.location.href='/survey/survey';
             }
             else if(r.data==-1){alert("안내) 로그인 정보가 없습니다.");}
             else if(r.data==-2){alert("안내) 등록실패.");}
             else if(r.data==-3){alert("안내) 해당 원자제가 등록되어있지 않습니다..");}
             else if(r.data==-4){alert("안내) 검사단계가 진행되었습니다.(수정불가)");}
+            setWorkPlanInfo({wcount:0})
+            setQuery(0);
+            setRender(render+1);
             
         })
         .catch((re)=>{console.log(re);})
@@ -135,41 +142,42 @@ export default function Survey(props){
 
     if(logininfo!=null){ // 로그인 정보가 로딩되지 않았다면 return 안함
         return(<>
-        <div style={{maxWidth:'66%',minWidth:'1100px',margin:'0 auto',border:'1px solid red'}}>
-            <SurveyTotalBox/>
-            <WorkPlanList/>
+        <RenderContext.Provider value={{ render ,setRender }}>
+            <div style={{maxWidth:'66%',minWidth:'1100px',margin:'0 auto',border:'1px solid red'}}>
+                <SurveyTotalBox/>
+                <WorkPlanList/>
 
-            {workPlanInfo.wcount!=""?
-            <div id="surveyCssBox">
-                <form>
-                    <h3>
-                        <span>생산제품 : {recipeDtoList[0].pname}</span>
-                        <span>생산수량 : {workPlanInfo.wcount.toLocaleString()} EA</span>
-                        <span>생산기한 : {workPlanInfo.wendtime.split('T')[0]} 까지</span>
-                    </h3>
-                    <div>
-                        <ul id="surveyUl">
-                        {
-                            recipeDtoList.map((r,index)=>{
-                                return(<>
-                                    <li>투입재료 : {r.rmname} 투입 해야하는 양 = {(r.reamount*workPlanInfo.wcount).toLocaleString()}g</li>
-                                    <div>
-                                        입력된 양 : <input type="text" onChange={()=>{onChangeEvent(index , r.reamount*workPlanInfo.wcount)}} className={"recipe"+index} id={r.rmno} { ...(logininfo.part === 1 || logininfo.part === -1? { disabled: false }: { disabled: true })} />
-                                        <span className={"validation"+index}></span>
-                                    </div>
-                                </>
-                                );
-                            })
-                        }
-                        </ul>
-                        <button id="surveyBtn" type="button" onClick={onClickEvent}>버튼</button>
-                    </div>
-                </form>
+                {workPlanInfo.wcount!=""?
+                <div id="surveyCssBox">
+                    <form>
+                        <h3>
+                            <span>생산제품 : {recipeDtoList[0].pname}</span>
+                            <span>생산수량 : {workPlanInfo.wcount.toLocaleString()} EA</span>
+                            <span>생산기한 : {workPlanInfo.wendtime.split('T')[0]} 까지</span>
+                        </h3>
+                        <div>
+                            <ul id="surveyUl">
+                            {
+                                recipeDtoList.map((r,index)=>{
+                                    return(<>
+                                        <li>투입재료 : {r.rmname} 투입 해야하는 양 = {(r.reamount*workPlanInfo.wcount).toLocaleString()}g</li>
+                                        <div>
+                                            입력된 양 : <input type="text" onChange={()=>{onChangeEvent(index , r.reamount*workPlanInfo.wcount)}} className={"recipe"+index} id={r.rmno} { ...(logininfo.part === 1 || logininfo.part === -1? { disabled: false }: { disabled: true })} />
+                                            <span className={"validation"+index}></span>
+                                        </div>
+                                    </>
+                                    );
+                                })
+                            }
+                            </ul>
+                            <button id="surveyBtn" type="button" onClick={onClickEvent}>버튼</button>
+                        </div>
+                    </form>
+                </div>
+                :""}
+                <SurveyCheckList/>
             </div>
-            :""}
-            <SurveyCheckList/>
-        </div>
-            
+        </RenderContext.Provider>
         </>);
     }
 }

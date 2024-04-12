@@ -22,7 +22,7 @@ public class MaterialInputConfirmController {
     private MemberService memberService;
 
     @PutMapping("/confirm.do")
-    public boolean putMaterialInputConfirm(MaterialInputDto materialInputDto){
+    public int putMaterialInputConfirm(MaterialInputDto materialInputDto){
         System.out.println("materialInputDto = " + materialInputDto);
         int mno = memberService.doLogininfo().getMno();
         int mipno = materialInputDto.getMipno();

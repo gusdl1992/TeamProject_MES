@@ -97,6 +97,7 @@ export default function ManufacturingCheckList(props){
 
     
     return(<>
+        {manufacturing==null?"":
         <div className="AcontentBox">
             <h3>목록</h3>
             <table>
@@ -154,8 +155,6 @@ export default function ManufacturingCheckList(props){
                                         </td>
                                         <td>
                                             <button onClick={()=>{document.querySelector('.modal'+r.mfno).style.display='block'}} type="button">상세보기</button>
-
-                                            {/* {console.log(document.querySelector('.modal'+r.mfno))} */}
                                         </td>
                                     </tr>
                                     <tr style={{display:'none'}} className={"modal"+r.mfno}>
@@ -167,7 +166,7 @@ export default function ManufacturingCheckList(props){
                                             <p>벌크제조 완료 날짜 : {r.cdate.split('T')[0]}</p>
                                             <p>벌크숙성 완료 날짜 : { timecalculator(r).getFullYear() }년{ timecalculator(r).getMonth()+1}월{ timecalculator(r).getDate()}일</p>
                                             <p>담당자 : {r.inputmemberDto.mname}</p>
-                                            <form className={"confirmForm"+index} >
+                                            <div className={"confirmForm"+index} >
                                                 
                                                 검사자 : <input onChange={confirmmembernameChange} disabled={r.checkmemberDto == null ? false : true }  value={r.checkmemberDto == null ? confirmmembername : r.checkmemberDto.mname } className="checkMemberInput" type="text"/> 
                                                 검사상태
@@ -182,9 +181,12 @@ export default function ManufacturingCheckList(props){
                                                         검사합격
                                                     </option>
                                                 </select>
-                                                <button disabled={r.checkmemberDto == null ? false : r.mfstate==2?true:false } type="button" onClick={()=>{completeBtn(r,r.materialInputDto.workPlanDto.wno)}}>검사 완료</button>
-                                            </form>
-                                            <button onClick={()=>{document.querySelector('.modal'+r.mfno).style.display = 'none'}} type="button">x</button>
+                                                <div>
+                                                    <button disabled={r.checkmemberDto == null ? false : r.mfstate==2?true:false } type="button" onClick={()=>{completeBtn(r,r.materialInputDto.workPlanDto.wno)}}>검사 완료</button>
+                                                    <button onClick={()=>{document.querySelector('.modal'+r.mfno).style.display = 'none'}} type="button">x</button>
+                                                </div>
+                                            </div>
+
                                         </td>
                                     </tr>
                                 </>
@@ -194,5 +196,6 @@ export default function ManufacturingCheckList(props){
                 </tbody>
             </table>
         </div>
+        }
     </>);
 }

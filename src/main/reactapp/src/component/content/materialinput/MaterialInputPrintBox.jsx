@@ -1,10 +1,14 @@
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { LoginInfoContext } from "../../Index";
 
 export default function MaterialInputPrintBox(props){
     let [material,setMaterial] = useState([]);
     const [confirmstate , setConfirmState] = useState('0');
     let [confirmmembername , setConfirmMemberName] = useState('');
+
+    // 1. 컨텍스트 가져오기 (로그인 정보)
+    const { logininfo, setLogin } = useContext(LoginInfoContext);
 
     // 출력
     useEffect(() =>{
@@ -31,19 +35,19 @@ export default function MaterialInputPrintBox(props){
         axios.put('/materialinput/confirm.do',confirmFormData)
         .then(r=>{
             console.log(r);
-            if(r.data){
-                if(r.data){
-                    let data = {
-                        wno : wno,
-                        wstate : 4
-                    }
-                    axios.put('/wp/changestate/put.do',data)
-                    .then(r=>{
-                        console.log(r);
-                    })
+            if(r.data>0){
+                let data = {
+                            wno : wno,
+                            wstate : 4
+                        }
+                        axios.put('/wp/changestate/put.do',data)
+                        .then(r=>{
+                            console.log(r);
+                        })
 
-                    window.location.href='/material/input';
-                }
+                window.location.href='/material/input';
+            }else if(r.data==-1){
+                alert("안내) 해당업무 담당자가 아닙니다.")
             }
         })
         .catch(e=>{

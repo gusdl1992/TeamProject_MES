@@ -118,40 +118,72 @@ public class SurveyCheckService {
 
 
     // 2. 검사 완료 체크 시 검사 완료자 데이터 저장
-    public boolean surveyCheck(int sno , int sstate){
+    public boolean surveyCheck(int sno , int sstate , int state){
         MemberDto memberDto = memberService.doLogininfo();
         SurveyEntity survey = surveyGetList(sno);
         WorkPlanEntity workPlan = workPlanGetList(survey.getWorkPlanEntity().getWno());
         List<RecipeEntity> recipeEntityList = recipeEntityList(workPlan.getProductEntity().getPno());
         List<SurveyBEntity> surveyBEntityList = surveyBEntityList(sno);
+        boolean result = surveyChack(workPlan, recipeEntityList, surveyBEntityList);
+        System.out.println("state = " + state);
+        if(state==2) {
+            System.out.println("insert messegssadsadsad***");
+            if (result) {
+                // 계량 체크가 유효성 검사가 모두 성공 했을 시 아래 문 실행.
+                survey.setCheckmemberEntity(memberNameCheck(memberDto.getMno()));
+                survey.setSstate(state);
+                // 해당 워크플랜을 상태 변경
+                workPlan.setWstate(2);
+                surveyRepository.save(survey);
+                // 상태변경한 워크플랜을 DB에 저장
+                workPlanEntityRepository.save(workPlan);
 
-        boolean result = surveyChack(workPlan ,recipeEntityList ,surveyBEntityList);
-        if (result){
-            // 계량 체크가 유효성 검사가 모두 성공 했을 시 아래 문 실행.
-            survey.setCheckmemberEntity(memberNameCheck(memberDto.getMno()));
-            survey.setSstate(sstate);
-            // 해당 워크플랜을 상태 변경
-            workPlan.setWstate(2);
-            surveyRepository.save(survey);
-            // 상태변경한 워크플랜을 DB에 저장
-            workPlanEntityRepository.save(workPlan);
-
-            // return true;
-        }else {
-            // 계량 검사 유효성 검사 실패시 false 리턴.
-            return false;
-        }
-        if (result){
-            for (int i = 0 ; i < surveyBEntityList.size() ; i++ ){
-                RawMaterialLogEntity rawMaterialLogEntity = RawMaterialLogEntity.builder()
-                        .rawMaterialEntity(surveyBEntityList.get(i).getRawMaterialEntity())
-                        .rmlcount(surveyBEntityList.get(i).getSbcount() * -1)
-                        .build();
-                rawMateriallogRepository.save(rawMaterialLogEntity);
+                // return true;
+            } else {
+                // 계량 검사 유효성 검사 실패시 false 리턴.
+                return false;
             }
-            return true;
-        }else {
-            return false;
+            if (result) {
+                for (int i = 0; i < surveyBEntityList.size(); i++) {
+                    RawMaterialLogEntity rawMaterialLogEntity = RawMaterialLogEntity.builder()
+                            .rawMaterialEntity(surveyBEntityList.get(i).getRawMaterialEntity())
+                            .rmlcount(surveyBEntityList.get(i).getSbcount() * -1)
+                            .build();
+                    rawMateriallogRepository.save(rawMaterialLogEntity);
+                }
+                return true;
+            } else {
+                return false;
+            }
+        }else {// 합격이 아닐경우 (복붙함 수정사항 = workplan state 1로 지정해둠)
+            if (result) {
+                // 계량 체크가 유효성 검사가 모두 성공 했을 시 아래 문 실행.
+                survey.setCheckmemberEntity(memberNameCheck(memberDto.getMno()));
+                survey.setSstate(state);
+                // 해당 워크플랜을 상태 변경
+                workPlan.setWstate(1);
+                surveyRepository.save(survey);
+                // 상태변경한 워크플랜을 DB에 저장
+                workPlanEntityRepository.save(workPlan);
+
+                // return true;
+            } else {
+                // 계량 검사 유효성 검사 실패시 false 리턴.
+                return false;
+            }
+            if (result) {
+                for (int i = 0; i < surveyBEntityList.size(); i++) {
+                    RawMaterialLogEntity rawMaterialLogEntity = RawMaterialLogEntity.builder()
+                            .rawMaterialEntity(surveyBEntityList.get(i).getRawMaterialEntity())
+                            .rmlcount(surveyBEntityList.get(i).getSbcount() * -1)
+                            .build();
+                    rawMateriallogRepository.save(rawMaterialLogEntity);
+                }
+                return true;
+            } else {
+                return false;
+            }
+
         }
     }
 
@@ -279,6 +311,7 @@ public class SurveyCheckService {
                 result.add(false);
             }
         }
+
 
         // 비교값을 Boolean 배열에 넣고 false 가 있는지 비교 있으면 검사 불합격 
         for (int i = 0 ; i < result.size() ; i++){
