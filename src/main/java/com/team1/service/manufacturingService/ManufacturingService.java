@@ -170,7 +170,7 @@ public class ManufacturingService {//class start
         if(!memberEntity.isPresent())return -1; // 찾은값이 없으면 실패 반환
 
         // 만약 검사자 또는 관리자 가 아니라면 등록 실패
-        if (memberEntity.get().getPno() != 10 && memberEntity.get().getPno() != -1) {
+        if (memberEntity.get().getPart() != 10 && memberEntity.get().getPart() != -1) {
             return -3;
         }
 

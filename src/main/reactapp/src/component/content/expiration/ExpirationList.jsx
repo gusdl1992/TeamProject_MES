@@ -17,7 +17,7 @@ export default function ExpirationList(props){
             </thead>
             <tbody>
                 {elist.map(e=>{
-                     return(<tr><td>{e.rmname}</td><td>{e.reamount*report2.workPlanDto.wcount}</td></tr>)
+                    //  return(<tr><td>{e.rmname}</td><td>{e.reamount*report2.workPlanDto.wcount}</td></tr>)
                 })}
             </tbody>
         </table>

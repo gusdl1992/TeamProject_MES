@@ -154,7 +154,7 @@ export default function Survey(props){
                                 return(<>
                                     <li>투입재료 : {r.rmname} 투입 해야하는 양 = {(r.reamount*workPlanInfo.wcount).toLocaleString()}g</li>
                                     <div>
-                                        입력된 양 : <input type="text" onChange={()=>{onChangeEvent(index , r.reamount*workPlanInfo.wcount)}} className={"recipe"+index} id={r.rmno} { ...(logininfo.pno === 1 || logininfo.pno === -1? { disabled: false }: { disabled: true })} />
+                                        입력된 양 : <input type="text" onChange={()=>{onChangeEvent(index , r.reamount*workPlanInfo.wcount)}} className={"recipe"+index} id={r.rmno} { ...(logininfo.part === 1 || logininfo.part === -1? { disabled: false }: { disabled: true })} />
                                         <span className={"validation"+index}></span>
                                     </div>
                                 </>
