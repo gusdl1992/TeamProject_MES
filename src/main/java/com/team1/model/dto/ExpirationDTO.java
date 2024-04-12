@@ -21,12 +21,13 @@ public class ExpirationDTO extends BaseTimeDto {
 
     private int epno;       // 식별번호 ()
 
+    private String pname;
 
     int pno; //프로덕트 번호 ?  <<<<<<<<<<<<<<<이 테이블은 input을 스케쥴러로 할 건데 productEntity를 넣어야 하는가에 대해 고민
 
     int plcount; //분량
 
     public ExpirationEntity toEntity(){
-        return ExpirationEntity.builder().epno(this.epno).plcount(this.plcount).pno(this.pno).cdate(this.cdate).udate(this.udate).build();
+        return ExpirationEntity.builder().epno(this.epno).plcount(this.plcount).cdate(this.cdate).udate(this.udate).build();
     }
 }
