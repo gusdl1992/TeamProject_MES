@@ -118,7 +118,7 @@ public class ManufacturingService {//class start
         ManufacturingEntity saveManufacturingEntity = manufacturingEntityRepository.save(ManufacturingEntity.builder()
                         .materialInputEntity(materialInputEntity.get()) // 해당 투입공정 입력
                         .mfcount(count) // 벌크 수량
-                        .mfstate(1)// 상태 변경
+                        .mfstate(0)// 상태 변경
                         .inputmemberEntity(memberEntity.get()) // 등록자 회원정보 등록
                 .build());
 
@@ -192,6 +192,15 @@ public class ManufacturingService {//class start
                 // 만약 현제날짜가 벌크 숙성 완료 일자보다 크면 통과 // 아니면 -2 반환
                 return -2;
             }
+            // 검사 상태변경
+            manufacturingEntity.get().setMfstate(state);
+
+            // 검사 등록자 등록
+            manufacturingEntity.get().setCheckmemberEntity(memberEntity.get());
+
+            manufacturingEntity.get().getMaterialInputEntity().getWorkPlanEntity().setWstate(6);
+
+            return manufacturingEntity.get().getMfno();
 
 
         }
@@ -201,7 +210,7 @@ public class ManufacturingService {//class start
         // 검사 등록자 등록
         manufacturingEntity.get().setCheckmemberEntity(memberEntity.get());
 
-        manufacturingEntity.get().getMaterialInputEntity().getWorkPlanEntity().setWstate(6);
+        manufacturingEntity.get().getMaterialInputEntity().getWorkPlanEntity().setWstate(5);
 
 
         return manufacturingEntity.get().getMfno();

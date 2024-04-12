@@ -1,10 +1,15 @@
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { RenderContext } from "../survey/Survey";
 
 export default function SurveyCheckList(props){
     let [surveyb,setSurveyb] = useState([]);
     const [confirmstate , setConfirmState] = useState('0');
     let [confirmmembername , setConfirmMemberName] = useState('');
+
+    // 재 랜더링용
+    // - provider 컴포넌트의 value 호출
+    const { render ,setRender } = useContext(RenderContext);
 
     // 출력
     useEffect(() =>{
@@ -15,7 +20,7 @@ export default function SurveyCheckList(props){
             setSurveyb(response.data);
         }
     })
-    } , [])
+    } , [render])
 
     // 검사
     const confirmStateChange = (e)=>{
@@ -27,11 +32,13 @@ export default function SurveyCheckList(props){
     
     let onMaterialConfirm = (index,wno)=>{
         const confirmForm = document.querySelector(`.confirmForm${index}`);
-        console.log(confirmForm);
+
+        const selectValue = document.querySelector(`.selectValue${wno}`).value;
+        // console.log(confirmForm);
         
 
         const confirmFormData = new FormData(confirmForm);
-        console.log("confirmFormData")
+        confirmFormData.append("state",selectValue);
         console.log(confirmFormData)
         axios.put('/survey/check/complete/put.do',confirmFormData)
         .then(r=>{
@@ -47,7 +54,8 @@ export default function SurveyCheckList(props){
                 .then(r=>{
                     console.log(r);
                 })
-                window.location.href='/survey/survey';
+                // window.location.href='/survey/survey';
+                setRender(render+1)// 재 랜더링 용
             }
         })
         .catch(e=>{
@@ -133,7 +141,7 @@ export default function SurveyCheckList(props){
                                             <input type="text" style={{display:'none'}} value={r.sno} name="sno"/>
                                             검사자 : <input onChange={checkMemberNameInput} disabled={r.checkmname != null ? true : false }  value={r.checkmname != null ? r.checkmname : confirmmembername} className="checkMemberInput" type="text"/> 
                                             검사상태
-                                            <select name="sstate" value={confirmstate} onChange={confirmStateChange}>
+                                            <select name="sstate" className={'selectValue'+r.wno} value={confirmstate} onChange={confirmStateChange}>
                                                 <option value="0">
                                                     검사대기
                                                 </option>

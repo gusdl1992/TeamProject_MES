@@ -1,9 +1,14 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 import "./survey.css"
+import { RenderContext } from "./Survey";
 
 export default function WorkPlanList(){
+
+    // 재 랜더링용
+    // - provider 컴포넌트의 value 호출
+    const { render ,setRender } = useContext(RenderContext);
     
     // 워크플랜
     const [ workPlan , setWorkPlan] = useState([]);
@@ -16,12 +21,12 @@ export default function WorkPlanList(){
             setWorkPlan(result);
 
         })
-    },[])
+    },[render])
     
     return(<>
         <div id="workplanCssBox">
         {workPlan.map((w)=>{
-            if(w.wstate == 0){
+            if(w.wstate < 2){
                 return(
                     <div className="workplanCss">
                         <Link to={`/survey/survey?wno=${w.wno}`}>

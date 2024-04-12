@@ -22,12 +22,15 @@ public class MaterialInputConfirmService {
     private MemberRepository memberRepository;
 
     @Transactional
-    public boolean putMaterialInputConfirm(int mno , int mipno , int mipstate){
+    public int putMaterialInputConfirm(int mno , int mipno , int mipstate){
         Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberInfo(mno);
         if(!optionalMemberEntity.isPresent()){
-            return false;
+            return 0;
         }
-        System.out.println("optionalMemberEntity"+optionalMemberEntity);
+        if (optionalMemberEntity.get().getPart() != 10 && optionalMemberEntity.get().getPart() != -1) {
+            return -1;
+        }
+//        System.out.println("optionalMemberEntity"+optionalMemberEntity);
 
         MaterialInputEntity materialInputEntity = materialInputRepository.findById(mipno).get();
 
@@ -37,9 +40,9 @@ public class MaterialInputConfirmService {
         System.out.println("materialInputEntity"+materialInputEntity);
 
         if (materialInputEntity.getCheckmemberEntity() == null){
-            return false;
+            return 0;
         }
-        return true;
+        return 0;
     }
 
     @Transactional
