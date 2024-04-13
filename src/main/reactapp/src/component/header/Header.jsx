@@ -89,12 +89,22 @@ export default function Header(props){
                             </ul>
                         </div>
                     </li>
-                    {/* <li>
-                        로그
+                    <li onClick={clickMenu}>
+                        <div className='topMenu'>
+                            로그
+                        </div> 
+                        <div className='subMenu'>
+
+                        </div>
                     </li>
-                    <li>
+                    <li onClick={clickMenu}>
+                        <div className='topMenu'>   
                         경영통계
-                    </li> */}
+                        </div> 
+                        <div className='subMenu'>
+
+                        </div>
+                    </li>
                     {logininfo.part == -1 && (
                         <li onClick={clickMenu} >
                             <div className='topMenu'>
