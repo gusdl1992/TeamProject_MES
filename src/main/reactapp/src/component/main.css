@@ -20,6 +20,7 @@ ul,ol{
 }
 body{
     background-color: #EBEFF2;
+    padding: 0 280px;
 }
 .searchBox,.statistics,.AinputBox,.AcontentBox{
     background-color: #fff;
@@ -45,12 +46,20 @@ body{
     justify-content: space-around;       
     align-items: center;
     position: relative;
+    margin: 0 4px;
 }
 #statisticsBoxFont{
     font-weight: bolder;
+    font-size: 40px;
     position: absolute;
-    top: 75%;
-    right: 10%;
+    bottom: 45px;
+    right: 50px;
+}
+.statisticsBoxFont2{
+    position: absolute;
+    top: 45px;
+    left: 50px;
+    font-size: 24px;
 }
 .statisticsBox:nth-child(1){
     background-color: #4678A9;  
@@ -86,8 +95,13 @@ table{
     width: 100%;
 }
 .AinputBox{
-    width: 1130px;    
+    width: 1130px;
 }
 .RmCountOne{
     text-align: center;
+}
+.contentWrap{
+    width: 1100px;
+    margin-left: 280px;
+    margin: 0 auto;
 }

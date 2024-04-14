@@ -7,7 +7,7 @@ import SurveyTotalBox from "../survey/SurveyTotalBox";
 export default function MaterialInput(props){
 
     return(
-        <div style={{maxWidth:'66%',minWidth:'1100px',margin:"0 auto"}}>
+        <div className="contentWrap">
             
             <MaterialInputTotalBox/>
             <div id="workplanCssBox">

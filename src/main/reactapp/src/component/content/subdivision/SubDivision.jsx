@@ -6,7 +6,7 @@ import SubDivisionWriteBox from "./SubDivisionWriteBox";
 export default function SubDivision(props){
 
     return(
-        <div style={{maxWidth:'66%',minWidth:'1100px',margin:'0 auto',border:'1px solid red'}}>
+        <div className="contentWrap">
             <SubDivisionTotalBox/>
             <div id="workplanCssBox">
                 <SubDivisionPreviousWork/>
