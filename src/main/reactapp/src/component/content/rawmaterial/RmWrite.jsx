@@ -1,5 +1,8 @@
+import { Button, Input, Stack } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
+import * as React from 'react';
+
 
 export default function RmWrite(props){
 
@@ -16,7 +19,23 @@ export default function RmWrite(props){
         }).catch(e=>{console.log(e)})
     }
     return(<>
-        <input value={rmname} onChange={(e)=>{setrmname(e.target.value)}}/>
-        <button type="button" onClick={doPost}>제품 등록</button>
+        <form
+
+    >
+      <Stack spacing={1}>
+        <Input value={rmname} onChange={(e)=>{setrmname(e.target.value)}} required />        
+        <Button type="button" onClick={doPost}>제품 등록</Button>
+      </Stack>
+    </form>
+
+    
     </>)
 }
+{/* <div id="RmWriteBox">
+        <div className="RmWriteInput">
+            <input value={rmname} onChange={(e)=>{setrmname(e.target.value)}}/>     
+        </div>   
+        <div className="RmWriteBtn">
+            <button type="button" onClick={doPost}>제품 등록</button>
+        </div>
+    </div> */}

@@ -81,7 +81,6 @@ body{
     font-size: 25px;
     color: white;
 }
-
 .AinputBox{
     height: 400px;
 }
@@ -99,4 +98,10 @@ table{
     width: 1100px;
     margin-left: 280px;
     margin: 0 auto;
+}
+.AinputBox{
+    width: 1130px;
+}
+.RmCountOne{
+    text-align: center;
 }
