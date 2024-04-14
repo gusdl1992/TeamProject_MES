@@ -39,8 +39,8 @@ public class MaterialInputConfirmService {
 
         System.out.println("materialInputEntity"+materialInputEntity);
 
-        if (materialInputEntity.getCheckmemberEntity() == null){
-            return 0;
+        if (materialInputEntity.getCheckmemberEntity() != null){
+            return 1;
         }
         return 0;
     }

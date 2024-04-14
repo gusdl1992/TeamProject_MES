@@ -55,7 +55,9 @@ export default function SurveyCheckList(props){
                     console.log(r);
                 })
                 // window.location.href='/survey/survey';
+                alert("안내) 검사 등록 성공")
                 setRender(render+1)// 재 랜더링 용
+                
             }
         })
         .catch(e=>{
