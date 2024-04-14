@@ -76,13 +76,14 @@ export default function MaterialInput2(props){
         .catch( (e) => {console.log(e)})
     }
 
+    
     if(logininfo != null ){
     return(<>
         <div>
         <h3>
             <span>생산제품 : {surveyB[0].pname}</span>
             <span>생산수량 : {surveyB[0].wcount.toLocaleString()} EA</span>
-            <span>생산기한 : {surveyB[0].wendtime.split('T')[0]} 까지</span>
+            <span>생산기한 : {surveyB[0].wendtime.split('T')[0]}까지</span>
             
         </h3>
         <ul>
