@@ -46,7 +46,7 @@ export default function Header(props){
     return (
         <div id='menuWrap'>
             <div id='logoBox'>
-                로고
+                <img src='/static/img/팀1로고.png' />
             </div>
             <div id='sideNav'>
                 <ul>

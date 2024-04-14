@@ -41,16 +41,20 @@ export default function PackagingTotalBox(props){
             <h3>통계</h3>
             <div className="statisticsWrap">
                 <div className="statisticsBox">
-                    진행전 {previous}개
+                    진행전 
+                    <div id="statisticsBoxFont">{previous}개</div>
                 </div>
                 <div className="statisticsBox">
-                    진행중 {now}개
+                    진행중 
+                    <div id="statisticsBoxFont">{now}개</div>
                 </div>
                 <div className="statisticsBox">
-                    완료 {success}개
+                    완료 
+                    <div id="statisticsBoxFont">{success}개</div>
                 </div>
                 <div className="statisticsBox">
-                    불합격 {fail}개
+                    불합격 
+                    <div id="statisticsBoxFont">{fail}개</div>
                 </div>
             </div>
         </div>

@@ -41,19 +41,38 @@ body{
 .statisticsBox{
     width: 270px;
     height: 170px;
+    display: flex; 
+    justify-content: space-around;       
+    align-items: center;
+    position: relative;
+}
+#statisticsBoxFont{
+    font-weight: bolder;
+    position: absolute;
+    top: 75%;
+    right: 10%;
 }
 .statisticsBox:nth-child(1){
-    background-color: #4678A9;    
+    background-color: #4678A9;  
+    font-size: 25px;    
+    color: white;       
 }
 .statisticsBox:nth-child(2){
     background-color: #F56B60;
+    font-size: 25px;
+    color: white;
 }
 .statisticsBox:nth-child(3){
     background-color: #A4B241;
+    font-size: 25px;
+    color: white;
 }
 .statisticsBox:nth-child(4){
     background-color: #E6B407;
+    font-size: 25px;
+    color: white;
 }
+
 .AinputBox{
     height: 400px;
 }
