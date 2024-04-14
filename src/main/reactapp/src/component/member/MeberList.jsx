@@ -27,6 +27,25 @@ export default function MeberList(props){
       setMember(!member);
     };
 
+    // 퇴사 처리 함수
+    const completeResignation = (mno , mname) =>{
+        
+        if (window.confirm(`사원번호 : ${mno} 이름 : ${mname} 퇴사처리를 하시겠습니까?`)) {
+            // 사용자가 확인을 눌렀을 때 수행할 작업
+            axios.delete(`/member/Account/delete.do?mno=${mno}`)
+            .then(() => {
+                console.log('삭제 성공!');
+                // 삭제 요청이 성공한 후에 memberList를 업데이트하여 재랜더링을 유발
+                setMemberList(memberList.filter(member => member.mno !== mno));
+            })
+            .catch(error => {
+                console.error('에러 발생 관리자에게 문의!:', error);
+            });
+        } else {
+            // 사용자가 취소를 눌렀을 때 수행할 작업 없음.
+        }
+    };
+
 
     return(<>
         {/* 버튼 클릭 시 showComponent2 값에 따라 Component2를 렌더링합니다. */}
@@ -75,16 +94,15 @@ export default function MeberList(props){
                                             {r.mname}
                                         </td>
                                         <td>
-                                            {r.part}
+                                            {r.part == -1 ? '관리자' : r.part == 1 ? '계량팀' : r.part == 2 ? '생산팀' : r.part == 3 ? '포장팀' : r.part == 10 ? '검사팀' : '기타' }
                                         </td>
                                         <td>
                                             {cdate}
                                         </td>
                                         <td>
-                                            <button onClick={()=>{document.querySelector('.modal'+r.sno).style.display = 'block'}} type="button">상세보기</button>
+                                        <button onClick={() => completeResignation(r.mno , r.mname)} type="button">퇴사 처리</button>
                                         </td>
                                     </tr>
-                                    
                                 </>
                             )
                         })

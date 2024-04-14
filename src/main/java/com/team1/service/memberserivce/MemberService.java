@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class MemberService {
@@ -91,6 +92,20 @@ public class MemberService {
         }
         return null;
     }
+
+    // 회원 탈퇴
+    public boolean deleteAccount(int mno){
+        System.out.println("MemberService.deleteAccount");
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberInfo(mno);
+        System.out.println("memberEntity = " + optionalMemberEntity);
+        if (optionalMemberEntity.isPresent()){
+            // 리포지토리에서 멤버 엔티티 삭제
+            memberRepository.deleteById(optionalMemberEntity.get().getMno());
+            return true;
+        }
+        return false;
+    }
+
 }
 /*
     Optional 클래스

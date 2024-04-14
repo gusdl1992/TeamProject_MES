@@ -16,6 +16,7 @@ export default function SurveyCheckList(props){
         axios.get('/survey/check/survey/get.do')
         .then((response)=>{
             console.log(response);
+            console.log(response.data[0].surveybList);
         if(response.data != []){
             setSurveyb(response.data);
         }
@@ -108,6 +109,7 @@ export default function SurveyCheckList(props){
 
                             return(
                                 <>
+                                {console.log(r)}
                                     <tr>
                                         <td>
                                             {r.wno}
@@ -134,7 +136,15 @@ export default function SurveyCheckList(props){
                                         <p>생산계획 번호 : {r.wno}</p>
                                         <p>제품명 : {r.pname}</p>
                                         <p>제품수량 : {r.wcount}</p>
-                                        {/* <p>{r.data.surveybList.rmname}투입량 : {r.surveyBDto.sbcount}</p> */}
+                                        {
+                                            r.surveybList.map((surveybItem, index) => {
+                                                return (<>
+                                                    <p>원자재명 : {surveybItem.rmname}<br/>필요량 : {surveybItem.reamount} <br/>투입량 : {surveybItem.sbcount}</p>                                                
+                                                </>    
+                                                );
+                                            })
+                                        }
+                                        {/* <p>{r.data.surveybList.rmname}필요량 : {r.data.surveybList.reamount} 투입량 : {r.data.surveybList.sbcount}</p> */}
                                         <p>날짜 : {cdate}</p>
                                         <p>담당자 : {r.inputmname}</p>
                                         <form className={"confirmForm"+index} >
