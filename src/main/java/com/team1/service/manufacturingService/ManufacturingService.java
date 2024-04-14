@@ -101,6 +101,11 @@ public class ManufacturingService {//class start
         Optional<MemberEntity> memberEntity = memberRepository.findById(memberDto.getMno());
         if(!memberEntity.isPresent())return -1; // 찾은값이 없으면 실패 반환
 
+        // 만약 검사자 또는 관리자 가 아니라면 등록 실패
+        if (memberEntity.get().getPart() != 2 && memberEntity.get().getPart() != -1) {
+            return -3;
+        }
+
         // 투입공정 엔티티 찾아오기
         Optional<MaterialInputEntity> materialInputEntity = materialInputEntityRepository.findById(mipno);
         if (!materialInputEntity.isPresent())return -2;

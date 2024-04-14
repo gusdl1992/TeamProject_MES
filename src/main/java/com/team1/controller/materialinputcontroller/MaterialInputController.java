@@ -18,12 +18,17 @@ public class MaterialInputController {
     @Autowired
     MaterialInputService materialInputService;
 
+    // 0 실패
+    // 1 이상 성공
+    // -1 해당 업무 담당자 아님
+    // -2 로그인 정보가 없음
     @PostMapping("/input/post.do")
-    public boolean doInputPost(@RequestParam int sno){
+    public int doInputPost(@RequestParam int sno){
         System.out.println("MaterialInputController.doInputPost");
         System.out.println("sno = " + sno);
-
-        return materialInputService.doInputPost(sno);
+        int result =materialInputService.doInputPost(sno);
+        System.out.println("result**** = " + result);
+        return result;
     }
 
     @GetMapping("/input/allinfo/get.do")

@@ -40,12 +40,14 @@ export default function MaterialInputPrintBox(props){
                             wno : wno,
                             wstate : 4
                         }
-                        axios.put('/wp/changestate/put.do',data)
-                        .then(r=>{
-                            console.log(r);
-                        })
+                axios.put('/wp/changestate/put.do',data)
+                .then(r=>{
+                    console.log(r);
+                })
+                alert("안내) 등록 성공하였습니다.");
 
                 window.location.href='/material/input';
+
             }else if(r.data==-1){
                 alert("안내) 해당업무 담당자가 아닙니다.")
             }

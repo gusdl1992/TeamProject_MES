@@ -52,18 +52,24 @@ public class PackagingService {
     }
 
     @Transactional
-    public boolean doMemberPost(int sdno , int pgbox , int pgcount ){
-        System.out.println("PackagingService.doMemberPost");
-        System.out.println("★pgcount = " + pgcount);
+    // 반환 0 = 실패 / 1이상 = 성공 / -1 = 로그인정보가 없음  / -2 권한이 없는작업
+    public int doMemberPost(int sdno , int pgbox , int pgcount ){
+//        System.out.println("PackagingService.doMemberPost");
+//        System.out.println("★pgcount = " + pgcount);
         MemberDto loginDto = memberService.doLogininfo();
-        if ( loginDto == null ) return false;
+        if ( loginDto == null ) return -1;
 
         // 1. 로그인된 회원 엔티티 찾기
         Optional<MemberEntity> optionalMemberEntity = memberRepository.findById( loginDto.getMno() );
         // 2. 찾은 엔티티가 존재하지 않으면
-        if( !optionalMemberEntity.isPresent() ) return false;
+        if( !optionalMemberEntity.isPresent() ) return -1;
         // 3. 엔티티 꺼내기
         MemberEntity memberEntity = optionalMemberEntity.get();
+
+        // 만약 포장인원 또는 관리자 가 아니라면 등록 실패
+        if (memberEntity.getPart() != 3 && memberEntity.getPart() != -1) {
+            return -1;
+        }
 
         SubdivisionEntity subdivisionEntity = subDivisionRepository.findById(sdno).get();
 
@@ -75,10 +81,10 @@ public class PackagingService {
             savePackaging.setSubdivisionEntity( subdivisionEntity );
             savePackaging.setPgcount( pgcount );
 
-            return true;
+            return 1;
         }
 
-        return false;
+        return 0;
     }
 
     public List<Object> subdivisionDtoList(){

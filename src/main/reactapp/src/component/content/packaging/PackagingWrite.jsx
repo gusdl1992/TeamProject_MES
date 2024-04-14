@@ -35,10 +35,8 @@ export default function PackagingWrite(props){
     }
     
     
-
+    
     const packaginPost = () => {
-        
-
         let packagingForm = document.querySelector(".packagingForm");
         let packagingFormData = new FormData(packagingForm);
         
@@ -47,30 +45,37 @@ export default function PackagingWrite(props){
 
         axios.post("/packaging/post.do?sdno="+query.get('sdno') , packagingFormData)
         .then((r)=>{
-            console.log(r);
-            if(r){
+            // 반환 0 = 실패 / 1이상 = 성공 / -1 = 로그인정보가 없음  / -2 권한이 없는작업
+            console.log(r.data);
+            if(r.data>0){
                 let data = {
                     wno : packagingInfo.manufacturingDto.materialInputDto.workPlanDto.wno,
                     wstate : 9
                 }
                 axios.put('/wp/changestate/put.do',data)
-                .then(r=>{
-                    console.log(r);
+                .then(r1=>{
+                    console.log(r1);
                 })
+                // console.log(packagingForm.pgcount.value);
+                // console.log(packagingInfo.manufacturingDto.materialInputDto.productDto.pno)
+
+                let packagingFormData2 = new FormData();
+                packagingFormData2.append('pno', packagingInfo.manufacturingDto.materialInputDto.productDto.pno);
+                packagingFormData2.append('pgcount', packagingForm.pgcount.value);
+
+                
+                axios.post("/productlog/post.do" , packagingFormData2 )
+                .then( (r2) => {
+                    console.log(r2);
+                }).catch((e) => {console.log(e)})
+                alert("안내) 등록 성공하였습니다.");
+            }else if(r.data==-1){
+                alert("안내) 로그인정보가 없습니다.")
+            }else if(r.data==-2){
+                alert("안내) 등록 권한이 없습니다.")
             }
         }).catch((e) => {console.log(e)})   
-        console.log(packagingForm.pgcount.value);
-        console.log(packagingInfo.manufacturingDto.materialInputDto.productDto.pno)
-
-        let packagingFormData2 = new FormData();
-        packagingFormData2.append('pno', packagingInfo.manufacturingDto.materialInputDto.productDto.pno);
-        packagingFormData2.append('pgcount', packagingForm.pgcount.value);
-
         
-        axios.post("/productlog/post.do" , packagingFormData2 )
-        .then( (r2) => {
-            console.log(r2);
-        }).catch((e) => {console.log(e)})
     }
 
 

@@ -30,7 +30,7 @@ public class MaterialInputConfirmService {
         if (optionalMemberEntity.get().getPart() != 10 && optionalMemberEntity.get().getPart() != -1) {
             return -1;
         }
-//        System.out.println("optionalMemberEntity"+optionalMemberEntity);
+//        System.out.println("optionalMemberEntity"+optionalMemberEntity);//
 
         MaterialInputEntity materialInputEntity = materialInputRepository.findById(mipno).get();
 
