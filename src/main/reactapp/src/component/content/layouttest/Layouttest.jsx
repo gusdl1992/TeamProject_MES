@@ -8,7 +8,7 @@ export default function LayoutTest(props){
     const [msgInput, setMsgInput] = useState("");
     let clientSocket = useRef(null);
     if(!clientSocket.current){
-        clientSocket.current = new WebSocket("ws://192.168.17.10:80/safety");
+            clientSocket.current = new WebSocket("ws://localhost/safety");
         //onmclose // onerror // onmessage // onopen : 웹소켓 객체네 포함된 메소드들
             //2.각 메소드 정의
                 //1.클라이언트 소켓이 close발생했을때 콜백함수 정의 
@@ -35,7 +35,7 @@ export default function LayoutTest(props){
         
         <div className="statistics">
             <marquee behavior="scroll" direction="right" scrollamount="10" style={msgInput >= 50 ? {backgroundColor: 'rgba(255, 99, 132, 0.2)'} : (msgInput > 10 ? {backgroundColor: 'rgba(75, 192, 192, 0.2)'} : {backgroundColor: 'rgba(54, 162, 235, 0.2)'})}>
-                <span>{msgInput >=50&& "위기상황발생!!!" } 현재 온도는: {msgInput} {msgInput >=50&& "위기상황발생!!!" }</span>
+                안전거리 체크: {msgInput} 
             </marquee>
             <h3>통계</h3>
             <div className="statisticsWrap">

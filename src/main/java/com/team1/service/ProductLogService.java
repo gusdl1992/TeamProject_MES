@@ -1,5 +1,6 @@
 package com.team1.service;
 
+import com.team1.model.dto.ChartDTO;
 import com.team1.model.dto.ProductLogDto;
 import com.team1.model.entity.PackagingEntity;
 import com.team1.model.entity.ProductEntity;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductLogService {
@@ -44,5 +47,17 @@ public class ProductLogService {
         productLogEntity.setPlcount(pgcount);
         productLogEntity.setProductEntity(productRepository.findById(pno).get());
 //
+    }
+
+    public List<Map<Object,Object>> remaining(){
+        return productLogRepository.findremaining();
+    }
+
+    public List<Map<Object,Object>> findlogWeek(){
+        return productLogRepository.findlogWeek();
+    }
+
+    public List<Map<Object,Object>> findlogMonth(){
+        return productLogRepository.findlogMonth();
     }
 }
