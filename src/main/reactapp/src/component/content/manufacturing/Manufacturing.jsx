@@ -112,7 +112,7 @@ export default function Manufacturing(props){
     if(logininfo!=null){ // 로그인 정보가 로딩되지 않았다면 return 안함
         return(<>
         <RenderContext.Provider value={{ render ,setRender }}>
-            <div style={{maxWidth:'66%',minWidth:'1100px',margin:'0 auto',border:'1px solid red'}}>
+            <div style={{maxWidth:'66%',minWidth:'1100px',margin:"0 auto"}}>
                 <ManufacturingTotalBox/>
                 <MaterialinputList/>
                 
