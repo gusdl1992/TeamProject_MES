@@ -34,22 +34,32 @@ public class MaterialInputService {
     WorkPlanEntityRepository workPlanEntityRepository;
 
     @Transactional
-    public boolean doInputPost(int sno){
+    // 0 실패
+    // 1 이상 성공
+    // -1 해당 업무 담당자 아님
+    // -2 로그인 정보가 없음
+    public int doInputPost(int sno){
         System.out.println("MaterialInputService.doInputPost");
         System.out.println("sno = " + sno);
 
         MemberDto loginDto = memberService.doLogininfo();
-        if ( loginDto == null ) return false;
+        if ( loginDto == null ) return -2;
 
         // 1. 로그인된 회원 엔티티 찾기
         Optional< MemberEntity > optionalMemberEntity = memberRepository.findById( loginDto.getMno() );
         // 2. 찾은 엔티티가 존재하지 않으면
-        if( !optionalMemberEntity.isPresent() ) return false;
+        if( !optionalMemberEntity.isPresent() ) return -2;
         // 3. 엔티티 꺼내기
         MemberEntity memberEntity = optionalMemberEntity.get();
 
+        // 만약 검사자 또는 관리자 가 아니라면 등록 실패
+        if (memberEntity.getPart() != 2 && memberEntity.getPart() != -1) {
+            return -1;
+        }
+
+
         Optional<SurveyEntity> optionalSurveyEntity = surveyRepository.findById( sno );
-        if (!optionalSurveyEntity.isPresent()) return false;
+        if (!optionalSurveyEntity.isPresent()) return 0;
 
         SurveyEntity surveyEntity = optionalSurveyEntity.get();
         System.out.println("surveyEntity = " + surveyEntity);
@@ -69,9 +79,9 @@ public class MaterialInputService {
             saveMaterialInput.setWorkPlanEntity(optionalWorkPlanEntity.get());
 
         // 인풋넘버 넣는곳
-            return true;
+            return 1;
         }
-        return false;
+        return 0;
     }
 
     @Transactional

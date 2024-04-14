@@ -19,25 +19,26 @@ public class PackagingController {
 
     @GetMapping("/info/get.do")
     public List<PackagingDto> doPackInfoGet(){
-        System.out.println("PackagingController.doPackInfoGet");
+//        System.out.println("PackagingController.doPackInfoGet");
         return packagingService.doPackInfoGet();
     }
 
     @GetMapping("/subdivision/info/get.do")
     public SubDivisionDto doSubdivisionInfoGet(@RequestParam int sdno){
-        System.out.println("★PackagingController.doSubdivisionInfoGet");
+//        System.out.println("★PackagingController.doSubdivisionInfoGet");
         System.out.println("sdno = " + sdno);
 
         return packagingService.doSubdivisionInfoGet(sdno);
     }
 
+    // 반환 0 = 실패 / 1이상 = 성공 / -1 = 로그인정보가 없음  / -2 권한이 없는작업
     @PostMapping("/post.do")
-    public boolean doMemberPost(int sdno , PackagingDto packagingDto){
-        System.out.println("☆☆☆sdno = " + sdno);
-        System.out.println("PackagingController.doMemberPost");
+    public int doMemberPost(int sdno , PackagingDto packagingDto){
+//        System.out.println("☆☆☆sdno = " + sdno);
+//        System.out.println("PackagingController.doMemberPost");
         int pgbox = 1000;
         int pgcount = packagingDto.getPgcount();
-        System.out.println("★pgcount = " + pgcount);
+//        System.out.println("★pgcount = " + pgcount);
 
         return packagingService.doMemberPost(sdno , pgbox , pgcount);
     }
@@ -46,7 +47,7 @@ public class PackagingController {
     @GetMapping("/subdivision.do")
     public List<Object> subdivisionDtoList(){
         List<Object> result = packagingService.subdivisionDtoList();
-        System.out.println("result = " + result);
+//        System.out.println("result = " + result);
 
         return result;
     }

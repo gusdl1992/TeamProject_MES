@@ -46,9 +46,14 @@ export default function MaterialInput2(props){
         console.log( query.get("sno"))
         axios.post("/material/input/post.do?sno="+query.get("sno"))
         .then( (r) => {
-            console.log(r);
-            // wstate 변경
-            if(r){
+            // 0 실패
+            // 1 이상 성공
+            // -1 해당 업무 담당자 아님
+            // -2 로그인 정보가 없음
+            console.log(r.data);
+            if(r.data>=1){
+                alert("안내) 투입내용 등록 성공하였습니다.");
+                // wstate 변경
                 let data = {
                     wno : surveyB[0].wno,
                     wstate : 3
@@ -57,9 +62,16 @@ export default function MaterialInput2(props){
                 .then(r=>{
                     console.log(r);
                 })
-
                 window.location.href="/material/input"
+            }else if(r.data==-1){
+                alert("안내) 등록 권한이 없습니다.");
+            }else if(r.data==-2){
+                alert("안내) 로그인된 정보가 없습니다.");
+            }else{
+                alert("안내) 등록 실패 [관리자 문의].");
             }
+            
+            
         })
         .catch( (e) => {console.log(e)})
     }
