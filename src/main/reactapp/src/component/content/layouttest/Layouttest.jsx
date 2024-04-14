@@ -31,7 +31,7 @@ export default function LayoutTest(props){
     }
 
     return(
-        <div style={{maxWidth:'66%',minWidth:'1100px',margin:'0 auto',border:'1px solid red'}}>
+        <div className="contentWrap">
         
         <div className="statistics">
             <marquee behavior="scroll" direction="right" scrollamount="10" style={msgInput >= 50 ? {backgroundColor: 'rgba(255, 99, 132, 0.2)'} : (msgInput > 10 ? {backgroundColor: 'rgba(75, 192, 192, 0.2)'} : {backgroundColor: 'rgba(54, 162, 235, 0.2)'})}>

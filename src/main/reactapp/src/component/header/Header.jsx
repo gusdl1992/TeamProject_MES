@@ -41,12 +41,12 @@ export default function Header(props){
 
 
 
-    const checklogin = logininfo ? <li id='loginCss'>{logininfo.mname}님 환영합니다! <span className='logoutSpan' onClick={logoutHandler}> 로그아웃</span> </li>:<li> <a href='/member/login'> 로그인</a></li>
+    const checklogin = logininfo ? <button type='button' onClick={logoutHandler} className='logoutBtn'><img src='/static/img/logoutbtn.png' width={'40px'}/></button>:<></>
 
     return (
         <div id='menuWrap'>
             <div id='logoBox'>
-                <img src='/static/img/팀1로고.png' />
+                <img src='/static/img/logo.png' width={'120px'}/>
             </div>
             <div id='sideNav'>
                 <ul>
@@ -60,7 +60,7 @@ export default function Header(props){
                                     <Link to="/RM">원자재</Link>
                                 </li>
                                 <li>
-                                <Link to ="/product">제품리스트</Link>
+                                    <Link to ="/product">제품리스트</Link>
                                 </li>
                             </ul>
                         </div>
@@ -125,9 +125,9 @@ export default function Header(props){
                         </div>
                     </li>
                     )}
-                    {checklogin}
                 </ul>
             </div>
+            {checklogin}
         </div>
     )
 }

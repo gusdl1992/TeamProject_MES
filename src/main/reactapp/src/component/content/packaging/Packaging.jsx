@@ -7,7 +7,7 @@ import PackagingWrite from "./PackagingWrite";
 export default function Packaging(props){
 
     return(
-        <div style={{maxWidth:'66%',minWidth:'1100px',margin:'0 auto',border:'1px solid red'}}>
+        <div className="contentWrap">
             <PackagingTotatBox />
             <div id="workplanCssBox">
                 <PackagingLayOut />
