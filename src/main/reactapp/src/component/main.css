@@ -94,16 +94,16 @@ table,td,th{
 table{
     width: 100%;
 }
+.contentWrap{
+    width: 1100px;
+    margin-left: 280px;
+    margin: 0 auto;
+}
 .AinputBox{
     width: 1130px;
 }
 .RmCountOne{
     text-align: center;
-}
-.contentWrap{
-    width: 1100px;
-    margin-left: 280px;
-    margin: 0 auto;
 }
 
 /* 캐러셀 */
@@ -113,14 +113,14 @@ table{
     width: 80%;
     position: relative;
   }
-  
+
   /* fix blank or flashing items on carousel */
   .owl-carousel .item {
     position: relative;
-    z-index: 100; 
-    -webkit-backface-visibility: hidden; 
+    z-index: 100;
+    -webkit-backface-visibility: hidden;
   }
-  
+
   /* end fix */
   .owl-nav > div {
     margin-top: -26px;
@@ -128,15 +128,15 @@ table{
     top: 50%;
     color: #cdcbcd;
   }
-  
+
   .owl-nav i {
     font-size: 52px;
   }
-  
+
   .owl-nav .owl-prev {
     left: -30px;
   }
-  
+
   .owl-nav .owl-next {
     right: -30px;
   }

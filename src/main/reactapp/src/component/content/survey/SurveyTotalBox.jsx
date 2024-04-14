@@ -38,19 +38,19 @@ export default function SurveyTotalBox(props){
             <h3>통계</h3>
             <div className="statisticsWrap">
                 <div className="statisticsBox">
-                    진행전 
+                    <p className="statisticsBoxFont2">진행전</p>
                     <div id="statisticsBoxFont">{previous}개</div>
                 </div>
                 <div className="statisticsBox">
-                    진행중 
+                    <p className="statisticsBoxFont2">진행중</p>
                     <div id="statisticsBoxFont">{previous}개</div>
                 </div>
                 <div className="statisticsBox">
-                    완료 
+                    <p className="statisticsBoxFont2">완료</p>
                     <div id="statisticsBoxFont">{success}개</div>
                 </div>
                 <div className="statisticsBox">
-                    불합격 
+                    <p className="statisticsBoxFont2">불합격</p>
                     <div id="statisticsBoxFont">{fail}개</div>
                 </div>
             </div>
