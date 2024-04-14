@@ -86,6 +86,8 @@ table{
     width: 100%;
 }
 .AinputBox{
-    width: 1130px;
-    
+    width: 1130px;    
+}
+.RmCountOne{
+    text-align: center;
 }
