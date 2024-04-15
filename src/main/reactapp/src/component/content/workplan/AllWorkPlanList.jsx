@@ -24,6 +24,7 @@ export default function AllWorkPlanList(props){
 
     console.log(Planlist);
     return (<>
+    
         <select onClick={ (e)=>{setsort(e.target.value)}}>
         <option value={"wno"}>보고서번호순</option>
         <option value={"pname"}>제품명순</option>
@@ -56,7 +57,7 @@ export default function AllWorkPlanList(props){
                         {state[e.wstate]}
                     </td>
                     <td>
-                        {e.cdate.split("T")[0]}
+                        {/* {e.wendtime.spilt("T")[0]} */}
                     </td>
 
                 </tr>
