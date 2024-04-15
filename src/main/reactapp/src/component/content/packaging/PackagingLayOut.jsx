@@ -32,21 +32,7 @@ export default function PackagingLayOut(props){
         arrows: subdivision.length > 0 ? true : false
       };
 
-    return(<>
-        <div id="workPlanListBox">
-            {subdivision.map((r) => {
-                if(r.manufacturingDto.materialInputDto.workPlanDto.wstate == 8 && r.sdstate == 2){
-                    return(
-                        <div>
-                            <Link to={`/packaging?sdno=${r.sdno}`}>
-                                <span>소분내역 : {r.sdno}</span>
-                                <span>등록일자 : {r.cdate}</span>
-                            </Link>
-                        </div>
-                    )
-                }
-            })}
-        </div>    
+    return(<>           
         <div className="slider-container previousWork">
             <Slider {...settings}>
                 {subdivision.map((r) => {

@@ -40,6 +40,7 @@ export default function LayoutTest(props){
         </div>
             <div className="AinputBox">
                 {props.insert}
+                
             </div>
             <div className="AcontentBox">
                 {props.list}

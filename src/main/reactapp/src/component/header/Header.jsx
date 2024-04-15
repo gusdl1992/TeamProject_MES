@@ -62,9 +62,7 @@ export default function Header(props){
                                 <li>
                                     <Link to ="/product">제품리스트</Link>
                                 </li>
-                                <li>
-                                <Link to ="/chart">제품통계</Link>
-                                </li>
+
                                 <li>
                                     <Link to ="/expiration">폐기 대기 </Link>
                                 </li>
@@ -95,22 +93,18 @@ export default function Header(props){
                             </ul>
                         </div>
                     </li>
-                    <li onClick={clickMenu}>
-                        <div className='topMenu'>
-                            로그
-                        </div> 
-                        <div className='subMenu'>
 
-                        </div>
-                    </li>
                     <li onClick={clickMenu}>
                         <div className='topMenu'>   
-                        경영통계
+                        통계
                         </div> 
                         <div className='subMenu'>
                             <ul>
                                 <li>
                                     <Link to="/시현진행상황">작업 진행 상황</Link>
+                                </li>
+                                <li>
+                                    <Link to ="/chart">제품통계</Link>
                                 </li>
                                 <li>
                                     <Link to="/wp/list">전체 보고서 출력</Link>

@@ -20,7 +20,7 @@ export default function RmWrite(props){
     }
     return(<>
         <form>
-        <input value={rmname} onChange={(e)=>{setrmname(e.target.value)}} />        
+        <input value={rmname} onChange={(e)=>{setrmname(e.target.value)}} />
         <button type="button" onClick={doPost}>제품 등록</button>
     </form>
 
