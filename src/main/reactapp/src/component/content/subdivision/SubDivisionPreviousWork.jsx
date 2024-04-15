@@ -38,8 +38,8 @@ export default function SubDivisionPreviousWork(props){
                             <div className="previosList">
                                 <Link to={`/subdivision?mfno=${r.mfno}`}>
                                     <h4>작업계획 {r.materialInputEntity.workPlanEntity.wno}</h4>
-                                    <p>거래처 : {r.materialInputEntity.workPlanEntity.wno}</p>
-                                    <p>등록일자 : {r.materialInputEntity.workPlanEntity.wendtime.split('T')[0].split('-')[0]}년 {r.materialInputEntity.workPlanEntity.cdate.split('T')[0].split('-')[1]}월 {r.materialInputEntity.workPlanEntity.cdate.split('T')[0].split('-')[2]}일</p>
+                                    <p>거래처 : {r.materialInputEntity.workPlanEntity.client}</p>
+                                    <p>등록일자 : {r.materialInputEntity.workPlanEntity.wendtime.split('T')[0].split('-')[0]}년 {r.materialInputEntity.workPlanEntity.wendtime.split('T')[0].split('-')[1]}월 {r.materialInputEntity.workPlanEntity.wendtime.split('T')[0].split('-')[2]}일</p>
                                 </Link>
                             </div>
                         )

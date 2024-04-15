@@ -1,8 +1,9 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function WorkPlan(props){
     const [reRender , setReRender] = useState(false);
+    const [productInfo , setProductInfo] = useState([]);
 
     const writeWorkPlan = ()=>{
         let workPlanForm = document.querySelector('.workPlanForm');
@@ -18,7 +19,18 @@ export default function WorkPlan(props){
         .catch(e=>{
             console.log(e);
         })
-    } 
+    }
+
+    useEffect(()=>{
+        axios.get('/product/get.do')
+        .then(r=>{
+            console.log(r);
+            setProductInfo(r.data);
+        })
+        .catch(e=>{
+            console.log(e);
+        })
+    },[])
 
     return(
         <div className="contentWrap">
@@ -28,12 +40,18 @@ export default function WorkPlan(props){
                     <h1>생산 일정</h1>
                     <div className="alsguddl">
                         <span>거래처</span>
-                        <input type="text"/> 
+                        <input type="text" name="client"/>
                     </div>
 
                     <div className="alsguddl">
                     <span>제품</span>                    
-                    <input type="text" name="pname"/> 
+                    <select name="pno" style={{width:'300px'}}>
+                        {productInfo.map((r)=>{
+                            return(
+                                <option value={r.pno}>{r.pname}</option>
+                            )
+                        })}
+                    </select>
                     </div>
                     
                     <div className="alsguddl">
