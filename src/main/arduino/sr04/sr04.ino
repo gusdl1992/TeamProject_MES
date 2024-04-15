@@ -21,7 +21,12 @@ void checkfloat(){
   delay(100);
 
 } 
-
+// void loop(){
+//   if (Serial.available() > 0) {
+//     String command = Serial.readString(); // 데이터를 읽음
+//     checkfloat();
+//   }
+// }
 
 void loop(){
   checkfloat();

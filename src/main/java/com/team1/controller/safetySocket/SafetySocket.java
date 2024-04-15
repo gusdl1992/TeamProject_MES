@@ -58,13 +58,19 @@ public class SafetySocket extends TextWebSocketHandler implements DisposableBean
 
         // 시리얼 포트의 설정을 구성합니다. 이 예제에서는 전송 속도를 9600 bps로 설정합니다.
         selectedPort.setBaudRate(9600);
-//        selectedPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
+        selectedPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
         출처: https://milanok.tistory.com/entry/자바-시리얼-통신-예제 [IT 엔지니어:티스토리]
-//        // 시리얼 포트로 데이터를 쓰기 위한 출력 스트림을 가져옵니다. 안되니까 잠깐 폐기
+        // 시리얼 포트로 데이터를 쓰기 위한 출력 스트림을 가져옵니다. 안되니까 잠깐 폐기
 //        try {
-//            selectedPort.getOutputStream().write("on".getBytes());
+//            System.out.println("출력체크");
+//
+//            System.out.println(selectedPort.isOpen());
+//            System.out.println(selectedPort.getOutputStream());
+//            String check = "on";
+//            byte[] on = check.getBytes();
+//            selectedPort.getOutputStream().write(on);
 //        } catch (Exception e) {
-//            e.printStackTrace();
+//            System.out.println(e);
 //        }
 
 
@@ -84,7 +90,7 @@ public class SafetySocket extends TextWebSocketHandler implements DisposableBean
         return null;
     }
     public void startScheduler() {
-        scheduledFuture = taskScheduler.scheduleAtFixedRate(this::doPost, 10000);
+        scheduledFuture = taskScheduler.scheduleAtFixedRate(this::doPost, 3000);
     }
     public void stopScheduler() {
         if (scheduledFuture != null) {
@@ -100,7 +106,7 @@ public class SafetySocket extends TextWebSocketHandler implements DisposableBean
 
     public void doPost() {
         String result = 100+"";
-//        result = serial().split("\n")[3]; //아두이노 연동했을떄 사용
+//        result = serial().split("\n")[1]; //아두이노 연동했을떄 사용
         System.out.println("소켓 체크용");
         System.out.println("나온 거리:"+result);
 

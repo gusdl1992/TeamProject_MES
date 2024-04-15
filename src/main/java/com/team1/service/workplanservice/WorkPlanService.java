@@ -2,18 +2,19 @@ package com.team1.service.workplanservice;
 
 
 import com.team1.model.dto.MemberDto;
+import com.team1.model.dto.SubDivisionDto;
 import com.team1.model.dto.WorkPlanDto;
 import com.team1.model.entity.MemberEntity;
 import com.team1.model.entity.ProductEntity;
 import com.team1.model.entity.WorkPlanEntity;
-import com.team1.model.repository.MemberRepository;
-import com.team1.model.repository.ProductRepository;
-import com.team1.model.repository.SurveyRepository;
-import com.team1.model.repository.WorkPlanEntityRepository;
+import com.team1.model.repository.*;
 import com.team1.service.memberserivce.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,6 +33,8 @@ public class WorkPlanService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private SubDivisionRepository subDivisionRepository;
     public boolean postWPWriteDo(WorkPlanDto workPlanDto){
         System.out.println("서비스workPlanDto = " + workPlanDto);
         // 멤버
@@ -61,8 +64,24 @@ public class WorkPlanService {
         }
     }
 
-    public List<WorkPlanDto> findWPList(){
-        return workPlanEntityRepository.findAll().stream().map(WorkPlanEntity::toDto).collect(Collectors.toList());
+    public List<WorkPlanDto> findWPList(String orderby) {
+        Comparator<WorkPlanDto> comparator = Comparator.comparing(dto -> {
+            try {
+                // WorkPlanDto 클래스의 해당 필드를 리플렉션으로 동적으로 가져옴
+                Field field = WorkPlanDto.class.getDeclaredField(orderby);
+                field.setAccessible(true); // private 필드에 접근할 수 있도록 설정
+                return (Comparable) field.get(dto);
+            } catch (Exception e) {
+                e.printStackTrace();
+                // 필드를 가져오는 데 실패한 경우, 기본적으로 정렬을 수행하지 않음
+                return null;
+            }
+        });
+
+        return workPlanEntityRepository.findAll().stream()
+                .map(WorkPlanEntity::toDto)
+                .sorted(comparator)
+                .collect(Collectors.toList());
     }
 
     public int findSno(int wno){
@@ -97,6 +116,11 @@ public class WorkPlanService {
             return result.intValue();
         }
         return 0;
+    }
+
+    public SubDivisionDto findsub(int wno){
+        System.out.println(subDivisionRepository.findByWno(wno));
+        return subDivisionRepository.findByWno(wno).toDto();
     }
 
 }

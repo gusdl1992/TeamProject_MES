@@ -4,6 +4,7 @@ import LayoutTest from "../layouttest/Layouttest";
 import ReportForSurvey from "./ReportForSurvey";
 import ReportForMInput from "./ReportForMInput";
 import ReportForBulk from "./ReportForBulk";
+import ReportForSub from "./ReportForSub";
 
 
 
@@ -16,8 +17,13 @@ export default function ReportAll(props){
     console.log(wno,wstate)
 
     const checkreport = (wno, wstate) => {
-        
-        if (wstate == 6 || wstate == 5){
+        if (wstate == 9){
+            return(<><ReportForSurvey wno={wno}/><ReportForMInput wno={wno}/><ReportForBulk wno={wno}/><ReportForSub wno={wno} /></>) //추가 값 대입
+        }
+        else if (wstate == 7 || wstate == 8){
+            return(<><ReportForSurvey wno={wno}/><ReportForMInput wno={wno}/><ReportForBulk wno={wno}/><ReportForSub wno={wno} /></>) //추가 값 대입
+        }
+        else if (wstate == 6 || wstate == 5){
             return(<><ReportForSurvey wno={wno}/><ReportForMInput wno={wno}/><ReportForBulk wno={wno}/></>) //추가 값 대입
         }
         else if (wstate==4|| wstate ==3){
