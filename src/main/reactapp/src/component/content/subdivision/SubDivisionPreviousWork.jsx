@@ -1,13 +1,17 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { RenderContext } from "./SubDivision";
 
 export default function SubDivisionPreviousWork(props){
+    // 재 랜더링용
+    // - provider 컴포넌트의 value 호출
+    const { render ,setRender } = useContext(RenderContext);
 
     // 계량
     const [ previousWork , setPreviousWork ] = useState([]);
@@ -18,7 +22,7 @@ export default function SubDivisionPreviousWork(props){
             console.log(r);
             setPreviousWork(r.data);
         })
-    },[])
+    },[render])
 
     const settings = {
         dots: true,

@@ -1,7 +1,11 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import axios from "axios";
+import { RenderContext } from "./SubDivision";
 
 export default function SubdivisionTotalBox(props){
+    // 재 랜더링용
+    // - provider 컴포넌트의 value 호출
+    const { render ,setRender } = useContext(RenderContext);
     const [previous , setPrevious] = useState(0);
     const [now , setNow] = useState(0);
     const [success , setSuccess] = useState(0);
@@ -34,7 +38,7 @@ export default function SubdivisionTotalBox(props){
     
         fetchData();
         fetchData2();
-      }, []);
+      }, [render]);
 
     return(
         <div className="statistics">

@@ -76,17 +76,17 @@ export default function SubDivisionWriteBox(props){
                     <h3>
                         <span>생산제품 : {manufacturingInfo.materialInputDto.workPlanDto.pname}</span>
                         <span>생산수량 : {manufacturingInfo.materialInputDto.workPlanDto.wcount} EA</span>
-                        <span>생산기한 : {manufacturingInfo.materialInputDto.workPlanDto.wendtime} 까지</span>
+                        <span>생산기한 : {manufacturingInfo.materialInputDto.workPlanDto.wendtime.split('T')[0]} 까지</span>
                     </h3>
                     <div>
-                        벌크완료량 : {manufacturingInfo.mfcount}
-                        {console.log(manufacturingInfo.materialInputDto.productDto.standard)}
+                        <p>벌크완료량 : {manufacturingInfo.mfcount.toLocaleString()}</p>
+                        {/* {console.log(manufacturingInfo.materialInputDto.productDto.standard)}
                         {console.log(manufacturingInfo.mfcount)}
-                        {console.log(((manufacturingInfo.materialInputDto.productDto.standard) / (1)))}
-                        만들수 있는 제품 수량 : {parseInt((manufacturingInfo.mfcount) / (manufacturingInfo.materialInputDto.productDto.standard))}
-                        소분완료량 : <input type="text" name="successcount"/>
-                        불량품량 : <input type="text" name="failcount"/>
-                        <button type="button" onClick={onClickBtn}>버튼</button>
+                        {console.log(((manufacturingInfo.materialInputDto.productDto.standard) / (1)))} */}
+                        <p>만들수 있는 제품 수량 : {parseInt((manufacturingInfo.mfcount) / (manufacturingInfo.materialInputDto.productDto.standard)).toLocaleString()}</p>
+                        <p>소분완료량 : <input type="text" name="successcount"/></p>
+                        <p>불량품량 : <input type="text" name="failcount"/></p>
+                        <button className="btn-3d green" type="button" onClick={onClickBtn}>버튼</button>
                     </div>
                 </form>
             </div>
