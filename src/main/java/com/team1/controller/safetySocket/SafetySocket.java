@@ -53,12 +53,12 @@ public class SafetySocket extends TextWebSocketHandler implements DisposableBean
         SerialPort[] ports = SerialPort.getCommPorts();
 
         // 첫 번째 시리얼 포트를 선택하여 엽니다. 포트의 인덱스를 조정하여 필요한 포트를 선택할 수 있습니다.
-        SerialPort selectedPort = ports[0];
+        SerialPort selectedPort = ports[1];
         selectedPort.openPort();
 
         // 시리얼 포트의 설정을 구성합니다. 이 예제에서는 전송 속도를 9600 bps로 설정합니다.
         selectedPort.setBaudRate(9600);
-        selectedPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
+//        selectedPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
         출처: https://milanok.tistory.com/entry/자바-시리얼-통신-예제 [IT 엔지니어:티스토리]
 //        // 시리얼 포트로 데이터를 쓰기 위한 출력 스트림을 가져옵니다. 안되니까 잠깐 폐기
 //        try {
