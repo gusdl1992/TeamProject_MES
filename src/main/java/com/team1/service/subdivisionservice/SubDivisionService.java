@@ -35,21 +35,27 @@ public class SubDivisionService {
     private SubDivisionRepository subDivisionRepository;
 
     // 소분 보고서 작성
+    // 반환 0 = 실패 / 1 이상 = 성공
+    // 반환 -1 = 로그인정보 없음  / -2 = 해당담당자아님
     @Transactional
-    public boolean doSubDivisionInputPost(int mfno , int failcount , int successcount){
+    public int doSubDivisionInputPost(int mfno , int failcount , int successcount){
         // 멤버
         MemberDto loginDto = memberService.doLogininfo();
-        if ( loginDto == null ) return false;
+        if ( loginDto == null ) return -1;
 
         Optional<MemberEntity> optionalMemberEntity = memberRepository.findById( loginDto.getMno() );
 
-        if( !optionalMemberEntity.isPresent() ) return false;
+        if( !optionalMemberEntity.isPresent() ) return -1;
 
         MemberEntity memberEntity = optionalMemberEntity.get();
+        // 만약 소분담당 또는 관리자 가 아니라면 등록 실패
+        if (memberEntity.getPart() != 3 && memberEntity.getPart() != -1) {
+            return -1;
+        }
 
         // 벌크
         Optional<ManufacturingEntity> optionalManufacturingEntity = manufacturingEntityRepository.findById(mfno);
-        if (!optionalManufacturingEntity.isPresent()) return false;
+        if (!optionalManufacturingEntity.isPresent()) return 0;
 
         ManufacturingEntity manufacturingEntity = optionalManufacturingEntity.get();
 
@@ -62,10 +68,10 @@ public class SubDivisionService {
             saveSubDivision.setFailCount(failcount);
             saveSubDivision.setSuccessCount(successcount);
 
-            return true;
+            return 1;
         }
 
-        return false;
+        return 0;
     }
 
     // 소분 모두 출력
@@ -101,13 +107,19 @@ public class SubDivisionService {
     }
 
     // 품질 검사
+    // 반환 0 = 실패 / 1 이상 = 성공
+    // 반환 -1 = 로그인정보 없음  / -2 = 해당담당자아님
     @Transactional
-    public boolean doSubDivisionConfirm(int mno , int sdno , int sdstate){
+    public int doSubDivisionConfirm(int mno , int sdno , int sdstate){
         Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberInfo(mno);
         if(!optionalMemberEntity.isPresent()){
-            return false;
+            return -1;
         }
-        System.out.println("optionalMemberEntity"+optionalMemberEntity);
+        // 만약 검사자 또는 관리자 가 아니라면 등록 실패
+        if (optionalMemberEntity.get().getPart() != 10 && optionalMemberEntity.get().getPart() != -1) {
+            return -1;
+        }
+//        System.out.println("optionalMemberEntity"+optionalMemberEntity);
 
         SubdivisionEntity subdivisionEntity = subDivisionRepository.findById(sdno).get();
 
@@ -116,9 +128,9 @@ public class SubDivisionService {
 
         System.out.println("subdivisionEntity"+subdivisionEntity);
 
-        if (subdivisionEntity.getCheckmemberEntity() == null){
-            return false;
+        if (subdivisionEntity.getCheckmemberEntity() != null){
+            return 1;
         }
-        return true;
+        return 0;
     }
 }

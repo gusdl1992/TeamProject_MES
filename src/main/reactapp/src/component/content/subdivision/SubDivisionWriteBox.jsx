@@ -1,9 +1,16 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { LoginInfoContext } from "../../Index";
+import { RenderContext } from "./SubDivision";
+
+
 
 export default function SubDivisionWriteBox(props){
+    // 재 랜더링용
+    // - provider 컴포넌트의 value 호출
+    const { render ,setRender } = useContext(RenderContext);
+
     // 1. 컨텍스트 가져오기 (로그인 정보)
     const { logininfo, setLogin } = useContext(LoginInfoContext);
     //console.log(logininfo); 
@@ -30,7 +37,7 @@ export default function SubDivisionWriteBox(props){
         if(query.get("mfno")){
             manufacturing();
         }
-    },[query.get("mfno")])
+    },[query.get("mfno"),render])
 
     const onClickBtn = ()=>{
         let subdivisionForm = document.querySelector('.subdivisionForm');
@@ -39,8 +46,11 @@ export default function SubDivisionWriteBox(props){
         console.log(subdivisionFormData);
         axios.post("/subdivision/input/post.do?mfno="+query.get('mfno'),subdivisionFormData)
         .then( (r) => {
-            console.log(r);
-            if(r){
+            console.log(r.data);
+            // 소분 보고서 작성
+            // 반환 0 = 실패 / 1 이상 = 성공
+            // 반환 -1 = 로그인정보 없음  / -2 = 해당담당자아님
+            if(r.data>0){// 
                 let data = {
                     wno : manufacturingInfo.materialInputDto.workPlanDto.wno,
                     wstate : 7
@@ -48,8 +58,12 @@ export default function SubDivisionWriteBox(props){
                 axios.put('/wp/changestate/put.do',data)
                 .then(r=>{
                     console.log(r);
+                    alert("안내) 등록에 성공하였습니다..");
+                    setRender(render+1);
                 })
-            }
+            }else if(r.data==-1){alert("안내) 로그인된 정보가 없습니다.")}
+            else if(r.data==-2){alert("안내) 해당 공정 담당자가 아닙니다.")}
+            else{alert("안내) 등록에 실패하였습니다..")}
         })
         .catch( (e) => {console.log(e)})
     }

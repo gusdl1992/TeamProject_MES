@@ -19,8 +19,11 @@ public class SubDivisionController {
     private MemberService memberService;
 
     // 소분 보고서 작성
+    // 소분 보고서 작성
+    // 반환 0 = 실패 / 1 이상 = 성공
+    // 반환 -1 = 로그인정보 없음  / -2 = 해당담당자아님
     @PostMapping("/input/post.do")
-    public boolean doSubDivisionInputPost(@RequestParam int mfno , SubDivisionDto subDivisionDto){
+    public int doSubDivisionInputPost(@RequestParam int mfno , SubDivisionDto subDivisionDto){
         int successcount = subDivisionDto.getSuccesscount();
         int failcount = subDivisionDto.getFailcount();
         return subDivisionService.doSubDivisionInputPost(mfno,failcount,successcount);
@@ -50,7 +53,7 @@ public class SubDivisionController {
 
     // 품질 검사
     @PutMapping("/confirm.do")
-    public boolean doSubDivisionConfirm(SubDivisionDto subDivisionDto){
+    public int doSubDivisionConfirm(SubDivisionDto subDivisionDto){
         System.out.println("subDivisionDto = " + subDivisionDto);
         int mno = memberService.doLogininfo().getMno();
         int sdno = subDivisionDto.getSdno();
