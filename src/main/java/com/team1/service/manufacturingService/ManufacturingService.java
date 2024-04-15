@@ -1,5 +1,6 @@
 package com.team1.service.manufacturingService;
 
+import com.team1.controller.AlertSocekt;
 import com.team1.model.dto.ManufacturingDto.ManufacturingDto;
 import com.team1.model.dto.MaterialInputDto;
 import com.team1.model.dto.MemberDto;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.socket.TextMessage;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -31,6 +33,8 @@ public class ManufacturingService {//class start
     @Autowired ManufacturingEntityRepository manufacturingEntityRepository;
     @Autowired BulkLogRepository bulkLogRepository;
     @Autowired WorkPlanEntityRepository workPlanEntityRepository;
+    @Autowired
+    AlertSocekt alertSocekt;
 
     //MaterialInput 정보 전부 가져오기
     public List<MaterialInputDto> materialInputDtoList(){
@@ -138,6 +142,13 @@ public class ManufacturingService {//class start
         WorkPlanEntity workPlanEntity = workPlanEntityRepository.findBywno(materialInputEntity.get().getWorkPlanEntity().getWno());
         workPlanEntity.setWstate(5);
 
+        // 작업 다 끝난후 검사 완료 메세지 소켓 전송
+        try {
+            alertSocekt.sendString(new TextMessage("벌크 등록 완료!!"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
 
         return saveManufacturingEntity.getMfno();
     }
@@ -216,6 +227,13 @@ public class ManufacturingService {//class start
         manufacturingEntity.get().setCheckmemberEntity(memberEntity.get());
 
         manufacturingEntity.get().getMaterialInputEntity().getWorkPlanEntity().setWstate(5);
+
+        // 작업 다 끝난후 검사 완료 메세지 소켓 전송
+        try {
+            alertSocekt.sendString(new TextMessage("벌크 검사 완료!!"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
 
         return manufacturingEntity.get().getMfno();
