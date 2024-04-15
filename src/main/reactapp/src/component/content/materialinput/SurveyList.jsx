@@ -45,8 +45,8 @@ export default function SurveyList(props){
                             <div className="previosList">
                                 <Link to={`/material/input?sno=${s.sno}`}>
                                     <h4>작업계획 {s.workPlanDto.wno}</h4>
-                                    <p>거래처 : {s.workPlanDto.wno}</p>
-                                    <p>등록일자 : {s.workPlanDto.wendtime.split('T')[0].split('-')[0]}년 {s.workPlanDto.cdate.split('T')[0].split('-')[1]}월 {s.workPlanDto.cdate.split('T')[0].split('-')[2]}일</p>
+                                    <p>거래처 : {s.workPlanDto.client}</p>
+                                    <p>등록일자 : {s.workPlanDto.wendtime.split('T')[0].split('-')[0]}년 {s.workPlanDto.wendtime.split('T')[0].split('-')[1]}월 {s.workPlanDto.wendtime.split('T')[0].split('-')[2]}일</p>
                                 </Link>
                             </div>
                         )

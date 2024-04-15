@@ -32,21 +32,7 @@ export default function PackagingLayOut(props){
         arrows: subdivision.length > 0 ? true : false
       };
 
-    return(<>
-        <div id="workPlanListBox">
-            {subdivision.map((r) => {
-                if(r.manufacturingDto.materialInputDto.workPlanDto.wstate == 8 && r.sdstate == 2){
-                    return(
-                        <div>
-                            <Link to={`/packaging?sdno=${r.sdno}`}>
-                                <span>소분내역 : {r.sdno}</span>
-                                <span>등록일자 : {r.cdate}</span>
-                            </Link>
-                        </div>
-                    )
-                }
-            })}
-        </div>    
+    return(<>   
         <div className="slider-container previousWork">
             <Slider {...settings}>
                 {subdivision.map((r) => {
@@ -55,8 +41,8 @@ export default function PackagingLayOut(props){
                             <div className="previosList">
                                 <Link to={`/packaging?sdno=${r.sdno}`}>
                                     <h4>작업계획 {r.manufacturingDto.materialInputDto.workPlanDto.wno}</h4>
-                                    <p>거래처 : {r.manufacturingDto.materialInputDto.workPlanDto.wno}</p>
-                                    <p>등록일자 : {r.manufacturingDto.materialInputDto.workPlanDto.wendtime.split('T')[0].split('-')[0]}년 {r.manufacturingDto.materialInputDto.workPlanDto.cdate.split('T')[0].split('-')[1]}월 {r.manufacturingDto.materialInputDto.workPlanDto.cdate.split('T')[0].split('-')[2]}일</p>
+                                    <p>거래처 : {r.manufacturingDto.materialInputDto.workPlanDto.client}</p>
+                                    <p>등록일자 : {r.manufacturingDto.materialInputDto.workPlanDto.wendtime.split('T')[0].split('-')[0]}년 {r.manufacturingDto.materialInputDto.workPlanDto.wendtime.split('T')[0].split('-')[1]}월 {r.manufacturingDto.materialInputDto.workPlanDto.wendtime.split('T')[0].split('-')[2]}일</p>
                                 </Link>
                             </div>
                         )

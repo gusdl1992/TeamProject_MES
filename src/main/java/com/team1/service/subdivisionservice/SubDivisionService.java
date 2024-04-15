@@ -1,5 +1,6 @@
 package com.team1.service.subdivisionservice;
 
+import com.team1.controller.AlertSocekt;
 import com.team1.model.dto.ManufacturingDto.ManufacturingDto;
 import com.team1.model.dto.MemberDto;
 import com.team1.model.dto.SubDivisionDto;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.socket.TextMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,9 @@ public class SubDivisionService {
     private MemberRepository memberRepository;
     @Autowired
     private SubDivisionRepository subDivisionRepository;
+    
+    @Autowired
+    AlertSocekt alertSocekt;
 
     // 소분 보고서 작성
     // 반환 0 = 실패 / 1 이상 = 성공
@@ -62,11 +67,19 @@ public class SubDivisionService {
         // insert
         SubdivisionEntity saveSubDivision = subDivisionRepository.save(SubdivisionEntity.builder().build());
 
+
         if(saveSubDivision.getSdno() >= 1){
             saveSubDivision.setManufacturingEntity(manufacturingEntity);
             saveSubDivision.setInputmemberEntity(memberEntity);
             saveSubDivision.setFailCount(failcount);
             saveSubDivision.setSuccessCount(successcount);
+
+            // 작업 다 끝난후 검사 완료 메세지 소켓 전송
+            try {
+                alertSocekt.sendString(new TextMessage("소분 등록 완료!!"));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
 
             return 1;
         }
@@ -129,6 +142,12 @@ public class SubDivisionService {
         System.out.println("subdivisionEntity"+subdivisionEntity);
 
         if (subdivisionEntity.getCheckmemberEntity() != null){
+            // 작업 다 끝난후 검사 완료 메세지 소켓 전송
+            try {
+                alertSocekt.sendString(new TextMessage("소분 검사 완료!!"));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             return 1;
         }
         return 0;

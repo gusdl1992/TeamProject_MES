@@ -265,7 +265,9 @@ thead th{text-align: center;}
 }
 .checkBox>button{margin-bottom: 30px;}
 /* 승호 CSS END================================ */
-
+.previousWork{
+    height: 180px !important;
+}
 .previosList{
     border: 1px solid #ddd;
     margin: 0 auto;

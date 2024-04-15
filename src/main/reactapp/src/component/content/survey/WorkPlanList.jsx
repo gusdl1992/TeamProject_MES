@@ -45,8 +45,8 @@ export default function WorkPlanList(){
                             <div className="previosList">
                                 <Link to={`/survey/survey?wno=${w.wno}`}>
                                     <h4>작업계획 : {w.wno}</h4>
-                                    <p>거래처 : {w.wno}</p>
-                                    <p>생산기한 : {w.wendtime.split('T')[0].split('-')[0]}년 {w.cdate.split('T')[0].split('-')[1]}월 {w.cdate.split('T')[0].split('-')[2]}일</p>
+                                    <p>거래처 : {w.client}</p>
+                                    <p>생산기한 : {w.wendtime.split('T')[0].split('-')[0]}년 {w.wendtime.split('T')[0].split('-')[1]}월 {w.wendtime.split('T')[0].split('-')[2]}일</p>
                                 </Link>
                             </div>
                         )

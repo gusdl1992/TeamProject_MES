@@ -30,6 +30,8 @@ public class WorkPlanDto extends BaseTimeDto {
 
     private String pname;
 
+    private String client; // 거래처
+
     // - 엔티티를 dto로 변환하는 메소드
     public WorkPlanEntity toEntity() {
         return WorkPlanEntity.builder()
@@ -37,6 +39,7 @@ public class WorkPlanDto extends BaseTimeDto {
                 .wcount(this.wcount)
                 .wendtime(this.wendtime)
                 .wstate(this.wstate)
+                .client(this.client)
                 .build();
     }
 

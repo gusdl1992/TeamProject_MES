@@ -43,8 +43,8 @@ export default function MaterialinputList(){
                             <div className="previosList">
                                 <Link to={`/manufacturing/info?mipno=${mip.mipno}`}>
                                     <h4>작업계획 {mip.workPlanDto.wno}</h4>
-                                    <p>거래처 : {mip.workPlanDto.wno}</p>
-                                    <p>등록일자 : {mip.workPlanDto.wendtime.split('T')[0].split('-')[0]}년 {mip.workPlanDto.cdate.split('T')[0].split('-')[1]}월 {mip.workPlanDto.cdate.split('T')[0].split('-')[2]}일</p>
+                                    <p>거래처 : {mip.workPlanDto.client}</p>
+                                    <p>등록일자 : {mip.workPlanDto.wendtime.split('T')[0].split('-')[0]}년 {mip.workPlanDto.wendtime.split('T')[0].split('-')[1]}월 {mip.workPlanDto.wendtime.split('T')[0].split('-')[2]}일</p>
                                 </Link>
                             </div>
                         )

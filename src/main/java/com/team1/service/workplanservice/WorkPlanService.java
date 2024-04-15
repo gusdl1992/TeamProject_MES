@@ -51,10 +51,11 @@ public class WorkPlanService {
 
         if(optionalMemberEntity.get().getPart() != -1) return false;
 
-        ProductEntity productEntity = productRepository.findByPname(workPlanDto.getPname());
+        ProductEntity productEntity = productRepository.findById(workPlanDto.getPno()).get();
 
         WorkPlanEntity saveWorkPlan = WorkPlanEntity.builder()
                 .wcount(workPlanDto.getWcount())
+                .client(workPlanDto.getClient())
                 .wendtime(workPlanDto.getWendtime()) // 이 부분 수정
                 .productEntity(productEntity)
                 .build();

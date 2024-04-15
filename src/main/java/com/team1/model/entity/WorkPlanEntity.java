@@ -28,7 +28,8 @@ public class WorkPlanEntity extends BaseTime{
     @ManyToOne
     @JoinColumn(name = "pno")
     private ProductEntity productEntity; // 제품 테이블 가져옴 ( 제품 이름 )
-
+    @Column( nullable = false)
+    private String client;
 
 
     // - 엔티티를 dto로 변환하는 메소드
@@ -40,6 +41,7 @@ public class WorkPlanEntity extends BaseTime{
                 .wstate(this.wstate)
                 .pno(this.productEntity.getPno())
                 .pname(this.productEntity.getPname())
+                .client(this.client)
                 .build();
         workPlanDto.setCdate(this.cdate);
         workPlanDto.setUdate(this.udate);
