@@ -65,6 +65,9 @@ export default function Header(props){
                                 <li>
                                 <Link to ="/chart">제품통계</Link>
                                 </li>
+                                <li>
+                                    <Link to ="/expiration">폐기 대기 </Link>
+                                </li>
                             </ul>
                         </div>
                     </li>

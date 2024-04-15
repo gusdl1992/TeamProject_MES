@@ -74,7 +74,7 @@ export default function Listmonth(props){
     <div>
       <select onChange={(e)=>{props.setPeriod(e.target.value)}}>
         <option value={1}>주간보기</option>
-        <option value={2}>월간보기</option>
+        <option value={2} selected>월간보기</option>
       </select>
       <h2>월간 상품 입출고 현황</h2>
       <div>

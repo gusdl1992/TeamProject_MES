@@ -73,7 +73,7 @@ export default function List(props){
   return (
     <div>
     <select onChange={(e)=>{props.setPeriod(e.target.value)}}>
-        <option value={1}>주간보기</option>
+        <option value={1} selected>주간보기</option>
         <option value={2}>월간보기</option>
       </select>
       <h2>주간 상품 입출고 현황</h2>
