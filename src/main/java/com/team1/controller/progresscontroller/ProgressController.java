@@ -22,7 +22,8 @@ public class ProgressController {
         System.out.println("ProgressController.progressGetPlan");
         return progressService.progressGetPlan();
     }
-    
+
+
     
 
 }
