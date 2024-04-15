@@ -30,8 +30,8 @@ export default function RmLogWrite(props){
     console.log(rmlist)
 
     return(
-        <>
-            <form ref={boardWriteFormRef}>
+        <>            
+            <form id="RmWriteBox" ref={boardWriteFormRef}>
                 <select name="rmname">
                 {rmlist.map((e) => (
                     <option key={e.rmlno} value={e.rmname}>
@@ -39,9 +39,9 @@ export default function RmLogWrite(props){
                     </option>
                     ))}
                 </select>
-                <input type="text" name="rmlcount"></input>
+                <input type="text" name="rmlcount"></input>                    
                 <button type="button" onClick={handleSubmit}>전송</button>
-            </form>
+            </form>            
         </>
     )
 

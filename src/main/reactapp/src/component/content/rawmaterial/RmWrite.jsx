@@ -19,23 +19,16 @@ export default function RmWrite(props){
         }).catch(e=>{console.log(e)})
     }
     return(<>
-        <form
-
-    >
-      <Stack spacing={1}>
-        <Input value={rmname} onChange={(e)=>{setrmname(e.target.value)}} required />        
-        <Button type="button" onClick={doPost}>제품 등록</Button>
-      </Stack>
-    </form>
-
-    
+        <form>
+            <div id="RmWriteBox">
+                <div className="RmWriteInput">
+                    <span>원자재 등록   </span>
+                    <input value={rmname} onChange={(e)=>{setrmname(e.target.value)}}/>     
+                </div>   
+                <div className="RmWriteBtn">
+                    <button type="button" onClick={doPost}>제품 등록</button>
+                </div>
+            </div>
+        </form>
     </>)
 }
-{/* <div id="RmWriteBox">
-        <div className="RmWriteInput">
-            <input value={rmname} onChange={(e)=>{setrmname(e.target.value)}}/>     
-        </div>   
-        <div className="RmWriteBtn">
-            <button type="button" onClick={doPost}>제품 등록</button>
-        </div>
-    </div> */}

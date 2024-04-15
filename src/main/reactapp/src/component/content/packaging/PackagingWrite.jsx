@@ -89,19 +89,25 @@ export default function PackagingWrite(props){
 
     if(logininfo != null && render2 ){
     return(<>
-        <div>
+        <div className="AinputBox2">
         <form className="packagingForm">
         <h3>
             <span>포장제품 : {packagingInfo.manufacturingDto.materialInputDto.workPlanDto.pname}</span>
-            <span>포장수량 : {packagingInfo.manufacturingDto.materialInputDto.workPlanDto.wcount} EA</span>
+            <span>포장수량 : {packagingInfo.manufacturingDto.materialInputDto.workPlanDto.wcount.toLocaleString()} EA</span>
             <span>포장기한 : {packagingInfo.manufacturingDto.materialInputDto.workPlanDto.wendtime.split('T')[0]} 까지</span>            
         </h3>
         <div>
-            소분완료량 : {packagingInfo.successcount}            
-            <input type="text" name="successcount" onChange={박스개수처리}/>
-            박스개수 : <input type="text" name="pgcount" value={parseInt((박스개수)/(packagingInfo.manufacturingDto.materialInputDto.productDto.packagingcount))}/>            
+            <div>
+            소분완료량 : {packagingInfo.successcount.toLocaleString()}            
+            <input type="text" name="successcount" onChange={박스개수처리.toLocaleString()}/>
+            </div>
+            <div>
+            박스개수 : <input type="text" name="pgcount" value={parseInt((박스개수)/(packagingInfo.manufacturingDto.materialInputDto.productDto.packagingcount)).toLocaleString()}/>            
+            </div>
         </div>
-            <button type="button" onClick={packaginPost}>등록</button>
+            <div>
+            <button className="btn-3d green" type="button" onClick={packaginPost}>등록</button>
+            </div>
             </form>
         </div>
 

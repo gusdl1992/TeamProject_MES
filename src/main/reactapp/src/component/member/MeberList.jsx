@@ -54,13 +54,13 @@ export default function MeberList(props){
             <span style={{marginLeft:600}}><button type="button" onClick={handleClick}>사원등록</button></span>
             <h3>사원 목록</h3> 
             <table>
-            <colgroup>
+            {/* <colgroup>
                 <col width="10%"/>
                 <col width="20%"/>
                 <col width="30%"/>
                 <col width="15%"/>
                 <col width="25%"/>
-            </colgroup>
+            </colgroup> */}
                 <thead>
                     <tr>
                         <th>

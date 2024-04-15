@@ -30,6 +30,14 @@ body{
     padding: 24px 10px;
     margin-top: 120px;
 }
+.AinputBox2{
+    background-color: #fff;
+    border: 2px solid #e5e9ec;
+    width: 90%;
+    margin: 0 auto;
+    padding: 24px 10px;
+    /* margin-top: 120px;   */
+}
 .searchBox{
     height: 30px;
 }
@@ -111,6 +119,7 @@ td, th {
 td {
     border-bottom: 1px solid rgba(0,0,0,.1);
     background: #fff;
+    text-align: center;
 }
 button{
     background-color: transparent;
@@ -176,7 +185,18 @@ button{
 }
 #workPlanmInputBoxWrapBox > button:hover{
     background-color: #6D7888;
-
+}
+.packagingForm > h3{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+}
+.packagingForm > div{
+    display: flex;
+    justify-content: center;    
+}
+.packagingForm > button{
+    
 }
 
 

@@ -16,8 +16,7 @@ export default function Packaging(props){
             <div className="contentWrap">
                 <PackagingTotatBox />
                 <PackagingLayOut />
-                <PackagingWrite />
-                <PackagingPrintBox />
+                <PackagingWrite />                
             </div>
         </RenderContext.Provider>
     </>)
