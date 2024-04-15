@@ -162,7 +162,7 @@ export default function ManufacturingCheckList(props){
                                             <p className="workplanNumber">작업계획 번호 : {r.materialInputDto.workPlanDto.wno}</p>
                                             <p>벌크제조계획 번호 : {r.mfno}</p>
                                             <p>벌크명 : {r.materialInputDto.productDto.pname}벌크</p>
-                                            <p>벌크수량 : {r.mfcount}</p>
+                                            <p>벌크수량 : {r.mfcount.toLocaleString()}</p>
                                             <p>벌크제조 완료 날짜 : {r.cdate.split('T')[0]}</p>
                                             <p>벌크숙성 완료 날짜 : { timecalculator(r).getFullYear() }년{ timecalculator(r).getMonth()+1}월{ timecalculator(r).getDate()}일</p>
                                             <p>담당자 : {r.inputmemberDto.mname}</p>
