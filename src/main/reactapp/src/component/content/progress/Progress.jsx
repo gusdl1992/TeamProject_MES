@@ -12,6 +12,7 @@ import VideoLabelIcon from '@mui/icons-material/VideoLabel';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import axios from 'axios';
 import { useContext, useEffect, useRef, useState } from "react";
+import styles from './Progress.css';
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -50,8 +51,8 @@ const QontoStepIconRoot = styled('div')(({ theme, ownerState }) => ({
     fontSize: 18,
   },
   '& .QontoStepIcon-circle': {
-    width: 8,
-    height: 8,
+    width: 10,
+    height: 10,
     borderRadius: '50%',
     backgroundColor: 'currentColor',
   },
@@ -101,25 +102,41 @@ export default function Progress() {
             // console.log(response); console.log('여기!!!!!!!!')
             if(response.data != []){
                 setProgress(response.data);
-                console.log(response.data);
-                console.log(progress[0]);
             }
     })
     } , []);
 
 
   return (<>
-      <div>
-        흠..?
-        <Stack sx={{ width: '100%' }} spacing={4}>
-        <Stepper alternativeLabel activeStep={4} connector={<QontoConnector />}>
-            {steps.map((label) => (
-            <Step key={label}>
-                <StepLabel StepIconComponent={QontoStepIcon}>{label}</StepLabel>
-            </Step>
-            ))}
-        </Stepper>
-        </Stack>
-    </div>
+        <div id='progressWrap'>
+            <h2>작업 진행 상황</h2>
+            {
+                progress.map((r,index)=>{
+                    console.log(r)
+                    let wendtime = r.wendtime?.split('T')[0];
+                    return(<>
+                    <div id='progressDiv' key={index} style={{ marginTop: index === 0 ? '50px' : '20px' }}>
+                            <div className='progressDataWrap'>
+                                <span className='progressData'>작업 번호 : {r.wno}</span>
+                                <span className='progressData'>제품 명 : {r.pname}</span>
+                                <span className='progressData'>제품 수량 : {r.wcount}</span>
+                                <span className='progressData'>제품 마감일 : {wendtime}</span><br/>
+                            </div>
+                            <div className='progressView'>
+                            <Stack sx={{ width: '100%' }} spacing={4}>
+                                <Stepper alternativeLabel activeStep={r.wstate} connector={<QontoConnector />}>
+                                    {steps.map((label) => (
+                                    <Step key={label}>
+                                        <StepLabel StepIconComponent={QontoStepIcon}>{label}</StepLabel>
+                                    </Step>
+                                    ))}
+                                </Stepper>
+                            </Stack>
+                            </div>
+                        </div>
+                    </>)
+                })
+            }
+        </div>
   </>);
 }

@@ -26,6 +26,12 @@ export default function ProductList(props){
                     <th>
                     제품명
                     </th>
+                    <th>
+                    레시피
+                    </th>
+                    <th>
+                    제품 로그 확인
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -37,7 +43,9 @@ export default function ProductList(props){
                 {infos.map((product) => (
                     <tr key={product.pno}>
                         <td>{product.pno}</td>
-                        <td><Link to={"/product/recipie/get?pno="+product.pno}>{product.pname}</Link></td>
+                        <td>{product.pname}</td>
+                        <td><Link to={"/product/recipie/get?pno="+product.pno}>이동</Link></td>
+                        <td><Link to={"/product/log/list?pno="+product.pno}>이동</Link></td>
                     </tr>
                 ))}
             </tbody>

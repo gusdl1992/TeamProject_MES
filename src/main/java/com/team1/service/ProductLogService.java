@@ -60,4 +60,6 @@ public class ProductLogService {
     public List<Map<Object,Object>> findlogMonth(){
         return productLogRepository.findlogMonth();
     }
+
+    public List<ProductLogDto> findlog(int pno){ return productLogRepository.findlog(pno).stream().map(ProductLogEntity::toDto).collect(Collectors.toList());}
 }

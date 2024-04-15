@@ -4,6 +4,7 @@ package com.team1.controller.workplancontroller;
 import com.team1.model.dto.ManufacturingDto.ManufacturingDto;
 import com.team1.model.dto.SubDivisionDto;
 import com.team1.model.dto.WorkPlanDto;
+import com.team1.model.dto.packagingdto.PackagingDto;
 import com.team1.model.entity.WorkPlanEntity;
 import com.team1.model.repository.SurveyRepository;
 import com.team1.service.SurveyService;
@@ -65,6 +66,13 @@ public class WorkPlanController {
     public SubDivisionDto findsub(int wno){
 
         return workPlanService.findsub(wno);
+    }
+
+
+    @GetMapping("/pack/get.do")
+    public PackagingDto findpack(int wno){
+
+        return workPlanService.findpack(wno);
     }
 
 }

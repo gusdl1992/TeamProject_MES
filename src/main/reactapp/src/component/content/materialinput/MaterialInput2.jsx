@@ -84,26 +84,27 @@ export default function MaterialInput2(props){
     
     if(logininfo != null ){
     return(<>
-        <div>
-        <h3>
-            <span>생산제품 : {surveyB[0].pname}</span>
-            <span>생산수량 : {surveyB[0].wcount.toLocaleString()} EA</span>
-            <span>생산기한 : {surveyB[0].wendtime.split('T')[0]}까지</span>
-            
-        </h3>
-        <ul>
-            {surveyB.map((r,index)=>
-                {
-                    return (<>
-                        <li>투입재료 : {r.rmname} 계량된 값 = {r.sbcount}g</li>
-                        <div>입력된 양 : <input type="text"  /></div>
-                    </>)
-                }
-            )}
-        </ul>
-        <button className="btn-3d green" type="button" onClick={onClickBtn}>등록</button>
-        </div>
+        {surveyB[0].wcount!=""?
+            <div>
+            <h3>
+                <span>생산제품 : {surveyB[0].pname}</span>
+                <span>생산수량 : {surveyB[0].wcount.toLocaleString()} EA</span>
+                <span>생산기한 : {surveyB[0].wendtime.split('T')[0]}까지</span>
 
+            </h3>
+            <ul>
+                {surveyB.map((r,index)=>
+                    {
+                        return (<>
+                            <li>투입재료 : {r.rmname} 계량된 값 = {r.sbcount}g</li>
+                            <div>입력된 양 : <input type="text"  /></div>
+                        </>)
+                    }
+                )}
+            </ul>
+            <button className="btn-3d green" type="button" onClick={onClickBtn}>등록</button>
+            </div>
+        :" "}
     </>);
     }
 }

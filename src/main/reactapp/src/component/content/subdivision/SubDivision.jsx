@@ -16,12 +16,8 @@ export default function SubDivision(props){
         <RenderContext.Provider value={{ render ,setRender }}>
             <div className="contentWrap">
                 <SubDivisionTotalBox/>
-                <div id="workplanCssBox">
-                    <SubDivisionPreviousWork/>
-                </div>
-                <div id="workplanCssBox">
-                    <SubDivisionWriteBox/>
-                </div>
+                <SubDivisionPreviousWork/>
+                <SubDivisionWriteBox/>
                 <SubDivisionPrintBox/>
             </div>
         </RenderContext.Provider>

@@ -15,7 +15,7 @@ export default function Chart() {
     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
     datasets: [
       {
-        label: '# of Votes',
+        label: '남은분량',
         data: [12, 19, 3, 5, 2, 3],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -61,5 +61,8 @@ export default function Chart() {
         console.log(error);
       });
   }, []);
-  return <div style={{width:"400px"}}><Doughnut data={chartData} /></div>;
+  return <div style={{width:"400px"}}>
+      <h2>현재 보관중인 제품 목록</h2>
+        <Doughnut data={chartData} />
+      </div>;
 }

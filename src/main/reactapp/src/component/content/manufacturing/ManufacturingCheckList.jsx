@@ -114,9 +114,6 @@ export default function ManufacturingCheckList(props){
                             벌크 제조 번호
                         </th>
                         <th>
-                            상품명
-                        </th>
-                        <th>
                             담당자
                         </th>
                         <th>
@@ -138,9 +135,6 @@ export default function ManufacturingCheckList(props){
                                     <tr className="tableTitle">
                                         <td>
                                             {r.mfno}
-                                        </td>
-                                        <td>
-                                            {r.materialInputDto.productDto.pname}
                                         </td>
                                         <td>
                                             {r.inputmemberDto.mname}
