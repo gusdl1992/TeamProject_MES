@@ -118,30 +118,30 @@ button{
 }
 .contentWrap{
     max-width: 1250px;
-    margin: 0px auto 0;                            
+    margin: 0px auto 0;
 }
 #workPlanmInputBoxWrapT{
     display: flex;
     align-items: center;
     height: 750px;
-    
+
 }
 #workPlanmInputBoxWrap{
-    font-weight: bolder;   
+    font-weight: bolder;
     background-color: #cac6c6;
-    width: 400px;    
-    margin: 0 auto;                    
-    border-radius: 8px;            
+    width: 400px;
+    margin: 0 auto;
+    border-radius: 8px;
 }
-#workPlanmInputBoxWrapBox{   
+#workPlanmInputBoxWrapBox{
      display: flex;
      justify-content: center;
-    
+
 }
-#workPlanmInputBoxWrap > input{ 
+#workPlanmInputBoxWrap > input{
     width: 390px;
     margin: 2px 0 3px 4px;
-    
+
 }
 #workPlanmInputBoxWrapBox > button{
     width: 30%;
@@ -153,13 +153,57 @@ button{
     color: white;
     font-size: 18px;
     cursor: pointer;
-    transition: background-color 0.3s ease;  
+    transition: background-color 0.3s ease;
     justify-content: center;
-    margin-top: 10px;  
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 #workPlanmInputBoxWrapBox > button:hover{
     background-color: #022447;
 }
 
-
+/* 승호 CSS */
+input{
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+select{
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+    /* 버튼 */
+.btn-3d {
+    border: none;
+    position: relative;
+    display: inline-block;
+    font-size: 15px;
+    padding: 10px 40px;
+    color: white;
+    margin: 20px 10px 10px;
+    border-radius: 6px;
+    text-align: center;
+    transition: top .01s linear;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+}
+.btn-3d.green:hover  {background-color: #3d4f66;}
+.btn-3d:active {top: 9px;}
+.btn-3d.green {
+    background-color: #42566e;
+    box-shadow: 0 0 0 1px #42566e inset,
+          0 0 0 2px rgba(255,255,255,0.15) inset,
+          0 8px 0 0 #42566eb6,
+          0 8px 0 1px rgba(0,0,0,.4),
+          0 8px 8px 1px rgba(0,0,0,0.5);
+}
+.btn-3d.green:active {
+    box-shadow: 0 0 0 1px #42566e inset,
+          0 0 0 2px rgba(255,255,255,0.15) inset,
+          0 0 0 1px rgba(0,0,0,0.4);
+}
+thead th{text-align: center;}
+.tableTitle td{text-align: center;}
+/* 승호 CSS END */

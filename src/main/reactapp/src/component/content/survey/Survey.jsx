@@ -132,9 +132,15 @@ export default function Survey(props){
         if(parseInt(inputCount-inputCount*0.01)<=parseInt(recipeClass)&&parseInt(recipeClass)<=parseInt(inputCount+inputCount*0.01)){
             // 입력값이 투입해야하는 양보다 1% 이상 오차가 없다면 (성공)
             document.querySelector(`.validation${index}`).innerHTML="";
+            document.querySelector(`.recipe${index}`).style.color = "black"; // 입력값 색상을 검정으로 변경
+            document.querySelector(`.recipe${index}`).style.border="1px solid black"
+
             succeseInfo[0]= true;
         }else{
             document.querySelector(`.validation${index}`).innerHTML=`+-${(inputCount+inputCount*0.01).toLocaleString()} 이내로 투입해주세요`;
+            document.querySelector(`.recipe${index}`).style.color = "red"; // 입력값 색상을 빨강으로 변경
+            document.querySelector(`.validation${index}`).style.color = "red"; // 입력값 색상을 빨강으로
+            document.querySelector(`.recipe${index}`).style.border="1px solid red"
             succeseInfo[0] = false;
         }
     }

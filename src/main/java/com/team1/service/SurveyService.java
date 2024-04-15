@@ -187,7 +187,6 @@ public class SurveyService {
             // Survey 업데이트 하기
             surveyEntity.get().setInputmemberEntity(memberEntity.get()); // 계량 등록한사람
 
-
             // SurveyB 업데이트 하기
             for (int i = 0; i < surveyInsertDto.getSurveyBDto().size(); i++) {
                 // 원재료 식별번호로 값 호출
@@ -199,7 +198,6 @@ public class SurveyService {
                 SurveyBEntity surveyBEntity = surveyBRepository.findByUpdate(surveyEntity.get().getSno(),rawMaterrialDto.get().getRmno());
                 // 등록수량 수정입력
                 surveyBEntity.setSbcount(surveyInsertDto.getSurveyBDto().get(i).getSbcount());
-
             }
             // 작업 다 끝난후 검사 완료 메세지 소켓 전송
             try {

@@ -124,8 +124,17 @@ public class SurveyCheckService {
 
 
     // 2. 검사 완료 체크 시 검사 완료자 데이터 저장
-    public boolean surveyCheck(int sno , int sstate , int state){
+    // 반환 정보 :
+    // 1 이상 = 성공
+    // 0 = 실패
+    // -1 로그인 정보가 없음
+    // -2 해당담당자가 아님
+    public int surveyCheck(int sno , int sstate , int state){
         MemberDto memberDto = memberService.doLogininfo();
+        // 만약 검사자 또는 관리자 가 아니라면 등록 실패
+        if (memberDto.getPart() != 10 && memberDto.getPart() != -1) {
+            return -1;
+        }
         SurveyEntity survey = surveyGetList(sno);
         WorkPlanEntity workPlan = workPlanGetList(survey.getWorkPlanEntity().getWno());
         List<RecipeEntity> recipeEntityList = recipeEntityList(workPlan.getProductEntity().getPno());
@@ -147,7 +156,7 @@ public class SurveyCheckService {
 //                 return true;
             } else {
                 // 계량 검사 유효성 검사 실패시 false 리턴.
-                return false;
+                return 0;
             }
             if (result) {
                 for (int i = 0; i < surveyBEntityList.size(); i++) {
@@ -163,9 +172,9 @@ public class SurveyCheckService {
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-                return true;
+                return 1;
             } else {
-                return false;
+                return 0;
             }
         }else {// 합격이 아닐경우 (복붙함 수정사항 = workplan state 1로 지정해둠)
             if (result) {
@@ -181,7 +190,7 @@ public class SurveyCheckService {
                 // return true;
             } else {
                 // 계량 검사 유효성 검사 실패시 false 리턴.
-                return false;
+                return 0;
             }
             if (result) {
                 for (int i = 0; i < surveyBEntityList.size(); i++) {
@@ -191,9 +200,9 @@ public class SurveyCheckService {
                             .build();
                     rawMateriallogRepository.save(rawMaterialLogEntity);
                 }
-                return true;
+                return 1;
             } else {
-                return false;
+                return 0;
             }
 
         }
