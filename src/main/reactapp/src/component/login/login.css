@@ -4,7 +4,7 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    background-color: #cac6c6;
+    background-color: #42566E;    
 }
 
 .loginHeader {
@@ -14,7 +14,7 @@
 
 .loginHeader h2 {
     margin: 0;
-    color: #333;
+    color: white;
     font-size: 24px;
 }
 
@@ -26,7 +26,7 @@
 .inputGroup span {
     display: inline;
     margin-bottom: 5px;
-    color: #555;
+    color:white;
     font-size: 16px;
 }
 
@@ -58,8 +58,8 @@
     padding: 8px;
     border: none;
     border-radius: 4px;
-    background-color: #0d82ff;
-    color: #fff;
+    background-color: white;
+    color:black;
     font-size: 18px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -68,7 +68,9 @@
 #loginWrap button:hover {
     background-color: #022447;
 }
-
+.AcontentBox{
+    overflow-y: scroll;
+}
 
 
 /* 

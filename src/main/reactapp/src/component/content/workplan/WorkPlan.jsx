@@ -23,12 +23,28 @@ export default function WorkPlan(props){
     return(
         <div className="contentWrap">
             <div id="workPlanmInputBoxWrapT">
-                <form className="workPlanForm" id="workPlanmInputBoxWrap">
+                
+                <form className="workPlanForm" id="workPlanmInputBoxWrap">                    
+                    <h1>생산 일정</h1>
+                    <div className="alsguddl">
+                        <span>거래처</span>
+                        <input type="text"/> 
+                    </div>
+
+                    <div className="alsguddl">
+                    <span>제품</span>                    
+                    <input type="text" name="pname"/> 
+                    </div>
                     
-                    거래처  <input type="text"/> 
-                    제품  <input type="text" name="pname"/> 
-                    수량  <input type="text" name="wcount"/> 
-                    납기 일  <input type="text" name="wendtime"/>
+                    <div className="alsguddl">
+                    <span>수량</span>                     
+                    <input type="text" name="wcount"/> 
+                    </div>
+
+                    <div className="alsguddl">
+                    <span>납기일</span>
+                    <input type="text" name="wendtime"/>
+                    </div>
 
                     <div id="workPlanmInputBoxWrapBox">
                         <button type="button" onClick={writeWorkPlan}>등록</button>
