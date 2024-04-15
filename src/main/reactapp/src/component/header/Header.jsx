@@ -110,7 +110,7 @@ export default function Header(props){
                         <div className='subMenu'>
                             <ul>
                                 <li>
-                                    <Link to="/#">작업 진행 상황</Link>
+                                    <Link to="/시현진행상황">작업 진행 상황</Link>
                                 </li>
                             </ul>
                         </div>
