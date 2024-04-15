@@ -120,8 +120,8 @@ export default function Index(props){
                     <Route path="/expiration" element={<ExpirationLayOut/>}/>
                     <Route path="/member/List" element={<MeberList/>}/>
                     <Route path="/chart" element = {<ChartLayOut/>}/>
-                    <Route path="/시현진행상황" element = {<Progress/>}/>
-                    <Route path="/product/log/list" element = {<LayoutTest2 list={<ProductLogList/>}/>}/>
+                    <Route path="/Progress/view" element = {<Progress/>}/>
+                    <Route path="/product/log/list" element = {<LayoutTest list={<ProductLogList/>}/>}/>
                     </Routes>
                 </div>
         </BrowserRouter>
