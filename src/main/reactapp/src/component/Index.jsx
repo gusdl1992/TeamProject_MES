@@ -98,8 +98,7 @@ export default function Index(props){
         <LoginInfoContext.Provider value={{logininfo,setLogin}}>
         <BrowserRouter>
                 <div id="wrap">
-                {logininfo && <Header/>}
-                {logininfo && <span onClick={() => window.location.href='/c'}>Profile</span>}
+                {logininfo && <Header/>}                
                     <Routes>
                     <Route path="/" element={<Login/>}/>
                     <Route path="/c" element={<Main/>}/>

@@ -108,35 +108,6 @@ export default function MaterialInputPrintBox(props){
         
         <div className="AcontentBox">            
             <h3>목록</h3>
-            <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>생산 계획 번호</StyledTableCell>
-            <StyledTableCell align="right">담당자</StyledTableCell>
-            <StyledTableCell align="right">날짜</StyledTableCell>
-            <StyledTableCell align="right">상태</StyledTableCell>
-            <StyledTableCell align="right">비고</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {material.map((r) => (
-            
-            <StyledTableRow key={r.name}>
-              <StyledTableCell component="th" scope="row">
-                {r.workPlanDto.wno}
-              </StyledTableCell>
-              <StyledTableCell align="right">{r.inputmemberDto.mname}</StyledTableCell>
-              <StyledTableCell align="right">{r.udate.split('T')[0]}</StyledTableCell>
-              <StyledTableCell align="right">{
-                                                r.mipstate == 0 ? '검사대기' : r.mipstate == 1 ? '검사불합격' : r.mipstate == 2 ? '검사합격' : '-'
-                                            }</StyledTableCell>
-              <StyledTableCell align="right"><button onClick={()=>{document.querySelector('.modal'+r.mipno).style.display = 'block'}} type="button">상세보기</button></StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
             <table>
             {/* <colgroup>
                 <col width="10%"/>
