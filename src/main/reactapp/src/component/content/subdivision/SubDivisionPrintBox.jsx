@@ -76,7 +76,7 @@ export default function SubDivisionPrintBox(props){
                 <col width="25%"/> */}
             </colgroup>
                 <thead>
-                    <tr>
+                    <tr className="tableTitle">
                         <th>
                             생산 계획 번호
                         </th>
@@ -100,9 +100,8 @@ export default function SubDivisionPrintBox(props){
                             let cdate = r.cdate.split('T')[0];
                             let udate = r.udate.split('T')[0];
 
-                            return(
-                                <>
-                                    <tr>
+                            return(<>
+                                    <tr className="tableTitle">
                                         <td>
                                             {r.manufacturingDto.materialInputDto.workPlanDto.wno}
                                         </td>
@@ -118,38 +117,44 @@ export default function SubDivisionPrintBox(props){
                                             }
                                         </td>
                                         <td>
-                                            <button onClick={()=>{document.querySelector('.modal'+r.sdno).style.display = 'block'}} type="button">상세보기</button>
+                                            <button onClick={()=>{document.querySelector('.modal'+r.sdno).style.display ='revert'}} type="button">상세보기</button>
                                         </td>
                                     </tr>
-                                    <div style={{display:'none'}} className={"modal"+r.sdno}>
-                                        <p>생산계획 번호 : {r.manufacturingDto.materialInputDto.workPlanDto.wno}</p>
-                                        <p>제품명 : {r.manufacturingDto.materialInputDto.productDto.pname}</p>
-                                        <p>수주량 : {r.manufacturingDto.materialInputDto.workPlanDto.wcount}</p>
-                                        <p>소분제품량 : {r.successcount}</p>
-                                        <p>불량품량 : {r.failcount}</p>
+                                    <tr>
+                                        <td colSpan={"5"} style={{display:'none'}} className={`modal${r.sdno} reportBox`}>
+                                        <p className="workplanNumber">생산계획 번호 : {r.manufacturingDto.materialInputDto.workPlanDto.wno} 번</p>
+                                        <div className="orderProduct">
+                                            <p>제품명 : {r.manufacturingDto.materialInputDto.productDto.pname}</p>
+                                            <p>수주량 : {r.manufacturingDto.materialInputDto.workPlanDto.wcount.toLocaleString()} 개</p>
+                                        </div>
+                                        <p>소분제품량 : {r.successcount.toLocaleString()} EA</p>
+                                        <p>불량품량 : {r.failcount.toLocaleString()} EA</p>
                                         <p>날짜 : {cdate}</p>
                                         <p>담당자 : {r.inputmemberDto.mname}</p>
                                         <form className={"confirmForm"+index} >
                                             <input type="text" style={{display:'none'}} value={r.sdno} name="sdno"/>
-                                            검사자 : <input onChange={checkMemberNameInput} disabled={r.checkmemberDto != null ? true : false }  value={r.checkmemberDto != null ? r.checkmemberDto.mname : confirmmembername} className="checkMemberInput" type="text"/>
-                                            검사상태
-                                            <select name="sdstate" value={confirmstate} onChange={confirmStateChange}>
-                                                <option value="0">
-                                                    검사대기
-                                                </option>
-                                                <option value="1">
-                                                    검사불합격
-                                                </option>
-                                                <option value="2">
-                                                    검사합격
-                                                </option>
-                                            </select>
-                                            <button disabled={r.checkmemberDto != null ? true : false } type="button" onClick={()=>{onMaterialConfirm(index,r.manufacturingDto.materialInputDto.workPlanDto.wno)}}>검사 완료</button>
+                                            <div className="checkBox">
+                                                검사자 : <input onChange={checkMemberNameInput} disabled={r.checkmemberDto != null ? true : false }  value={r.checkmemberDto != null ? r.checkmemberDto.mname : confirmmembername} className="checkMemberInput" type="text"/>
+                                                검사상태
+                                                <select name="sdstate" value={confirmstate} onChange={confirmStateChange}>
+                                                    <option value="0">
+                                                        검사대기
+                                                    </option>
+                                                    <option value="1">
+                                                        검사불합격
+                                                    </option>
+                                                    <option value="2">
+                                                        검사합격
+                                                    </option>
+                                                </select>
+                                                <button className="btn-3d green" disabled={r.checkmemberDto != null ? true : false } type="button" onClick={()=>{onMaterialConfirm(index,r.manufacturingDto.materialInputDto.workPlanDto.wno)}}>검사 완료</button>
+                                                <button className="btn-3d green" onClick={()=>{document.querySelector('.modal'+r.sdno).style.display = 'none'}} type="button">x</button>
+                                            </div>
                                         </form>
-                                        <button onClick={()=>{document.querySelector('.modal'+r.sdno).style.display = 'none'}} type="button">x</button>
-                                    </div>
-                                </>
-                            )
+                                        
+                                        </td>
+                                    </tr>
+                                </>)
                         })
                     }
                 </tbody>

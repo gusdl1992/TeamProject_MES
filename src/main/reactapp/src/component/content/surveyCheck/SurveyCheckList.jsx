@@ -105,9 +105,8 @@ export default function SurveyCheckList(props){
                             let cdate = r.cdate?.split('T')[0];
                             let udate = r.udate?.split('T')[0];
 
-                            return(
-                                <>
-                                {console.log(r)}
+                            return(<>
+                                    {console.log(r)}
                                     <tr className="tableTitle">
                                         <td>
                                             {r.wno}
@@ -172,8 +171,7 @@ export default function SurveyCheckList(props){
                                             
                                         </td>
                                     </tr>
-                                </>
-                            )
+                                </>)
                         })
                     }
                 </tbody>

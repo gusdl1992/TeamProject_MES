@@ -94,15 +94,15 @@ export default function PackagingWrite(props){
         <h3>
             <span>포장제품 : {packagingInfo.manufacturingDto.materialInputDto.workPlanDto.pname}</span>
             <span>포장수량 : {packagingInfo.manufacturingDto.materialInputDto.workPlanDto.wcount.toLocaleString()} EA</span>
-            <span>포장기한 : {packagingInfo.manufacturingDto.materialInputDto.workPlanDto.wendtime.split('T')[0]} 까지</span>            
+            <span>포장기한 : {packagingInfo.manufacturingDto.materialInputDto.workPlanDto.wendtime.split('T')[0]} 까지</span>
         </h3>
         <div>
             <div>
-            소분완료량 : {packagingInfo.successcount.toLocaleString()}            
+            소분완료량 : {packagingInfo.successcount.toLocaleString()}
             <input type="text" name="successcount" onChange={박스개수처리.toLocaleString()}/>
             </div>
             <div>
-            박스개수 : <input type="text" name="pgcount" value={parseInt((박스개수)/(packagingInfo.manufacturingDto.materialInputDto.productDto.packagingcount)).toLocaleString()}/>            
+            박스개수 : <input type="text" name="pgcount" value={parseInt((박스개수)/(packagingInfo.manufacturingDto.materialInputDto.productDto.packagingcount)).toLocaleString()}/>
             </div>
         </div>
             <div>
