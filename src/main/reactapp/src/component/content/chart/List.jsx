@@ -42,7 +42,8 @@ export default function List(props){
               backgroundColor: 'rgba(0, 0, 0, 0)', // 배경색은 투명하게
             };
           }
-          groupedData[item.pno].data.push({ x: item.cdate%4, y: item.plcount });
+          groupedData[item.pno].data.push({ x: item.cdate%4+1, y: item.plcount });
+          groupedData[item.pno].data.sort((a, b) => a.x - b.x);
         });
         console.log(groupedData);
         // 데이터셋 배열 생성

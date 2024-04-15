@@ -23,7 +23,6 @@ public class PackagingDto extends BaseTimeDto {
 
     private MemberDto memberDto; // 등록자
 
-
     public PackagingEntity toEntity(){
         return PackagingEntity.builder()
                 .memberEntity(this.toEntity().getMemberEntity())

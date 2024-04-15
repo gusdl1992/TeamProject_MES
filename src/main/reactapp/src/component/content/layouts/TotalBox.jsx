@@ -6,7 +6,7 @@ export default function TotalBox(props){
             <div className="statisticsWrap">
                 <div className="statisticsBox">
                     <div>진행전</div>
-                    <div id="statisticsBoxFont">0개</div>
+                    
                 </div>
                 <div className="statisticsBox">
                     <div className="statisticsBoxFont">진행중</div>

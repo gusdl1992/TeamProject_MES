@@ -20,18 +20,31 @@ export default function ReportForBulk(props){
     
 
     console.log(report2)
-    return report2 ? (
+    return report2.mfcount ? (
         <>
+        <h4>벌크제조보고서</h4>
         <table>
             <thead>
                 <tr>
-                    <th>완성분량</th>
+                    <th>완성분량</th><th>담당자</th><th>결재자</th><th>작성일자</th><th>상태</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>
                         {report2.mfcount}
+                    </td>
+                    <td>
+                        {report2.inputmemberDto.mname}
+                    </td>
+                    <td>
+                        {report2.checkmemberDto.mname}
+                    </td>
+                    <td>
+                        {report2.cdate.split("T")[0]}
+                    </td>
+                    <td>
+                        {wstate > 5 ? <div>소분완료</div>:<div>소분전</div>}
                     </td>
                 </tr>
             </tbody>

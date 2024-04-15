@@ -2,6 +2,7 @@ package com.team1.controller.workplancontroller;
 
 
 import com.team1.model.dto.ManufacturingDto.ManufacturingDto;
+import com.team1.model.dto.SubDivisionDto;
 import com.team1.model.dto.WorkPlanDto;
 import com.team1.model.entity.WorkPlanEntity;
 import com.team1.model.repository.SurveyRepository;
@@ -31,8 +32,9 @@ public class WorkPlanController {
 
 
     @GetMapping("/list/get.do")
-    public List<WorkPlanDto> findWPList(){
-        return workPlanService.findWPList();
+    public List<WorkPlanDto> findWPList(String orderby){
+        System.out.println(orderby+"dddddddd");
+        return workPlanService.findWPList(orderby);
     }
 
     @GetMapping("/fidsno/get.do")
@@ -57,4 +59,12 @@ public class WorkPlanController {
         System.out.println("\"\" = " + "안녕");
         return manufacturingService.findbymipno(mipno);
     }
+
+
+    @GetMapping("/sub/get.do")
+    public SubDivisionDto findsub(int wno){
+
+        return workPlanService.findsub(wno);
+    }
+
 }

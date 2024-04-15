@@ -21,4 +21,7 @@ public interface MaterialInputRepository extends JpaRepository<MaterialInputEnti
             "inner join workplan on workplan.wno=survey.wno " +
             "inner join product on product.pno=workplan.pno where survey.sno= :sno" , nativeQuery = true)
     List<Map<Object,Object>> findByHard(int sno);
+
+
+
 }
