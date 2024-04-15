@@ -57,7 +57,7 @@ export default function SurveyList(props){
                             <div>
                                 <Link to={`/material/input?sno=${s.sno}`}>
                                     <span>작업계획 {s.sno}</span>
-                                    <span>등록일자 : {s.cdate}</span>
+                                    <span>등록일자 : {s.cdate.split('T')[0]}까지</span>
                                 </Link>
                             </div>
                         )

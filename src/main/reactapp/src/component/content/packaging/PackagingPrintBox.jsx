@@ -1,7 +1,12 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { RenderContext } from "./Packaging";
 
 export default function PackagingPrintBox(props){
+    // 재 랜더링용
+    // - provider 컴포넌트의 value 호출
+    const { render ,setRender } = useContext(RenderContext);
+
     let [packaging,setPackaging] = useState([]);
     
     
@@ -16,7 +21,7 @@ export default function PackagingPrintBox(props){
             setPackaging(r.data);
         }
     })
-    } , [])
+    } , [render])
     
     return(
         <div className="AcontentBox">

@@ -2,15 +2,20 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { LoginInfoContext } from "../../Index";
+import { RenderContext } from "./Packaging";
 
 export default function PackagingWrite(props){    
+    // 재 랜더링용
+    // - provider 컴포넌트의 value 호출
+    const { render ,setRender } = useContext(RenderContext);
+
     // 1. 컨텍스트 가져오기 (로그인 정보)
     const { logininfo, setLogin } = useContext(LoginInfoContext);
     //console.log(logininfo); 
 
     const [ packagingInfo , setPackagingInfo] = useState("");
 
-    const [ render , setRender ] = useState(false);
+    const [ render2 , setRender2 ] = useState(false);
     
     const [ 박스개수 , set박스개수 ] = useState("");
 
@@ -22,7 +27,7 @@ export default function PackagingWrite(props){
         .then((r)=>{
             console.log(r); 
 
-            setRender(true);
+            setRender2(true);
             setPackagingInfo(r.data);            
         }).catch( (e) => {console.log(e)})
     }   
@@ -55,20 +60,21 @@ export default function PackagingWrite(props){
                 axios.put('/wp/changestate/put.do',data)
                 .then(r1=>{
                     console.log(r1);
+                    // console.log(packagingForm.pgcount.value);
+                    // console.log(packagingInfo.manufacturingDto.materialInputDto.productDto.pno)
+
+                    let packagingFormData2 = new FormData();
+                    packagingFormData2.append('pno', packagingInfo.manufacturingDto.materialInputDto.productDto.pno);
+                    packagingFormData2.append('pgcount', packagingForm.pgcount.value);
+
+                    axios.post("/productlog/post.do" , packagingFormData2 )
+                    .then( (r2) => {
+                        console.log(r2);
+                    }).catch((e) => {console.log(e)})
+                    alert("안내) 등록 성공하였습니다.");
+                    setRender(render+1);
                 })
-                // console.log(packagingForm.pgcount.value);
-                // console.log(packagingInfo.manufacturingDto.materialInputDto.productDto.pno)
-
-                let packagingFormData2 = new FormData();
-                packagingFormData2.append('pno', packagingInfo.manufacturingDto.materialInputDto.productDto.pno);
-                packagingFormData2.append('pgcount', packagingForm.pgcount.value);
-
                 
-                axios.post("/productlog/post.do" , packagingFormData2 )
-                .then( (r2) => {
-                    console.log(r2);
-                }).catch((e) => {console.log(e)})
-                alert("안내) 등록 성공하였습니다.");
             }else if(r.data==-1){
                 alert("안내) 로그인정보가 없습니다.")
             }else if(r.data==-2){
@@ -79,9 +85,9 @@ export default function PackagingWrite(props){
     }
 
 
-    useEffect( () => { packaging(); },[query])
+    useEffect( () => { packaging(); },[query,render])
 
-    if(logininfo != null && render ){
+    if(logininfo != null && render2 ){
     return(<>
         <div>
         <form className="packagingForm">

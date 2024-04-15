@@ -1,7 +1,12 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { RenderContext } from "./SubDivision";
 
 export default function SubDivisionPrintBox(props){
+    // 재 랜더링용
+    // - provider 컴포넌트의 value 호출
+    const { render ,setRender } = useContext(RenderContext);
+
     let [subdivision,setSubDivision] = useState([]);
     const [confirmstate , setConfirmState] = useState('0');
     let [confirmmembername , setConfirmMemberName] = useState('');
@@ -16,7 +21,7 @@ export default function SubDivisionPrintBox(props){
             setSubDivision(r.data);
         }
     })
-    } , [])
+    } , [render])
 
     // 검사
     const confirmStateChange = (e)=>{
@@ -32,7 +37,9 @@ export default function SubDivisionPrintBox(props){
         axios.put('/subdivision/confirm.do',confirmFormData)
         .then(r=>{
             console.log(r);
-            if(r.data){
+            // 반환 0 = 실패 / 1 이상 = 성공
+            // 반환 -1 = 로그인정보 없음  / -2 = 해당담당자아님
+            if(r.data>0){
                 let data = {
                     wno : wno,
                     wstate : 8
@@ -40,9 +47,13 @@ export default function SubDivisionPrintBox(props){
                 axios.put('/wp/changestate/put.do',data)
                 .then(r=>{
                     console.log(r);
+                    alert("안내) 등록 성공.")
+                    setRender(render+1);
                 })
-                window.location.href='/subdivision';
-            }
+                // window.location.href='/subdivision';
+            }else if(r.data==-1){alert("안내) 로그인 된 정보가 없습니다.");}
+            else if(r.data==-2){alert("안내) 해당공정 담당자가 아닙니다.");}
+            else{alert("안내) 등록실패.");}
         })
         .catch(e=>{
             console.log(e);
