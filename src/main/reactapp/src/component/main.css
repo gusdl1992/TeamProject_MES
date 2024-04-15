@@ -113,8 +113,9 @@ td {
     background: #fff;
 }
 button{
-    background-color: transparent; /* 배경색 투명하게 설정 */
-    border: none; /* 테두리 없앰 */
+    background-color: transparent;
+    border: none; 
+    
 }
 .contentWrap{
     max-width: 1250px;
@@ -125,22 +126,37 @@ button{
     align-items: center;
     height: 750px;
 
-}
-#workPlanmInputBoxWrap{
+}   
+#workPlanmInputBoxWrap{        
     font-weight: bolder;
-    background-color: #cac6c6;
-    width: 400px;
+    background-color: #42566E;
+    color: white;
+    width: 470px;
     margin: 0 auto;
     border-radius: 8px;
+    padding: 30px 28px;
+}
+#workPlanmInputBoxWrap > h1{
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 50px;
 }
 #workPlanmInputBoxWrapBox{
      display: flex;
      justify-content: center;
 
 }
-#workPlanmInputBoxWrap > input{
-    width: 390px;
-    margin: 2px 0 3px 4px;
+.alsguddl{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 20px;
+}
+.alsguddl > span{
+    padding: 10px 0;        
+}
+.alsguddl > input{
+    width: 300px;
+    
 
 }
 #workPlanmInputBoxWrapBox > button{
@@ -149,8 +165,8 @@ button{
     padding: 8px;
     border: none;
     border-radius: 4px;
-    background-color: #0d82ff;
-    color: white;
+    background-color: #d3d3d3;
+    color: black;
     font-size: 18px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -159,8 +175,10 @@ button{
     margin-bottom: 10px;
 }
 #workPlanmInputBoxWrapBox > button:hover{
-    background-color: #022447;
+    background-color: #6D7888;
+    
 }
+
 
 /* 승호 CSS */
 input{

@@ -46,7 +46,7 @@ export default function Header(props){
     return (
         <div id='menuWrap'>
             <div id='logoBox'>
-                <img src='/static/img/logo.png' width={'120px'}/>
+                <Link to="/RM"><img src='/static/img/logo.png' width={'120px'}/></Link>                
             </div>
             <div id='sideNav'>
                 <ul>
