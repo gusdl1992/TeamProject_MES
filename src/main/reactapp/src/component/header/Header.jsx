@@ -112,6 +112,9 @@ export default function Header(props){
                                 <li>
                                     <Link to="/시현진행상황">작업 진행 상황</Link>
                                 </li>
+                                <li>
+                                    <Link to="/wp/list">전체 보고서 출력</Link>
+                                </li>
                             </ul>
                         </div>
                     </li>
@@ -128,9 +131,7 @@ export default function Header(props){
                                 <li>
                                     <Link to="/wp/write">생산일정 등록</Link>
                                 </li>
-                                <li>
-                                    <Link to="/wp/list">전체 보고서 출력</Link>
-                                </li>
+
                             </ul>
                         </div>
                     </li>

@@ -39,6 +39,7 @@ import ChartLayOut from "./content/chart/ChartLayOut";
 import ProgressAlarm from "./member/ProgressAlarm"; // 시현 소켓통신
 import Progress from "./content/progress/Progress"; // 시현 진행상황
 import ProductLogList from "./content/product/ProductLogList";
+import LayoutTest2 from "./content/layouttest/Layouttest2";
 
 
 export const LoginInfoContext = React.createContext("");
@@ -120,7 +121,7 @@ export default function Index(props){
                     <Route path="/member/List" element={<MeberList/>}/>
                     <Route path="/chart" element = {<ChartLayOut/>}/>
                     <Route path="/시현진행상황" element = {<Progress/>}/>
-                    <Route path="/product/log/list" element = {<LayoutTest list={<ProductLogList/>}/>}/>
+                    <Route path="/product/log/list" element = {<LayoutTest2 list={<ProductLogList/>}/>}/>
                     </Routes>
                 </div>
         </BrowserRouter>

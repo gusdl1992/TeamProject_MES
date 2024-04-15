@@ -6,6 +6,7 @@ import ReportForMInput from "./ReportForMInput";
 import ReportForBulk from "./ReportForBulk";
 import ReportForSub from "./ReportForSub";
 import ReportForPack from "./ReportForPack";
+import LayoutTest2 from "../layouttest/Layouttest2";
 
 
 
@@ -37,7 +38,7 @@ export default function ReportAll(props){
 
     const result = checkreport(wno,wstate)
     console.log(result)
-    return(<><LayoutTest list={result}/></>)
+    return(<><LayoutTest2 list={result}/></>)
 
 
 }

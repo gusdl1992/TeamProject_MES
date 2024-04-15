@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import ProductWrite from "./ProductWrite";
 
 export default function ProductList(props){
     const [infos, setInfos] = useState([]);
+    const [reroad, setReroad] = useState(true);
     useEffect(
         ()=>{
             axios.get("/product/get.do").then( (r) => { 
@@ -12,12 +14,14 @@ export default function ProductList(props){
                 console.error("Error:", error);
             });
 
-        },[props.reroad]
+        },[reroad]
     )
 
     console.log(infos)
 
-    return(<table>
+    return(<>
+        <ProductWrite pno={props.pno} reroad={reroad} setReroad={setReroad}/>
+        <table>
             <thead>
                 <tr>
                     <th>
@@ -49,5 +53,6 @@ export default function ProductList(props){
                     </tr>
                 ))}
             </tbody>
-    </table>)
+    </table>
+    </>)
 }

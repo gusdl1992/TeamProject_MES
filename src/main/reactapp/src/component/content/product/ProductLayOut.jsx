@@ -5,10 +5,10 @@ import ProductRecipieList from "../recipie/ProductRecipieList";
 import ProductWrite from "./ProductWrite";
 import ProductList from "./Productlist";
 import { useSearchParams } from "react-router-dom";
+import LayoutTest2 from "../layouttest/Layouttest2";
 
 export default function ProductLayOut(props){
 
-    const [reroad, setReroad] = useState(true);
     //쿼리스트링 받아오기
     let [query, setQuery] = useSearchParams();
 
@@ -17,6 +17,6 @@ export default function ProductLayOut(props){
 
 
     return(
-        <LayoutTest insert={<ProductWrite pno={query.get("pno")} reroad={reroad} setReroad={setReroad}/>} list={<ProductList pno={query.get("pno")} reroad={reroad}/>} />
+        <LayoutTest2 list={<ProductList pno={query.get("pno")} />} />
     )
 }

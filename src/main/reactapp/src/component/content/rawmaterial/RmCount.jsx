@@ -2,8 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import RmLogList from "./RMLogList";
+import RmWrites from "./RmWirtes";
 
 export default function RmCount(props){
+    
+    const [rerender , setrerender] = useState(false);
     const [infos, setInfos] = useState([]);
     useEffect(
         ()=>{
@@ -13,12 +16,14 @@ export default function RmCount(props){
                 console.error("Error:", error);
             });
 
-        },[props.rerender]
+        },[rerender]
     )
 
     console.log(infos)
 
-    return(<table>
+    return(<>
+     <RmWrites rerender ={rerender} setrerender={setrerender} />
+    <table>
             <thead>
                 <tr>
                     <th>
@@ -46,5 +51,6 @@ export default function RmCount(props){
                     </tr>
                 ))}
             </tbody>
-    </table>)
+    </table>
+    </>)
 }

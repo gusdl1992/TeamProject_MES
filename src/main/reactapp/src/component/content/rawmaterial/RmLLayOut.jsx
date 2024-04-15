@@ -1,4 +1,5 @@
 import LayoutTest from "../layouttest/Layouttest";
+import LayoutTest2 from "../layouttest/Layouttest2";
 import RmLogList from "./RMLogList";
 import RmCount from "./RmCount";
 import RmLogWrite from "./RmLogWrite";
@@ -7,6 +8,6 @@ import RmWrite from "./RmWrite";
 
 export default function RmLLayOut(props){
     return(
-        <LayoutTest list={<RmLogList/>} />
+        <LayoutTest2 list={<RmLogList/>} />
     )
 }

@@ -37,20 +37,6 @@ export default function LayoutTest(props){
             <marquee behavior="scroll" direction="right" scrollamount="10" style={msgInput >= 50 ? {backgroundColor: 'rgba(255, 99, 132, 0.2)'} : (msgInput > 10 ? {backgroundColor: 'rgba(75, 192, 192, 0.2)'} : {backgroundColor: 'rgba(54, 162, 235, 0.2)'})}>
                 안전거리 체크: {msgInput} 
             </marquee>
-            <div className="statisticsWrap">
-                <div className="statisticsBox">
-                    진행전 0개
-                </div>
-                <div className="statisticsBox">
-                    진행중 0개
-                </div>
-                <div className="statisticsBox">
-                    완료 0개
-                </div>
-                <div className="statisticsBox">
-                    불합격 0개
-                </div>
-            </div>
         </div>
             <div className="AinputBox">
                 {props.insert}
