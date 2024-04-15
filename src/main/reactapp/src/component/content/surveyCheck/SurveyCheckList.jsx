@@ -16,7 +16,6 @@ export default function SurveyCheckList(props){
         axios.get('/survey/check/survey/get.do')
         .then((response)=>{
             console.log(response);
-            console.log(response.data[0].surveybList);
         if(response.data != []){
             setSurveyb(response.data);
         }
@@ -87,9 +86,6 @@ export default function SurveyCheckList(props){
                             생산 계획 번호
                         </th>
                         <th>
-                            상품명
-                        </th>
-                        <th>
                             담당자
                         </th>
                         <th>
@@ -115,9 +111,6 @@ export default function SurveyCheckList(props){
                                     <tr className="tableTitle">
                                         <td>
                                             {r.wno}
-                                        </td>
-                                        <td>
-                                            {r.pname}
                                         </td>
                                         <td>
                                             {r.inputmname}

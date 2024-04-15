@@ -10,12 +10,8 @@ export default function MaterialInput(props){
         <div className="contentWrap">
             
             <MaterialInputTotalBox/>
-            <div id="workplanCssBox">
-                <SurveyList/>
-            </div>
-            <div id="workplanCssBox">
-                <MaterialInput2/>
-            </div>
+            <SurveyList/>
+            <MaterialInput2/>
             <MaterialInputPrintBox/>
         </div>
     )

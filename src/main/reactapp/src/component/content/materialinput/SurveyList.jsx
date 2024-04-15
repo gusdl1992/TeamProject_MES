@@ -3,8 +3,9 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 /* global $ */
 
-
-
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export default function SurveyList(props){
 
@@ -19,53 +20,33 @@ export default function SurveyList(props){
             setSurvey(result)
         })
     },[])
-
-    // $('.owl-carousel').owlCarousel({
-    //     loop: true,
-    //     margin: 10,
-    //     nav: true,
-    //     navText: [
-    //       "<i class='fa fa-caret-left'></i>",
-    //       "<i class='fa fa-caret-right'></i>"
-    //     ],
-    //     autoplay: true,
-    //     autoplayHoverPause: true,
-    //     responsive: {
-    //       0: {
-    //         items: 1
-    //       },
-    //       600: {
-    //         items: 3
-    //       },
-    //       1000: {
-    //         items: 5
-    //       }
-    //     }
-    //   }) 
     
-
-   
-
+    const settings = {
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow: survey.length > 0 ? 3 : 0,
+        slidesToScroll: 1,
+        arrows: survey.length > 0 ? true : false
+      };
 
     return(<>
-        <div className="carousel-wrap">
-            <div className="owl-carousel">
-                <div className="item" id="workPlanListBox">
-                    {survey.map((s) => {
+        <div className="slider-container previousWork">
+            <Slider {...settings}>
+                {survey.map((s) => {
                     if(s.workPlanDto.wstate == 2 && s.sstate == 2){
                         return(
-                            <div>
+                            <div className="previosList">
                                 <Link to={`/material/input?sno=${s.sno}`}>
-                                    <span>작업계획 {s.sno}</span>
-                                    <span>등록일자 : {s.cdate.split('T')[0]}까지</span>
+                                    <h4>작업계획 {s.workPlanDto.wno}</h4>
+                                    <p>거래처 : {s.workPlanDto.wno}</p>
+                                    <p>등록일자 : {s.workPlanDto.wendtime.split('T')[0].split('-')[0]}년 {s.workPlanDto.cdate.split('T')[0].split('-')[1]}월 {s.workPlanDto.cdate.split('T')[0].split('-')[2]}일</p>
                                 </Link>
                             </div>
                         )
                     }
                 })}
-                </div>                
-            </div>
+            </Slider>
         </div>
-          
     </>)
 }

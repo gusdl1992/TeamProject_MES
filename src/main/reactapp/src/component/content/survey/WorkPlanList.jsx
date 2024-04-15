@@ -32,11 +32,12 @@ export default function WorkPlanList(){
         infinite: false,
         speed: 500,
         slidesToShow: workPlan.length > 0 ? 3 : 0,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        arrows: workPlan.length > 0 ? true : false
       };
     
     return(<>
-        <div id="workplanCssBox" className="slider-container">
+        <div className="slider-container previousWork">
             <Slider {...settings}>
                 {workPlan.map((w)=>{
                     if(w.wstate < 2){

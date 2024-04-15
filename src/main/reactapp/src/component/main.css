@@ -22,7 +22,7 @@ body{
     background-color: #EBEFF2;
     padding: 0 280px;
 }
-.searchBox,.statistics,.AinputBox,.AcontentBox{
+.searchBox,.statistics,.AinputBox,.AcontentBox,.previousWork{
     background-color: #fff;
     border: 2px solid #e5e9ec;
     width: 90%;
@@ -223,7 +223,7 @@ thead th{text-align: center;}
 }
 .slick-slide{
     width: auto !important;
-    margin: 10px 41px;
+    margin: 10px 63px;
 }
 .slick-prev:before,
 .slick-next:before

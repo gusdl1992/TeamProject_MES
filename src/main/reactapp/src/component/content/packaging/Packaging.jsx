@@ -15,12 +15,8 @@ export default function Packaging(props){
         <RenderContext.Provider value={{ render ,setRender }}>
             <div className="contentWrap">
                 <PackagingTotatBox />
-                <div id="workplanCssBox">
-                    <PackagingLayOut />
-                </div>
-                <div id="workplanCssBox">
-                    <PackagingWrite />
-                </div>
+                <PackagingLayOut />
+                <PackagingWrite />
                 <PackagingPrintBox />
             </div>
         </RenderContext.Provider>
