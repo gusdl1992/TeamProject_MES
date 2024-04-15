@@ -114,8 +114,8 @@ td {
 }
 button{
     background-color: transparent;
-    border: none; 
-    
+    border: none;
+
 }
 .contentWrap{
     max-width: 1250px;
@@ -126,8 +126,8 @@ button{
     align-items: center;
     height: 750px;
 
-}   
-#workPlanmInputBoxWrap{        
+}
+#workPlanmInputBoxWrap{
     font-weight: bolder;
     background-color: #42566E;
     color: white;
@@ -152,11 +152,11 @@ button{
     margin: 10px 20px;
 }
 .alsguddl > span{
-    padding: 10px 0;        
+    padding: 10px 0;
 }
 .alsguddl > input{
     width: 300px;
-    
+
 
 }
 #workPlanmInputBoxWrapBox > button{
@@ -176,11 +176,11 @@ button{
 }
 #workPlanmInputBoxWrapBox > button:hover{
     background-color: #6D7888;
-    
+
 }
 
 
-/* 승호 CSS */
+/* 승호 CSS ===============================*/
 input{
     width: 200px;
     padding: 10px;
@@ -199,7 +199,7 @@ select{
     position: relative;
     display: inline-block;
     font-size: 15px;
-    padding: 10px 40px;
+    padding: 8px 30px;
     color: white;
     margin: 20px 10px 10px;
     border-radius: 6px;
@@ -224,7 +224,47 @@ select{
 }
 thead th{text-align: center;}
 .tableTitle td{text-align: center;}
-/* 승호 CSS END */
+
+/* 작업계획 출력될 박스 */
+#cssBox{
+    background-color: #fff;
+    border: 2px solid #ccd0d3;
+    width: 90%;
+    margin: 0 auto;
+    padding: 24px 10px;
+    margin-top: 20px;
+}
+
+/* 보고서 출력부분 */
+.reportBox{padding: 10px 20px}
+.workplanNumber{font-weight: bold; font-size: 20px;}
+.reportBox>p{margin-top: 5px;}
+
+    /* 생산 재품 내용 */
+.orderProduct{
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0px;
+    font-size: 17px; font-weight: bold;
+}
+
+    /* 투입(작업) 내용 */
+.inserContent{
+    display: flex; justify-content: space-around;
+}
+.inserContent div{
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+    /* 검사자 체크부분 */
+.checkBox{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.checkBox>button{margin-bottom: 30px;}
+/* 승호 CSS END================================ */
 
 .previosList{
     border: 1px solid #ddd;

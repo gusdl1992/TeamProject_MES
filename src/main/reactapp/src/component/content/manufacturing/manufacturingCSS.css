@@ -23,12 +23,6 @@
 #surveyCssBox>form>h3{margin: 10px 0px;}
 #surveyCssBox>form>h3>span{margin: 0px 10px;}
 
-#surveyBtn{
-    margin: 20px 0px ;
-    width: 100px;height: 40px;
-    border-radius: 5px;
-}
-#surveyBtn:hover{
-    background-color: #adadad;
-}
+
+
 .inputCon{font-weight: bold;}

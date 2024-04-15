@@ -176,7 +176,7 @@ export default function Survey(props){
                                 })
                             }
                             </ul>
-                            <button id="surveyBtn" type="button" onClick={onClickEvent}>버튼</button>
+                            <button className="btn-3d green" id="surveyBtn" type="button" onClick={onClickEvent}>버튼</button>
                         </div>
                     </form>
                 </div>

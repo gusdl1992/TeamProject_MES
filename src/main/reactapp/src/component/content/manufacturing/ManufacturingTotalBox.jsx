@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import axios from "axios";
+import { RenderContext } from "./Manufacturing";
 
 export default function ManufacturingTotalBox(props){
     const [previous , setPrevious] = useState(0);
     const [now , setNow] = useState(0);
     const [success , setSuccess] = useState(0);
     const [fail , setFail] = useState(0);
+    // 재 랜더링용
+    // - provider 컴포넌트의 value 호출
+    const { render ,setRender } = useContext(RenderContext);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,7 +38,7 @@ export default function ManufacturingTotalBox(props){
     
         fetchData();
         fetchData2();
-      }, []);
+      }, [render]);
 
     return(
         <div className="statistics">
