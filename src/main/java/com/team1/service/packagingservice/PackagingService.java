@@ -1,5 +1,6 @@
 package com.team1.service.packagingservice;
 
+import com.team1.controller.AlertSocekt;
 import com.team1.model.dto.MemberDto;
 import com.team1.model.dto.SubDivisionDto;
 import com.team1.model.dto.packagingdto.PackagingDto;
@@ -15,6 +16,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.socket.TextMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,8 @@ public class PackagingService {
     private MemberRepository memberRepository;
     @Autowired
     private SubDivisionRepository subDivisionRepository;
+    @Autowired
+    AlertSocekt alertSocekt;
 
     public List<PackagingDto> doPackInfoGet() {
 
@@ -80,7 +84,12 @@ public class PackagingService {
             savePackaging.setMemberEntity( memberEntity );
             savePackaging.setSubdivisionEntity( subdivisionEntity );
             savePackaging.setPgcount( pgcount );
-
+            // 작업 다 끝난후 검사 완료 메세지 소켓 전송
+            try {
+                alertSocekt.sendString(new TextMessage("포장 완료!!"));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             return 1;
         }
 

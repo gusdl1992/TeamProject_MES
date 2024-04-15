@@ -1,5 +1,6 @@
 package com.team1.service;
 
+import com.team1.controller.AlertSocekt;
 import com.team1.model.dto.*;
 import com.team1.model.dto.survetDto.SurveyInsertDto;
 import com.team1.model.dto.survetDto.SurveyPlanInfoDto;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.socket.TextMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +38,8 @@ public class SurveyService {
     private SurveyBRepository surveyBRepository;
     @Autowired
     private MemberRepository memberRepository;
-
+    @Autowired
+    AlertSocekt alertSocekt;
 
     // workplan 정보 가져오기
     public List<WorkPlanDto> workPlanDtoList (){
@@ -171,7 +174,12 @@ public class SurveyService {
                 
 
             }// SurveyB 저장 for End
-
+            // 작업 다 끝난후 검사 완료 메세지 소켓 전송
+            try {
+                alertSocekt.sendString(new TextMessage("계량 완료!!"));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             return savedSurveyEntity.getSno();
 
         }else {// 워크플랜 번로와 같은 sno가 있는경우(있는내용에서 업데이트 시켜야함)
@@ -193,7 +201,12 @@ public class SurveyService {
                 surveyBEntity.setSbcount(surveyInsertDto.getSurveyBDto().get(i).getSbcount());
 
             }
-
+            // 작업 다 끝난후 검사 완료 메세지 소켓 전송
+            try {
+                alertSocekt.sendString(new TextMessage("계량 완료!!"));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             return surveyEntity.get().getSno();
         }
 
