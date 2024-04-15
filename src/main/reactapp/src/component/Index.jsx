@@ -40,8 +40,6 @@ import ProgressAlarm from "./member/ProgressAlarm"; // 시현 소켓통신
 import Progress from "./content/progress/Progress"; // 시현 진행상황
 
 
-
-
 export const LoginInfoContext = React.createContext("");
 
 export default function Index(props){

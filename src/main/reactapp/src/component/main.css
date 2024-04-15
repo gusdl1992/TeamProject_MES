@@ -207,3 +207,43 @@ select{
 thead th{text-align: center;}
 .tableTitle td{text-align: center;}
 /* 승호 CSS END */
+
+.previosList{
+    border: 1px solid #ddd;
+    margin: 0 auto;
+    width: 240px !important;
+    height: 90px;
+    padding: 10px 18px;
+}
+.previosList:hover{
+    border: 1px solid #111;
+}
+.previosList>a>p{
+    margin: 4px 0;
+}
+.slick-slide{
+    width: auto !important;
+    margin: 10px 41px;
+}
+.slick-prev:before,
+.slick-next:before
+{
+    font-size: 40px !important;
+    color: #0d82ff !important ;
+}
+.slick-list{
+    z-index: 10;
+}
+.slick-next{
+    right: 15px !important;
+    z-index: 20;
+    top:44% !important;
+}
+.slick-prev{
+    left: -4px !important;
+    z-index: 20;
+    top:44% !important;
+}
+.slick-prev.slick-disabled:before, .slick-next.slick-disabled:before {
+    opacity: 0.75 !important;
+}
