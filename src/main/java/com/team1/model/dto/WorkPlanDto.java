@@ -22,7 +22,7 @@ public class WorkPlanDto extends BaseTimeDto {
 
     private int wcount; // 작업 수량
 
-    private String wendtime; // 납기 일
+    private LocalDateTime wendtime; // 납기 일
 
     private int wstate; // 보고서 진행상황
 
