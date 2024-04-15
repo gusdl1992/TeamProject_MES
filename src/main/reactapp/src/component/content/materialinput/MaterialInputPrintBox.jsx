@@ -9,9 +9,14 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { RenderContext } from "./MaterialInput";
 
 
 export default function MaterialInputPrintBox(props){
+    // 재 랜더링용
+    // - provider 컴포넌트의 value 호출
+    const { render ,setRender } = useContext(RenderContext);
+
     let [material,setMaterial] = useState([]);
     const [confirmstate , setConfirmState] = useState('0');
     let [confirmmembername , setConfirmMemberName] = useState('');
@@ -28,7 +33,7 @@ export default function MaterialInputPrintBox(props){
             setMaterial(response.data);
         }
     })
-    } , [])
+    } , [render])
 
     // 검사
     const confirmStateChange = (e)=>{
@@ -54,8 +59,8 @@ export default function MaterialInputPrintBox(props){
                     console.log(r);
                 })
                 alert("안내) 등록 성공하였습니다.");
-
-                window.location.href='/material/input';
+                setRender(render+1);
+                // window.location.href='/material/input';
 
             }else if(r.data==-1){
                 alert("안내) 해당업무 담당자가 아닙니다.")

@@ -1,12 +1,16 @@
 import axios from "axios";
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom";
+import { RenderContext } from "./MaterialInput";
 /* global $ */
 
 
 
 
 export default function SurveyList(props){
+    // 재 랜더링용
+    // - provider 컴포넌트의 value 호출
+    const { render ,setRender } = useContext(RenderContext);
 
     // 계량
     const [ survey , setSurvey ] = useState([]);
@@ -18,7 +22,7 @@ export default function SurveyList(props){
             const result = r.data.map((survey) => {return survey;})
             setSurvey(result)
         })
-    },[])
+    },[render])
 
     // $('.owl-carousel').owlCarousel({
     //     loop: true,

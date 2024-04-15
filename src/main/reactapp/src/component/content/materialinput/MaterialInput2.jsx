@@ -3,8 +3,12 @@ import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import SurveyList from "./SurveyList";
 import { LoginInfoContext } from "../../Index";
+import { RenderContext } from "./MaterialInput";
 
 export default function MaterialInput2(props){
+    // 재 랜더링용
+    // - provider 컴포넌트의 value 호출
+    const { render ,setRender } = useContext(RenderContext);
     // 1. 컨텍스트 가져오기 (로그인 정보)
     const { logininfo, setLogin } = useContext(LoginInfoContext);
     //console.log(logininfo); 
@@ -39,7 +43,7 @@ export default function MaterialInput2(props){
         if(query.get("sno")){
             survey() 
         }
-    } , [query.get("sno")])
+    } , [query.get("sno"),render])
     
 
     function onClickBtn(){
@@ -62,7 +66,8 @@ export default function MaterialInput2(props){
                 .then(r=>{
                     console.log(r);
                 })
-                window.location.href="/material/input"
+                setRender(render+1);
+                // window.location.href="/material/input"
             }else if(r.data==-1){
                 alert("안내) 등록 권한이 없습니다.");
             }else if(r.data==-2){
