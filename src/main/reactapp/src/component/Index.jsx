@@ -36,7 +36,8 @@ import MeberList from "./member/MeberList"; // 시현 멤버 리스트 출력
 import ChartLayOut from "./content/chart/ChartLayOut";
 
 
-import Test1234 from "./member/Test1234"; // 시현 소켓통신
+import ProgressAlarm from "./member/ProgressAlarm"; // 시현 소켓통신
+import Progress from "./content/progress/Progress"; // 시현 진행상황
 
 
 
@@ -99,7 +100,6 @@ export default function Index(props){
         <BrowserRouter>
                 <div id="wrap">
                 {logininfo && <Header/>}
-                {logininfo && <span onClick={() => window.location.href='/c'}>Profile</span>}
                     <Routes>
                     <Route path="/" element={<Login/>}/>
                     <Route path="/c" element={<Main/>}/>
@@ -120,10 +120,11 @@ export default function Index(props){
                     <Route path="/expiration" element={<ExpirationLayOut/>}/>
                     <Route path="/member/List" element={<MeberList/>}/>
                     <Route path="/chart" element = {<ChartLayOut/>}/>
+                    <Route path="/시현진행상황" element = {<Progress/>}/>
                     </Routes>
                 </div>
         </BrowserRouter>
-        {messageFromSocket && <Test1234 message={messageFromSocket} />} {/* Render Test1234 with the message from socket */}
+        {messageFromSocket && <ProgressAlarm message={messageFromSocket} />} {/* 진행 사항마다 소켓 안내창 발생 컴포넌트 */}
         </LoginInfoContext.Provider>
     )
 }
