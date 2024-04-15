@@ -1,16 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import axios from 'axios';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 
 
 
-export default function App() {
+export default function Chart() {
   const [ps, setHello] = useState([]);
-  useEffect(()=>{},[])
-  const data = { //이부분에서 axios 통신으로 값 받아와서 바꾸는걸로 하면 될듯? 
+
+  const [chartData, setChartData] = useState({
     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
     datasets: [
       {
@@ -35,6 +36,30 @@ export default function App() {
         borderWidth: 1,
       },
     ],
-  };
-  return <div style={{width:"400px"}}><Doughnut data={data} /></div>;
+  });
+
+  useEffect(() => {
+    axios.get("/productlog/chart/remaining")
+      .then((response) => {
+        console.log(response.data)
+        const data = response.data;
+        const labels = data.map(item => item.label);
+        const values = data.map(item => item.value);
+
+        setChartData(prevChartData => ({
+          ...prevChartData,
+          labels: labels,
+          datasets: [
+            {
+              ...prevChartData.datasets[0],
+              data: values,
+            },
+          ],
+        }));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+  return <div style={{width:"400px"}}><Doughnut data={chartData} /></div>;
 }

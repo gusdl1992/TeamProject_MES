@@ -1,5 +1,6 @@
 import LayoutTest from "../layouttest/Layouttest";
-import  App  from "./Chart";
+import Chart from "./Chart";
+import ChartList from "./ChartList";
 
 export default function ChartLayOut(props){
 
@@ -8,6 +9,6 @@ export default function ChartLayOut(props){
 
 
     return(
-        <LayoutTest list={<App/>} />
+        <LayoutTest list={<ChartList/>} />
     )
 }
