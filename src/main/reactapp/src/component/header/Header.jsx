@@ -62,6 +62,9 @@ export default function Header(props){
                                 <li>
                                 <Link to ="/product">제품리스트</Link>
                                 </li>
+                                <li>
+                                <Link to ="/chart">제품통계</Link>
+                                </li>
                             </ul>
                         </div>
                     </li>
