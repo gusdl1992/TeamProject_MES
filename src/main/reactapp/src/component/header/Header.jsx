@@ -46,7 +46,7 @@ export default function Header(props){
     return (
         <div id='menuWrap'>
             <div id='logoBox'>
-                <Link to="/RM"><img src='/static/img/logo.png' width={'120px'}/></Link>                
+                <Link to="/Progress/view"><img src='/static/img/logo.png' width={'120px'}/></Link>                
             </div>
             <div id='sideNav'>
                 <ul>
@@ -110,7 +110,7 @@ export default function Header(props){
                         <div className='subMenu'>
                             <ul>
                                 <li>
-                                    <Link to="/시현진행상황">작업 진행 상황</Link>
+                                    <Link to="/Progress/view">작업 진행 상황</Link>
                                 </li>
                             </ul>
                         </div>
