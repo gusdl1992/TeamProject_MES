@@ -24,4 +24,7 @@ public interface ProductLogRepository extends JpaRepository<ProductLogEntity , I
             "WHERE YEAR(pl.cdate) = YEAR(CURRENT_DATE())\n" +
             "GROUP BY pl.pno, Month(pl.cdate)",nativeQuery = true)
     List<Map<Object,Object>> findlogMonth();
+
+    @Query(value = "select * from productlog where pno=:pno", nativeQuery = true)
+    List<ProductLogEntity> findlog(int pno);
 }

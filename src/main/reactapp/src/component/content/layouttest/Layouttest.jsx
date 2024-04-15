@@ -37,7 +37,6 @@ export default function LayoutTest(props){
             <marquee behavior="scroll" direction="right" scrollamount="10" style={msgInput >= 50 ? {backgroundColor: 'rgba(255, 99, 132, 0.2)'} : (msgInput > 10 ? {backgroundColor: 'rgba(75, 192, 192, 0.2)'} : {backgroundColor: 'rgba(54, 162, 235, 0.2)'})}>
                 안전거리 체크: {msgInput} 
             </marquee>
-            <h3>통계</h3>
             <div className="statisticsWrap">
                 <div className="statisticsBox">
                     진행전 0개
@@ -54,11 +53,9 @@ export default function LayoutTest(props){
             </div>
         </div>
             <div className="AinputBox">
-                <h3>작성</h3>
                 {props.insert}
             </div>
             <div className="AcontentBox">
-                <h3>목록</h3>
                 {props.list}
             </div>
         </div>

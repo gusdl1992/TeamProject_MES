@@ -106,19 +106,19 @@ public class SafetySocket extends TextWebSocketHandler implements DisposableBean
 
     public void doPost() {
         String result = 100+"";
-//        result = serial().split("\n")[1]; //아두이노 연동했을떄 사용
-        System.out.println("소켓 체크용");
-        System.out.println("나온 거리:"+result);
+        result = serial().split("\n")[1]; //아두이노 연동했을떄 사용
+//        System.out.println("소켓 체크용");
+//        System.out.println("나온 거리:"+result);
 
         try {
             WebSocketMessage<String> sendmessage = new TextMessage(result);
-            System.out.println(sendmessage.getPayload());
-            System.out.println(sendmessage.getPayload()+"를 보냅니다");
+//            System.out.println(sendmessage.getPayload());
+//            System.out.println(sendmessage.getPayload()+"를 보냅니다");
             for (WebSocketSession webSocketSession : 접속명단) {
                 webSocketSession.sendMessage(sendmessage);
             }
 
-            System.out.println(sendmessage);
+//            System.out.println(sendmessage);
         }
         catch (Exception e ){
             System.out.println(e);

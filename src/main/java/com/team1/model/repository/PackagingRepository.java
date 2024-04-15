@@ -17,6 +17,7 @@ public interface PackagingRepository extends JpaRepository<PackagingEntity , Int
     @Query(value = "select packaging.* , product.pname from packaging inner join subdivision on packaging.sdno = subdivision.sdno inner join manufacturing on subdivision.mfno = manufacturing.mfno inner join materialinput on manufacturing.mipno = materialinput.mipno inner join product on materialinput.pno = product.pno" , nativeQuery = true)
     List<PackagingEntity> findByAllProduct();
 
-
+    @Query(value = "select p.* from packaging as p join subdivision as s on p.sdno = s.sdno join manufacturing as mf on s.mfno = mf.mfno join materialinput as mi on mi.mipno = mf.mipno join workplan as w on w.wno = mi.wno2 where wno = :wno" , nativeQuery = true)
+    PackagingEntity findbywno(int wno);
 
 }

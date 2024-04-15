@@ -5,6 +5,7 @@ import ReportForSurvey from "./ReportForSurvey";
 import ReportForMInput from "./ReportForMInput";
 import ReportForBulk from "./ReportForBulk";
 import ReportForSub from "./ReportForSub";
+import ReportForPack from "./ReportForPack";
 
 
 
@@ -18,7 +19,7 @@ export default function ReportAll(props){
 
     const checkreport = (wno, wstate) => {
         if (wstate == 9){
-            return(<><ReportForSurvey wno={wno}/><ReportForMInput wno={wno}/><ReportForBulk wno={wno}/><ReportForSub wno={wno} /></>) //추가 값 대입
+            return(<><ReportForSurvey wno={wno}/><ReportForMInput wno={wno}/><ReportForBulk wno={wno}/><ReportForSub wno={wno} /><ReportForPack wno={wno}/></>) //추가 값 대입
         }
         else if (wstate == 7 || wstate == 8){
             return(<><ReportForSurvey wno={wno}/><ReportForMInput wno={wno}/><ReportForBulk wno={wno}/><ReportForSub wno={wno} /></>) //추가 값 대입

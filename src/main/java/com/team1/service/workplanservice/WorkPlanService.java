@@ -4,6 +4,7 @@ package com.team1.service.workplanservice;
 import com.team1.model.dto.MemberDto;
 import com.team1.model.dto.SubDivisionDto;
 import com.team1.model.dto.WorkPlanDto;
+import com.team1.model.dto.packagingdto.PackagingDto;
 import com.team1.model.entity.MemberEntity;
 import com.team1.model.entity.ProductEntity;
 import com.team1.model.entity.WorkPlanEntity;
@@ -12,6 +13,7 @@ import com.team1.service.memberserivce.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.lang.reflect.Field;
 import java.util.Comparator;
@@ -32,6 +34,8 @@ public class WorkPlanService {
     private MemberRepository memberRepository;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private PackagingRepository packagingRepository;
 
     @Autowired
     private SubDivisionRepository subDivisionRepository;
@@ -121,6 +125,11 @@ public class WorkPlanService {
     public SubDivisionDto findsub(int wno){
         System.out.println(subDivisionRepository.findByWno(wno));
         return subDivisionRepository.findByWno(wno).toDto();
+    }
+
+    public PackagingDto findpack(int wno){
+
+        return packagingRepository.findbywno(wno).toDto();
     }
 
 }

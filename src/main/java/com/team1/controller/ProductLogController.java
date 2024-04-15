@@ -39,4 +39,9 @@ public class ProductLogController {
     public List<Map<Object,Object>> findlogMonth(){
         return productLogService.findlogMonth();
     }
+
+    @GetMapping("/list/get.do")
+    public List<ProductLogDto> findlog(int pno){
+        return productLogService.findlog(pno);
+    }
 }
