@@ -108,9 +108,10 @@ export default function Test(props){
                 <label for="userType">업무부서:</label>
                 <select id="userType" name="part" value={part} onChange={handleUserTypeChange} required>
                     <option value="">업무부서를 선택하세요</option>
-                    <option value="1">계량원</option>
-                    <option value="2">투입원</option>
-                    <option value="10">검사자</option>
+                    <option value="1">계량팀</option>
+                    <option value="2">생산팀</option>
+                    <option value="3">포장팀</option>
+                    <option value="10">검사팀</option>
                 </select>
                 
             </div>

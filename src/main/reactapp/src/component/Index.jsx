@@ -35,7 +35,8 @@ import ExpirationLayOut from "./content/expiration/ExpirationLayOut";
 import MeberList from "./member/MeberList"; // 시현 멤버 리스트 출력
 import ChartLayOut from "./content/chart/ChartLayOut";
 
-import Test1234 from "./member/Test1234";
+
+import Test1234 from "./member/Test1234"; // 시현 소켓통신
 
 
 
@@ -81,12 +82,14 @@ export default function Index(props){
         clientSocket.current.onmessage = (e) =>{
             console.log(e);
             console.log(e.data);
-            <Test1234 maseege = {e.data}/>
+            setMessageFromSocket(e.data);
         }
                 // - 4 클라이언트 소켓이 open 발생 했을떄 콜백함수 정의
         clientSocket.current.onopen = (e) => {console.log(e); console.log('서버소켓연결성공');}
 
         }
+
+        const [messageFromSocket, setMessageFromSocket] = useState(""); 
 
         // 소켓 끝
 
@@ -120,6 +123,7 @@ export default function Index(props){
                     </Routes>
                 </div>
         </BrowserRouter>
+        {messageFromSocket && <Test1234 message={messageFromSocket} />} {/* Render Test1234 with the message from socket */}
         </LoginInfoContext.Provider>
     )
 }

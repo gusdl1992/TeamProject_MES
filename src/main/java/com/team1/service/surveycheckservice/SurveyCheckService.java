@@ -1,5 +1,6 @@
 package com.team1.service.surveycheckservice;
 
+import com.team1.controller.AlertSocekt;
 import com.team1.model.dto.MemberDto;
 import com.team1.model.dto.surveyCheckDto.SurveyBCheckOutDto;
 import com.team1.model.dto.surveyCheckDto.SurveyCheckOutDto;
@@ -9,6 +10,7 @@ import com.team1.service.memberserivce.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.socket.TextMessage;
 
 import javax.imageio.plugins.tiff.TIFFImageReadParam;
 import java.util.*;
@@ -32,6 +34,10 @@ public class SurveyCheckService {
     MemberService memberService;
     @Autowired
     RawMateriallogRepository rawMateriallogRepository;
+
+    // 박시현 알림 소켓
+    @Autowired
+    AlertSocekt alertSocekt;
 
 
     // 1. 계량데이터 가져오기
@@ -138,7 +144,7 @@ public class SurveyCheckService {
                 // 상태변경한 워크플랜을 DB에 저장
                 workPlanEntityRepository.save(workPlan);
 
-                // return true;
+//                 return true;
             } else {
                 // 계량 검사 유효성 검사 실패시 false 리턴.
                 return false;
@@ -150,6 +156,12 @@ public class SurveyCheckService {
                             .rmlcount(surveyBEntityList.get(i).getSbcount() * -1)
                             .build();
                     rawMateriallogRepository.save(rawMaterialLogEntity);
+                }
+                // 작업 다 끝난후 검사 완료 메세지 소켓 전송
+                try {
+                    alertSocekt.sendString(new TextMessage("계량 검사 완료!!"));
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
                 return true;
             } else {

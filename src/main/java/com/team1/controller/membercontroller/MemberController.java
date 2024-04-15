@@ -52,5 +52,11 @@ public class MemberController {
         return memberService.getfindMemail(memail);
     }
 
+    @DeleteMapping("/Account/delete.do")
+    public boolean deleteAccount(@RequestParam int mno){
+        return memberService.deleteAccount(mno);
+    }
+
+
 
 }
