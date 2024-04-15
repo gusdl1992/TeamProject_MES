@@ -135,7 +135,7 @@ export default function ManufacturingCheckList(props){
                         manufacturing.map((r,index)=>{
                             return(
                                 <>
-                                    <tr>
+                                    <tr className="tableTitle">
                                         <td>
                                             {r.mfno}
                                         </td>
@@ -154,19 +154,19 @@ export default function ManufacturingCheckList(props){
                                             }
                                         </td>
                                         <td>
-                                            <button onClick={()=>{document.querySelector('.modal'+r.mfno).style.display='block'}} type="button">상세보기</button>
+                                            <button onClick={()=>{document.querySelector('.modal'+r.mfno).style.display='revert'}} type="button">상세보기</button>
                                         </td>
                                     </tr>
-                                    <tr style={{display:'none'}} className={"modal"+r.mfno}>
-                                        <td colSpan={"5"}>
-                                            <p>작업계획 번호 : {r.materialInputDto.workPlanDto.wno}</p>
+                                    <tr>
+                                        <td colSpan={"5"} style={{display:'none'}} className={`modal${r.mfno} reportBox`}>
+                                            <p className="workplanNumber">작업계획 번호 : {r.materialInputDto.workPlanDto.wno}</p>
                                             <p>벌크제조계획 번호 : {r.mfno}</p>
                                             <p>벌크명 : {r.materialInputDto.productDto.pname}벌크</p>
                                             <p>벌크수량 : {r.mfcount}</p>
                                             <p>벌크제조 완료 날짜 : {r.cdate.split('T')[0]}</p>
                                             <p>벌크숙성 완료 날짜 : { timecalculator(r).getFullYear() }년{ timecalculator(r).getMonth()+1}월{ timecalculator(r).getDate()}일</p>
                                             <p>담당자 : {r.inputmemberDto.mname}</p>
-                                            <div className={"confirmForm"+index} >
+                                            <div className={`confirmForm"${index}`} >
                                                 
                                                 검사자 : <input onChange={confirmmembernameChange} disabled={r.checkmemberDto == null ? false : true }  value={r.checkmemberDto == null ? confirmmembername : r.checkmemberDto.mname } className="checkMemberInput" type="text"/> 
                                                 검사상태
@@ -181,11 +181,11 @@ export default function ManufacturingCheckList(props){
                                                         검사합격
                                                     </option>
                                                 </select>
-                                                <div>
-                                                    <button disabled={r.checkmemberDto == null ? false : r.mfstate==2?true:false } type="button" onClick={()=>{completeBtn(r,r.materialInputDto.workPlanDto.wno)}}>검사 완료</button>
-                                                    <button onClick={()=>{document.querySelector('.modal'+r.mfno).style.display = 'none'}} type="button">x</button>
-                                                </div>
+                                                <button className="btn-3d green" disabled={r.checkmemberDto == null ? false : r.mfstate==2?true:false } type="button" onClick={()=>{completeBtn(r,r.materialInputDto.workPlanDto.wno)}}>검사 완료</button>
+                                                <button className="btn-3d green" onClick={()=>{document.querySelector('.modal'+r.mfno).style.display = 'none'}} type="button">x</button>
+                                            
                                             </div>
+
 
                                         </td>
                                     </tr>

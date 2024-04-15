@@ -101,7 +101,7 @@ export default function MaterialInput2(props){
                 }
             )}
         </ul>
-        <button type="button" onClick={onClickBtn}>등록</button>
+        <button className="btn-3d green" type="button" onClick={onClickBtn}>등록</button>
         </div>
 
     </>);

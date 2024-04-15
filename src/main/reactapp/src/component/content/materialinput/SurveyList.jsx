@@ -54,14 +54,14 @@ export default function SurveyList(props){
     return(<>
         <div className="carousel-wrap">
             <div className="owl-carousel">
-                <div className="item" id="workPlanListBox">
+                <div className="item" id="cssBox">
                     {survey.map((s) => {
                     if(s.workPlanDto.wstate == 2 && s.sstate == 2){
                         return(
-                            <div>
+                            <div className="previosList">
                                 <Link to={`/material/input?sno=${s.sno}`}>
-                                    <span>작업계획 {s.sno}</span>
-                                    <span>등록일자 : {s.cdate.split('T')[0]}까지</span>
+                                    <h4>작업계획 {s.sno}</h4>
+                                    <p>등록일자 : {s.cdate.split('T')[0]}까지</p>
                                 </Link>
                             </div>
                         )

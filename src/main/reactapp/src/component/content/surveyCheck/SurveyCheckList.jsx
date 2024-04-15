@@ -135,38 +135,46 @@ export default function SurveyCheckList(props){
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colSpan={"6"} col style={{display:'none'}} className={"modal"+r.sno}>
-                                            <p>생산계획 번호 : {r.wno}</p>
-                                            <p>제품명 : {r.pname}</p>
-                                            <p>제품수량 : {r.wcount}</p>
-                                            {
-                                                r.surveybList.map((surveybItem, index) => {
-                                                    return (<>
-                                                        <p>원자재명 : {surveybItem.rmname}<br/>필요량 : {surveybItem.reamount} <br/>투입량 : {surveybItem.sbcount}</p>                                                
-                                                    </>    
-                                                    );
-                                                })
-                                            }
+                                        <td colSpan={"6"} style={{display:'none'}} className={`modal${r.sno} reportBox`}>
+                                            <p className="workplanNumber">생산계획 번호 : {r.wno}번</p>
+                                            <div className="orderProduct">
+                                                <p>제품명 : {r.pname}</p>
+                                                <p>생산 예정 수량 : {r.wcount.toLocaleString()} 개</p>
+                                            </div>
+                                            <div className="inserContent">
+                                                {
+                                                    r.surveybList.map((surveybItem, index) => {
+                                                        return (<>
+                                                            <div>
+                                                                <p>원자재명 : {surveybItem.rmname}<br/>필요량 : {surveybItem.reamount.toLocaleString()} <br/>투입량 : {surveybItem.sbcount.toLocaleString()}</p>
+                                                            </div>
+                                                        </>    
+                                                        );
+                                                    })
+                                                }
+                                            </div>
                                             {/* <p>{r.data.surveybList.rmname}필요량 : {r.data.surveybList.reamount} 투입량 : {r.data.surveybList.sbcount}</p> */}
-                                            <p>날짜 : {cdate}</p>
-                                            <p>담당자 : {r.inputmname}</p>
+                                            <p>작업날짜 : {cdate}</p>
+                                            <p>작업자 : {r.inputmname}</p>
                                             <form className={"confirmForm"+index} >
                                                 <input type="text" style={{display:'none'}} value={r.sno} name="sno"/>
-                                                <span>검사자 : <input onChange={checkMemberNameInput} disabled={r.checkmname != null ? true : false }  value={r.checkmname != null ? r.checkmname : confirmmembername} className="checkMemberInput" type="text"/></span>
-                                                검사상태
-                                                <select name="sstate" className={'selectValue'+r.wno} value={confirmstate} onChange={confirmStateChange}>
-                                                    <option value="0">
-                                                        검사대기
-                                                    </option>
-                                                    <option value="1">
-                                                        검사불합격
-                                                    </option>
-                                                    <option value="2">
-                                                        검사합격
-                                                    </option>
-                                                </select>
-                                                <button className="btn-3d green" disabled={r.checkmname != null ? true : false } type="button" onClick={()=>{onMaterialConfirm(index,r.wno)}}>검사 완료</button>
-                                                <button className="btn-3d green" onClick={()=>{document.querySelector('.modal'+r.sno).style.display = 'none'}} type="button">x</button>
+                                                <div className="checkBox">
+                                                    <span>검사자 : <input onChange={checkMemberNameInput} disabled={r.checkmname != null ? true : false }  value={r.checkmname != null ? r.checkmname : confirmmembername} className="checkMemberInput" type="text"/></span>
+                                                    검사상태
+                                                    <select name="sstate" className={'selectValue'+r.wno} value={confirmstate} onChange={confirmStateChange}>
+                                                        <option value="0">
+                                                            검사대기
+                                                        </option>
+                                                        <option value="1">
+                                                            검사불합격
+                                                        </option>
+                                                        <option value="2">
+                                                            검사합격
+                                                        </option>
+                                                    </select>
+                                                    <button className="btn-3d green" disabled={r.checkmname != null ? true : false } type="button" onClick={()=>{onMaterialConfirm(index,r.wno)}}>검사 완료</button>
+                                                    <button className="btn-3d green" onClick={()=>{document.querySelector('.modal'+r.sno).style.display = 'none'}} type="button">x</button>
+                                                </div>
                                             </form>
                                             
                                         </td>

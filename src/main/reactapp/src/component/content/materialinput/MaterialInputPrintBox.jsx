@@ -114,22 +114,22 @@ export default function MaterialInputPrintBox(props){
         <div className="AcontentBox">            
             <h3>목록</h3>
             <table>
-            {/* <colgroup>
-                <col width="10%"/>
+            <colgroup>
+                {/* <col width="10%"/>
                 <col width="20%"/>
                 <col width="30%"/>
                 <col width="15%"/>
-                <col width="25%"/>
-            </colgroup> */}
+                <col width="25%"/> */}
+            </colgroup>
                 <thead>
                     <tr>                        
-                        <th>
+                        <th >
                             생산 계획 번호
                         </th>
-                        <th>
+                        <th >
                             담당자
                         </th>
-                        <th>
+                        <th >
                             날짜
                         </th>
                         <th>
@@ -148,7 +148,7 @@ export default function MaterialInputPrintBox(props){
 
                             return(
                                 <>
-                                    <tr>
+                                    <tr className="tableTitle">
                                         <td>
                                             {r.workPlanDto.wno}
                                         </td>
@@ -164,34 +164,41 @@ export default function MaterialInputPrintBox(props){
                                             }
                                         </td>
                                         <td>
-                                            <button onClick={()=>{document.querySelector('.modal'+r.mipno).style.display = 'block'}} type="button">상세보기</button>
+                                            <button onClick={()=>{document.querySelector('.modal'+r.mipno).style.display = 'revert'}} type="button">상세보기</button>
                                         </td>
                                     </tr>
-                                    <div style={{display:'none'}} className={"modal"+r.mipno}>
-                                        <p>생산계획 번호 : {r.workPlanDto.wno}</p>
-                                        <p>제품명 : {r.productDto.pname}</p>
-                                        <p>제품수량 : {r.workPlanDto.wcount}</p>
-                                        <p>날짜 : {cdate}</p>
-                                        <p>담당자 : {r.inputmemberDto.mname}</p>
-                                        <form className={"confirmForm"+index} >
-                                            <input type="text" style={{display:'none'}} value={r.mipno} name="mipno"/>
-                                            검사자 : <input onChange={checkMemberNameInput} disabled={r.checkmemberDto != null ? true : false }  value={r.checkmemberDto != null ? r.checkmemberDto.mname : confirmmembername} className="checkMemberInput" type="text"/>
-                                            검사상태
-                                            <select name="mipstate" value={confirmstate} onChange={confirmStateChange}>
-                                                <option value="0">
-                                                    검사대기
-                                                </option>
-                                                <option value="1">
-                                                    검사불합격
-                                                </option>
-                                                <option value="2">
-                                                    검사합격
-                                                </option>
-                                            </select>
-                                            <button disabled={r.checkmemberDto != null ? true : false } type="button" onClick={()=>{onMaterialConfirm(index,r.workPlanDto.wno)}}>검사 완료</button>
-                                        </form>
-                                        <button onClick={()=>{document.querySelector('.modal'+r.mipno).style.display = 'none'}} type="button">x</button>
-                                    </div>
+                                    <tr>
+                                        <td colSpan={"5"} style={{display:'none'}} className={"modal"+r.mipno}>
+                                            <p className="workplanNumber">생산계획 번호 : {r.workPlanDto.wno}</p>
+                                            <div className="orderProduct">
+                                                <p>제품명 : {r.productDto.pname}</p>
+                                                <p>생상 예정 수량 : {r.workPlanDto.wcount} 개</p>
+                                            </div>
+                                            <p>날짜 : {cdate}</p>
+                                            <p>담당자 : {r.inputmemberDto.mname}</p>
+                                            <form className={"confirmForm"+index} >
+                                                <input type="text" style={{display:'none'}} value={r.mipno} name="mipno"/>
+                                                <div className="checkBox">
+                                                    검사자 : <input onChange={checkMemberNameInput} disabled={r.checkmemberDto != null ? true : false }  value={r.checkmemberDto != null ? r.checkmemberDto.mname : confirmmembername} className="checkMemberInput" type="text"/>
+                                                    검사상태
+                                                    <select name="mipstate" value={confirmstate} onChange={confirmStateChange}>
+                                                        <option value="0">
+                                                            검사대기
+                                                        </option>
+                                                        <option value="1">
+                                                            검사불합격
+                                                        </option>
+                                                        <option value="2">
+                                                            검사합격
+                                                        </option>
+                                                    </select>
+                                                    <button className="btn-3d green" disabled={r.checkmemberDto != null ? true : false } type="button" onClick={()=>{onMaterialConfirm(index,r.workPlanDto.wno)}}>검사 완료</button>
+                                                    <button className="btn-3d green" onClick={()=>{document.querySelector('.modal'+r.mipno).style.display = 'none'}} type="button">x</button>
+                                                </div>
+                                            </form>
+                                            
+                                        </td>
+                                    </tr>
                                 </>
                             )
                         })

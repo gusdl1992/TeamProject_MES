@@ -36,7 +36,7 @@ export default function WorkPlanList(){
       };
     
     return(<>
-        <div id="workplanCssBox" className="slider-container">
+        <div id="cssBox" className="slider-container">
             <Slider {...settings}>
                 {workPlan.map((w)=>{
                     if(w.wstate < 2){
