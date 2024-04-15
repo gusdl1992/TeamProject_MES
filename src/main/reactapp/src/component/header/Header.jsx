@@ -105,7 +105,11 @@ export default function Header(props){
                         경영통계
                         </div> 
                         <div className='subMenu'>
-
+                            <ul>
+                                <li>
+                                    <Link to="/#">작업 진행 상황</Link>
+                                </li>
+                            </ul>
                         </div>
                     </li>
                     {logininfo.part == -1 && (

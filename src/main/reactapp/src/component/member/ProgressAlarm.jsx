@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
-function Test1234(props) {
+function ProgressAlarm(props) {
   // useState 대신 useEffect를 사용하여 props.message를 상태로 설정
   const [message, setMessage] = useState(props.message);
 
@@ -26,7 +26,7 @@ function Test1234(props) {
 
   return (
     <div>
-      <Snackbar open={open} autoHideDuration={30000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} >
+      <Snackbar open={open} autoHideDuration={5000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} >
         <Alert
           onClose={handleClose}
           severity="success"
@@ -40,4 +40,4 @@ function Test1234(props) {
   );
 }
 
-export default Test1234;
+export default ProgressAlarm;
