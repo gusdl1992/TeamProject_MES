@@ -39,8 +39,6 @@ import ChartLayOut from "./content/chart/ChartLayOut";
 import Test1234 from "./member/Test1234"; // 시현 소켓통신
 
 
-
-
 export const LoginInfoContext = React.createContext("");
 
 export default function Index(props){

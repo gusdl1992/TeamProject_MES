@@ -106,37 +106,42 @@ table{
     text-align: center;
 }
 
-/* 캐러셀 */
-.carousel-wrap {
-    margin: 90px auto;
-    padding: 0 5%;
-    width: 80%;
-    position: relative;
-  }
-
-  /* fix blank or flashing items on carousel */
-  .owl-carousel .item {
-    position: relative;
-    z-index: 100;
-    -webkit-backface-visibility: hidden;
-  }
-
-  /* end fix */
-  .owl-nav > div {
-    margin-top: -26px;
-    position: absolute;
-    top: 50%;
-    color: #cdcbcd;
-  }
-
-  .owl-nav i {
-    font-size: 52px;
-  }
-
-  .owl-nav .owl-prev {
-    left: -30px;
-  }
-
-  .owl-nav .owl-next {
-    right: -30px;
-  }
+.previosList{
+    border: 1px solid #ddd;
+    margin: 0 auto;
+    width: 240px !important;
+    height: 90px;
+    padding: 10px 18px;
+}
+.previosList:hover{
+    border: 1px solid #111;
+}
+.previosList>a>p{
+    margin: 4px 0;
+}
+.slick-slide{
+    width: auto !important;
+    margin: 10px 41px;
+}
+.slick-prev:before,
+.slick-next:before
+{
+    font-size: 40px !important;
+    color: #0d82ff !important ;
+}
+.slick-list{
+    z-index: 10;
+}
+.slick-next{
+    right: 15px !important;
+    z-index: 20;
+    top:44% !important;
+}
+.slick-prev{
+    left: -4px !important;
+    z-index: 20;
+    top:44% !important;
+}
+.slick-prev.slick-disabled:before, .slick-next.slick-disabled:before {
+    opacity: 0.75 !important;
+}

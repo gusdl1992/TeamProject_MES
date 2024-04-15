@@ -22,7 +22,7 @@ public class WorkPlanEntity extends BaseTime{
     @Column( nullable = false)
     private int wcount; // 작업 수량
     @Column( nullable = false )
-    private LocalDateTime wendtime; // 납기 일
+    private String wendtime; // 납기 일
     @Column( nullable = false , columnDefinition = " int default 0 ")
     private int wstate; // 보고서 진행상황
     @ManyToOne
