@@ -43,7 +43,7 @@ export default function WorkPlan(props){
 
                     <div className="alsguddl">
                     <span>납기일</span>
-                    <input type="text" name="wendtime"/>
+                    <input type="datetime-local" name="wendtime"/>
                     </div>
 
                     <div id="workPlanmInputBoxWrapBox">
