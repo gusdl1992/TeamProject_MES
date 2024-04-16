@@ -63,7 +63,7 @@ public class ManufacturingController {//class star
 
     // 검사완료 버튼 클릭시 스테이터스 수정
         // 1이상 = 성공
-        // 0 = 실패
+        // 0 = 실패.
         // -1 = 로그인정보가 없음
         // -2 = 숙성시간이 도달되지 못함
         // -3 = 권한이 없음
