@@ -20,8 +20,7 @@ public class MemberService {
     MemberRepository memberRepository;
 
     //아이디 중복검사
-    public boolean getfindMemail(String mid){
-        System.out.println("MemberService.getfindMemail");
+    public boolean getfindMid(String mid){
         System.out.println("mid = " + mid);
         boolean result;
         result = memberRepository.existsByMid(mid);
@@ -33,7 +32,7 @@ public class MemberService {
     @Transactional
     public int doSignupPost( MemberDto memberDto){
         System.out.println("memberDto = " + memberDto);
-        boolean result = getfindMemail(memberDto.getMid());
+        boolean result = getfindMid(memberDto.getMid());
         // 아이디 중복이 있을시 true
         if(result){
             return -1;
