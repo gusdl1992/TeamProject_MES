@@ -117,7 +117,7 @@ export default function Progress() {
                     return(<>
                     <div id='progressDiv' key={index} style={{ marginTop: index === 0 ? '50px' : '20px' }}>
                             <div className='progressDataWrap'>
-                                <span className='progressData'>작업 번호 : {r.wno}</span>
+                                <span className='progressData'>작업 번호 :{r.wno}</span>
                                 <span className='progressData'>제품 명 : {r.pname}</span>
                                 <span className='progressData'>제품 수량 : {r.wcount}</span>
                                 <span className='progressData'>제품 마감일 : {wendtime}</span><br/>
