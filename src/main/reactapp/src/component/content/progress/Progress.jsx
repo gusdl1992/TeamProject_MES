@@ -115,7 +115,7 @@ export default function Progress() {
                     console.log(r)
                     let wendtime = r.wendtime?.split('T')[0];
                     return(<>
-                    <div id='progressDiv' key={index} style={{ marginTop: index === 0 ? '50px' : '20px' }}>
+                    <div id='progressDiv' key={index} style={{ marginTop: index === 0 ? '50px' : '30px' }}>
                             <div className='progressDataWrap'>
                                 <span className='progressData'>작업 번호 : {r.wno}</span>
                                 <span className='progressData'>제품 명 : {r.pname}</span>
