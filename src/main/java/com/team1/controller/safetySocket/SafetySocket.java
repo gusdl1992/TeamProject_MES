@@ -112,6 +112,7 @@ public class SafetySocket extends TextWebSocketHandler implements DisposableBean
 //        System.out.println("소켓 체크용");
 //        System.out.println("나온 거리:"+result);
 
+
         try {
             WebSocketMessage<String> sendmessage = new TextMessage(result);
 //            System.out.println(sendmessage.getPayload());
