@@ -66,7 +66,8 @@
 }
 
 #loginWrap button:hover {
-    background-color: #022447;
+    background-color: #000c18;
+    color: #fff;
 }
 .AcontentBox{
     overflow-y: scroll;
