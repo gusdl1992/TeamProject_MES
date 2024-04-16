@@ -104,3 +104,24 @@ insert into bulklog ( blcount , blno , mfno , cdate , udate ) values(21000, 1 ,1
 (64000, 2 ,2,"2024-01-17 14:22:42.588342","2024-01-17 14:22:42.637240");
 
 insert into subdivision (checkmno ,fail_count,inputmno,mfno,sdno,sdstate,success_count,cdate,udate)values( 5 , 0 , 4 , 2 , 1 , 2 , 640 , "2024-01-17 14:22:42.588342","2024-01-17 14:22:42.637240");
+
+-- 유통기한 샘플 데이터 추가
+insert into productlog(pno,plcount,cdate) values(2,-10,"2022-11-11") , (2,-20,now()) , (2,40,now()) , (2,500,"2022-11-11"),(3,-10,"2022-11-11") , (3,-20,now()) , (3,40,now()) , (3,500,"2022-11-11");
+
+
+ INSERT INTO expiration (pno, plcount , cdate)
+      SELECT outgoing.pno,  (COALESCE(expired.expired_quantity, 0) + outgoing.total_outgoing)*-1 AS remaining_quantity , now()
+      FROM (
+         SELECT pno, SUM(plcount) AS total_outgoing
+         FROM productlog
+         WHERE plcount < 0
+         GROUP BY pno
+      ) AS outgoing
+      LEFT JOIN (
+         SELECT p.pno, SUM(pl.plcount) AS expired_quantity
+         FROM productlog AS pl
+         JOIN product AS p ON pl.pno = p.pno
+         WHERE plcount > 0 AND NOW() > DATE_ADD(pl.cdate, INTERVAL p.period DAY)
+         GROUP BY p.pno
+      ) AS expired ON outgoing.pno = expired.pno;
+
