@@ -67,14 +67,14 @@ public class SafetySocket extends TextWebSocketHandler implements DisposableBean
 ////            PrintWriter output = new PrintWriter(selectedPort.getOutputStream()); //안됨
 ////            DataOutputStream output = new DataOutputStream(selectedPort.getOutputStream()); //안됨
 //            String check = "on";
-////            OutputStream outputStream = selectedPort.getOutputStream().nullOutputStream(); //안됨
+//            OutputStream outputStream = selectedPort.getOutputStream().nullOutputStream(); //안됨
 ////            outputStream.write(check.getBytes());
 ////            output.writeUTF(check);
-//
+////            outputStream.write(check.getBytes(),0,check.getBytes().length); // 이것도 안됨
 //        } catch (Exception e) {
 //            System.out.println(e);
 //        }
-
+//
 
 
         // 시리얼 포트로부터 데이터를 읽기 위한 입력 스트림을 가져옵니다.
@@ -108,7 +108,7 @@ public class SafetySocket extends TextWebSocketHandler implements DisposableBean
 
     public void doPost() {
         String result = 100+"";
-//        result = serial().split("\n")[1]; //아두이노 연동했을떄 사용
+        result = serial().split("\n")[1]; //아두이노 연동했을떄 사용
 //        System.out.println("소켓 체크용");
 //        System.out.println("나온 거리:"+result);
 

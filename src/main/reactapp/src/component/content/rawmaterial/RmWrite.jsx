@@ -21,7 +21,7 @@ export default function RmWrite(props){
     return(<>
         <form>
         <input value={rmname} className="sinputinput" onChange={(e)=>{setrmname(e.target.value)}} />
-        <button type="button" className="sinputbutton" onClick={doPost}>제품 등록</button>
+        <button type="button" className="sinputbutton" onClick={doPost}>원자재 등록</button>
     </form>
 
     
