@@ -176,7 +176,11 @@ public class SurveyService {
             }// SurveyB 저장 for End
             // 작업 다 끝난후 검사 완료 메세지 소켓 전송
             try {
-                alertSocekt.sendString(new TextMessage("계량 완료!!"));
+                // 제품 이름 과 수량을 소켓으로 전달
+                String workName = savedSurveyEntity.getWorkPlanEntity().getProductEntity().getPname();
+                String workCount = String.valueOf(savedSurveyEntity.getWorkPlanEntity().getWcount());
+                String workNo = String.valueOf(savedSurveyEntity.getWorkPlanEntity().getWno());
+                alertSocekt.sendString(new TextMessage(" 생산계획 번호 : "+workNo +" 제품명 : "+workName+" 수량 : " +workCount+" EA "+"   "+" 계량 완료!!"));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -201,7 +205,10 @@ public class SurveyService {
             }
             // 작업 다 끝난후 검사 완료 메세지 소켓 전송
             try {
-                alertSocekt.sendString(new TextMessage("계량 완료!!"));
+                String workName = surveyEntity.get().getWorkPlanEntity().getProductEntity().getPname();
+                String workCount = String.valueOf(surveyEntity.get().getWorkPlanEntity().getWcount());
+                String workNo = String.valueOf(surveyEntity.get().getWorkPlanEntity().getWno());
+                alertSocekt.sendString(new TextMessage(" 생산계획 번호 : "+workNo +" 제품명 : "+workName+" 수량 : " +workCount+" EA "+"    계량 수정 완료!!"));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

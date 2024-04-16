@@ -55,6 +55,8 @@ export default function Header(props) {
                 if(r.data){ // 응답 데이터가 있는 경우
                     alert("로그인성공"); // 성공 메시지를 표시합니다.
                     window.location.href = "/Progress/view"; // 로그인 후 페이지를 이동합니다.
+                }else{
+                    alert("로그인 실패! 아이디 , 패스워드 확인 바랍니다.") // 실패 메세지 표시
                 }
             })
             .catch(e => {

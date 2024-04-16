@@ -137,7 +137,7 @@ export default function SubDivisionPrintBox(props){
                                                 검사자 : <input onChange={checkMemberNameInput} disabled={r.checkmemberDto != null ? true : false }  value={r.checkmemberDto != null ? r.checkmemberDto.mname : confirmmembername} className="checkMemberInput" type="text"/>
                                                 검사상태
                                                 <select name="sdstate" value={confirmstate} onChange={confirmStateChange}>
-                                                    <option value="0">
+                                                    <option>
                                                         검사대기
                                                     </option>
                                                     <option value="1">

@@ -154,7 +154,7 @@ export default function SurveyCheckList(props){
                                                     <span>검사자 : <input onChange={checkMemberNameInput} disabled={r.checkmname != null ? true : false }  value={r.checkmname != null ? r.checkmname : confirmmembername} className="checkMemberInput" type="text"/></span>
                                                     검사상태
                                                     <select name="sstate" className={'selectValue'+r.wno} value={confirmstate} onChange={confirmStateChange}>
-                                                        <option value="0">
+                                                        <option>
                                                             검사대기
                                                         </option>
                                                         <option value="1">

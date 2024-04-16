@@ -14,8 +14,8 @@ export default function ManufacturingTotalBox(props){
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("/wp/list/get.do");
-                const filteredData = response.data.filter((result) => result.wstate <= 4);
+                const response = await axios.get("/wp/workList/get.do");
+                const filteredData = response.data.filter((result) => result.wstate == 4);
                 setPrevious(filteredData.length);
             } catch (error) {
                 console.log(error);

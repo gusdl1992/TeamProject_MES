@@ -144,7 +144,11 @@ public class ManufacturingService {//class start
 
         // 작업 다 끝난후 검사 완료 메세지 소켓 전송
         try {
-            alertSocekt.sendString(new TextMessage("벌크 등록 완료!!"));
+            // 제품 이름 과 수량을 소켓으로 전달
+            String workName = workPlanEntity.getProductEntity().getPname();
+            String workCount = String.valueOf(workPlanEntity.getWcount());
+            String workNo = String.valueOf(workPlanEntity.getWno());
+            alertSocekt.sendString(new TextMessage(" 생산계획 번호 : "+workNo +" 제품명 : "+workName+" 수량 : " +workCount+" EA "+ "   "+" 벌크 등록 완료!!"));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -216,6 +220,15 @@ public class ManufacturingService {//class start
 
             manufacturingEntity.get().getMaterialInputEntity().getWorkPlanEntity().setWstate(6);
 
+            // 작업 다 끝난후 검사 완료 메세지 소켓 전송
+            try {
+                // 제품 이름 과 수량을 소켓으로 전달
+                String workName = manufacturingEntity.get().getMaterialInputEntity().getWorkPlanEntity().getProductEntity().getPname();
+                String workCount = String.valueOf(manufacturingEntity.get().getMaterialInputEntity().getWorkPlanEntity().getWcount());
+                String workNo = String.valueOf(manufacturingEntity.get().getMaterialInputEntity().getWorkPlanEntity().getWno());
+                alertSocekt.sendString(new TextMessage(" 생산계획 번호 : "+workNo +" 제품명 : "+workName+" 수량 : " +workCount+ " EA "+"   "+" 벌크 검사 완료!!"));
+            } catch (Exception e) {throw new RuntimeException(e);}
+
             return manufacturingEntity.get().getMfno();
 
 
@@ -227,12 +240,6 @@ public class ManufacturingService {//class start
         manufacturingEntity.get().setCheckmemberEntity(memberEntity.get());
 
         manufacturingEntity.get().getMaterialInputEntity().getWorkPlanEntity().setWstate(5);
-
-        // 작업 다 끝난후 검사 완료 메세지 소켓 전송
-        try {
-            alertSocekt.sendString(new TextMessage("벌크 검사 완료!!"));
-        } catch (Exception e) {throw new RuntimeException(e);}
-
 
         return manufacturingEntity.get().getMfno();
     }

@@ -38,6 +38,13 @@ public class WorkPlanController {
         return workPlanService.findWPList(orderby);
     }
 
+    // 박시현
+    @GetMapping("/workList/get.do")
+    public List<WorkPlanDto> findWorkListGet(){
+        System.out.println("WorkPlanController.findWorkListGet");
+        return workPlanService.findWorkListGet();
+    }
+
     @GetMapping("/fidsno/get.do")
     public int findSno(int wno){
         System.out.println("임시테스트용"+wno);

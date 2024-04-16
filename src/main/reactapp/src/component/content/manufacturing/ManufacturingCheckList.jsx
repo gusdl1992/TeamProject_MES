@@ -165,7 +165,7 @@ export default function ManufacturingCheckList(props){
                                                 검사자 : <input onChange={confirmmembernameChange} disabled={r.checkmemberDto == null ? false : true }  value={r.checkmemberDto == null ? confirmmembername : r.checkmemberDto.mname } className="checkMemberInput" type="text"/> 
                                                 검사상태
                                                 <select name="state" className={"stateSelect"+r.mfno} value={confirmstate} onChange={confirmStateChange}>
-                                                    <option value="0">
+                                                    <option>
                                                         검사대기
                                                     </option>
                                                     <option value="1">

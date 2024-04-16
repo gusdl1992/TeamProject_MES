@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -88,6 +89,26 @@ public class WorkPlanService {
                 .sorted(comparator)
                 .collect(Collectors.toList());
     }
+
+    // 박시현
+    public List<WorkPlanDto> findWorkListGet(){
+        System.out.println("WorkPlanService.findWorkListGet");
+
+        List<WorkPlanEntity> workPlanEntityList = workPlanEntityRepository.findAll();
+        List<WorkPlanDto> workPlanDtoList = new ArrayList<>();
+
+        if(workPlanEntityList != null){
+            for (int i = 0 ; i < workPlanEntityList.size(); i++){
+                workPlanDtoList.add(workPlanEntityList.get(i).toDto());
+            }
+        }else {
+            // 빈값이면 null 리턴
+            return null;
+        }
+        // 모든 워크플랜을 List 에 담아서 전달
+        return workPlanDtoList;
+    }
+
 
     public int findSno(int wno){
         Integer result = surveyRepository.findSnoBywno(wno);

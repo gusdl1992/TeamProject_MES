@@ -16,9 +16,11 @@ export default function PackagingTotalBox(props){
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("/wp/list/get.do");
-                const filteredData = response.data.filter((result) => result.wstate <= 8);
+                const response = await axios.get("/wp/workList/get.do");
+                const filteredData = response.data.filter((result) => result.wstate == 8);
+                const successlength = response.data.filter((result) => result.wstate == 9);
                 setPrevious(filteredData.length);
+                setSuccess(successlength.length); // 제조 완료 된 wstate 가져오기
             } catch (error) {
                 console.log(error);
             }
@@ -31,8 +33,9 @@ export default function PackagingTotalBox(props){
                 const successlength = response2.data.filter((result) => result.sdstate === 2);
                 const faillength = response2.data.filter((result) => result.sdstate === 1);
                 setNow(nowlength.length);
-                setSuccess(successlength.length);
+                // setSuccess(successlength.length);
                 setFail(faillength.length);
+                console.log(success); console.log('여기');
             } catch (error) {
                 console.log(error);
             }

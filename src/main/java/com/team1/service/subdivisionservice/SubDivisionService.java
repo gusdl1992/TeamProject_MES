@@ -76,7 +76,11 @@ public class SubDivisionService {
 
             // 작업 다 끝난후 검사 완료 메세지 소켓 전송
             try {
-                alertSocekt.sendString(new TextMessage("소분 등록 완료!!"));
+                // 제품 이름 과 수량을 소켓으로 전달
+                String workName = saveSubDivision.getManufacturingEntity().getMaterialInputEntity().getWorkPlanEntity().getProductEntity().getPname();
+                String workCount = String.valueOf(saveSubDivision.getManufacturingEntity().getMaterialInputEntity().getWorkPlanEntity().getWcount());
+                String workNo = String.valueOf(saveSubDivision.getManufacturingEntity().getMaterialInputEntity().getWorkPlanEntity().getWno());
+                alertSocekt.sendString(new TextMessage(" 생산계획 번호 : "+workNo +" 제품명 : "+workName+" 수량 : " +workCount+ " EA "+"   "+" 소분 등록 완료!!"));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -144,7 +148,11 @@ public class SubDivisionService {
         if (subdivisionEntity.getCheckmemberEntity() != null){
             // 작업 다 끝난후 검사 완료 메세지 소켓 전송
             try {
-                alertSocekt.sendString(new TextMessage("소분 검사 완료!!"));
+                // 제품 이름 과 수량을 소켓으로 전달
+                String workName = subdivisionEntity.getManufacturingEntity().getMaterialInputEntity().getWorkPlanEntity().getProductEntity().getPname();
+                String workCount = String.valueOf(subdivisionEntity.getManufacturingEntity().getMaterialInputEntity().getWorkPlanEntity().getWcount());
+                String workNo = String.valueOf(subdivisionEntity.getManufacturingEntity().getMaterialInputEntity().getWorkPlanEntity().getWno());
+                alertSocekt.sendString(new TextMessage(" 생산계획 번호 : "+workNo +" 제품명 : "+workName+" 수량 : " +workCount+ " EA "+"   "+" 소분 검사 완료!!"));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

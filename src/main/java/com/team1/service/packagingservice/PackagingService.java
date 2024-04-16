@@ -86,7 +86,11 @@ public class PackagingService {
             savePackaging.setPgcount( pgcount );
             // 작업 다 끝난후 검사 완료 메세지 소켓 전송
             try {
-                alertSocekt.sendString(new TextMessage("포장 완료!!"));
+                // 제품 이름 과 수량을 소켓으로 전달
+                String workName = savePackaging.getSubdivisionEntity().getManufacturingEntity().getMaterialInputEntity().getWorkPlanEntity().getProductEntity().getPname();
+                String workCount = String.valueOf(savePackaging.getSubdivisionEntity().getManufacturingEntity().getMaterialInputEntity().getWorkPlanEntity().getWcount());
+                String workNo = String.valueOf(savePackaging.getSubdivisionEntity().getManufacturingEntity().getMaterialInputEntity().getWorkPlanEntity().getWno());
+                alertSocekt.sendString(new TextMessage(" 생산계획 번호 : "+workNo +" 제품명 : "+workName+" 수량 : " +workCount+" EA "+ "   "+" 포장 완료!!"));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
