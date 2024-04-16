@@ -231,9 +231,7 @@ public class ManufacturingService {//class start
         // 작업 다 끝난후 검사 완료 메세지 소켓 전송
         try {
             alertSocekt.sendString(new TextMessage("벌크 검사 완료!!"));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        } catch (Exception e) {throw new RuntimeException(e);}
 
 
         return manufacturingEntity.get().getMfno();
