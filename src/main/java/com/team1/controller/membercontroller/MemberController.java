@@ -47,11 +47,12 @@ public class MemberController {
     }
 
 
-    @GetMapping("/find/email/get.do")
-    public boolean getfindMemail(String memail){
-        return memberService.getfindMemail(memail);
-    }
+//    @GetMapping("/find/email/get.do")
+//    public boolean getfindMemail(String memail){
+//        return memberService.getfindMemail(memail);
+//    }
 
+    // 회원 탈퇴 기능
     @DeleteMapping("/Account/delete.do")
     public boolean deleteAccount(@RequestParam int mno){
         return memberService.deleteAccount(mno);
