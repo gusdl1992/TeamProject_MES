@@ -129,7 +129,7 @@ public class SurveyCheckService {
     // 0 = 실패
     // -1 로그인 정보가 없음
     // -2 해당담당자가 아님
-    public int surveyCheck(int sno , int sstate , int state){
+    public int surveyCheck(int sno  , int state){
         MemberDto memberDto = memberService.doLogininfo();
         // 만약 검사자 또는 관리자 가 아니라면 등록 실패
         if (memberDto.getPart() != 10 && memberDto.getPart() != -1) {
