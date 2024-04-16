@@ -106,7 +106,6 @@ export default function Progress() {
     })
     } , []);
 
-
   return (<>
         <div id='progressWrap'>
             <h2>작업 진행 상황</h2>
@@ -115,7 +114,8 @@ export default function Progress() {
                     console.log(r)
                     let wendtime = r.wendtime?.split('T')[0];
                     return(<>
-                    <div id='progressDiv' key={index} style={{ marginTop: index === 0 ? '50px' : '20px' }}>
+                    {/* 워크플랜의 wstate 가 9(제품 완성) 면 화면 표시 none  */}
+                    <div id='progressDiv' key={r.wstate} style={{ display: r.wstate === 9 ? 'none' : 'block', marginTop: index === 0 ? '50px' : '20px' }}>
                             <div className='progressDataWrap'>
                                 <span className='progressData'>작업 번호 : {r.wno}</span>
                                 <span className='progressData'>제품 명 : {r.pname}</span>
