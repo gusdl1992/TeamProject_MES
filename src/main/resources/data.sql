@@ -11,9 +11,9 @@ insert into member (mno , part , cdate , udate , mid , mpw , mname ) values (9,1
 insert into member (mno , part , cdate , udate , mid , mpw , mname ) values (10,1,'2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456','id9' , '1234', "신동엽" );
 
 
-insert into product ( pno , cdate , udate , pname , ferment , standard , packagingcount , period ) values ( 1 , '2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456' , '촉촉촉촉한 수분크림' , 30 , 30 , 15 , 365);
-insert into product ( pno , cdate , udate , pname , ferment , standard , packagingcount , period) values ( 2 , '2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456' , '칙칙 뿌리는 페브리즈' , 20 , 20 , 10 , 30);
-insert into product ( pno , cdate , udate , pname , ferment , standard , packagingcount , period) values ( 3 , '2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456' , '남자다잉 로션' , 0 , 10 , 5 , 7);
+insert into product ( pno , cdate , udate , pname , ferment , standard , packagingcount , period ) values ( 1 , '2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456' , '예리나 알로에 수분폭탄 대용량 수분크림' , 30 , 30 , 15 , 365);
+insert into product ( pno , cdate , udate , pname , ferment , standard , packagingcount , period) values ( 2 , '2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456' , '냄새 뺌' , 20 , 20 , 10 , 30);
+insert into product ( pno , cdate , udate , pname , ferment , standard , packagingcount , period) values ( 3 , '2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456' , '데일리 레스큐 워터로션' , 0 , 10 , 5 , 7);
 insert into product ( pno , cdate , udate , pname , ferment , standard , packagingcount , period) values ( 4 , '2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456' , '벤튼 깊은녹차 세럼' , 0 , 10 , 5 , 7);
 insert into product ( pno , cdate , udate , pname , ferment , standard , packagingcount , period) values ( 5 , '2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456' , '하이드라-에센셜 모이스처라이즈 앤 퀀치, 리치 크림' , 0 , 10 , 5 , 7);
 insert into product ( pno , cdate , udate , pname , ferment , standard , packagingcount , period) values ( 6 , '2024-03-12 10:00:12.123456','2024-03-12 10:00:12.123456' , '캡춰 토탈 인텐시브 에센스 로션' , 0 , 10 , 5 , 7);
