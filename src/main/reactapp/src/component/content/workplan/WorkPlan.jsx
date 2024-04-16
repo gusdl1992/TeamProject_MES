@@ -15,6 +15,7 @@ export default function WorkPlan(props){
             if(r){
                 setReRender(!reRender);
             }
+            alert("생산일정 등록완료")
         })
         .catch(e=>{
             console.log(e);
