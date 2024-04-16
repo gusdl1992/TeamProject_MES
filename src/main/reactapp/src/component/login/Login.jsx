@@ -17,7 +17,7 @@ export default function Header(props) {
                 const response = await axios.get("/member/login/info/get.do");
                 console.log(response); 
                 if (response.data !== "") {
-                    window.location.href = "/c";
+                    window.location.href = "/Progress/view";
                 }
             } catch (error) {
                 console.log(error); 
@@ -54,7 +54,7 @@ export default function Header(props) {
             .then( r => {
                 if(r.data){ // 응답 데이터가 있는 경우
                     alert("로그인성공"); // 성공 메시지를 표시합니다.
-                    window.location.href = "/c"; // 로그인 후 페이지를 이동합니다.
+                    window.location.href = "/Progress/view"; // 로그인 후 페이지를 이동합니다.
                 }
             })
             .catch(e => {

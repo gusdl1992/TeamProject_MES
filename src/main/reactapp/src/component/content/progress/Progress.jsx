@@ -106,6 +106,7 @@ export default function Progress() {
     })
     } , []);
 
+
   return (<>
         <div id='progressWrap'>
             <h2>작업 진행 상황</h2>

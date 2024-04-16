@@ -41,6 +41,12 @@ body{
 .searchBox{
     height: 30px;
 }
+.statistics>h3{
+    margin-left: 14px;
+}
+.AcontentBox>h3{
+    margin-bottom: 10px;
+}
 .statisticsWrap{
     padding: 10px;
     display: flex;

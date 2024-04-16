@@ -28,3 +28,5 @@ public interface ProductLogRepository extends JpaRepository<ProductLogEntity , I
     @Query(value = "select * from productlog where pno=:pno", nativeQuery = true)
     List<ProductLogEntity> findlog(int pno);
 }
+
+

@@ -32,15 +32,15 @@ export default function RmLogWrite(props){
     return(
         <>            
             <form id="RmWriteBox" ref={boardWriteFormRef}>
-                <select name="rmname">
+                <select className="sselect" name="rmname">
                 {rmlist.map((e) => (
                     <option key={e.rmlno} value={e.rmname}>
                         {e.rmname}
                     </option>
                     ))}
                 </select>
-                <input type="text" name="rmlcount"></input>                    
-                <button type="button" onClick={handleSubmit}>전송</button>
+                <input type="text" className="sinputinput" name="rmlcount"></input>                    
+                <button type="button" className="sinputbutton" onClick={handleSubmit}>전송</button>
             </form>            
         </>
     )

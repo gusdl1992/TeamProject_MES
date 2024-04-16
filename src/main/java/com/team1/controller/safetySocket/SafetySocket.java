@@ -15,9 +15,7 @@ import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.ScheduledFuture;
@@ -51,14 +49,14 @@ public class SafetySocket extends TextWebSocketHandler implements DisposableBean
 
     public String serial(){
         SerialPort[] ports = SerialPort.getCommPorts();
-
+        System.out.println("스케쥴러실행");
         // 첫 번째 시리얼 포트를 선택하여 엽니다. 포트의 인덱스를 조정하여 필요한 포트를 선택할 수 있습니다.
         SerialPort selectedPort = ports[1];
         selectedPort.openPort();
 
         // 시리얼 포트의 설정을 구성합니다. 이 예제에서는 전송 속도를 9600 bps로 설정합니다.
         selectedPort.setBaudRate(9600);
-        selectedPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
+//        selectedPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
         출처: https://milanok.tistory.com/entry/자바-시리얼-통신-예제 [IT 엔지니어:티스토리]
         // 시리얼 포트로 데이터를 쓰기 위한 출력 스트림을 가져옵니다. 안되니까 잠깐 폐기
 //        try {
@@ -66,9 +64,13 @@ public class SafetySocket extends TextWebSocketHandler implements DisposableBean
 //
 //            System.out.println(selectedPort.isOpen());
 //            System.out.println(selectedPort.getOutputStream());
+////            PrintWriter output = new PrintWriter(selectedPort.getOutputStream()); //안됨
+////            DataOutputStream output = new DataOutputStream(selectedPort.getOutputStream()); //안됨
 //            String check = "on";
-//            byte[] on = check.getBytes();
-//            selectedPort.getOutputStream().write(on);
+////            OutputStream outputStream = selectedPort.getOutputStream().nullOutputStream(); //안됨
+////            outputStream.write(check.getBytes());
+////            output.writeUTF(check);
+//
 //        } catch (Exception e) {
 //            System.out.println(e);
 //        }
@@ -109,6 +111,7 @@ public class SafetySocket extends TextWebSocketHandler implements DisposableBean
 //        result = serial().split("\n")[1]; //아두이노 연동했을떄 사용
 //        System.out.println("소켓 체크용");
 //        System.out.println("나온 거리:"+result);
+
 
         try {
             WebSocketMessage<String> sendmessage = new TextMessage(result);

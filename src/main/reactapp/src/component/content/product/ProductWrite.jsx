@@ -15,7 +15,7 @@ export default function ProductWrite(props){
         }).catch(e=>{console.log(e)})
     }
     return(<>
-        <input value={pname} onChange={(e)=>{setPname(e.target.value)}}/>
-        <button type="button" onClick={doPost}>제품 등록2</button>
+        <input className="sinputinput" value={pname} onChange={(e)=>{setPname(e.target.value)}}/>
+        <button className="sinputbutton" type="button" onClick={doPost}>제품 등록</button>
     </>)
 }
