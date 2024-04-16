@@ -25,7 +25,7 @@ export default function AllWorkPlanList(props){
     console.log(Planlist);
     return (<>
     
-        <select onClick={ (e)=>{setsort(e.target.value)}}>
+        <select className="sselect" onClick={ (e)=>{setsort(e.target.value)}}>
         <option value={"wno"}>보고서번호순</option>
         <option value={"pname"}>제품명순</option>
         <option value={"wcount"}>분량순</option>

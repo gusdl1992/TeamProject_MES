@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
-import PrintBox from "../layouts/PrintBox";
-import TotalBox from "../layouts/TotalBox";
 
+import Styles from "./Latouytest.css";
 
 
 export default function LayoutTest2(props){
@@ -33,9 +32,9 @@ export default function LayoutTest2(props){
     return(
         <div className="contentWrap">
         
-        <div className="statistics">
-            <marquee behavior="scroll" direction="right" scrollamount="10" style={msgInput >= 50 ? {backgroundColor: 'rgba(255, 99, 132, 0.2)'} : (msgInput > 10 ? {backgroundColor: 'rgba(75, 192, 192, 0.2)'} : {backgroundColor: 'rgba(54, 162, 235, 0.2)'})}>
-                안전거리 체크: {msgInput} 
+        <div className="statistics" style={msgInput <= 100 ? {backgroundColor: 'rgba(255, 99, 132, 0.2)'} : (msgInput < 500 ? {backgroundColor: 'rgba(75, 192, 192, 0.2)'} : {backgroundColor: 'rgba(54, 162, 235, 0.2)'})}>
+            <marquee behavior="scroll" direction="right" scrollamount="10">
+                 현재 안전 거리 : {msgInput} {msgInput <= 100 ?"너무가깝습니다":""} 
             </marquee>
         </div>
             <div className="AcontentBox">
