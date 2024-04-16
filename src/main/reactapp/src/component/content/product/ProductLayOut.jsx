@@ -7,6 +7,7 @@ import ProductList from "./Productlist";
 import { useSearchParams } from "react-router-dom";
 import LayoutTest2 from "../layouttest/Layouttest2";
 
+
 export default function ProductLayOut(props){
 
     //쿼리스트링 받아오기

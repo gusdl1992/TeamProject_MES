@@ -112,7 +112,7 @@ export default function Index(props){
                     <Route path="/survey/survey" element={<Survey/> } />
                     <Route path="/survey/plan" element={<WorkPlanList/> } />
                     <Route path="/product/recipie/get" element={<ProductRLayOut/>}/>
-                    <Route path="/wp/list" element={<LayoutTest list={<AllWorkPlanList/>} />}/>
+                    <Route path="/wp/list" element={<LayoutTest2 list={<AllWorkPlanList/>} />}/>
                     <Route path="/wp/write" element={<WorkPlan/>}/>
                     <Route path="/wp/report" element={<ReportAll/>}/>
                     <Route path="/manufacturing/info" element={<Manufacturing/>}/>

@@ -20,7 +20,6 @@ export default function ExpirationList(props){
 
 
     return(<>
-        <h3>유통기한이 지나 폐기해야되는 제품 목록</h3>
         <table>
             <thead>
                 <tr><th>제품명</th><th>분량</th></tr>
@@ -31,6 +30,6 @@ export default function ExpirationList(props){
                 })}
             </tbody>
         </table>
-        <button type="button" onClick={postHandler}>폐기 </button>
+        <button type="button" className="sinputbutton" onClick={postHandler}>폐기 </button>
     </>)
 }

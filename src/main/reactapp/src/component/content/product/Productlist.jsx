@@ -20,7 +20,7 @@ export default function ProductList(props){
     console.log(infos)
 
     return(<>
-        <ProductWrite pno={props.pno} reroad={reroad} setReroad={setReroad}/>
+            <ProductWrite pno={props.pno} reroad={reroad} setReroad={setReroad}/>
         <table>
             <thead>
                 <tr>
