@@ -21,17 +21,17 @@ public class MemberService {
 
     //아이디 중복검사
     public boolean getfindMid(String mid){
-        System.out.println("mid = " + mid);
+
         boolean result;
         result = memberRepository.existsByMid(mid);
-        System.out.println("result = " + result);
+
         return result;
     };
 
     // 회원가입 기능
     @Transactional
     public int doSignupPost( MemberDto memberDto){
-        System.out.println("memberDto = " + memberDto);
+
         boolean result = getfindMid(memberDto.getMid());
         // 아이디 중복이 있을시 true
         if(result){
@@ -42,8 +42,7 @@ public class MemberService {
 
         // 엔티티 생성이 되었는지 아닌지 확인 (PK)
         if(savedEntity.getMno()>0) {
-            System.out.println("savedEntity.getMno() = " + savedEntity.getMno());
-            System.out.println("savedEntity.getMname() = " + savedEntity.getMname());
+
             return 1;
         }
         // 아이디 중복이 없었지만 엔티티 생성은 실패 했을 경우.
@@ -55,7 +54,7 @@ public class MemberService {
     public List<MemberDto> doAllReadMember(){
         List<MemberEntity> memberEntityList = memberRepository.findAll();
         List<MemberDto> memberDtoList = new ArrayList<>();
-        System.out.println("memberEntityList = " + memberEntityList);
+
         for (MemberEntity memberEntity : memberEntityList) {
             memberDtoList.add(memberEntity.toDto());
         }
@@ -72,7 +71,7 @@ public class MemberService {
         if(memberEntity == null){
             return false;
         }
-        System.out.println(memberEntity);
+
         request.getSession().setAttribute("logindto",memberEntity.toDto());
         return true;
     }
@@ -94,9 +93,9 @@ public class MemberService {
 
     // 회원 탈퇴
     public boolean deleteAccount(int mno){
-        System.out.println("MemberService.deleteAccount");
+
         Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberInfo(mno);
-        System.out.println("memberEntity = " + optionalMemberEntity);
+
         if (optionalMemberEntity.isPresent()){
             // 리포지토리에서 멤버 엔티티 삭제
             memberRepository.deleteById(optionalMemberEntity.get().getMno());

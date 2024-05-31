@@ -19,8 +19,6 @@ public class ProductLogController {
 
     @PostMapping("/post.do")
     public void productLogDtos( int pgcount, int pno){
-        System.out.println("제품로그 컨트롤러");
-        System.out.println("★★★pgcount = " + pgcount +"pno"+ pno);
         productLogService.productLogDtos(pgcount , pno);
     }
 

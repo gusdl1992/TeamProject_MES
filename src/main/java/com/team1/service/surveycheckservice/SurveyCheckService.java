@@ -64,7 +64,7 @@ public class SurveyCheckService {
         List<SurveyCheckOutDto> surveyCheckOutDtoList = new ArrayList<>();
         if (!surveyEntityList.isEmpty()){
             for (int i = 0 ; i < surveyEntityList.size(); i++){
-                System.out.println(surveyEntityList.get(i).getCheckmemberEntity());
+
                 SurveyCheckOutDto surveyCheckOutDto = SurveyCheckOutDto.builder()
                         .wno(surveyEntityList.get(i).getWorkPlanEntity().getWno())
                         .sno(surveyEntityList.get(i).getSno())
@@ -140,9 +140,9 @@ public class SurveyCheckService {
         List<RecipeEntity> recipeEntityList = recipeEntityList(workPlan.getProductEntity().getPno());
         List<SurveyBEntity> surveyBEntityList = surveyBEntityList(sno);
         boolean result = surveyChack(workPlan, recipeEntityList, surveyBEntityList);
-        System.out.println("state = " + state);
+
         if(state==2) {
-            System.out.println("insert messegssadsadsad***");
+
             if (result) {
                 // 계량 체크가 유효성 검사가 모두 성공 했을 시 아래 문 실행.
                 survey.setCheckmemberEntity(memberNameCheck(memberDto.getMno()));

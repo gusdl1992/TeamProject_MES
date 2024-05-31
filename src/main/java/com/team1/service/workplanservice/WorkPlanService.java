@@ -41,7 +41,7 @@ public class WorkPlanService {
     @Autowired
     private SubDivisionRepository subDivisionRepository;
     public boolean postWPWriteDo(WorkPlanDto workPlanDto){
-        System.out.println("서비스workPlanDto = " + workPlanDto);
+
         // 멤버
         MemberDto loginDto = memberService.doLogininfo();
         if ( loginDto == null ) return false;
@@ -92,7 +92,7 @@ public class WorkPlanService {
 
     // 박시현
     public List<WorkPlanDto> findWorkListGet(){
-        System.out.println("WorkPlanService.findWorkListGet");
+
 
         List<WorkPlanEntity> workPlanEntityList = workPlanEntityRepository.findAll();
         List<WorkPlanDto> workPlanDtoList = new ArrayList<>();
@@ -119,8 +119,7 @@ public class WorkPlanService {
     }
 
     public boolean putChangeStateDo(int wno , int wstate){
-        System.out.println("wno = " + wno);
-        System.out.println("wstate = " + wstate);
+
 
         Optional<WorkPlanEntity> optionalWorkPlanEntity = workPlanEntityRepository.findById(wno);
 
@@ -128,7 +127,7 @@ public class WorkPlanService {
 
         workPlan.setWstate(wstate);
 
-        System.out.println("workPlan.getWstate() = " + workPlan.getWstate());
+
 
         if(workPlan.getWstate() != 0){
             workPlanEntityRepository.save(workPlan);
@@ -145,7 +144,7 @@ public class WorkPlanService {
     }
 
     public SubDivisionDto findsub(int wno){
-        System.out.println(subDivisionRepository.findByWno(wno));
+
         return subDivisionRepository.findByWno(wno).toDto();
     }
 

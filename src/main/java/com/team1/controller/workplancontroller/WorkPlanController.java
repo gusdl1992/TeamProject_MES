@@ -27,27 +27,27 @@ public class WorkPlanController {
     ManufacturingService manufacturingService;
     @PostMapping("/write/post.do")
     public boolean postWPWriteDo(WorkPlanDto workPlanDto){
-        System.out.println("컨트롤러workPlanDto = " + workPlanDto);
+
         return workPlanService.postWPWriteDo(workPlanDto);
     }
 
 
     @GetMapping("/list/get.do")
     public List<WorkPlanDto> findWPList(String orderby){
-        System.out.println(orderby+"dddddddd");
+
         return workPlanService.findWPList(orderby);
     }
 
     // 박시현
     @GetMapping("/workList/get.do")
     public List<WorkPlanDto> findWorkListGet(){
-        System.out.println("WorkPlanController.findWorkListGet");
+
         return workPlanService.findWorkListGet();
     }
 
     @GetMapping("/fidsno/get.do")
     public int findSno(int wno){
-        System.out.println("임시테스트용"+wno);
+
         return workPlanService.findSno(wno);
     }
 
@@ -64,7 +64,7 @@ public class WorkPlanController {
 
     @GetMapping("/manu/get.do")
     public ManufacturingDto findmap(@RequestParam int mipno){
-        System.out.println("\"\" = " + "안녕");
+
         return manufacturingService.findbymipno(mipno);
     }
 

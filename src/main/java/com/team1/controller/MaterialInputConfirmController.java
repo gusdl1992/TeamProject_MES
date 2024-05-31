@@ -23,7 +23,6 @@ public class MaterialInputConfirmController {
 
     @PutMapping("/confirm.do")
     public int putMaterialInputConfirm(MaterialInputDto materialInputDto){
-        System.out.println("materialInputDto = " + materialInputDto);
         int mno = memberService.doLogininfo().getMno();
         int mipno = materialInputDto.getMipno();
         int mipstate = materialInputDto.getMipstate();
@@ -33,7 +32,6 @@ public class MaterialInputConfirmController {
 
     @GetMapping("/confirm/log.do")
     public List<MaterialInputDto> getMaterialInputConfirmLog(){
-        System.out.println("material 정보" + materialInputConfirmService.getMaterialInputConfirmLog());
         return materialInputConfirmService.getMaterialInputConfirmLog();
     }
 }

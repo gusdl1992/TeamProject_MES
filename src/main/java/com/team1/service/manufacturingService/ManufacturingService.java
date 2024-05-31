@@ -55,12 +55,12 @@ public class ManufacturingService {//class start
     public MaterialInputDto MaterialInputClickDo(int mipno){
 
         Optional<MaterialInputEntity> materialInputEntity = materialInputEntityRepository.findById(mipno);
-        System.out.println("materialInputEntity = " + materialInputEntity);
+
         if(!materialInputEntity.isPresent()){return null;};
 
         MaterialInputDto materialInputDto =materialInputEntity.get().toDto();
 
-        System.out.println("materialInputDto = " + materialInputDto);
+
         return materialInputDto;
     }
 

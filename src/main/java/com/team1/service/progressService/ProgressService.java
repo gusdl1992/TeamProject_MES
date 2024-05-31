@@ -19,9 +19,9 @@ public class ProgressService {
     // 작업진행 상황 워크플랜 데이터 가져오기
     @GetMapping("/get.do")
     public List<ProgressDTO> progressGetPlan(){
-        System.out.println("ProgressService.progressGetPlan");
+
         List<WorkPlanEntity> workPlanEntityList = workPlanEntityRepository.findAll();
-        System.out.println("workPlanEntityList = " + workPlanEntityList);
+
         List<ProgressDTO> progressDTOList = new ArrayList<>();
         for (int i = 0 ; i < workPlanEntityList.size(); i++){
             progressDTOList.add(ProgressDTO.builder()
@@ -32,7 +32,7 @@ public class ProgressService {
                             .pname(workPlanEntityList.get(i).getProductEntity().getPname())
                     .build());
         }
-        System.out.println("progressDTOList(여기) = " + progressDTOList);
+
         return progressDTOList;
     }
 }

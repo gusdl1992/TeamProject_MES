@@ -29,10 +29,10 @@ public class SafetySocket extends TextWebSocketHandler implements DisposableBean
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        System.out.println("session = " + session);
+
         //1.접속한 세션정보를 리스트에 담기
         접속명단.add(session);
-        System.out.println("접속명단 = " + 접속명단);
+
 
     }
 
@@ -49,7 +49,7 @@ public class SafetySocket extends TextWebSocketHandler implements DisposableBean
 
     public String serial(){
         SerialPort[] ports = SerialPort.getCommPorts();
-        System.out.println("스케쥴러실행");
+
         // 첫 번째 시리얼 포트를 선택하여 엽니다. 포트의 인덱스를 조정하여 필요한 포트를 선택할 수 있습니다.
         SerialPort selectedPort = ports[1];
         selectedPort.openPort();
@@ -60,10 +60,9 @@ public class SafetySocket extends TextWebSocketHandler implements DisposableBean
         출처: https://milanok.tistory.com/entry/자바-시리얼-통신-예제 [IT 엔지니어:티스토리]
         // 시리얼 포트로 데이터를 쓰기 위한 출력 스트림을 가져옵니다. 안되니까 잠깐 폐기
 //        try {
-//            System.out.println("출력체크");
+
 //
-//            System.out.println(selectedPort.isOpen());
-//            System.out.println(selectedPort.getOutputStream());
+
 ////            PrintWriter output = new PrintWriter(selectedPort.getOutputStream()); //안됨
 ////            DataOutputStream output = new DataOutputStream(selectedPort.getOutputStream()); //안됨
 //            String check = "on";
@@ -109,19 +108,17 @@ public class SafetySocket extends TextWebSocketHandler implements DisposableBean
     public void doPost() {
         String result = 100+"";
 //        result = serial().split("\n")[1]; //아두이노 연동했을떄 사용
-//        System.out.println("소켓 체크용");
-//        System.out.println("나온 거리:"+result);
+
 
 
         try {
             WebSocketMessage<String> sendmessage = new TextMessage(result);
-//            System.out.println(sendmessage.getPayload());
-//            System.out.println(sendmessage.getPayload()+"를 보냅니다");
+
             for (WebSocketSession webSocketSession : 접속명단) {
                 webSocketSession.sendMessage(sendmessage);
             }
 
-//            System.out.println(sendmessage);
+
         }
         catch (Exception e ){
             System.out.println(e);

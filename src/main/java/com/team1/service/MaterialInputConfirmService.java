@@ -35,14 +35,14 @@ public class MaterialInputConfirmService {
         if (optionalMemberEntity.get().getPart() != 10 && optionalMemberEntity.get().getPart() != -1) {
             return -1;
         }
-//        System.out.println("optionalMemberEntity"+optionalMemberEntity);//
+
 
         MaterialInputEntity materialInputEntity = materialInputRepository.findById(mipno).get();
 
         materialInputEntity.setCheckmemberEntity(optionalMemberEntity.get());
         materialInputEntity.setMipstate(mipstate);
 
-        System.out.println("materialInputEntity"+materialInputEntity);
+
 
         if (materialInputEntity.getCheckmemberEntity() != null){
             // 작업 다 끝난후 검사 완료 메세지 소켓 전송

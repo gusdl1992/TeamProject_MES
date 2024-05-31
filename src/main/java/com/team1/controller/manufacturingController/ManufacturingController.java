@@ -28,7 +28,6 @@ public class ManufacturingController {//class star
     // mipno
     @GetMapping("/MaterialInput/click.do")
     public MaterialInputDto MaterialInputClickDo(@RequestParam int mipno){
-        System.out.println("mipno = " + mipno);
 
         return manufacturingService.MaterialInputClickDo(mipno);
     }
@@ -69,8 +68,7 @@ public class ManufacturingController {//class star
         // -3 = 권한이 없음
     @PostMapping("/updateState.do")
     public int manufacturingStateUpdateDo(int mfno , int state){
-        System.out.println("mfno = " + mfno);
-        System.out.println("state = " + state);
+
 
 
 

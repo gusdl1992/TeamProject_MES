@@ -49,8 +49,8 @@ public class PackagingService {
     }
 
     public SubDivisionDto doSubdivisionInfoGet(int sdno){
-        System.out.println("PackagingController.doSubdivisionInfoGet");
-        System.out.println("sdno = " + sdno);
+
+
         SubDivisionDto subDivisionDto = subDivisionRepository.findById(sdno).get().toDto();
         return subDivisionDto;
     }
@@ -58,8 +58,7 @@ public class PackagingService {
     @Transactional
     // 반환 0 = 실패 / 1이상 = 성공 / -1 = 로그인정보가 없음  / -2 권한이 없는작업
     public int doMemberPost(int sdno , int pgbox , int pgcount ){
-//        System.out.println("PackagingService.doMemberPost");
-//        System.out.println("★pgcount = " + pgcount);
+
         MemberDto loginDto = memberService.doLogininfo();
         if ( loginDto == null ) return -1;
 

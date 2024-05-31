@@ -43,8 +43,7 @@ public class MaterialInputService {
     // -1 해당 업무 담당자 아님
     // -2 로그인 정보가 없음
     public int doInputPost(int sno){
-        System.out.println("MaterialInputService.doInputPost");
-        System.out.println("sno = " + sno);
+
 
         MemberDto loginDto = memberService.doLogininfo();
         if ( loginDto == null ) return -2;
@@ -66,10 +65,10 @@ public class MaterialInputService {
         if (!optionalSurveyEntity.isPresent()) return 0;
 
         SurveyEntity surveyEntity = optionalSurveyEntity.get();
-        System.out.println("surveyEntity = " + surveyEntity);
-        System.out.println("optionalSurveyEntity = " + optionalSurveyEntity);
+
+
         ProductEntity optionalProductEntity = productRepository.findBySnoSQL( sno );
-        System.out.println("방금찍은 : optionalProductEntity = " + optionalProductEntity);
+
         Optional<WorkPlanEntity> optionalWorkPlanEntity = workPlanEntityRepository.findById(sno);
 
             // insert
@@ -112,10 +111,10 @@ public class MaterialInputService {
 
     @Transactional
     public List<Map<Object,Object>> doInputInfoGet(int sno){
-//        System.out.println("MaterialInputController.doInputInfoGet");
+
 //        List<MaterialInputEntity> result = materialInputRepository.findAll();
 //
-//        System.out.println("result = " + result);
+
 //        // Entity를 Dto로 변환한다
 //        List<MaterialInputDto> materialInputDtoList = new ArrayList<>();
 //            // 1. 꺼내온 entity를 순회한다
@@ -123,7 +122,7 @@ public class MaterialInputService {
 //            // 2.하나씩 entity를 꺼낸다
 //            MaterialInputEntity materialInputEntity = result.get(i);
 //                result.get(i).getSurveyBEntity().getSbno();
-//            System.out.println("방금막쓴sno = " + materialInputEntity);
+
 //
 //            // 3. 해당 entity를 dto로 변환한다
 //            MaterialInputDto materialInputDto = materialInputEntity.toDto();
@@ -155,5 +154,3 @@ public class MaterialInputService {
 
 //        Optional<MaterialInputEntity> test = materialInputRepository.findBySno(1);
 //        Optional<MaterialInputEntity> test2 = materialInputRepository.findByHard(1);
-//        System.out.println("테스트 : "+test);
-//        System.out.println("테스트2"+test2);

@@ -77,7 +77,6 @@ public class SurveyService {
                 // 해당 workPlanDto 호출
         WorkPlanEntity workPlanEntity = workPlanEntityRepository.findBywno(wno);
         WorkPlanDto workPlanDto = workPlanEntity.toDto(); // DTO로 변환
-//        System.out.println("workPlanDto = " + workPlanDto);
         surveyPlanInfoDto.setWorkPlanDto(workPlanDto); // 추가
 
             // 2-2. workPlan 에 해당하는 제품 레시피 찾아서 넣기

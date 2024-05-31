@@ -66,10 +66,10 @@ public class RecipieService {
     }
     @Transactional
     public boolean productPost(RecipeDto recipeDto){
-        System.out.println("ddddddddd"+recipeDto.getPno());
-        System.out.println(recipeDto.getRmno());
+
+
         RecipeEntity recipeEntity2 = recipeREpositorty.findByRmnoandPnoSQl(recipeDto.getRmno(),recipeDto.getPno());
-        System.out.println(recipeEntity2);
+
         if(recipeEntity2 != null){
             recipeEntity2.setReamount(recipeEntity2.getReamount()+recipeDto.getReamount());
             return true;
@@ -77,7 +77,7 @@ public class RecipieService {
         else{
             RecipeEntity recipeEntity =recipeREpositorty.save(recipeDto.toEntity());
             if(recipeEntity.getReno() >= 1 ){
-                System.out.println("안녕안녕");
+
                 recipeEntity.setProductEntity(productRepository.findById(recipeDto.getPno()).get());
                 recipeEntity.setRawMaterialEntity(rawMeterailRepository.findById(recipeDto.getRmno()).get());
                 return true;

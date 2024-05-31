@@ -18,20 +18,20 @@ public class MemberController {
     MemberService memberService;
     @PostMapping("/signup/post.do")
     public int doSignupPost(@RequestBody MemberDto memberDto){ //회원가입
-        System.out.println(memberDto);
+
         return memberService.doSignupPost(memberDto);
     }
 
     @PostMapping("/login/post.do")
     public boolean doLoginPost(MemberDto memberDto){ //로그인
-        System.out.println(memberDto);
+
         return memberService.doLoginPost(memberDto);
     }
     
     // 멤버 전부 가져오기 
     @GetMapping("/all/get.do")
     public List<MemberDto> doAllReadMember(){
-        System.out.println("MemberController.doAllReadMember");
+
         return memberService.doAllReadMember();
     }
 

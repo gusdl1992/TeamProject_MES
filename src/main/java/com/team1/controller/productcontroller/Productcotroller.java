@@ -20,7 +20,7 @@ public class Productcotroller {
     //1.제품 등록
     @PostMapping("/post.do")
     public boolean uploadProduct(ProductDto productDto){
-        System.out.println(productDto);
+
         return productService.uploadProduct(productDto);
     }
 
@@ -36,7 +36,7 @@ public class Productcotroller {
 
     @PostMapping("recipie/post.do")
     public boolean productPost(RecipeDto recipeDto){
-        System.out.println(recipeDto);
+
         return recipieService.productPost(recipeDto);
     }
 }

@@ -33,7 +33,7 @@ public class SurveyCheckController {
     public int surveyCheck(SurveyDto surveyDto , int state){
         int sno = surveyDto.getSno();
         int sstate = surveyDto.getSstate();
-        System.out.println("state = " + state);
+
         return surveyCheckService.surveyCheck(sno  ,state);
     }
 

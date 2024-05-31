@@ -51,7 +51,6 @@ public class SurveyController {
         // -4 검사 단계 진행됨 (수정불가능).
     @PostMapping("/insert.do")
     public int surveyInsertDo(@RequestBody SurveyInsertDto surveyInsertDto){
-        //System.out.println("surveyInsertDto.getSurveyBDto().get(0) = " + surveyInsertDto.getSurveyBDto().get(0));
         return surveyService.surveyInsertDo(surveyInsertDto);
     }
 

@@ -31,16 +31,14 @@ public class RawMeterialController {
 
     @PostMapping("/log/post.do")
     public boolean doPostRmLog(RawMaterialLogDto rawMaterialLogDto){
-        System.out.println(rawMaterialLogDto);
+
         return rawMeterialService.doPostRmLog(rawMaterialLogDto);
     }
 
     @GetMapping("/log/get.do")
     public List<RawMaterialLogDto> doFindRmLog(int rmno){
         List<RawMaterialLogDto> result = rawMeterialService.doFindRmLog(rmno);
-//        result.forEach((e)->{
-//            System.out.println(e.cdate);
-//        } );
+
         return result;
     }
 

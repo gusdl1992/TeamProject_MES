@@ -33,7 +33,7 @@ public class ProductLogService {
 
     @Transactional
     public void productLogDtos(int pgcount, int pno ){
-        System.out.println("제품로그 서비스");
+
         List<PackagingEntity> packagingEntityList = packagingRepository.findByAllProduct();
 
 //////            int pgcount = packagingEntityList.get(i).getPgcount();

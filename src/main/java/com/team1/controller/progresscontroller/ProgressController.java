@@ -19,7 +19,7 @@ public class ProgressController {
     // 작업진행 상황 워크플랜 데이터 가져오기
     @GetMapping("/get.do")
     public List<ProgressDTO> progressGetPlan(){
-        System.out.println("ProgressController.progressGetPlan");
+
         return progressService.progressGetPlan();
     }
 

@@ -24,16 +24,16 @@ public class MaterialInputController {
     // -2 로그인 정보가 없음
     @PostMapping("/input/post.do")
     public int doInputPost(@RequestParam int sno){
-        System.out.println("MaterialInputController.doInputPost");
-        System.out.println("sno = " + sno);
+
+
         int result =materialInputService.doInputPost(sno);
-        System.out.println("result**** = " + result);
+
         return result;
     }
 
     @GetMapping("/input/allinfo/get.do")
     public List<MaterialInputDto> doInputAllInfoGet(){
-        System.out.println("MaterialInputController.doInputInfoGet");
+
 
         return materialInputService.doInputAllInfoGet();
 
@@ -41,8 +41,7 @@ public class MaterialInputController {
 
     @GetMapping("/input/info/get.do")
     public List<Map<Object,Object>> doInputInfoGet(@RequestParam int sno ){
-        System.out.println("MaterialInputController.doInputInfoGet");
-        System.out.println("sno = " + sno);
+
         return materialInputService.doInputInfoGet(sno);
     }
 
@@ -51,7 +50,7 @@ public class MaterialInputController {
     public List<Object> surveyDtoList(){
 
         List<Object> result = materialInputService.surveyDtoList();
-        System.out.println("result = " + result);
+
 
         return result;
     }

@@ -39,7 +39,7 @@ public class SubDivisionController {
     @GetMapping("/manufacturing/get.do")
     public List<Object> doManufacturingAllinfoGet(){
         List<Object> result = subDivisionService.doManufacturingAllinfoGet();
-        System.out.println("result = " + result);
+
         return result;
     }
 
@@ -47,14 +47,14 @@ public class SubDivisionController {
     @GetMapping("/manufacturing/one/get.do")
     public ManufacturingDto doManufacturingOneInfoGet(@RequestParam int mfno){
         ManufacturingDto manufacturingDto = subDivisionService.doManufacturingOneInfoGet(mfno);
-        System.out.println("벌크 1개 manufacturingDto = " + manufacturingDto);
+
         return manufacturingDto;
     }
 
     // 품질 검사
     @PutMapping("/confirm.do")
     public int doSubDivisionConfirm(SubDivisionDto subDivisionDto){
-        System.out.println("subDivisionDto = " + subDivisionDto);
+
         int mno = memberService.doLogininfo().getMno();
         int sdno = subDivisionDto.getSdno();
         int sdstate = subDivisionDto.getSdstate();
